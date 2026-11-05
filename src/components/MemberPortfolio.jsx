@@ -10,15 +10,12 @@ import {
   ShieldCheck, 
   Briefcase, 
   Cpu, 
-  Layers, 
   Award, 
   ExternalLink,
   ChevronLeft,
   ChevronRight,
-  Download,
-  QrCode,
-  Barcode,
-  Zap
+  Zap,
+  BadgeCheck
 } from 'lucide-react';
 import { TEAM_MEMBERS } from '../data/teamData';
 
@@ -40,7 +37,6 @@ function GitHubIcon(props) {
 
 export default function MemberPortfolio({ employeeCode, onNavigateToTeam, onNavigateToMember }) {
   const [copied, setCopied] = useState(false);
-  const [codeType, setCodeType] = useState('barcode'); // 'barcode' | 'qr'
 
   // Find member by employee code (case-insensitive) or index
   const currentIndex = TEAM_MEMBERS.findIndex(
@@ -90,9 +86,6 @@ export default function MemberPortfolio({ employeeCode, onNavigateToTeam, onNavi
       </div>
     );
   }
-
-  const barcodeSrc = `/barcodes/${member.id}_barcode.png`;
-  const qrSrc = `/barcodes/${member.id}_qr.png`;
 
   return (
     <div className="min-h-screen bg-[#06080f] text-slate-100 pt-24 pb-20 relative overflow-hidden">
@@ -297,7 +290,7 @@ export default function MemberPortfolio({ employeeCode, onNavigateToTeam, onNavi
 
           </div>
 
-          {/* Side Column: Skills, Security Barcode Badge, Socials */}
+          {/* Side Column: Skills, Verified Credentials, Socials */}
           <div className="lg:col-span-4 space-y-8">
             
             {/* Technical Skills Radar */}
@@ -318,79 +311,30 @@ export default function MemberPortfolio({ employeeCode, onNavigateToTeam, onNavi
               </div>
             </div>
 
-            {/* Official Digital Badge / Dynamic Barcode & QR Code */}
-            <div className="rounded-3xl bg-gradient-to-b from-[#0c1424] to-[#070b14] border border-[#1e2d4a] p-6 text-center shadow-xl">
-              <div className="text-xs font-mono text-slate-400 uppercase tracking-wider mb-3">
-                OFFICIAL DIGITAL BADGE
+            {/* Crew Identity Card */}
+            <div className="rounded-3xl bg-gradient-to-b from-[#0c1424] to-[#070b14] border border-[#1e2d4a] p-6 text-left shadow-xl space-y-3">
+              <div className="flex items-center gap-2 text-xs font-mono text-green-400 font-bold uppercase tracking-wider">
+                <BadgeCheck className="w-4 h-4" />
+                <span>Verified Engineering Crew</span>
               </div>
-
-              {/* Format Toggle Tabs */}
-              <div className="grid grid-cols-2 gap-1 p-1 rounded-xl bg-black/40 border border-[#1a253a] mb-4">
-                <button
-                  onClick={() => setCodeType('barcode')}
-                  className={`flex items-center justify-center gap-1.5 py-1.5 rounded-lg text-xs font-mono transition-all ${
-                    codeType === 'barcode'
-                      ? 'bg-green-500 text-black font-bold shadow'
-                      : 'text-slate-400 hover:text-white'
-                  }`}
-                >
-                  <Barcode className="w-3.5 h-3.5" />
-                  <span>1D Barcode</span>
-                </button>
-                <button
-                  onClick={() => setCodeType('qr')}
-                  className={`flex items-center justify-center gap-1.5 py-1.5 rounded-lg text-xs font-mono transition-all ${
-                    codeType === 'qr'
-                      ? 'bg-green-500 text-black font-bold shadow'
-                      : 'text-slate-400 hover:text-white'
-                  }`}
-                >
-                  <QrCode className="w-3.5 h-3.5" />
-                  <span>2D QR Code</span>
-                </button>
-              </div>
-
-              {/* Code Presentation Container */}
-              {codeType === 'barcode' ? (
-                <div className="bg-white p-3 rounded-2xl shadow-inner my-2 flex flex-col items-center justify-center overflow-hidden">
-                  <img 
-                    src={barcodeSrc} 
-                    alt={`Barcode for ${member.name} (${member.id})`} 
-                    className="w-full h-auto max-h-24 object-contain"
-                  />
-                  <div className="mt-1 font-mono text-[11px] font-black text-black tracking-widest">
-                    {member.id}
-                  </div>
+              
+              <div className="space-y-2 pt-1 font-mono text-xs">
+                <div className="flex items-center justify-between py-1.5 border-b border-[#182338]">
+                  <span className="text-slate-500">Employee ID</span>
+                  <span className="text-green-400 font-bold">{member.id}</span>
                 </div>
-              ) : (
-                <div className="w-36 h-36 mx-auto my-2 p-2.5 bg-white rounded-2xl shadow-inner flex flex-col items-center justify-center">
-                  <img 
-                    src={qrSrc} 
-                    alt={`QR Code for ${member.name} (${member.id})`} 
-                    className="w-full h-full object-contain"
-                  />
+                <div className="flex items-center justify-between py-1.5 border-b border-[#182338]">
+                  <span className="text-slate-500">Department</span>
+                  <span className="text-slate-200">{member.department}</span>
                 </div>
-              )}
-
-              {/* Direct Employee Code Label */}
-              <div className="mt-3 flex items-center justify-center gap-2">
-                <span className="font-mono text-xs font-bold text-white tracking-widest bg-black/70 px-3 py-1 rounded-lg border border-[#223048]">
-                  ID: <span className="text-green-400">{member.id}</span>
-                </span>
-                
-                {/* Download Badge Link */}
-                <a
-                  href={codeType === 'barcode' ? barcodeSrc : qrSrc}
-                  download={`${member.id}_${codeType}.png`}
-                  className="p-1.5 rounded-lg bg-[#0e1626] border border-[#1f2b45] hover:border-green-500/50 text-slate-300 hover:text-green-400 transition-colors"
-                  title="Download Code Badge Image"
-                >
-                  <Download className="w-3.5 h-3.5" />
-                </a>
-              </div>
-
-              <div className="text-[10px] font-mono text-slate-500 mt-2">
-                Scan opens https://adblabs.in/about/{member.id}
+                <div className="flex items-center justify-between py-1.5 border-b border-[#182338]">
+                  <span className="text-slate-500">Roster Status</span>
+                  <span className="text-emerald-400 font-medium">● Active / Lab Staff</span>
+                </div>
+                <div className="flex items-center justify-between py-1.5">
+                  <span className="text-slate-500">Facility Base</span>
+                  <span className="text-slate-300">Chennai Lab</span>
+                </div>
               </div>
             </div>
 

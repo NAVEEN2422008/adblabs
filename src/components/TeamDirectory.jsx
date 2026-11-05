@@ -143,12 +143,12 @@ export default function TeamDirectory({ onSelectMember }) {
                   </div>
 
                   {/* Short Bio snippet */}
-                  <p className="text-xs text-slate-300 line-clamp-2 mb-3 leading-relaxed">
+                  <p className="text-xs text-slate-300 line-clamp-2 mb-4 leading-relaxed">
                     {member.bio}
                   </p>
 
                   {/* Skills tags */}
-                  <div className="flex flex-wrap gap-1.5 mb-4">
+                  <div className="flex flex-wrap gap-1.5 mb-5">
                     {member.skills.slice(0, 3).map((skill, sIdx) => (
                       <span
                         key={sIdx}
@@ -163,27 +163,10 @@ export default function TeamDirectory({ onSelectMember }) {
                       </span>
                     )}
                   </div>
-
-                  {/* Scannable Barcode Strip with Employee Code Beside It */}
-                  <div className="bg-white rounded-xl p-2 mb-4 flex items-center justify-between border border-white/20 shadow-sm">
-                    <img 
-                      src={`/barcodes/${member.id}_barcode.png`} 
-                      alt={`Barcode for ${member.id}`} 
-                      className="h-7 w-auto object-contain max-w-[170px]"
-                    />
-                    <div className="text-right pl-2">
-                      <div className="font-mono text-[10px] font-black text-black tracking-wider">
-                        {member.id}
-                      </div>
-                      <div className="text-[8px] font-mono text-slate-500 uppercase tracking-tighter">
-                        Scan to View
-                      </div>
-                    </div>
-                  </div>
                 </div>
 
                 {/* Footer Action */}
-                <div className="pt-3 border-t border-[#141d2e] flex items-center justify-between">
+                <div className="pt-4 border-t border-[#141d2e] flex items-center justify-between">
                   <span className="text-[11px] font-mono text-slate-500">
                     Exp: <strong className="text-slate-300">{member.experience}</strong>
                   </span>
