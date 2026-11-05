@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import EcoFlowTitan from './EcoFlowTitan';
 import Navbar from './components/Navbar';
 import StickySubNav from './components/StickySubNav';
 import Hero from './components/Hero';
@@ -19,9 +20,9 @@ import ContactSection from './components/ContactSection';
 import SiteWorkflowSection from './components/SiteWorkflowSection';
 import Footer from './components/Footer';
 import InternshipModal from './components/InternshipModal';
-import { ArrowLeft } from 'lucide-react';
+import { ArrowLeft, Layers } from 'lucide-react';
 
-export default function App() {
+function ADBLabsView() {
   const [activeView, setActiveView] = useState('home');
   const [isInternshipModalOpen, setIsInternshipModalOpen] = useState(false);
 
@@ -48,172 +49,193 @@ export default function App() {
     } else {
       setActiveView('solutions');
     }
-    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   return (
-    <div className="min-h-screen bg-[#060709] text-slate-100 selection:bg-green-500 selection:text-black">
-      
-      {/* Top Fixed Navbar */}
+    <div className="min-h-screen bg-[#04060c] text-slate-100 flex flex-col font-sans selection:bg-cyan-500 selection:text-black">
       <Navbar
+        onOpenInternship={() => setIsInternshipModalOpen(true)}
+        onScrollToQuote={scrollToQuote}
+        onNavigate={handleNavigate}
         activeView={activeView}
-        setActiveView={setActiveView}
-        onOpenQuote={scrollToQuote}
       />
 
-      {/* EcoFlow Titan-style Sticky Subnav (Appears upon scrolling past hero) */}
-      {activeView === 'home' && (
-        <StickySubNav
-          onOpenQuote={scrollToQuote}
-          activeSection="ps1"
-        />
-      )}
+      <StickySubNav
+        activeView={activeView}
+        onNavigate={handleNavigate}
+        onScrollToQuote={scrollToQuote}
+      />
 
-      {/* Subpage Breadcrumb & Return to Home button */}
-      {activeView !== 'home' && (
-        <div className="pt-24 pb-4 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <button
-            onClick={() => setActiveView('home')}
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-slate-900 border border-slate-800 text-xs font-mono text-slate-300 hover:text-green-400 hover:border-green-500/50 transition-colors"
-          >
-            <ArrowLeft className="w-3.5 h-3.5" />
-            <span>← Back to Home Overview</span>
-          </button>
-        </div>
-      )}
-
-      {/* Main Content Area */}
-      <main>
+      <main className="flex-grow">
         {activeView === 'home' && (
           <>
-            {/* Cinematic Hero with 3D Mouse Parallax & Real Photorealistic PS1 Render */}
-            <Hero
-              onExploreSolutions={() => {
-                const el = document.getElementById('solutions');
-                if (el) el.scrollIntoView({ behavior: 'smooth' });
-              }}
-              onOpenCapabilities={() => {
-                const el = document.getElementById('architecture');
-                if (el) el.scrollIntoView({ behavior: 'smooth' });
-              }}
-              onOpenPS1={() => setActiveView('ps1')}
-            />
-
-            {/* EcoFlow Titan Section 1: Benchmark Comparison (Diesel vs PS1) */}
+            <Hero onOpenInternship={() => setIsInternshipModalOpen(true)} onScrollToQuote={scrollToQuote} />
+            <BentoHighlights onNavigate={handleNavigate} />
             <BenchmarkComparison />
-
-            {/* EcoFlow Titan Section 2: "Get the Highlights" Asymmetrical Bento Grid */}
-            <BentoHighlights onOpenQuote={scrollToQuote} />
-
-            {/* EcoFlow Titan Modular Architecture & Exploded Subsystem Docking */}
-            <PS1ExplodedView onOpenQuote={scrollToQuote} />
-
-            {/* ADB Labs PS1 Multi-Angle Interactive Showcase */}
-            <PS1Showcase onOpenQuote={scrollToQuote} />
-
-            {/* Our Solutions Section (4 Cards Grid with Real Photography from Mockup) */}
-            <EnergySolutions
-              isSubView={false}
-              onSelectSolution={handleSelectSolution}
-              onOpenQuote={scrollToQuote}
-            />
-
-            {/* Featured Project: Besant Nagar Commercial Fish Stall Pilot */}
-            <ProjectsShowcase
-              isSubView={false}
-              onOpenQuote={scrollToQuote}
-            />
-
-            {/* EcoFlow Titan Live Appliance & Autonomy Simulator */}
-            <RuntimeCalculator onOpenQuote={scrollToQuote} />
-
-            {/* EcoFlow Titan Section 8: Financial Payback Odometer & ROI */}
-            <FinancialROI onOpenQuote={scrollToQuote} />
-
-            {/* Applied Robotics & Edge AI Division (Quadruped Platform & ROS 2) */}
-            <RoboticsRnD
-              isSubView={false}
-              onOpenInternship={() => setIsInternshipModalOpen(true)}
-            />
-
-            {/* Robotics & AI Industrial Internship (6-Axis Arm & 6-Week Roadmap) */}
-            <InternshipSection
-              isSubView={false}
-              onOpenInternshipModal={() => setIsInternshipModalOpen(true)}
-            />
-
-            {/* Our Process (5 Steps) */}
+            <PS1ExplodedView />
+            <EnergySolutions onSelectSolution={handleSelectSolution} onNavigate={handleNavigate} />
+            <ProjectsShowcase onNavigate={handleNavigate} />
+            <RuntimeCalculator onNavigate={handleNavigate} />
+            <FinancialROI onNavigate={handleNavigate} />
+            <RoboticsRnD onOpenInternship={() => setIsInternshipModalOpen(true)} onNavigate={handleNavigate} />
+            <InternshipSection onOpenModal={() => setIsInternshipModalOpen(true)} />
             <ProcessSection />
-
-            {/* EcoFlow Titan Section 13: 3-Tier Technical Spec Matrix */}
-            <SpecMatrix onOpenQuote={scrollToQuote} />
-
-            {/* About ADB Labs Facility & Focus Areas */}
-            <AboutSection isSubView={false} />
-
-            {/* Direct Quote Request & Feasibility Assessment Form */}
+            <SpecMatrix />
+            <AboutSection />
+            <SiteWorkflowSection onNavigate={handleNavigate} />
             <ContactSection />
           </>
         )}
 
-        {/* Dedicated Page View: ADB Labs PS1 Power Station (Multi-Angle) */}
         {activeView === 'ps1' && (
-          <PS1Showcase onOpenQuote={scrollToQuote} />
+          <div className="pt-24 pb-16">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-6">
+              <button
+                onClick={() => handleNavigate('home')}
+                className="inline-flex items-center gap-2 text-cyan-400 hover:text-cyan-300 font-medium text-sm transition"
+              >
+                <ArrowLeft className="w-4 h-4" /> Back to Overview
+              </button>
+            </div>
+            <PS1Showcase onScrollToQuote={scrollToQuote} />
+            <SpecMatrix />
+          </div>
         )}
 
-        {/* Dedicated Page View: Besant Nagar Off-Grid System */}
-        {activeView === 'besant' && (
-          <ProjectsShowcase isSubView={true} onOpenQuote={scrollToQuote} />
-        )}
-
-        {/* Dedicated Page View: Energy Solutions */}
         {activeView === 'solutions' && (
-          <EnergySolutions
-            isSubView={true}
-            onSelectSolution={handleSelectSolution}
-            onOpenQuote={scrollToQuote}
-          />
+          <div className="pt-24 pb-16">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-6">
+              <button
+                onClick={() => handleNavigate('home')}
+                className="inline-flex items-center gap-2 text-cyan-400 hover:text-cyan-300 font-medium text-sm transition"
+              >
+                <ArrowLeft className="w-4 h-4" /> Back to Home
+              </button>
+            </div>
+            <EnergySolutions onSelectSolution={handleSelectSolution} onNavigate={handleNavigate} />
+            <RuntimeCalculator onNavigate={handleNavigate} />
+            <FinancialROI onNavigate={handleNavigate} />
+          </div>
         )}
 
-        {/* Dedicated Page View: Robotics & R&D */}
         {activeView === 'robotics' && (
-          <RoboticsRnD
-            isSubView={true}
-            onOpenInternship={() => setIsInternshipModalOpen(true)}
-          />
+          <div className="pt-24 pb-16">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-6">
+              <button
+                onClick={() => handleNavigate('home')}
+                className="inline-flex items-center gap-2 text-cyan-400 hover:text-cyan-300 font-medium text-sm transition"
+              >
+                <ArrowLeft className="w-4 h-4" /> Back to Home
+              </button>
+            </div>
+            <RoboticsRnD onOpenInternship={() => setIsInternshipModalOpen(true)} onNavigate={handleNavigate} />
+            <InternshipSection onOpenModal={() => setIsInternshipModalOpen(true)} />
+          </div>
         )}
 
-        {/* Dedicated Page View: Industrial Internship Program */}
-        {activeView === 'internship' && (
-          <InternshipSection
-            isSubView={true}
-            onOpenInternshipModal={() => setIsInternshipModalOpen(true)}
-          />
+        {activeView === 'besant' && (
+          <div className="pt-24 pb-16">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-6">
+              <button
+                onClick={() => handleNavigate('home')}
+                className="inline-flex items-center gap-2 text-cyan-400 hover:text-cyan-300 font-medium text-sm transition"
+              >
+                <ArrowLeft className="w-4 h-4" /> Back to Home
+              </button>
+            </div>
+            <ProjectsShowcase onNavigate={handleNavigate} />
+            <FinancialROI onNavigate={handleNavigate} />
+          </div>
         )}
 
-        {/* Dedicated Page View: About ADB Labs */}
+        {activeView === 'calculator' && (
+          <div className="pt-24 pb-16">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-6">
+              <button
+                onClick={() => handleNavigate('home')}
+                className="inline-flex items-center gap-2 text-cyan-400 hover:text-cyan-300 font-medium text-sm transition"
+              >
+                <ArrowLeft className="w-4 h-4" /> Back to Home
+              </button>
+            </div>
+            <RuntimeCalculator onNavigate={handleNavigate} />
+            <FinancialROI onNavigate={handleNavigate} />
+          </div>
+        )}
+
         {activeView === 'about' && (
-          <AboutSection isSubView={true} />
+          <div className="pt-24 pb-16">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-6">
+              <button
+                onClick={() => handleNavigate('home')}
+                className="inline-flex items-center gap-2 text-cyan-400 hover:text-cyan-300 font-medium text-sm transition"
+              >
+                <ArrowLeft className="w-4 h-4" /> Back to Home
+              </button>
+            </div>
+            <AboutSection />
+            <SiteWorkflowSection onNavigate={handleNavigate} />
+          </div>
+        )}
+
+        {activeView === 'contact' && (
+          <div className="pt-24 pb-16">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-6">
+              <button
+                onClick={() => handleNavigate('home')}
+                className="inline-flex items-center gap-2 text-cyan-400 hover:text-cyan-300 font-medium text-sm transition"
+              >
+                <ArrowLeft className="w-4 h-4" /> Back to Home
+              </button>
+            </div>
+            <ContactSection />
+          </div>
         )}
       </main>
 
-      {/* Site Workflow & Structure (Architecture Diagram & Sitemap matching Mockup) */}
-      <SiteWorkflowSection
-        onNavigate={handleNavigate}
-        onOpenQuote={scrollToQuote}
-      />
+      <Footer onNavigate={handleNavigate} />
 
-      {/* Full Footer with Grounded Contact Information */}
-      <Footer
-        onNavigate={handleNavigate}
-        onOpenQuote={scrollToQuote}
-      />
-
-      {/* Priority Waitlist Modal */}
       <InternshipModal
         isOpen={isInternshipModalOpen}
         onClose={() => setIsInternshipModalOpen(false)}
       />
+    </div>
+  );
+}
+
+export default function App() {
+  const [currentMode, setCurrentMode] = useState('ecoflow'); // 'ecoflow' (1-1 copy) or 'adblabs'
+
+  return (
+    <div className="relative">
+      {/* View Switcher Pill */}
+      <aside aria-label="Version Switcher" className="fixed bottom-6 left-6 z-[9999] flex items-center bg-black/85 backdrop-blur-md border border-neutral-700/80 rounded-full p-1 shadow-2xl text-xs font-semibold">
+        <button
+          onClick={() => setCurrentMode('ecoflow')}
+          className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full transition ${
+            currentMode === 'ecoflow'
+              ? 'bg-white text-black shadow'
+              : 'text-neutral-400 hover:text-white'
+          }`}
+        >
+          <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+          EcoFlow TITAN (1:1 Replica)
+        </button>
+        <button
+          onClick={() => setCurrentMode('adblabs')}
+          className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full transition ${
+            currentMode === 'adblabs'
+              ? 'bg-cyan-500 text-black shadow'
+              : 'text-neutral-400 hover:text-white'
+          }`}
+        >
+          <Layers className="w-3.5 h-3.5" />
+          ADB Labs Site
+        </button>
+      </aside>
+
+      {/* Render selected view */}
+      {currentMode === 'ecoflow' ? <EcoFlowTitan /> : <ADBLabsView />}
     </div>
   );
 }

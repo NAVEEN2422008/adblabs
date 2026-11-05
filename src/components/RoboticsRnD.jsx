@@ -22,7 +22,7 @@ export default function RoboticsRnD({ isSubView = false, onOpenInternship }) {
       setLogIndex(prev => (prev + 1) % rosLogs.length);
     }, 2200);
     return () => clearInterval(interval);
-  }, [isPatrolling]);
+  }, [isPatrolling, rosLogs.length]);
 
   const iconMap = {
     Bot: Bot,

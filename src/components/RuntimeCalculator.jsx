@@ -16,7 +16,7 @@ import {
   Lightbulb,
   Radio,
   Flame,
-  Infinity
+  Infinity as InfinityIcon
 } from 'lucide-react';
 
 export default function RuntimeCalculator({ onOpenQuote }) {
@@ -273,7 +273,7 @@ export default function RuntimeCalculator({ onOpenQuote }) {
                     PS1 SINGLE (6.144 kWh)
                   </span>
                   <div className="text-3xl font-mono font-black text-white mt-2 flex items-center justify-center gap-1">
-                    {singleHours === '∞' ? <Infinity className="w-7 h-7 text-green-400" /> : singleHours}
+                    {singleHours === '∞' ? <InfinityIcon className="w-7 h-7 text-green-400" /> : singleHours}
                     {singleHours !== '∞' && <span className="text-xs font-normal text-slate-400">Hours</span>}
                   </div>
                   <span className="text-[10px] text-slate-500 font-mono mt-1 block">
@@ -287,7 +287,7 @@ export default function RuntimeCalculator({ onOpenQuote }) {
                     PS1 DUAL (12.288 kWh) ★
                   </span>
                   <div className="text-3xl font-mono font-black text-green-400 mt-2 flex items-center justify-center gap-1">
-                    {dualHours === '∞' ? <Infinity className="w-7 h-7 text-green-400" /> : dualHours}
+                    {dualHours === '∞' ? <InfinityIcon className="w-7 h-7 text-green-400" /> : dualHours}
                     {dualHours !== '∞' && <span className="text-xs font-normal text-slate-400">Hours</span>}
                   </div>
                   <span className="text-[10px] text-green-300/80 font-mono mt-1 block">
