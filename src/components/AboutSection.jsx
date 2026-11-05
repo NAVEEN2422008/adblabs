@@ -9,12 +9,14 @@ import {
   Layers, 
   Sun, 
   CheckCircle2,
-  MapPin
+  MapPin,
+  Users,
+  ArrowRight
 } from 'lucide-react';
 import { COMPANY_INFO, ABOUT_FOCUS_AREAS } from '../data/websiteData';
 import LabFacilityGraphic from './LabFacilityGraphic';
 
-export default function AboutSection({ isSubView = false }) {
+export default function AboutSection({ isSubView = false, onNavigateToTeam }) {
   return (
     <section id="about" className="py-24 bg-[#06080f] relative overflow-hidden border-t border-[#141824]">
       {/* Background Lighting */}
@@ -44,7 +46,7 @@ export default function AboutSection({ isSubView = false }) {
           </p>
         </div>
 
-        {/* R&D Lab Facility Presentation Banner (Matching Mockup) */}
+        {/* R&D Lab Facility Presentation Banner */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -71,7 +73,7 @@ export default function AboutSection({ isSubView = false }) {
               </div>
             </div>
 
-            {/* Clean Architectural R&D Studio Graphic (Exact Mockup Match) */}
+            {/* Clean Architectural R&D Studio Graphic */}
             <div className="lg:col-span-5 flex items-center justify-center">
               <LabFacilityGraphic className="w-full max-w-md shadow-2xl border border-slate-800" />
             </div>
@@ -79,8 +81,8 @@ export default function AboutSection({ isSubView = false }) {
           </div>
         </motion.div>
 
-        {/* Our Focus Areas Grid (Exact 8 items from Mockup) */}
-        <div>
+        {/* Our Focus Areas Grid */}
+        <div className="mb-12">
           <div className="text-xs font-mono text-slate-400 uppercase tracking-wider mb-4 font-bold">
             Our Focus Areas
           </div>
@@ -99,6 +101,39 @@ export default function AboutSection({ isSubView = false }) {
             ))}
           </div>
         </div>
+
+        {/* Core Engineering Team & Roster Showcase Banner */}
+        {onNavigateToTeam && (
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="rounded-3xl bg-gradient-to-r from-green-950/30 via-[#0d1624] to-[#070b14] border border-green-500/30 p-6 sm:p-8 flex flex-col sm:flex-row items-center justify-between gap-6 shadow-2xl relative overflow-hidden"
+          >
+            <div className="absolute top-0 right-0 w-64 h-64 bg-green-500/10 rounded-full blur-[100px] pointer-events-none" />
+            
+            <div className="space-y-2 text-center sm:text-left relative z-10">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-green-500/15 border border-green-500/40 text-green-400 text-xs font-mono font-bold uppercase tracking-wider">
+                <Users className="w-3.5 h-3.5" />
+                <span>17 MULTIDISCIPLINARY CREW MEMBERS</span>
+              </div>
+              <h4 className="text-xl sm:text-2xl font-black text-white">
+                Meet the Engineers Behind ADB Labs
+              </h4>
+              <p className="text-xs sm:text-sm text-slate-300 max-w-xl leading-relaxed">
+                Explore individual research portfolios, project contributions, and technical competencies for each verified crew member (<code className="text-green-400 font-mono">ADB-446-001</code> through <code className="text-green-400 font-mono">ADB-446-017</code>).
+              </p>
+            </div>
+
+            <button
+              onClick={onNavigateToTeam}
+              className="inline-flex items-center gap-2.5 px-6 py-3.5 rounded-xl bg-green-500 hover:bg-green-400 text-black font-bold text-xs sm:text-sm font-mono transition-all whitespace-nowrap shadow-[0_0_25px_rgba(34,197,94,0.35)] hover:scale-105 relative z-10"
+            >
+              <span>Explore Team Portfolios</span>
+              <ArrowRight className="w-4 h-4" />
+            </button>
+          </motion.div>
+        )}
 
       </div>
     </section>

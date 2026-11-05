@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Navbar from './components/Navbar';
 import StickySubNav from './components/StickySubNav';
 import Hero from './components/Hero';
@@ -19,14 +19,94 @@ import ContactSection from './components/ContactSection';
 import SiteWorkflowSection from './components/SiteWorkflowSection';
 import Footer from './components/Footer';
 import InternshipModal from './components/InternshipModal';
+import TeamDirectory from './components/TeamDirectory';
+import MemberPortfolio from './components/MemberPortfolio';
+import { TEAM_MEMBERS } from './data/teamData';
 import { ArrowLeft } from 'lucide-react';
 
+function parseLocation() {
+  if (typeof window === 'undefined') return { view: 'home', code: null };
+  const rawPath = window.location.pathname.replace(/\/+$/, '') || '/';
+  
+  // Match /about/:code or /about/ADB-446-001
+  const memberMatch = rawPath.match(/^\/about\/(.+)$/i);
+  if (memberMatch) {
+    let code = decodeURIComponent(memberMatch[1]).toUpperCase();
+    if (/^\d{3}$/.test(code)) {
+      code = `ADB-446-${code}`;
+    }
+    return { view: 'portfolio', code };
+  }
+
+  if (rawPath === '/about') {
+    return { view: 'about', code: null };
+  }
+  if (rawPath === '/ps1') return { view: 'ps1', code: null };
+  if (rawPath === '/besant' || rawPath === '/projects') return { view: 'besant', code: null };
+  if (rawPath === '/solutions') return { view: 'solutions', code: null };
+  if (rawPath === '/robotics') return { view: 'robotics', code: null };
+  if (rawPath === '/internship') return { view: 'internship', code: null };
+
+  return { view: 'home', code: null };
+}
+
 export default function App() {
-  const [activeView, setActiveView] = useState('home');
+  const initialLoc = parseLocation();
+  const [activeView, setActiveView] = useState(initialLoc.view);
+  const [selectedEmployeeCode, setSelectedEmployeeCode] = useState(initialLoc.code);
   const [isInternshipModalOpen, setIsInternshipModalOpen] = useState(false);
 
+  // Sync route with URL history
+  const navigateTo = (viewId, code = null, push = true) => {
+    setActiveView(viewId);
+    setSelectedEmployeeCode(code);
+
+    let targetPath = '/';
+    if (viewId === 'about') targetPath = '/about';
+    else if (viewId === 'portfolio' && code) targetPath = `/about/${code}`;
+    else if (viewId === 'ps1') targetPath = '/ps1';
+    else if (viewId === 'besant') targetPath = '/besant';
+    else if (viewId === 'solutions') targetPath = '/solutions';
+    else if (viewId === 'robotics') targetPath = '/robotics';
+    else if (viewId === 'internship') targetPath = '/internship';
+
+    if (push && window.location.pathname !== targetPath) {
+      window.history.pushState({ viewId, code }, '', targetPath);
+    }
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  // Listen to browser Back/Forward navigation
+  useEffect(() => {
+    const handlePopState = () => {
+      const parsed = parseLocation();
+      setActiveView(parsed.view);
+      setSelectedEmployeeCode(parsed.code);
+    };
+    window.addEventListener('popstate', handlePopState);
+    return () => window.removeEventListener('popstate', handlePopState);
+  }, []);
+
+  // Dynamic document title updates
+  useEffect(() => {
+    if (activeView === 'portfolio' && selectedEmployeeCode) {
+      const member = TEAM_MEMBERS.find(
+        (m) => m.id.toLowerCase() === selectedEmployeeCode.toLowerCase()
+      );
+      if (member) {
+        document.title = `${member.name} (${member.id}) | ADB Labs Portfolio`;
+      } else {
+        document.title = `Portfolio (${selectedEmployeeCode}) | ADB Labs`;
+      }
+    } else if (activeView === 'about') {
+      document.title = `Team Directory & Engineering Roster (17 Members) | ADB Labs`;
+    } else {
+      document.title = `ADB Labs | Off-Grid Clean Energy & Applied Robotics`;
+    }
+  }, [activeView, selectedEmployeeCode]);
+
   const scrollToQuote = () => {
-    setActiveView('home');
+    navigateTo('home');
     setTimeout(() => {
       const el = document.getElementById('contact');
       if (el) el.scrollIntoView({ behavior: 'smooth' });
@@ -34,21 +114,19 @@ export default function App() {
   };
 
   const handleNavigate = (viewId) => {
-    setActiveView(viewId);
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    navigateTo(viewId);
   };
 
   const handleSelectSolution = (solId) => {
     if (solId === 'portable-power') {
-      setActiveView('ps1');
+      navigateTo('ps1');
     } else if (solId === 'robotics-rd') {
-      setActiveView('robotics');
+      navigateTo('robotics');
     } else if (solId === 'off-grid') {
-      setActiveView('besant');
+      navigateTo('besant');
     } else {
-      setActiveView('solutions');
+      navigateTo('solutions');
     }
-    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   return (
@@ -57,11 +135,11 @@ export default function App() {
       {/* Top Fixed Navbar */}
       <Navbar
         activeView={activeView}
-        setActiveView={setActiveView}
+        setActiveView={(v) => navigateTo(v)}
         onOpenQuote={scrollToQuote}
       />
 
-      {/* EcoFlow Titan-style Sticky Subnav (Appears upon scrolling past hero) */}
+      {/* Sticky Subnav on Home View */}
       {activeView === 'home' && (
         <StickySubNav
           onOpenQuote={scrollToQuote}
@@ -69,12 +147,12 @@ export default function App() {
         />
       )}
 
-      {/* Subpage Breadcrumb & Return to Home button */}
+      {/* Breadcrumb & Return to Home button for subviews */}
       {activeView !== 'home' && (
-        <div className="pt-24 pb-4 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="pt-24 pb-2 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <button
-            onClick={() => setActiveView('home')}
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-slate-900 border border-slate-800 text-xs font-mono text-slate-300 hover:text-green-400 hover:border-green-500/50 transition-colors"
+            onClick={() => navigateTo('home')}
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-slate-900 border border-slate-800 text-xs font-mono text-slate-300 hover:text-green-400 hover:border-green-500/50 transition-colors shadow-md"
           >
             <ArrowLeft className="w-3.5 h-3.5" />
             <span>← Back to Home Overview</span>
@@ -86,7 +164,7 @@ export default function App() {
       <main>
         {activeView === 'home' && (
           <>
-            {/* Cinematic Hero with 3D Mouse Parallax & Real Photorealistic PS1 Render */}
+            {/* Cinematic Hero */}
             <Hero
               onExploreSolutions={() => {
                 const el = document.getElementById('solutions');
@@ -96,67 +174,70 @@ export default function App() {
                 const el = document.getElementById('architecture');
                 if (el) el.scrollIntoView({ behavior: 'smooth' });
               }}
-              onOpenPS1={() => setActiveView('ps1')}
+              onOpenPS1={() => navigateTo('ps1')}
             />
 
-            {/* EcoFlow Titan Section 1: Benchmark Comparison (Diesel vs PS1) */}
+            {/* Benchmark Comparison */}
             <BenchmarkComparison />
 
-            {/* EcoFlow Titan Section 2: "Get the Highlights" Asymmetrical Bento Grid */}
+            {/* Bento Highlights */}
             <BentoHighlights onOpenQuote={scrollToQuote} />
 
-            {/* EcoFlow Titan Modular Architecture & Exploded Subsystem Docking */}
+            {/* PS1 Modular Architecture & Exploded Subsystem */}
             <PS1ExplodedView onOpenQuote={scrollToQuote} />
 
-            {/* ADB Labs PS1 Multi-Angle Interactive Showcase */}
+            {/* PS1 Showcase */}
             <PS1Showcase onOpenQuote={scrollToQuote} />
 
-            {/* Our Solutions Section (4 Cards Grid with Real Photography from Mockup) */}
+            {/* Energy Solutions */}
             <EnergySolutions
               isSubView={false}
               onSelectSolution={handleSelectSolution}
               onOpenQuote={scrollToQuote}
             />
 
-            {/* Featured Project: Besant Nagar Commercial Fish Stall Pilot */}
+            {/* Featured Project: Besant Nagar */}
             <ProjectsShowcase
               isSubView={false}
               onOpenQuote={scrollToQuote}
             />
 
-            {/* EcoFlow Titan Live Appliance & Autonomy Simulator */}
+            {/* Runtime Calculator */}
             <RuntimeCalculator onOpenQuote={scrollToQuote} />
 
-            {/* EcoFlow Titan Section 8: Financial Payback Odometer & ROI */}
+            {/* Financial ROI */}
             <FinancialROI onOpenQuote={scrollToQuote} />
 
-            {/* Applied Robotics & Edge AI Division (Quadruped Platform & ROS 2) */}
+            {/* Applied Robotics Division */}
             <RoboticsRnD
               isSubView={false}
               onOpenInternship={() => setIsInternshipModalOpen(true)}
             />
 
-            {/* Robotics & AI Industrial Internship (6-Axis Arm & 6-Week Roadmap) */}
+            {/* Robotics Internship */}
             <InternshipSection
               isSubView={false}
               onOpenInternshipModal={() => setIsInternshipModalOpen(true)}
             />
 
-            {/* Our Process (5 Steps) */}
+            {/* Our Process */}
             <ProcessSection />
 
-            {/* EcoFlow Titan Section 13: 3-Tier Technical Spec Matrix */}
+            {/* Spec Matrix */}
             <SpecMatrix onOpenQuote={scrollToQuote} />
 
-            {/* About ADB Labs Facility & Focus Areas */}
-            <AboutSection isSubView={false} />
+            {/* About ADB Labs Facility & Team Showcase */}
+            <AboutSection 
+              isSubView={false} 
+              onNavigateToTeam={() => navigateTo('about')}
+            />
 
-            {/* Direct Quote Request & Feasibility Assessment Form */}
+            {/* Contact Form */}
             <ContactSection />
           </>
         )}
 
-        {/* Dedicated Page View: ADB Labs PS1 Power Station (Multi-Angle) */}
+        {/* Dedicated Page View: ADB Labs PS1 Power Station */}
         {activeView === 'ps1' && (
           <PS1Showcase onOpenQuote={scrollToQuote} />
         )}
@@ -191,19 +272,35 @@ export default function App() {
           />
         )}
 
-        {/* Dedicated Page View: About ADB Labs */}
+        {/* Dedicated Page View: About ADB Labs & 17-Member Team Directory */}
         {activeView === 'about' && (
-          <AboutSection isSubView={true} />
+          <div>
+            <TeamDirectory 
+              onSelectMember={(code) => navigateTo('portfolio', code)} 
+            />
+            <AboutSection 
+              isSubView={true} 
+            />
+          </div>
+        )}
+
+        {/* Dedicated Page View: Individual Team Member Portfolio (/about/:employeeCode) */}
+        {activeView === 'portfolio' && (
+          <MemberPortfolio
+            employeeCode={selectedEmployeeCode}
+            onNavigateToTeam={() => navigateTo('about')}
+            onNavigateToMember={(code) => navigateTo('portfolio', code)}
+          />
         )}
       </main>
 
-      {/* Site Workflow & Structure (Architecture Diagram & Sitemap matching Mockup) */}
+      {/* Site Workflow & Structure */}
       <SiteWorkflowSection
         onNavigate={handleNavigate}
         onOpenQuote={scrollToQuote}
       />
 
-      {/* Full Footer with Grounded Contact Information */}
+      {/* Full Footer */}
       <Footer
         onNavigate={handleNavigate}
         onOpenQuote={scrollToQuote}
