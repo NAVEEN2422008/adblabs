@@ -1,677 +1,462 @@
 // ADB Labs Team Directory & Portfolio Dataset
-// Employee IDs: ADB-446-001 to ADB-446-017
+// Employee IDs: ADB-446-001 to ADB-446-012
 
 export const TEAM_MEMBERS = [
   {
     id: 'ADB-446-001',
-    name: 'Naveen K',
-    role: 'Founder & Chief Hardware Architect',
-    department: 'Hardware & Power',
-    division: 'Systems Architecture',
+    name: 'Mohammed Zain',
+    role: 'Chief Executive Officer (CEO)',
+    department: 'Executive Leadership',
+    division: 'Strategic Management & Vision',
     location: 'Chennai, India',
-    status: 'Active / Lab Lead',
-    bio: 'Pioneering modular portable energy storage and rugged field robotics at ADB Labs. Leading the development of the PS-1 Titan Power Station and coordinating cross-disciplinary hardware-software integration for off-grid industrial deployments.',
-    quote: 'Democratizing reliable clean energy and autonomous hardware through first-principles engineering.',
+    status: 'Active / Executive',
+    bio: 'Guiding ADB Labs toward innovative hardware, sustainable power architecture, and accessible deep-tech engineering. Leading company strategy, partnerships, and product lifecycle vision.',
+    quote: 'Building bold hardware solutions engineered for the toughest real-world challenges.',
     skills: [
-      'System Architecture',
-      'Power Electronics',
-      'BMS Design',
-      'High-Voltage Safety',
-      'Industrial Prototyping',
-      'Thermal Modeling'
+      'Executive Leadership',
+      'Strategic Planning',
+      'Product Vision',
+      'Hardware Venture Scaling',
+      'Partnership Development',
+      'Operational Strategy'
     ],
     experience: '6+ Years',
-    projectsCompleted: 18,
-    patentsFiled: 2,
-    education: 'B.E. in Electrical & Electronics Engineering, Anna University',
+    projectsCompleted: 24,
+    patentsFiled: 1,
+    education: 'Bachelor of Engineering in Electronics & Communication',
     featuredProjects: [
       {
-        title: 'ADB Labs PS-1 Titan Power Station',
-        desc: 'Architected the core 2048Wh LiFePO4 battery pack, modular DC bus distribution, and high-surge 2400W pure sine wave inverter subsystem.'
+        title: 'ADB Labs Industrial Roadmap',
+        desc: 'Spearheaded corporate strategy and execution for modular clean energy and autonomous hardware units.'
       },
       {
-        title: 'Besant Nagar Off-Grid Fishery Cold-Chain',
-        desc: 'Engineered the 5kW rooftop solar microgrid with hybrid energy buffer ensuring 24/7 uninterrupted ice slurry generation.'
+        title: 'Cross-Disciplinary R&D Expansion',
+        desc: 'Established state-of-the-art laboratory testing facilities for rapid hardware-software prototyping.'
       }
     ],
     socials: {
-      email: 'naveen@adblabs.in',
-      linkedin: 'https://linkedin.com/in/naveen-adblabs',
-      github: 'https://github.com/NAVEEN2422008'
+      email: 'zain@adblabs.in',
+      linkedin: 'https://linkedin.com/in/mohammed-zain-adblabs',
+      github: 'https://github.com/adblabs'
     },
     avatarGradient: 'from-emerald-500 to-green-700'
   },
   {
     id: 'ADB-446-002',
-    name: 'Sanjay B',
-    role: 'Co-Founder & Lead Systems Engineer',
-    department: 'Robotics & Perception',
-    division: 'Robotics R&D',
+    name: 'Haran Vinod',
+    role: 'Chief Marketing Officer (CMO)',
+    department: 'Operations & Systems',
+    division: 'Growth & Brand Architecture',
     location: 'Chennai, India',
-    status: 'Active / Lab Lead',
-    bio: 'Directing the applied robotics division at ADB Labs. Spearheading quadruped rough-terrain locomotion, ROS 2 middleware architecture, and edge perception pipelines for industrial inspection.',
-    quote: 'Bringing adaptive, autonomous robotics out of simulation and into harsh real-world terrains.',
+    status: 'Active / Executive',
+    bio: 'Overseeing global brand positioning, go-to-market strategies, and commercial adoption for ADB Labs clean energy stations and industrial robotics portfolios.',
+    quote: 'Telling authentic stories of ground-level engineering that transforms communities.',
     skills: [
-      'ROS 2 Humble',
-      'C++ / Python',
-      'Kinematics & Dynamics',
-      'LiDAR SLAM',
-      'Edge AI Perception',
-      'Gazebo & Isaac Sim'
+      'Growth Strategy',
+      'Brand Architecture',
+      'Market Penetration',
+      'Industrial Product Marketing',
+      'B2B Hardware Partnerships',
+      'Narrative Design'
     ],
     experience: '5+ Years',
-    projectsCompleted: 14,
-    patentsFiled: 1,
-    education: 'M.Tech in Mechatronics & Autonomous Systems',
+    projectsCompleted: 19,
+    patentsFiled: 0,
+    education: 'B.Tech & Strategic Management',
     featuredProjects: [
       {
-        title: 'ADB Quadruped Inspection Robot',
-        desc: 'Implemented model predictive control (MPC) and whole-body controller for omnidirectional trotting across non-flat terrain.'
+        title: 'PS-1 Titan Launch Campaign',
+        desc: 'Led omnichannel launch narrative positioning the PS-1 Titan as India’s leading rugged portable station.'
       },
       {
-        title: '6-Axis Industrial Robotic Arm Pipeline',
-        desc: 'Developed MoveIt 2 motion planning and precision trajectory tracking for pick-and-place automation in the ADB training lab.'
+        title: 'Clean Energy Outreach Initiative',
+        desc: 'Established regional field demonstration hubs across industrial, marine, and emergency response sectors.'
       }
     ],
     socials: {
-      email: 'sanjay@adblabs.in',
-      linkedin: 'https://linkedin.com/in/sanjay-adblabs',
-      github: 'https://github.com/sanjayforgit-oss'
-    },
-    avatarGradient: 'from-cyan-500 to-blue-700'
-  },
-  {
-    id: 'ADB-446-003',
-    name: 'Karthik Raja',
-    role: 'Lead Power Electronics Engineer',
-    department: 'Hardware & Power',
-    division: 'Power Systems',
-    location: 'Chennai, India',
-    status: 'Active / Research Staff',
-    bio: 'Specialist in GaN-based bi-directional DC-DC converters, high-frequency magnetic design, and MPPT solar tracking algorithms for high-density power stations.',
-    quote: 'Every milliwatt saved is thermal headroom gained for reliable field electronics.',
-    skills: [
-      'GaN / SiC Converters',
-      'Altium Designer',
-      'MPPT Tracking',
-      'EMI / EMC Mitigation',
-      'Thermal Simulation',
-      'DSP Firmware'
-    ],
-    experience: '4+ Years',
-    projectsCompleted: 11,
-    patentsFiled: 1,
-    education: 'B.Tech in Power Electronics, NIT Trichy',
-    featuredProjects: [
-      {
-        title: 'Dual-Stage 1200W MPPT Solar Charger',
-        desc: 'Designed a 98.4% peak efficiency multi-phase synchronous buck converter with sub-second maximum power point tracking.'
-      },
-      {
-        title: 'Bi-Directional AC Inverter Module',
-        desc: 'Engineered seamless grid-tied to off-grid UPS changeover in under 12 milliseconds for the PS-1 system.'
-      }
-    ],
-    socials: {
-      email: 'karthik.r@adblabs.in',
-      linkedin: 'https://linkedin.com',
-      github: 'https://github.com'
+      email: 'haran@adblabs.in',
+      linkedin: 'https://linkedin.com/in/haran-vinod-adblabs',
+      github: 'https://github.com/adblabs'
     },
     avatarGradient: 'from-amber-500 to-orange-700'
   },
   {
-    id: 'ADB-446-004',
-    name: 'Ananya Sundaram',
-    role: 'Embedded Firmware Architect',
-    department: 'Embedded Firmware',
-    division: 'Edge Computing',
+    id: 'ADB-446-003',
+    name: 'Jerusha JJ',
+    role: 'Managing Director (MD)',
+    department: 'Executive Leadership',
+    division: 'Corporate Governance & Operations',
     location: 'Chennai, India',
-    status: 'Active / Research Staff',
-    bio: 'Writing bare-metal and FreeRTOS firmware for safety-critical battery management controllers, CAN bus telemetry, and low-latency motor control drivers.',
-    quote: 'Deterministic real-time systems form the unshakeable foundation of modern hardware.',
+    status: 'Active / Executive',
+    bio: 'Directing overarching lab administration, corporate governance, fiscal planning, and cross-functional project delivery at ADB Labs.',
+    quote: 'Operational rigor turns inventive concepts into industrial-grade reality.',
     skills: [
-      'Embedded C / C++',
-      'FreeRTOS',
-      'STM32 & ESP32',
-      'CAN Bus & UART Protocols',
-      'Bare-metal Bootloaders',
-      'Hardware Debugging'
+      'Corporate Governance',
+      'Operations Management',
+      'Resource Allocation',
+      'Compliance & Quality Systems',
+      'Team Leadership',
+      'Fiscal Planning'
     ],
-    experience: '4+ Years',
-    projectsCompleted: 12,
+    experience: '6+ Years',
+    projectsCompleted: 22,
     patentsFiled: 0,
-    education: 'B.E. in Electronics & Communication Engineering',
+    education: 'Master of Business Administration & Technology Management',
     featuredProjects: [
       {
-        title: 'Fault-Tolerant CAN BMS Telemetry',
-        desc: 'Built multi-node CAN communication protocol handling 16-cell LiFePO4 voltage and temperature monitoring at 50Hz.'
+        title: 'ADB Labs Operational Framework',
+        desc: 'Implemented unified agile hardware workflow optimizing supply chain procurement and lab production cycles.'
       },
       {
-        title: 'Secure OTA Firmware Engine',
-        desc: 'Designed dual-bank memory swapping and cryptographic rollback prevention for remote IoT power station updates.'
+        title: 'Quality Standard Certification',
+        desc: 'Established rigorous ISO and CE compliance pathways for ADB commercial hardware devices.'
       }
     ],
     socials: {
-      email: 'ananya.s@adblabs.in',
+      email: 'jerusha@adblabs.in',
+      linkedin: 'https://linkedin.com/in/jerusha-adblabs',
+      github: 'https://github.com/adblabs'
+    },
+    avatarGradient: 'from-purple-500 to-indigo-700'
+  },
+  {
+    id: 'ADB-446-004',
+    name: 'Dushyanth',
+    role: 'IoT & Telemetry Engineer',
+    department: 'Embedded Firmware',
+    division: 'Connected Hardware & Edge Cloud',
+    location: 'Chennai, India',
+    status: 'Active / Engineering',
+    bio: 'Specializing in edge telemetry, low-power cellular connectivity (LTE-M/NB-IoT), MQTT broker synchronization, and remote diagnostic clusters for power station fleets.',
+    quote: 'Every device in the field must be transparent, connected, and fail-safe.',
+    skills: [
+      'MQTT & CoAP',
+      'ESP-IDF / FreeRTOS',
+      'Cellular & LoRaWAN',
+      'OTA Update Pipelines',
+      'Edge Data Logging',
+      'Embedded Security'
+    ],
+    experience: '3+ Years',
+    projectsCompleted: 11,
+    patentsFiled: 0,
+    education: 'B.E. in Electronics & Instrumentation Engineering',
+    featuredProjects: [
+      {
+        title: 'Cloud Fleet Telemetry Hub',
+        desc: 'Engineered real-time telemetry streaming battery temperatures, cycle counts, and inverter surge telemetry to cloud monitoring.'
+      },
+      {
+        title: 'Encrypted Multi-Device OTA Engine',
+        desc: 'Architected fail-safe A/B partition OTA firmware updates over low-bandwidth cellular field links.'
+      }
+    ],
+    socials: {
+      email: 'dushyanth@adblabs.in',
       linkedin: 'https://linkedin.com',
       github: 'https://github.com'
     },
-    avatarGradient: 'from-violet-500 to-purple-800'
+    avatarGradient: 'from-cyan-500 to-teal-700'
   },
   {
     id: 'ADB-446-005',
-    name: 'Vigneshwaran M',
-    role: 'Lead Mechanical & Thermal Engineer',
+    name: 'Sam Joseph',
+    role: 'Hardware Design Engineer',
     department: 'Hardware & Power',
-    division: 'Mechanical Design',
+    division: 'PCB & Power Electronics',
     location: 'Chennai, India',
-    status: 'Active / Research Staff',
-    bio: 'Expert in finite element analysis (FEA), computational fluid dynamics (CFD) for enclosed battery packs, and ruggedized IP65 enclosure engineering.',
-    quote: 'Form follows physics: rugged engineering built to survive tropical coastal heat and vibration.',
+    status: 'Active / Engineering',
+    bio: 'Dedicated to power converter topologies, gate drivers, layout EMI compliance, and ruggedized enclosure thermal integration.',
+    quote: 'Clean board layout is equal parts high-frequency electrical physics and art.',
     skills: [
-      'SolidWorks',
-      'Ansys FEA & CFD',
-      'Extruded Aluminum Enclosures',
-      'Injection Molding Prep',
-      'Shock & Vibration Testing',
-      'DFM / DFA'
-    ],
-    experience: '5+ Years',
-    projectsCompleted: 15,
-    patentsFiled: 1,
-    education: 'B.E. in Mechanical Engineering, PSG Tech',
-    featuredProjects: [
-      {
-        title: 'PS-1 Unibody Magnesium Chassis',
-        desc: 'Engineered high-rigidity lightweight frame with internal isolated ducting keeping battery cell deltas below 3°C.'
-      },
-      {
-        title: 'Hermetic Seal Battery Enclosure',
-        desc: 'Designed IP66-rated water-resistant battery housing with pressure relief membrane for coastal deployment.'
-      }
-    ],
-    socials: {
-      email: 'vignesh.m@adblabs.in',
-      linkedin: 'https://linkedin.com',
-      github: 'https://github.com'
-    },
-    avatarGradient: 'from-rose-500 to-pink-700'
-  },
-  {
-    id: 'ADB-446-006',
-    name: 'Deepak Raghavan',
-    role: 'Computer Vision & SLAM Specialist',
-    department: 'Robotics & Perception',
-    division: 'Robotics R&D',
-    location: 'Chennai, India',
-    status: 'Active / Research Staff',
-    bio: 'Developing visual-inertial odometry, 3D LiDAR point cloud segmentation, and real-time obstacle avoidance algorithms on NVIDIA Jetson Orin modules.',
-    quote: 'Enabling autonomous robots to make split-second spatial decisions in zero-visibility conditions.',
-    skills: [
-      'PyTorch / OpenCV',
-      '3D Point Cloud Processing',
-      'Visual Odometry',
-      'TensorRT Optimization',
-      'CUDA Programming',
-      'Sensor Calibration'
+      'High-Power PCB Layout',
+      'Altium Designer',
+      'Gate Driver Architecture',
+      'Signal & Power Integrity',
+      'DFM / DFT Prototyping',
+      'Bench Debugging'
     ],
     experience: '3+ Years',
-    projectsCompleted: 9,
+    projectsCompleted: 14,
     patentsFiled: 0,
-    education: 'M.S. in Computer Science (Robotics Track)',
+    education: 'B.E. in Electrical & Electronics Engineering',
     featuredProjects: [
       {
-        title: 'Real-time Edge LiDAR Odometry',
-        desc: 'Achieved sub-2cm drift localization using solid-state LiDAR fused with dual IMUs on the quadruped robot.'
+        title: 'Bi-Directional Inverter Driver Board',
+        desc: 'Designed 4-layer 2oz copper PCB handling 2400W continuous AC output with ultra-compact thermal footprint.'
       },
       {
-        title: 'Obstacle Classification Model',
-        desc: 'Deployed quantized YOLOv11 model running at 45 FPS on Jetson Orin Nano for human and hazard detection.'
+        title: 'Modular Auxiliary Power Distribution',
+        desc: 'Created isolated multi-rail buck-boost supply for display panels, cooling fans, and logic boards.'
       }
     ],
     socials: {
-      email: 'deepak.r@adblabs.in',
+      email: 'sam@adblabs.in',
       linkedin: 'https://linkedin.com',
       github: 'https://github.com'
     },
     avatarGradient: 'from-blue-500 to-indigo-700'
   },
   {
-    id: 'ADB-446-007',
-    name: 'Pooja Krishnan',
-    role: 'Battery Systems & Chemistry Specialist',
-    department: 'Hardware & Power',
-    division: 'Energy Storage',
+    id: 'ADB-446-006',
+    name: 'Nangaiyar M',
+    role: 'Community & Ecosystem Manager',
+    department: 'Operations & Systems',
+    division: 'Student Engagement & Lab Outreach',
     location: 'Chennai, India',
-    status: 'Active / Research Staff',
-    bio: 'Focusing on electrochemical impedance spectroscopy (EIS), thermal runaway prevention, and life-cycle characterization for prismatic LiFePO4 cells.',
-    quote: 'Safe, sustainable energy storage begins with microscopic cell-level understanding.',
+    status: 'Active / Operations',
+    bio: 'Fostering the hardware maker community, coordinating industrial bootcamps, and managing university relations for ADB Labs research internship cohorts.',
+    quote: 'Knowledge multiplies when shared in hands-on building communities.',
     skills: [
-      'LiFePO4 Cell Characterization',
-      'EIS Analysis',
-      'Thermal Runaway Mitigation',
-      'Battery Aging Models',
-      'Cell Balancing Algorithms',
-      'Laboratory Testing'
+      'Community Building',
+      'Event Coordination',
+      'University Relations',
+      'Content Strategy',
+      'Talent Scouting',
+      'Maker Culture'
     ],
-    experience: '4+ Years',
-    projectsCompleted: 10,
-    patentsFiled: 1,
-    education: 'M.Tech in Electrochemical Systems & Energy Technology',
+    experience: '3+ Years',
+    projectsCompleted: 16,
+    patentsFiled: 0,
+    education: 'B.A. in Communications & Technology Relations',
     featuredProjects: [
       {
-        title: '3500-Cycle Durability Benchmarking',
-        desc: 'Conducted accelerated temperature cycling establishing the 10-year service life model for the PS-1 power cells.'
+        title: 'ADB Hardware Fellowship Program',
+        desc: 'Curated and executed fellowship pipeline reaching over 500+ aspiring embedded and robotics engineers across South India.'
       },
       {
-        title: 'Active Cell Equalization System',
-        desc: 'Implemented inductor-based bi-directional charge shuttle preserving cell capacity to within 0.5% variance.'
+        title: 'Maker Day Demonstrations',
+        desc: 'Organized interactive public showcases highlighting solar microgrid resiliency and robotics locomotion.'
       }
     ],
     socials: {
-      email: 'pooja.k@adblabs.in',
+      email: 'nangaiyar@adblabs.in',
       linkedin: 'https://linkedin.com',
       github: 'https://github.com'
     },
-    avatarGradient: 'from-teal-500 to-emerald-800'
+    avatarGradient: 'from-pink-500 to-rose-700'
+  },
+  {
+    id: 'ADB-446-007',
+    name: 'Naveenkumar S',
+    role: 'Robotics Engineering Intern',
+    department: 'Robotics & Perception',
+    division: 'Autonomous Systems & Control',
+    location: 'Chennai, India',
+    status: 'Active / Intern',
+    bio: 'Focusing on robot kinematics, motor drive tuning, embedded sensory data acquisition, and automated hardware test harnesses.',
+    quote: 'Testing every assumption under real vibration and load builds unbreakable machines.',
+    skills: [
+      'ROS 2 Basics',
+      'C++ / Python',
+      'Actuator Tuning',
+      'Sensor Fusion (IMU/Odom)',
+      'CAN Bus Diagnostics',
+      'CAD Modeling'
+    ],
+    experience: 'Internship Cohort',
+    projectsCompleted: 6,
+    patentsFiled: 0,
+    education: 'Undergraduate in Mechatronics Engineering',
+    featuredProjects: [
+      {
+        title: 'Automated Endurance Test Rig',
+        desc: 'Engineered cycling test rig monitoring thermal dissipation and torque degradation on high-current planetary gearboxes.'
+      },
+      {
+        title: 'Sensory Telemetry Bridge',
+        desc: 'Created CAN-to-serial high-throughput stream for low-latency robotics joint state feedback.'
+      }
+    ],
+    socials: {
+      email: 'naveenkumar@adblabs.in',
+      linkedin: 'https://linkedin.com',
+      github: 'https://github.com'
+    },
+    avatarGradient: 'from-emerald-500 to-teal-700'
   },
   {
     id: 'ADB-446-008',
-    name: 'Aditya Swaminathan',
-    role: 'Edge AI & IoT Platform Engineer',
-    department: 'Edge AI & Compute',
-    division: 'Cloud & Telemetry',
+    name: 'Adi',
+    role: 'Hardware Engineering Member',
+    department: 'Hardware & Power',
+    division: 'Rapid Prototyping & Assembly',
     location: 'Chennai, India',
-    status: 'Active / Core Developer',
-    bio: 'Building end-to-end telemetry pipelines, MQTT edge gateways, and real-time power analytics dashboards connecting deployed field units to cloud monitoring.',
-    quote: 'Bridging physical edge telemetry with actionable predictive analytics in real time.',
+    status: 'Active / Team Member',
+    bio: 'Engaged in electrical system assembly, wiring harness validation, battery pack potting, and benchtop load verification for ADB prototypes.',
+    quote: 'Attention to detail in wire routing and crimping saves days of debugging.',
     skills: [
-      'Go / Python / Node.js',
-      'MQTT & WebSockets',
-      'Time-series Databases',
-      'Docker & Edge Containers',
-      'REST & GraphQL APIs',
-      'React & Tailwind CSS'
+      'System Prototyping',
+      'Wire Harness Fabrication',
+      'Component Testing',
+      'Soldering & Rework',
+      'Thermal Paste Application',
+      'Quality Inspection'
     ],
-    experience: '3+ Years',
-    projectsCompleted: 13,
+    experience: 'Active Team Member',
+    projectsCompleted: 5,
     patentsFiled: 0,
-    education: 'B.Tech in Information Technology',
+    education: 'Undergraduate in Engineering',
     featuredProjects: [
       {
-        title: 'ADB Cloud Fleet Telemetry',
-        desc: 'Created sub-second IoT streaming platform monitoring state-of-charge, grid health, and solar irradiance across field units.'
-      },
-      {
-        title: 'Edge Fault Prediction Engine',
-        desc: 'Implemented lightweight anomaly detector running directly on gateway MCU to anticipate inverter overload conditions.'
+        title: 'Battery Module Assembly Rig',
+        desc: 'Fabricated cell fixtures and nickel strip spot-welding validation routines for modular battery packs.'
       }
     ],
     socials: {
-      email: 'aditya.s@adblabs.in',
+      email: 'adi@adblabs.in',
       linkedin: 'https://linkedin.com',
       github: 'https://github.com'
     },
-    avatarGradient: 'from-sky-500 to-blue-800'
+    avatarGradient: 'from-amber-500 to-yellow-700'
   },
   {
     id: 'ADB-446-009',
-    name: 'Divya Ramesh',
-    role: 'Industrial Design & Human Factors Lead',
-    department: 'Hardware & Power',
-    division: 'Product Experience',
+    name: 'Sharika',
+    role: 'Embedded Systems Intern',
+    department: 'Embedded Firmware',
+    division: 'Firmware & Logic Control',
     location: 'Chennai, India',
-    status: 'Active / Design Lead',
-    bio: 'Crafting ergonomic, utilitarian product form factors for industrial energy hardware, tactile control interfaces, and high-readability outdoor status displays.',
-    quote: 'Industrial equipment should feel intuitive, commanding, and durable in the hands of field operators.',
+    status: 'Active / Intern',
+    bio: 'Working on microcontroller peripherals, state machine implementations for safety cutoffs, and digital display driver interfaces.',
+    quote: 'Deterministic code keeps hardware safe in unpredictable environments.',
     skills: [
-      'Industrial Product Styling',
-      'Ergonomics & Human Factors',
-      'Rhino & Blender Rendering',
-      'CMF Engineering',
-      'Rapid 3D Prototyping',
-      'UI/UX Display Layouts'
+      'C / Embedded C',
+      'State Machines',
+      'SPI & I2C Protocols',
+      'OLED / LCD Drivers',
+      'Unit Testing',
+      'Oscilloscope Debugging'
     ],
-    experience: '4+ Years',
-    projectsCompleted: 16,
-    patentsFiled: 1,
-    education: 'Master of Design (M.Des) in Industrial Design',
+    experience: 'Internship Cohort',
+    projectsCompleted: 5,
+    patentsFiled: 0,
+    education: 'Undergraduate in Electronics & Communication',
     featuredProjects: [
       {
-        title: 'PS-1 Dual Ergonomic Carry Grip',
-        desc: 'Engineered balanced center-of-mass handle geometry enabling effortless two-person or single-operator transport.'
-      },
-      {
-        title: 'High-Contrast OLED Status Console',
-        desc: 'Designed sunlight-readable outdoor interface showing instantaneous watt-hour inflow and outflow metrics.'
+        title: 'Front Panel Display Controller',
+        desc: 'Implemented fluid 60FPS UI transitions on 4.3" TFT display rendering real-time power flow animations.'
       }
     ],
     socials: {
-      email: 'divya.r@adblabs.in',
+      email: 'sharika@adblabs.in',
       linkedin: 'https://linkedin.com',
       github: 'https://github.com'
     },
-    avatarGradient: 'from-fuchsia-500 to-purple-700'
+    avatarGradient: 'from-purple-500 to-pink-700'
   },
   {
     id: 'ADB-446-010',
-    name: 'Manoj Kumar',
-    role: 'Robotics Control & Actuation Engineer',
+    name: 'Sanjay B L',
+    role: 'Robotics Control Intern',
     department: 'Robotics & Perception',
-    division: 'Robotics R&D',
+    division: 'Embedded Control & Kinematics',
     location: 'Chennai, India',
-    status: 'Active / Research Staff',
-    bio: 'Developing high-torque planetary gear actuators, field-oriented control (FOC) motor drivers, and impedance control algorithms for the quadruped robot limbs.',
-    quote: 'Precise torque control is the magic that gives machines grace and agility.',
+    status: 'Active / Intern',
+    bio: 'Developing embedded PID loops, brushless DC motor field-oriented control (FOC), and robotic joint trajectory synchronization.',
+    quote: 'Smooth motion control is the foundation of robotic dexterity.',
     skills: [
       'Field-Oriented Control (FOC)',
-      'BLDC Motor Tuning',
-      'Planetary Actuator Design',
-      'MATLAB & Simulink',
+      'Embedded C++',
+      'BLDC Driver Hardware',
+      'PID Tuning',
       'CANopen Protocol',
-      'Torque Sensing'
+      'Simulink Modeling'
     ],
-    experience: '3+ Years',
-    projectsCompleted: 8,
+    experience: 'Internship Cohort',
+    projectsCompleted: 7,
     patentsFiled: 0,
-    education: 'B.E. in Mechatronics Engineering',
+    education: 'Undergraduate in Mechatronics Engineering',
     featuredProjects: [
       {
-        title: 'Quasi-Direct Drive Actuator Module',
-        desc: 'Designed custom 12:1 reduction planetary joint delivering 35Nm peak torque with high back-drivability.'
-      },
-      {
-        title: 'Compliance Control for Quadruped Leg',
-        desc: 'Implemented impedance controller absorbing ground contact shocks during rapid downhill traversal.'
+        title: 'High-Torque FOC BLDC Controller',
+        desc: 'Programmed magnetic encoder feedback and current sensing loops achieving sub-millisecond torque step responses.'
       }
     ],
     socials: {
-      email: 'manoj.k@adblabs.in',
+      email: 'sanjay.bl@adblabs.in',
       linkedin: 'https://linkedin.com',
       github: 'https://github.com'
     },
-    avatarGradient: 'from-amber-600 to-red-700'
+    avatarGradient: 'from-cyan-500 to-blue-700'
   },
   {
     id: 'ADB-446-011',
-    name: 'Sneha Balaji',
-    role: 'Quality Assurance & Regulatory Compliance Lead',
-    department: 'Operations & Systems',
-    division: 'Compliance & Safety',
+    name: 'Sarveash',
+    role: 'Hardware Systems Intern',
+    department: 'Hardware & Power',
+    division: 'Thermal Testing & Hardware Validation',
     location: 'Chennai, India',
-    status: 'Active / Systems Staff',
-    bio: 'Ensuring all ADB Labs products achieve BIS, IEC, CE, and UN 38.3 transport safety compliance. Directing destructive drop testing, thermal stress testing, and EMI audits.',
-    quote: 'Safety and compliance are never afterthoughts; they are built into the initial schematic.',
+    status: 'Active / Intern',
+    bio: 'Executing thermal stress testing, battery cycle verification under extreme temperatures, and mechanical casing vibration endurance.',
+    quote: 'Break it in the lab so it never breaks in the field.',
     skills: [
-      'IEC 62619 & UN 38.3 Testing',
-      'BIS Certification Standards',
-      'Environmental Stress Screening',
-      'Quality Management Systems',
-      'Root-Cause Failure Analysis',
-      'Test Fixture Automation'
+      'Thermal Chamber Testing',
+      'Thermocouple Data Logging',
+      'Electronic Loads',
+      'Vibration Analysis',
+      'Battery Cycle Cycling',
+      'Safety Audits'
     ],
-    experience: '5+ Years',
-    projectsCompleted: 20,
+    experience: 'Internship Cohort',
+    projectsCompleted: 5,
     patentsFiled: 0,
-    education: 'B.Tech in Electrical Engineering & Quality Systems',
+    education: 'Undergraduate in Mechanical & Electrical Engineering',
     featuredProjects: [
       {
-        title: 'UN 38.3 Lithium Transport Safety Dossier',
-        desc: 'Formulated test protocols and completed certified altitude simulation, thermal shock, and vibration qualification.'
-      },
-      {
-        title: 'Automated Factory End-of-Line Tester',
-        desc: 'Programmed Python-automated test rig running 40 electrical safety checks on assembled units in 3 minutes.'
+        title: 'Thermal Stress Profiling Rig',
+        desc: 'Mapped heat dissipation across GaN power stage under 3000W surge conditions using 16-channel thermocouple array.'
       }
     ],
     socials: {
-      email: 'sneha.b@adblabs.in',
+      email: 'sarveash@adblabs.in',
       linkedin: 'https://linkedin.com',
       github: 'https://github.com'
     },
-    avatarGradient: 'from-emerald-600 to-teal-800'
+    avatarGradient: 'from-orange-500 to-red-700'
   },
   {
     id: 'ADB-446-012',
-    name: 'Pranav Venkat',
-    role: 'PCB Layout & High-Speed Hardware Engineer',
-    department: 'Hardware & Power',
-    division: 'Hardware Engineering',
-    location: 'Chennai, India',
-    status: 'Active / Research Staff',
-    bio: 'Designing dense multi-layer printed circuit boards, controlled impedance routing for differential lines, and high-current copper busbars up to 100A.',
-    quote: 'Flawless signal integrity and clean power planes turn complex schematics into bulletproof boards.',
-    skills: [
-      'KiCad & Altium Designer',
-      'High-Current PCB Layout',
-      'Signal & Power Integrity',
-      'Heavy Copper Traces (4oz+)',
-      'SMD Hand Assembly & Rework',
-      'DFM Rules'
-    ],
-    experience: '3+ Years',
-    projectsCompleted: 14,
-    patentsFiled: 0,
-    education: 'B.E. in Electronics & Communication',
-    featuredProjects: [
-      {
-        title: '6-Layer Mainboard for PS-1 Controller',
-        desc: 'Routed dense hybrid analog-digital board isolating high-current inverter switching noise from precision ADC measurement lines.'
-      },
-      {
-        title: 'Rigid-Flex Sensor Interconnects',
-        desc: 'Engineered reliable dynamic flex circuits routed through rotating joints in the 6-axis robotic arm.'
-      }
-    ],
-    socials: {
-      email: 'pranav.v@adblabs.in',
-      linkedin: 'https://linkedin.com',
-      github: 'https://github.com'
-    },
-    avatarGradient: 'from-cyan-600 to-indigo-800'
-  },
-  {
-    id: 'ADB-446-013',
-    name: 'Harini Natarajan',
-    role: 'Robotics Perception & AI Training Lead',
+    name: 'Arjun',
+    role: 'Robotics Engineering Member',
     department: 'Robotics & Perception',
-    division: 'AI Research',
+    division: 'Mechanical Dynamics & Linkages',
     location: 'Chennai, India',
-    status: 'Active / Research Staff',
-    bio: 'Training reinforcement learning policies in simulation for legged gait generation and deploying self-supervised vision models for real-time terrain classification.',
-    quote: 'Reinforcement learning bridges the gap between mechanical potential and natural biological agility.',
+    status: 'Active / Team Member',
+    bio: 'Focused on mechanical linkage analysis, 3D printing prototyping with engineering resins and carbon-fiber filaments, and chassis structural rigidity.',
+    quote: 'Lightweight structures enable agile robotic locomotion.',
     skills: [
-      'Reinforcement Learning (PPO)',
-      'Isaac Gym / MuJoCo',
-      'Deep Learning / PyTorch',
-      'Synthetic Data Generation',
-      'Python / C++',
-      'Model Quantization'
+      'SolidWorks / Fusion 360',
+      'FEA Structural Simulation',
+      'Additive Manufacturing',
+      'Gearbox Tolerancing',
+      'Linkage Synthesis',
+      'CNC Machining'
     ],
-    experience: '3+ Years',
-    projectsCompleted: 7,
+    experience: 'Active Team Member',
+    projectsCompleted: 6,
     patentsFiled: 0,
-    education: 'M.S. in Artificial Intelligence & Robotics',
+    education: 'Undergraduate in Mechanical Engineering',
     featuredProjects: [
       {
-        title: 'Terrain-Adaptive Locomotion Policy',
-        desc: 'Trained a single neural policy in Isaac Gym navigating sand, gravel, stairs, and slippery wet grass without manual gait switching.'
-      },
-      {
-        title: 'Visual Footstep Planner',
-        desc: 'Engineered real-time elevation mapping module selecting footholds over rocky terrain at 30Hz.'
+        title: 'Carbon-Fiber Robotic Leg Linkage',
+        desc: 'Engineered high-stiffness low-inertia leg assembly withstanding 4G ground impact shocks.'
       }
     ],
     socials: {
-      email: 'harini.n@adblabs.in',
+      email: 'arjun@adblabs.in',
       linkedin: 'https://linkedin.com',
       github: 'https://github.com'
     },
-    avatarGradient: 'from-pink-600 to-rose-800'
-  },
-  {
-    id: 'ADB-446-014',
-    name: 'Rohan Chandran',
-    role: 'Solar Microgrid & Field Operations Engineer',
-    department: 'Operations & Systems',
-    division: 'Field Deployment',
-    location: 'Chennai, India',
-    status: 'Active / Field Operations',
-    bio: 'Leading field site surveys, rooftop solar structural mounting, marine-environment corrosion protection, and customer installation operations across Tamil Nadu.',
-    quote: 'Lab innovations only count when they perform flawlessly in the salt spray and heat of the field.',
-    skills: [
-      'Solar PV Array Sizing',
-      'Structural Mount Engineering',
-      'Coastal Corrosion Protection',
-      'Earthing & Lightning Arrestors',
-      'Field Grid Interconnection',
-      'Safety Audits'
-    ],
-    experience: '4+ Years',
-    projectsCompleted: 22,
-    patentsFiled: 0,
-    education: 'B.Tech in Renewable Energy Systems',
-    featuredProjects: [
-      {
-        title: 'Besant Nagar Fish Stall Grid Deployment',
-        desc: 'Oversaw physical structure installation, salt-fog resistant cabling, and dual-inverter synchronization in under 48 hours.'
-      },
-      {
-        title: 'Agricultural Pumping Pilot (Kanchipuram)',
-        desc: 'Installed standalone 7.5HP solar VFD water pumping system operating reliably off-grid with zero diesel dependency.'
-      }
-    ],
-    socials: {
-      email: 'rohan.c@adblabs.in',
-      linkedin: 'https://linkedin.com',
-      github: 'https://github.com'
-    },
-    avatarGradient: 'from-yellow-500 to-amber-700'
-  },
-  {
-    id: 'ADB-446-015',
-    name: 'Meera Jayaraman',
-    role: 'Software Frontend & Interface Engineer',
-    department: 'Edge AI & Compute',
-    division: 'Digital Experience',
-    location: 'Chennai, India',
-    status: 'Active / Core Developer',
-    bio: 'Designing responsive web dashboards, real-time telemetry visualizations, and mobile companion interfaces for monitoring ADB Labs hardware fleets.',
-    quote: 'Complex real-time engineering data deserves clear, human-centered visual representations.',
-    skills: [
-      'React / Vite / Next.js',
-      'Tailwind CSS',
-      'Data Visualization (D3 / Recharts)',
-      'Web Bluetooth / WebUSB',
-      'Progressive Web Apps',
-      'TypeScript'
-    ],
-    experience: '3+ Years',
-    projectsCompleted: 11,
-    patentsFiled: 0,
-    education: 'B.E. in Computer Science & Engineering',
-    featuredProjects: [
-      {
-        title: 'ADB Labs Interactive Fleet Portal',
-        desc: 'Built the responsive telemetry web application featuring live state-of-charge gauges, load charts, and remote power cutoff toggle.'
-      },
-      {
-        title: 'Industrial Runtime Simulator',
-        desc: 'Developed client-side interactive battery runtime calculator computing appliance autonomy across 20+ equipment profiles.'
-      }
-    ],
-    socials: {
-      email: 'meera.j@adblabs.in',
-      linkedin: 'https://linkedin.com',
-      github: 'https://github.com'
-    },
-    avatarGradient: 'from-violet-600 to-indigo-800'
-  },
-  {
-    id: 'ADB-446-016',
-    name: 'Gautam Siddharth',
-    role: 'Embedded Robotics Firmware Engineer',
-    department: 'Embedded Firmware',
-    division: 'Robotics R&D',
-    location: 'Chennai, India',
-    status: 'Active / Research Staff',
-    bio: 'Writing micro-ROS node firmware on Cortex-M7 microcontrollers, synchronizing multi-axis brushless motors via EtherCAT/CAN-FD, and tuning IMU Kalman filters.',
-    quote: 'Sub-millisecond latency is the pulse of coordinated robotic movement.',
-    skills: [
-      'micro-ROS & FreeRTOS',
-      'CAN-FD & EtherCAT',
-      'STM32H7 / Teensy 4.1',
-      'Sensor Fusion (EKF)',
-      'Low-Level Motor Timing',
-      'C & Rust Embedded'
-    ],
-    experience: '2+ Years',
-    projectsCompleted: 7,
-    patentsFiled: 0,
-    education: 'B.E. in Electrical & Electronics Engineering',
-    featuredProjects: [
-      {
-        title: '12-Joint Motor Synchronizer',
-        desc: 'Implemented synchronous CAN-FD communications broadcasting joint position commands to 12 actuators at 1000Hz.'
-      },
-      {
-        title: 'Rugged IMU Orientation Filter',
-        desc: 'Tuned 9-axis extended Kalman filter eliminating drift from mechanical shock during quadruped jumps.'
-      }
-    ],
-    socials: {
-      email: 'gautam.s@adblabs.in',
-      linkedin: 'https://linkedin.com',
-      github: 'https://github.com'
-    },
-    avatarGradient: 'from-emerald-500 to-cyan-700'
-  },
-  {
-    id: 'ADB-446-017',
-    name: 'Tarun Prasanna',
-    role: 'Industrial Training & Labs Coordinator',
-    department: 'Operations & Systems',
-    division: 'Industrial Internship Program',
-    location: 'Chennai, India',
-    status: 'Active / Program Lead',
-    bio: 'Orchestrating ADB Labs hands-on engineering internship cohorts, curriculum development for 6-axis arm automation, ROS 2 bootcamps, and student hardware labs.',
-    quote: 'Empowering the next generation of hardware engineers through real industry tooling and dirty-hands building.',
-    skills: [
-      'Curriculum Architecture',
-      'Robotics Lab Instruction',
-      'Hardware Prototyping Mentorship',
-      'ROS 2 Lab Courseware',
-      'Industry-Academia Partnerships',
-      'Student Capstone Supervision'
-    ],
-    experience: '4+ Years',
-    projectsCompleted: 15,
-    patentsFiled: 0,
-    education: 'B.Tech in Mechatronics & Technical Education',
-    featuredProjects: [
-      {
-        title: 'ADB 6-Week Industrial Internship Curriculum',
-        desc: 'Designed hands-on syllabus mentoring 80+ engineering students on industrial ROS 2, PCB layout, and motor drive commissioning.'
-      },
-      {
-        title: 'Rapid Hardware Hackathon Program',
-        desc: 'Facilitated intensive 48-hour hardware prototyping sprints producing functional off-grid and agricultural prototypes.'
-      }
-    ],
-    socials: {
-      email: 'tarun.p@adblabs.in',
-      linkedin: 'https://linkedin.com',
-      github: 'https://github.com'
-    },
-    avatarGradient: 'from-amber-500 to-rose-700'
+    avatarGradient: 'from-teal-500 to-emerald-700'
   }
 ];
 
 export const DEPARTMENTS = [
   'All Departments',
+  'Executive Leadership',
   'Hardware & Power',
   'Robotics & Perception',
   'Embedded Firmware',
-  'Edge AI & Compute',
   'Operations & Systems'
 ];
