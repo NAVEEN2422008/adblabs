@@ -34,6 +34,7 @@ import {
 } from 'lucide-react';
 // Scoped clean styles loaded via index.css
 import { TEAM_MEMBERS } from './data/teamData';
+import { motion, AnimatePresence } from 'framer-motion';
 
 export default function AdbLabsTitanPage({ onNavigateToMember }) {
   // Navigation & Sub-nav state
@@ -384,28 +385,48 @@ export default function AdbLabsTitanPage({ onNavigateToMember }) {
       <section id="overview" className="relative pt-24 pb-20 px-6 overflow-hidden flex flex-col items-center justify-center text-center">
         
         {/* Atmospheric Radial Backdrop Halo */}
-        <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[900px] h-[550px] bg-gradient-to-b from-[#adceff]/15 via-[#3f68e0]/05 to-transparent rounded-full blur-[140px] pointer-events-none -z-10"></div>
+        <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[900px] h-[550px] bg-gradient-to-b from-[#adceff]/15 via-[#3f68e0]/05 to-transparent rounded-full blur-[140px] pointer-events-none -z-10 animate-halo-breathe"></div>
 
         <div className="max-w-6xl mx-auto w-full">
           
           {/* Eyebrow badge */}
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/[0.04] border border-white/10 text-xs text-[#adceff] font-medium mb-6 backdrop-blur-md">
+          <motion.div 
+            initial={{ opacity: 0, y: -12 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/[0.04] border border-white/10 text-xs text-[#adceff] font-medium mb-6 backdrop-blur-md"
+          >
             <span className="w-2 h-2 rounded-full bg-[#adceff] animate-ping"></span>
             <span>Commercial Energy · Robotics · Real-World R&D</span>
-          </div>
+          </motion.div>
 
           {/* Titan Large Headline */}
-          <h1 className="text-5xl sm:text-7xl lg:text-8xl font-black tracking-tight max-w-5xl mx-auto leading-[1.04] text-white">
+          <motion.h1 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
+            className="text-5xl sm:text-7xl lg:text-8xl font-black tracking-tight max-w-5xl mx-auto leading-[1.04] text-white"
+          >
             ADB Labs PS1 Series
-          </h1>
+          </motion.h1>
 
           {/* Subtitle */}
-          <p className="text-[#adafb3] text-lg sm:text-2xl max-w-3xl mx-auto mt-6 font-normal leading-relaxed">
+          <motion.p 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+            className="text-[#adafb3] text-lg sm:text-2xl max-w-3xl mx-auto mt-6 font-normal leading-relaxed"
+          >
             Whole-Stall Power & Commercial Energy Storage, Now Within Reach.
-          </p>
+          </motion.p>
 
           {/* Hero CTAs */}
-          <div className="flex flex-wrap items-center justify-center gap-4 mt-8">
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
+            className="flex flex-wrap items-center justify-center gap-4 mt-8"
+          >
             <button 
               onClick={() => { setModalType('quote'); setIsQuoteModalOpen(true); }}
               className="bg-white hover:bg-neutral-200 text-black font-bold text-sm px-8 py-3.5 rounded-full transition shadow-[0_0_35px_rgba(255,255,255,0.2)] flex items-center gap-2"
@@ -426,18 +447,23 @@ export default function AdbLabsTitanPage({ onNavigateToMember }) {
               <Play className="w-4 h-4 fill-current text-[#adceff]" />
               <span>Watch Field Pilot</span>
             </button>
-          </div>
+          </motion.div>
 
           {/* Floating Hardware Graphic (Clean, edge-to-edge Luxury Presentation) */}
-          <div className="relative mt-12 max-w-4xl mx-auto flex flex-col items-center justify-center">
-            <div className="relative aspect-[16/9] w-full flex items-center justify-center">
+          <motion.div 
+            initial={{ opacity: 0, y: 40, scale: 0.95 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            transition={{ duration: 1.1, delay: 0.35, ease: [0.16, 1, 0.3, 1] }}
+            className="relative mt-12 max-w-4xl mx-auto flex flex-col items-center justify-center"
+          >
+            <div className="relative aspect-[16/9] w-full flex items-center justify-center animate-hardware-float">
               <img 
                 src="/images/ps1_titan_studio.jpg"
                 alt="ADB Labs PS1 Power Station Flagship Hardware"
                 className="max-h-full max-w-full object-contain filter drop-shadow-[0_35px_50px_rgba(0,0,0,0.95)]"
               />
             </div>
-          </div>
+          </motion.div>
 
         </div>
       </section>
@@ -456,72 +482,36 @@ export default function AdbLabsTitanPage({ onNavigateToMember }) {
           </div>
 
           <div className="flex items-center gap-6 text-xs font-semibold tracking-wide whitespace-nowrap text-[#83868a] overflow-x-auto no-scrollbar pl-4">
-            <button 
-              onClick={() => scrollToSection('highlights')}
-              className={`hover:text-white transition py-3.5 border-b-2 ${activeNav === 'highlights' ? 'text-white border-white' : 'border-transparent'}`}
-            >
-              Highlights
-            </button>
-            <button 
-              onClick={() => scrollToSection('comparison')}
-              className={`hover:text-white transition py-3.5 border-b-2 ${activeNav === 'comparison' ? 'text-white border-white' : 'border-transparent'}`}
-            >
-              Why PS1
-            </button>
-            <button 
-              onClick={() => scrollToSection('appliances')}
-              className={`hover:text-white transition py-3.5 border-b-2 ${activeNav === 'appliances' ? 'text-white border-white' : 'border-transparent'}`}
-            >
-              Appliances
-            </button>
-            <button 
-              onClick={() => scrollToSection('hardware')}
-              className={`hover:text-white transition py-3.5 border-b-2 ${activeNav === 'hardware' ? 'text-white border-white' : 'border-transparent'}`}
-            >
-              Hardware
-            </button>
-            <button 
-              onClick={() => scrollToSection('packages')}
-              className={`hover:text-white transition py-3.5 border-b-2 ${activeNav === 'packages' ? 'text-white border-white' : 'border-transparent'}`}
-            >
-              Packages
-            </button>
-            <button 
-              onClick={() => scrollToSection('calculator')}
-              className={`hover:text-white transition py-3.5 border-b-2 ${activeNav === 'calculator' ? 'text-white border-white' : 'border-transparent'}`}
-            >
-              Calculator
-            </button>
-            <button 
-              onClick={() => scrollToSection('besant')}
-              className={`hover:text-white transition py-3.5 border-b-2 ${activeNav === 'besant' ? 'text-white border-white' : 'border-transparent'}`}
-            >
-              Field Pilot
-            </button>
-            <button 
-              onClick={() => scrollToSection('robotics')}
-              className={`hover:text-white transition py-3.5 border-b-2 ${activeNav === 'robotics' ? 'text-white border-white' : 'border-transparent'}`}
-            >
-              Robotics
-            </button>
-            <button 
-              onClick={() => scrollToSection('team')}
-              className={`hover:text-white transition py-3.5 border-b-2 ${activeNav === 'team' ? 'text-white border-white' : 'border-transparent'}`}
-            >
-              Team
-            </button>
-            <button 
-              onClick={() => scrollToSection('specs')}
-              className={`hover:text-white transition py-3.5 border-b-2 ${activeNav === 'specs' ? 'text-white border-white' : 'border-transparent'}`}
-            >
-              Specs
-            </button>
-            <button 
-              onClick={() => scrollToSection('faq')}
-              className={`hover:text-white transition py-3.5 border-b-2 ${activeNav === 'faq' ? 'text-white border-white' : 'border-transparent'}`}
-            >
-              FAQ
-            </button>
+            {[
+              { id: 'highlights', label: 'Highlights' },
+              { id: 'comparison', label: 'Why PS1' },
+              { id: 'appliances', label: 'Appliances' },
+              { id: 'hardware', label: 'Hardware' },
+              { id: 'packages', label: 'Packages' },
+              { id: 'calculator', label: 'Calculator' },
+              { id: 'besant', label: 'Field Pilot' },
+              { id: 'robotics', label: 'Robotics' },
+              { id: 'team', label: 'Team' },
+              { id: 'specs', label: 'Specs' },
+              { id: 'faq', label: 'FAQ' }
+            ].map((tab) => (
+              <button 
+                key={tab.id}
+                onClick={() => scrollToSection(tab.id)}
+                className={`relative py-3.5 hover:text-white transition font-medium ${
+                  activeNav === tab.id ? 'text-white' : 'text-[#83868a]'
+                }`}
+              >
+                <span>{tab.label}</span>
+                {activeNav === tab.id && (
+                  <motion.div 
+                    layoutId="subnavActiveIndicator" 
+                    className="absolute bottom-0 left-0 right-0 h-0.5 bg-white shadow-[0_0_8px_rgba(255,255,255,0.8)]" 
+                    transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                  />
+                )}
+              </button>
+            ))}
           </div>
 
           <button
@@ -553,7 +543,13 @@ export default function AdbLabsTitanPage({ onNavigateToMember }) {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             
             {/* Bento Card 1: Full-width Power & Capacity */}
-            <div className="md:col-span-2 p-8 sm:p-12 rounded-[32px] glass-panel glass-panel-hover relative overflow-hidden text-left shadow-2xl">
+            <motion.div 
+              initial={{ opacity: 0, y: 28 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-50px" }}
+              transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+              className="md:col-span-2 p-8 sm:p-12 rounded-[32px] glass-panel glass-panel-hover relative overflow-hidden text-left shadow-2xl"
+            >
               <div className="absolute top-0 right-0 w-96 h-96 bg-[#adceff]/10 rounded-full blur-3xl pointer-events-none"></div>
 
               <div className="max-w-xl">
@@ -592,10 +588,16 @@ export default function AdbLabsTitanPage({ onNavigateToMember }) {
                   <div className="text-xs text-neutral-400 mt-1">Dual MPPT Tracking</div>
                 </div>
               </div>
-            </div>
+            </motion.div>
 
             {/* Bento Card 2: Spend Less From Day One */}
-            <div className="p-8 sm:p-10 rounded-[32px] glass-panel glass-panel-hover text-left flex flex-col justify-between">
+            <motion.div 
+              initial={{ opacity: 0, y: 28 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-50px" }}
+              transition={{ duration: 0.7, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
+              className="p-8 sm:p-10 rounded-[32px] glass-panel glass-panel-hover text-left flex flex-col justify-between"
+            >
               <div>
                 <span className="text-xs uppercase tracking-wider text-[#adceff] font-bold">Economic Payback</span>
                 <h3 className="text-2xl font-bold text-white mt-2">Spend ₹0 on Fuel From Day One</h3>
@@ -621,10 +623,16 @@ export default function AdbLabsTitanPage({ onNavigateToMember }) {
                 <span>See Fuel Comparison</span>
                 <ArrowRight className="w-4 h-4" />
               </div>
-            </div>
+            </motion.div>
 
             {/* Bento Card 3: Autonomous Robotics & AI */}
-            <div className="p-8 sm:p-10 rounded-[32px] glass-panel glass-panel-hover text-left flex flex-col justify-between">
+            <motion.div 
+              initial={{ opacity: 0, y: 28 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-50px" }}
+              transition={{ duration: 0.7, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+              className="p-8 sm:p-10 rounded-[32px] glass-panel glass-panel-hover text-left flex flex-col justify-between"
+            >
               <div>
                 <span className="text-xs uppercase tracking-wider text-[#adceff] font-bold">Autonomous Robotics & AI</span>
                 <h3 className="text-2xl font-bold text-white mt-2">Field Robotics & ROS 2 Intelligence</h3>
@@ -650,7 +658,7 @@ export default function AdbLabsTitanPage({ onNavigateToMember }) {
                 <span>Explore Robotics Division</span>
                 <ArrowRight className="w-4 h-4" />
               </div>
-            </div>
+            </motion.div>
 
           </div>
 
@@ -676,7 +684,13 @@ export default function AdbLabsTitanPage({ onNavigateToMember }) {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
             
             {/* Card 1: Traditional 5kVA Diesel Generator */}
-            <div className="p-8 sm:p-10 rounded-[32px] bg-white/[0.02] border border-white/[0.08] text-left relative overflow-hidden backdrop-blur-xl">
+            <motion.div 
+              initial={{ opacity: 0, x: -24 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, margin: "-50px" }}
+              transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+              className="p-8 sm:p-10 rounded-[32px] bg-white/[0.02] border border-white/[0.08] text-left relative overflow-hidden backdrop-blur-xl"
+            >
               <div className="text-xs font-mono uppercase tracking-wider text-red-400 font-bold mb-2">
                 Traditional Setup
               </div>
@@ -713,10 +727,16 @@ export default function AdbLabsTitanPage({ onNavigateToMember }) {
                   <div className="text-xs text-neutral-500 mt-1">Costly repairs caused by coastal salt air corrosion</div>
                 </div>
               </div>
-            </div>
+            </motion.div>
 
             {/* Card 2: ADB Labs PS1 Solar Solution */}
-            <div className="p-8 sm:p-10 rounded-[32px] bg-gradient-to-b from-white/[0.06] to-white/[0.02] border border-white/20 text-left relative overflow-hidden backdrop-blur-xl shadow-2xl">
+            <motion.div 
+              initial={{ opacity: 0, x: 24 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, margin: "-50px" }}
+              transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+              className="p-8 sm:p-10 rounded-[32px] bg-gradient-to-b from-white/[0.06] to-white/[0.02] border border-white/20 text-left relative overflow-hidden backdrop-blur-xl shadow-2xl"
+            >
               <div className="inline-block bg-[#adceff]/15 text-[#adceff] text-[10px] font-bold uppercase tracking-wider px-3 py-1 rounded-full mb-2">
                 ADB Labs Breakthrough ★
               </div>
@@ -759,7 +779,7 @@ export default function AdbLabsTitanPage({ onNavigateToMember }) {
                   <div className="text-xs text-neutral-400 mt-1">3,500+ lifecycle prismatic cells lasting over 10 years</div>
                 </div>
               </div>
-            </div>
+            </motion.div>
 
           </div>
         </div>
@@ -875,16 +895,23 @@ export default function AdbLabsTitanPage({ onNavigateToMember }) {
               
               {/* Product View Display */}
               <div className="relative w-full max-w-md aspect-[4/3] flex items-center justify-center">
-                <img 
-                  src={
-                    activeAngle === 'front' ? '/images/ps1_titan_studio.jpg' :
-                    activeAngle === 'rear' ? '/images/ps1_studio_render.jpg' :
-                    activeAngle === 'side' ? '/images/sol_ps1.png' :
-                    '/images/ps1_hero.jpg'
-                  }
-                  alt={`ADB Labs PS1 - ${activeAngle} view`}
-                  className="max-h-full max-w-full object-contain filter drop-shadow-[0_20px_30px_rgba(0,0,0,0.9)]"
-                />
+                <AnimatePresence mode="wait">
+                  <motion.img 
+                    key={activeAngle}
+                    src={
+                      activeAngle === 'front' ? '/images/ps1_titan_studio.jpg' :
+                      activeAngle === 'rear' ? '/images/ps1_studio_render.jpg' :
+                      activeAngle === 'side' ? '/images/sol_ps1.png' :
+                      '/images/ps1_hero.jpg'
+                    }
+                    alt={`ADB Labs PS1 - ${activeAngle} view`}
+                    initial={{ opacity: 0, scale: 0.96 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    exit={{ opacity: 0, scale: 0.96 }}
+                    transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+                    className="max-h-full max-w-full object-contain filter drop-shadow-[0_20px_30px_rgba(0,0,0,0.9)]"
+                  />
+                </AnimatePresence>
 
                 {/* Hotspot 1: Inverter */}
                 <button 
@@ -1371,38 +1398,47 @@ export default function AdbLabsTitanPage({ onNavigateToMember }) {
             <div className="p-8 sm:p-12 rounded-[32px] bg-white/[0.03] border border-white/[0.08] backdrop-blur-2xl relative shadow-2xl overflow-hidden">
               <div className="absolute top-0 right-0 w-80 h-80 bg-[#adceff]/5 rounded-full blur-3xl pointer-events-none"></div>
 
-              <div className="flex flex-col md:flex-row gap-8 items-center">
-                <div className="w-full md:w-1/2 aspect-[4/3] rounded-2xl overflow-hidden bg-black/80 border border-white/[0.08] flex-shrink-0 flex items-center justify-center p-3">
-                  <img 
-                    src={fieldStories[activeStoryIdx].image} 
-                    alt={fieldStories[activeStoryIdx].title} 
-                    className="max-h-full max-w-full object-contain rounded-xl"
-                  />
-                </div>
-
-                <div className="w-full md:w-1/2 space-y-4 text-left">
-                  <div className="inline-block bg-[#adceff]/15 text-[#adceff] text-[10px] font-bold uppercase tracking-wider px-3 py-1 rounded-full">
-                    {fieldStories[activeStoryIdx].badge}
+              <AnimatePresence mode="wait">
+                <motion.div 
+                  key={activeStoryIdx}
+                  initial={{ opacity: 0, x: 20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  exit={{ opacity: 0, x: -20 }}
+                  transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+                  className="flex flex-col md:flex-row gap-8 items-center"
+                >
+                  <div className="w-full md:w-1/2 aspect-[4/3] rounded-2xl overflow-hidden bg-black/80 border border-white/[0.08] flex-shrink-0 flex items-center justify-center p-3">
+                    <img 
+                      src={fieldStories[activeStoryIdx].image} 
+                      alt={fieldStories[activeStoryIdx].title} 
+                      className="max-h-full max-w-full object-contain rounded-xl"
+                    />
                   </div>
-                  <h3 className="text-2xl font-bold text-white leading-snug">
-                    {fieldStories[activeStoryIdx].title}
-                  </h3>
-                  <p className="text-neutral-300 text-sm leading-relaxed italic">
-                    "{fieldStories[activeStoryIdx].quote}"
-                  </p>
 
-                  <div className="pt-4 border-t border-white/[0.08] flex items-center justify-between">
-                    <div>
-                      <div className="text-sm font-bold text-white">{fieldStories[activeStoryIdx].author}</div>
-                      <div className="text-xs text-[#83868a]">{fieldStories[activeStoryIdx].role}</div>
+                  <div className="w-full md:w-1/2 space-y-4 text-left">
+                    <div className="inline-block bg-[#adceff]/15 text-[#adceff] text-[10px] font-bold uppercase tracking-wider px-3 py-1 rounded-full">
+                      {fieldStories[activeStoryIdx].badge}
                     </div>
-                    <div className="text-right">
-                      <div className="text-lg font-black text-[#adceff]">{fieldStories[activeStoryIdx].stat1}</div>
-                      <div className="text-[10px] text-neutral-400">{fieldStories[activeStoryIdx].stat1Label}</div>
+                    <h3 className="text-2xl font-bold text-white leading-snug">
+                      {fieldStories[activeStoryIdx].title}
+                    </h3>
+                    <p className="text-neutral-300 text-sm leading-relaxed italic">
+                      "{fieldStories[activeStoryIdx].quote}"
+                    </p>
+
+                    <div className="pt-4 border-t border-white/[0.08] flex items-center justify-between">
+                      <div>
+                        <div className="text-sm font-bold text-white">{fieldStories[activeStoryIdx].author}</div>
+                        <div className="text-xs text-[#83868a]">{fieldStories[activeStoryIdx].role}</div>
+                      </div>
+                      <div className="text-right">
+                        <div className="text-lg font-black text-[#adceff]">{fieldStories[activeStoryIdx].stat1}</div>
+                        <div className="text-[10px] text-neutral-400">{fieldStories[activeStoryIdx].stat1Label}</div>
+                      </div>
                     </div>
                   </div>
-                </div>
-              </div>
+                </motion.div>
+              </AnimatePresence>
 
               {/* Slider Navigation Buttons */}
               <div className="flex items-center justify-between mt-8 pt-6 border-t border-white/[0.08]">
@@ -2018,11 +2054,13 @@ export default function AdbLabsTitanPage({ onNavigateToMember }) {
                     <ChevronDown className={`w-5 h-5 flex-shrink-0 transition-transform duration-300 text-[#83868a] ${isOpen ? 'rotate-180 text-white' : ''}`} />
                   </button>
 
-                  {isOpen && (
-                    <div className="px-6 sm:px-7 pb-6 text-sm text-[#adafb3] leading-relaxed border-t border-white/[0.06] pt-4">
-                      {faq.a}
+                  <div className={`faq-grid-collapse ${isOpen ? 'open' : 'closed'}`}>
+                    <div className="faq-inner">
+                      <div className="px-6 sm:px-7 pb-6 text-sm text-[#adafb3] leading-relaxed border-t border-white/[0.06] pt-4">
+                        {faq.a}
+                      </div>
                     </div>
-                  )}
+                  </div>
                 </div>
               );
             })}
@@ -2135,9 +2173,22 @@ export default function AdbLabsTitanPage({ onNavigateToMember }) {
       </footer>
 
       {/* INTERACTIVE QUOTE & AUDIT MODAL */}
-      {isQuoteModalOpen && (
-        <div className="fixed inset-0 z-[10000] bg-black/80 backdrop-blur-md flex items-center justify-center p-4">
-          <div className="bg-[#101217] border border-white/20 max-w-lg w-full rounded-3xl p-6 sm:p-8 relative shadow-2xl text-left">
+      <AnimatePresence>
+        {isQuoteModalOpen && (
+          <motion.div 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.25 }}
+            className="fixed inset-0 z-[10000] bg-black/80 backdrop-blur-md flex items-center justify-center p-4"
+          >
+            <motion.div 
+              initial={{ opacity: 0, scale: 0.94, y: 15 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.94, y: 15 }}
+              transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+              className="bg-[#101217] border border-white/20 max-w-lg w-full rounded-3xl p-6 sm:p-8 relative shadow-2xl text-left"
+            >
             <button
               onClick={() => setIsQuoteModalOpen(false)}
               className="absolute top-5 right-5 text-neutral-400 hover:text-white p-2 rounded-full hover:bg-white/10 transition"
@@ -2259,9 +2310,10 @@ export default function AdbLabsTitanPage({ onNavigateToMember }) {
                 </form>
               </>
             )}
-          </div>
-        </div>
-      )}
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
     </div>
   );
