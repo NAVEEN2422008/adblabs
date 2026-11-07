@@ -1,0 +1,192 @@
+Worked for 12s
+
+Bro, here’s the ADB Labs website content inventory based on the brochures, project handover, and mockups you shared. I’ve separated what’s documented from concepts or draft material—because the website should not accidentally turn an engineering estimate into a promise.## ADB Labs — what the company does
+
+ADB Labs is presented in your materials as a technology and R&D initiative working across:
+
+* Energy solutions and portable power
+
+* Off-grid solar systems
+
+* Robotics and AI
+
+* Embedded systems and hardware development
+
+* Engineering, prototyping, and product development
+
+The overall website message can be: “Building practical technology through research, engineering, prototyping, and real-world experimentation.”
+
+### Products and energy solutions
+
+### 1\. ADB Labs PS1 Power Station
+
+An integrated portable power station intended for backup and off-grid use. The concept combines:
+
+* LiFePO₄ battery storage
+
+* Battery management system (BMS)
+
+* Solar charge controller
+
+* Inverter
+
+* Electrical protection and connections
+
+* Display and controls
+
+* Cooling and enclosure
+
+* An expansion connection for a compatible additional battery
+
+Draft / target specifications shown in your materials:
+
+* Battery: 6.144 kWh nominal
+
+* Inverter: 3 kW target, subject to validation
+
+* Solar charging: up to 420 W in the website mockup
+
+* Expandable battery configuration
+
+* Portable, durable enclosure concept
+
+The mockup labels PS1 “In Development.” Treat the specs as preliminary until engineering validates them. Don’t publish the mockup’s screen readings as verified performance.
+
+### 2\. PS1 solar system packages
+
+Your internal project handover describes two proposed small-business configurations:
+
+| Package                      | Configuration described in the handover                                                                                                                |
+| ---------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Standard PS1 system — Shop 1 | One PS1 with 6.144 kWh nominal battery, two 720 W panels (1.44 kWp), mounting and installation accessories                                             |
+| Expanded PS1 system — Shop 2 | One PS1 with 6.144 kWh nominal battery, one additional 6.144 kWh battery module, four 720 W panels (2.88 kWp), and associated installation accessories |
+
+The expanded setup is one PS1 plus an extra battery module—not two PS1 units connected together.
+
+The handover contains preliminary cost and launch-price estimates, but it explicitly says engineering, supplier quotes, compatibility, and customer loads still need validation. I’d keep prices off the public website until you confirm them.
+
+### 3\. Energy solutions / services
+
+These are the solution categories shown in your website materials:
+
+* Off-Grid Power Systems: solar-powered systems for shops, remote sites, and small businesses.
+
+* Home Backup Systems: backup power for essential household loads.
+
+* Custom Battery Solutions: tailored LiFePO₄ battery packs.
+
+* Portable Power Stations: integrated and potentially expandable backup power products.
+
+Describe these as solutions ADB Labs is developing or offering only to the extent that is currently true. The materials don’t establish final availability, warranty terms, or validated performance for every category.
+
+### Projects
+
+### Besant Nagar Off-Grid System
+
+A commercial off-grid solar project for a fish stall in Besant Nagar, Chennai. The project handover describes the proposed configuration as:
+
+* One PS1
+
+* Main battery: 6.144 kWh nominal
+
+* Additional battery: 6.144 kWh nominal
+
+* Total battery: 12.288 kWh nominal
+
+* Four 720 W solar panels: 2.88 kWp
+
+* Intended loads include lights and signboards
+
+The handover also flags that the customer’s estimated load needs confirmation and that usable energy and runtime cannot yet be guaranteed. On the website, present this as a project overview or system under validation, not as a proven runtime case study.
+
+### Juice, chocolate, and waffle stall system
+
+The handover also describes a proposed setup for a small food stall:
+
+* One PS1
+
+* One 6.144 kWh nominal battery
+
+* Two 720 W solar panels: 1.44 kWp
+
+* Intended loads include lighting, signage, a blender, chocolate machine, and waffle maker
+
+The load sheet is described as preliminary and not a validated energy audit. Use it as a project concept / design case, not a performance claim.
+
+### Robotics & R&D
+
+The website can present ADB Labs’ robotics work as research, prototyping, and experimentation in robotics, automation, and intelligent systems. The mockup lists these capability areas:
+
+* Robotics systems: robot design, control, and simulation
+
+* AI integration: perception, computer vision, and decision-making
+
+* Embedded systems: firmware and hardware integration
+
+* Prototyping: rapid development and validation
+
+The materials also identify broader focus areas: robotics, AI, engineering, embedded systems, hardware development, clean-energy technology, product development, and R&D.
+
+### Robotics & AI Industrial Internship
+
+Your internship brochure is marked draft / for internal review, so the website should call it a proposed program until the details are finalized.
+
+The draft describes:
+
+* Six-week, project-based program
+
+* 18 live sessions
+
+* Live mentorship
+
+* Simulation-first learning; participation does not depend on physical hardware
+
+* Intended for students in CSE, AI/ML, Robotics, ECE, EEE, and Mechanical disciplines
+
+* A capstone project: building up a simulated autonomous robot
+
+The draft’s learning journey includes robotics foundations, programming and ROS 2, kinematics and control, computer vision and AI, autonomous robotics, and capstone development. It mentions robot modeling, sensors, simulation, mapping, localization, navigation, obstacle avoidance, computer vision, and an autonomous mission.
+
+The mockup says “Apply (Opening Soon)”—use that only if applications really are not open yet.
+
+### Suggested website navigation
+
+* Home
+
+* Energy Solutions
+
+    * Portable Power Stations
+
+    * Home Backup Systems
+
+    * Off-Grid Power Systems
+
+    * Custom Battery Solutions
+
+* Power Stations
+
+    * ADB Labs PS1
+
+* Projects
+
+    * Besant Nagar Off-Grid System
+
+    * Small-business solar system
+
+* Robotics & R&D
+
+* Internship
+
+* About
+
+* Contact / Get a Quote
+
+### About ADB Labs — draft copy
+
+> ADB Labs is a technology and R&D initiative focused on practical solutions across energy, robotics, engineering, embedded systems, and product development. We explore problems, design and prototype solutions, and test ideas through structured engineering and real-world experimentation.
+
+### Important before publishing
+
+A few items in the materials are not yet confirmed public facts: PS1 final specifications, validated runtime, battery compatibility, final package prices, product availability, and internship dates/application status. Keep those marked in development, proposed, or enquire for details until you confirm them.
+
+Also, your materials include contact details and a company/legal-name reference. Confirm which phone, email, and legal entity details you want public before adding them to the site.
