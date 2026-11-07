@@ -40,6 +40,10 @@ import RoboticsTitanGallery from './components/RoboticsTitanGallery';
 import PowerFlowDiagram from './components/PowerFlowDiagram';
 import ModularStackingSimulator from './components/ModularStackingSimulator';
 import Interactive3DTiltCard from './components/Interactive3DTiltCard';
+import EcoFlowScrollPinnedHardware from './components/EcoFlowScrollPinnedHardware';
+import OurSolutionsBento from './components/OurSolutionsBento';
+import InternshipRoadmapInteractive from './components/InternshipRoadmapInteractive';
+import ProcessSection from './components/ProcessSection';
 
 export default function AdbLabsTitanPage({ onNavigateToMember }) {
   // Global Scroll-Linked Progress (Apple Pro / Tesla style)
@@ -312,16 +316,19 @@ export default function AdbLabsTitanPage({ onNavigateToMember }) {
           </div>
 
           {/* Desktop Navigation Links with Active Spring Indicator */}
-          <nav className="hidden lg:flex items-center gap-6 xl:gap-7 text-xs font-semibold tracking-wide text-[#83868a]">
+          <nav className="hidden lg:flex items-center gap-5 xl:gap-6 text-xs font-semibold tracking-wide text-[#83868a]">
             {[
+              { id: 'solutions', label: 'Solutions' },
+              { id: 'hardware', label: 'PS1 Station' },
               { id: 'highlights', label: 'Highlights' },
               { id: 'comparison', label: 'Why PS1' },
               { id: 'appliances', label: 'Appliances' },
-              { id: 'hardware', label: 'Hardware' },
               { id: 'packages', label: 'Packages' },
               { id: 'calculator', label: 'Calculator' },
               { id: 'besant', label: 'Field Pilot' },
               { id: 'robotics', label: 'Robotics' },
+              { id: 'internship', label: 'Internship' },
+              { id: 'process', label: 'Process' },
               { id: 'team', label: 'Team' },
               { id: 'specs', label: 'Specs' },
               { id: 'faq', label: 'FAQ' }
@@ -398,14 +405,17 @@ export default function AdbLabsTitanPage({ onNavigateToMember }) {
 
                 {[
                   { id: 'overview', label: 'Overview & 3D Stage', icon: Zap },
+                  { id: 'solutions', label: 'Our Solutions Portfolio', icon: ShieldCheck },
+                  { id: 'hardware', label: 'PS1 Hardware Anatomy', icon: Cpu },
                   { id: 'highlights', label: 'Key Highlights', icon: Award },
                   { id: 'comparison', label: 'Why PS1 vs Generator', icon: Leaf },
                   { id: 'appliances', label: 'Stall Appliances', icon: Snowflake },
-                  { id: 'hardware', label: 'Hardware Subsystems', icon: Cpu },
                   { id: 'packages', label: 'Commercial Packages', icon: ShieldCheck },
                   { id: 'calculator', label: 'Autonomy Calculator', icon: Sliders },
                   { id: 'besant', label: 'Besant Nagar Field Pilot', icon: MapPin },
                   { id: 'robotics', label: 'Robotics & AI Division', icon: Bot },
+                  { id: 'internship', label: 'Industrial Internship (6 Wks)', icon: Award },
+                  { id: 'process', label: 'Our 5-Phase Process', icon: Activity },
                   { id: 'team', label: 'Engineering Team', icon: Award },
                   { id: 'specs', label: 'Technical Specs', icon: Activity },
                   { id: 'faq', label: 'Technical FAQ', icon: ChevronDown }
@@ -513,8 +523,8 @@ export default function AdbLabsTitanPage({ onNavigateToMember }) {
             transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
             className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/[0.04] border border-white/10 text-xs text-[#adceff] font-medium mb-6 backdrop-blur-md"
           >
-            <span className="w-2 h-2 rounded-full bg-[#adceff] animate-ping"></span>
-            <span>Commercial Energy · Robotics · Real-World R&D</span>
+            <span className="w-2 h-2 rounded-full bg-[#00f5a0] animate-ping"></span>
+            <span>ENERGY | ROBOTICS | ENGINEERING | R&D</span>
           </motion.div>
 
           {/* Titan Large Headline */}
@@ -524,7 +534,8 @@ export default function AdbLabsTitanPage({ onNavigateToMember }) {
             transition={{ duration: 0.8, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
             className="text-5xl sm:text-7xl lg:text-8xl font-black tracking-tight max-w-5xl mx-auto leading-[1.04] text-white"
           >
-            ADB Labs PS1 Series
+            Engineering <br className="hidden sm:inline" />
+            <span className="bg-gradient-to-r from-[#00f5a0] via-[#00d9f5] to-[#38bdf8] bg-clip-text text-transparent">Real-World</span> Solutions.
           </motion.h1>
 
           {/* Subtitle */}
@@ -534,7 +545,7 @@ export default function AdbLabsTitanPage({ onNavigateToMember }) {
             transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
             className="text-[#adafb3] text-lg sm:text-2xl max-w-3xl mx-auto mt-6 font-normal leading-relaxed"
           >
-            Whole-Stall Power & Commercial Energy Storage, Now Within Reach.
+            Portable power, off-grid systems, custom battery solutions and robotics R&D — from concept to real-world deployment.
           </motion.p>
 
           {/* Hero CTAs */}
@@ -545,17 +556,17 @@ export default function AdbLabsTitanPage({ onNavigateToMember }) {
             className="flex flex-wrap items-center justify-center gap-4 mt-8"
           >
             <button 
-              onClick={() => { setModalType('quote'); setIsQuoteModalOpen(true); }}
-              className="bg-white hover:bg-neutral-200 text-black font-bold text-sm px-8 py-3.5 rounded-full transition shadow-[0_0_35px_rgba(255,255,255,0.2)] flex items-center gap-2"
+              onClick={() => scrollToSection('solutions')}
+              className="bg-gradient-to-r from-[#00f5a0] to-[#38bdf8] hover:opacity-90 text-black font-extrabold text-sm px-8 py-3.5 rounded-full transition shadow-[0_0_35px_rgba(0,245,160,0.3)] flex items-center gap-2 group"
             >
-              <span>Get Expert Help</span>
-              <ArrowRight className="w-4 h-4" />
+              <span>Explore Solutions</span>
+              <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition" />
             </button>
             <button 
-              onClick={() => scrollToSection('highlights')}
+              onClick={() => scrollToSection('hardware')}
               className="bg-white/[0.06] hover:bg-white/[0.12] text-white border border-white/20 font-semibold text-sm px-8 py-3.5 rounded-full transition backdrop-blur-md flex items-center gap-2"
             >
-              <span>Get the Highlights</span>
+              <span>PS1 Hardware Anatomy</span>
             </button>
             <button 
               onClick={() => { setModalType('video'); setIsQuoteModalOpen(true); }}
@@ -582,10 +593,55 @@ export default function AdbLabsTitanPage({ onNavigateToMember }) {
             </div>
           </motion.div>
 
+          {/* 4 Value Pillars Bar directly underneath Hero */}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-16 pt-10 border-t border-white/[0.08] max-w-5xl mx-auto">
+            <div className="p-5 rounded-2xl bg-[#090b10] border border-white/[0.08] text-left hover:border-[#38bdf8]/40 transition">
+              <Zap className="w-5 h-5 text-[#38bdf8] mb-2" />
+              <div className="text-sm font-bold text-white">Power Solutions</div>
+              <div className="text-[11px] text-neutral-400 mt-0.5">Reliable & scalable energy</div>
+            </div>
+            <div className="p-5 rounded-2xl bg-[#090b10] border border-white/[0.08] text-left hover:border-[#38bdf8]/40 transition">
+              <Bot className="w-5 h-5 text-[#38bdf8] mb-2" />
+              <div className="text-sm font-bold text-white">Robotics R&D</div>
+              <div className="text-[11px] text-neutral-400 mt-0.5">Intelligent robotic systems</div>
+            </div>
+            <div className="p-5 rounded-2xl bg-[#090b10] border border-white/[0.08] text-left hover:border-[#38bdf8]/40 transition">
+              <Cpu className="w-5 h-5 text-[#38bdf8] mb-2" />
+              <div className="text-sm font-bold text-white">Product Development</div>
+              <div className="text-[11px] text-neutral-400 mt-0.5">From concept to prototype</div>
+            </div>
+            <div className="p-5 rounded-2xl bg-[#090b10] border border-white/[0.08] text-left hover:border-[#38bdf8]/40 transition">
+              <Award className="w-5 h-5 text-[#38bdf8] mb-2" />
+              <div className="text-sm font-bold text-white">Internship Program</div>
+              <div className="text-[11px] text-neutral-400 mt-0.5">Hands-on, project-based learning</div>
+            </div>
+          </div>
+
         </div>
       </section>
 
-      {/* SECTION 2: ECOFLOW TITAN SIGNATURE BENTO HIGHLIGHTS (Titan-C4 Replica) */}
+      {/* SECTION 2: OUR SOLUTIONS (Core Offerings Portfolio) */}
+      <section id="solutions" className="py-32 sm:py-40 px-4 sm:px-6 lg:px-8 border-b border-white/[0.08] relative">
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[500px] bg-[#38bdf8]/5 rounded-full blur-[140px] pointer-events-none -z-10"></div>
+
+        <div className="max-w-6xl mx-auto">
+          <div className="text-center max-w-3xl mx-auto mb-20 sm:mb-24">
+            <span className="text-xs font-semibold uppercase tracking-widest text-[#38bdf8]">
+              Technology & Systems Portfolio
+            </span>
+            <h2 className="text-4xl sm:text-6xl lg:text-7xl font-black text-white mt-3 tracking-tight">
+              Our <span className="bg-gradient-to-r from-[#00f5a0] via-[#00d9f5] to-[#38bdf8] bg-clip-text text-transparent">Solutions.</span>
+            </h2>
+            <p className="text-[#adafb3] text-base sm:text-xl mt-4 leading-relaxed font-normal">
+              End-to-end energy and engineering solutions for homes, businesses and new-age applications.
+            </p>
+          </div>
+
+          <OurSolutionsBento onSelectSolution={(anchor) => scrollToSection(anchor)} />
+        </div>
+      </section>
+
+      {/* SECTION 3: ECOFLOW TITAN SIGNATURE BENTO HIGHLIGHTS (Titan-C4 Replica) */}
       <section id="highlights" className="py-32 sm:py-40 px-4 sm:px-6 lg:px-8 border-b border-white/[0.08] relative">
         {/* Ambient section halo */}
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[500px] bg-[#38bdf8]/5 rounded-full blur-[140px] pointer-events-none -z-10"></div>
@@ -948,171 +1004,9 @@ export default function AdbLabsTitanPage({ onNavigateToMember }) {
         </div>
       </section>
 
-      {/* SECTION 6: PS1 HARDWARE ARCHITECTURE & INTERACTIVE HOTSPOTS */}
-      <section id="hardware" className="py-24 px-6 border-b border-white/[0.08] relative">
-        <div className="max-w-6xl mx-auto">
-          
-          <div className="text-center max-w-3xl mx-auto mb-16">
-            <span className="text-xs font-semibold uppercase tracking-widest text-[#adceff]">
-              Modular Subsystem Architecture
-            </span>
-            <h2 className="text-4xl sm:text-6xl font-black text-white mt-3 tracking-tight">
-              Power Almost Everything.
-            </h2>
-            <p className="text-[#adafb3] text-base sm:text-lg mt-4 leading-relaxed">
-              Engineered with automotive LiFePO₄ prismatic cells, 3kW continuous pure sine inverter, dual MPPT solar controllers, and rugged caster mobility.
-            </p>
-          </div>
-
-          {/* Interactive Multi-angle Hardware Viewer */}
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center bg-white/[0.02] rounded-[32px] border border-white/[0.08] backdrop-blur-xl p-6 sm:p-10">
-            
-            {/* Visual Display with Hotspots */}
-            <div className="lg:col-span-8 relative flex flex-col items-center justify-center min-h-[460px] bg-black/60 rounded-3xl border border-white/[0.06] p-6 bg-cad-grid cad-corner-tl">
-              
-              {/* CAD Subsystem Top Telemetry Header */}
-              <div className="w-full flex items-center justify-between pb-4 border-b border-white/[0.06] mb-4 text-[10px] font-mono text-[#83868a]">
-                <div className="flex items-center gap-2">
-                  <span className="w-2 h-2 rounded-full bg-[#38bdf8] animate-ping"></span>
-                  <span className="text-white font-bold tracking-wider">CAD SUBSYSTEM EXPLORER // REV 3.2</span>
-                </div>
-                <div className="hidden sm:flex items-center gap-3">
-                  <span>SCALE: 1:1 FIELD SPEC</span>
-                  <span>•</span>
-                  <span className="text-[#38bdf8] font-bold">CLICK HOTSPOTS (1-4)</span>
-                </div>
-              </div>
-
-              {/* Product View Display */}
-              <div className="relative w-full max-w-md aspect-[4/3] flex items-center justify-center">
-                <AnimatePresence mode="wait">
-                  <motion.img 
-                    key={activeAngle}
-                    src={
-                      activeAngle === 'front' ? '/images/ps1_titan_studio.jpg' :
-                      activeAngle === 'rear' ? '/images/ps1_studio_render.jpg' :
-                      activeAngle === 'side' ? '/images/sol_ps1.png' :
-                      '/images/ps1_hero.jpg'
-                    }
-                    alt={`ADB Labs PS1 - ${activeAngle} view`}
-                    initial={{ opacity: 0, scale: 0.96 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    exit={{ opacity: 0, scale: 0.96 }}
-                    transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
-                    className="max-h-full max-w-full object-contain filter drop-shadow-[0_20px_30px_rgba(0,0,0,0.9)]"
-                  />
-                </AnimatePresence>
-
-                {/* Hotspot 1: Inverter */}
-                <button 
-                  onClick={() => setActiveHotspot(1)}
-                  className={`absolute top-[28%] left-[25%] w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold transition shadow-lg ${
-                    activeHotspot === 1 ? 'bg-white text-black scale-125 ring-4 ring-[#38bdf8]/40' : 'bg-neutral-800/90 text-white hover:bg-neutral-700'
-                  }`}
-                >
-                  {activeHotspot === 1 && <span className="absolute -inset-1.5 rounded-full border border-[#38bdf8] hotspot-pulse pointer-events-none"></span>}
-                  1
-                </button>
-
-                {/* Hotspot 2: LiFePO₄ Core */}
-                <button 
-                  onClick={() => setActiveHotspot(2)}
-                  className={`absolute top-[52%] left-[48%] w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold transition shadow-lg ${
-                    activeHotspot === 2 ? 'bg-white text-black scale-125 ring-4 ring-[#38bdf8]/40' : 'bg-neutral-800/90 text-white hover:bg-neutral-700'
-                  }`}
-                >
-                  {activeHotspot === 2 && <span className="absolute -inset-1.5 rounded-full border border-[#38bdf8] hotspot-pulse pointer-events-none"></span>}
-                  2
-                </button>
-
-                {/* Hotspot 3: MPPT Solar */}
-                <button 
-                  onClick={() => setActiveHotspot(3)}
-                  className={`absolute top-[32%] right-[24%] w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold transition shadow-lg ${
-                    activeHotspot === 3 ? 'bg-white text-black scale-125 ring-4 ring-[#38bdf8]/40' : 'bg-neutral-800/90 text-white hover:bg-neutral-700'
-                  }`}
-                >
-                  {activeHotspot === 3 && <span className="absolute -inset-1.5 rounded-full border border-[#38bdf8] hotspot-pulse pointer-events-none"></span>}
-                  3
-                </button>
-
-                {/* Hotspot 4: Expansion Bus */}
-                <button 
-                  onClick={() => setActiveHotspot(4)}
-                  className={`absolute bottom-[18%] right-[32%] w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold transition shadow-lg ${
-                    activeHotspot === 4 ? 'bg-white text-black scale-125 ring-4 ring-[#38bdf8]/40' : 'bg-neutral-800/90 text-white hover:bg-neutral-700'
-                  }`}
-                >
-                  {activeHotspot === 4 && <span className="absolute -inset-1.5 rounded-full border border-[#38bdf8] hotspot-pulse pointer-events-none"></span>}
-                  4
-                </button>
-              </div>
-
-              {/* Multi-angle Selector Pills */}
-              <div className="flex items-center gap-2 mt-6 bg-white/[0.04] border border-white/10 p-1.5 rounded-full backdrop-blur-md">
-                {['front', 'rear', 'side', 'top'].map((angle) => (
-                  <button
-                    key={angle}
-                    onClick={() => setActiveAngle(angle)}
-                    className={`px-4 py-1.5 rounded-full text-xs font-medium uppercase transition ${
-                      activeAngle === angle ? 'bg-white text-black font-bold shadow' : 'text-[#83868a] hover:text-white'
-                    }`}
-                  >
-                    {angle} View
-                  </button>
-                ))}
-              </div>
-            </div>
-
-            {/* Hotspot Deep-Dive Information Cards (Clickable Two-Way Sync) */}
-            <div className="lg:col-span-4 space-y-4">
-              <div onClick={() => setActiveHotspot(1)} className={`p-6 rounded-3xl border transition-all cursor-pointer ${activeHotspot === 1 ? 'bg-white/[0.08] border-[#adceff]/60 ring-1 ring-[#adceff]/40 shadow-lg' : 'bg-white/[0.02] border-white/[0.08] hover:border-white/30'}`}>
-                <div className="flex items-center justify-between">
-                  <span className="text-xs text-[#adceff] font-bold uppercase tracking-wider">Subsystem 01</span>
-                  <span className="text-[10px] bg-white/10 text-neutral-300 px-2 py-0.5 rounded font-mono">3000W Target</span>
-                </div>
-                <h3 className="text-lg font-bold text-white mt-1.5">Pure Sine Inverter & Surge Power</h3>
-                <p className="text-[#adafb3] text-xs mt-2 leading-relaxed">
-                  High-surge bidirectional inverter engineered to easily absorb inductive inrush surges from commercial blenders, waffle irons, deep chillers, and power tools.
-                </p>
-              </div>
-
-              <div onClick={() => setActiveHotspot(2)} className={`p-6 rounded-3xl border transition-all cursor-pointer ${activeHotspot === 2 ? 'bg-white/[0.08] border-[#adceff]/60 ring-1 ring-[#adceff]/40 shadow-lg' : 'bg-white/[0.02] border-white/[0.08] hover:border-white/30'}`}>
-                <div className="flex items-center justify-between">
-                  <span className="text-xs text-[#adceff] font-bold uppercase tracking-wider">Subsystem 02</span>
-                  <span className="text-[10px] bg-white/10 text-neutral-300 px-2 py-0.5 rounded font-mono">6.144 kWh Core</span>
-                </div>
-                <h3 className="text-lg font-bold text-white mt-1.5">Automotive LiFePO₄ & Active BMS</h3>
-                <p className="text-[#adafb3] text-xs mt-2 leading-relaxed">
-                  3,500+ lifecycle prismatic chemistry safe for tropical temperatures. Integrated CAN-bus active cell balancing and multi-sensor thermal cutoffs.
-                </p>
-              </div>
-
-              <div onClick={() => setActiveHotspot(3)} className={`p-6 rounded-3xl border transition-all cursor-pointer ${activeHotspot === 3 ? 'bg-white/[0.08] border-[#adceff]/60 ring-1 ring-[#adceff]/40 shadow-lg' : 'bg-white/[0.02] border-white/[0.08] hover:border-white/30'}`}>
-                <div className="flex items-center justify-between">
-                  <span className="text-xs text-[#adceff] font-bold uppercase tracking-wider">Subsystem 03</span>
-                  <span className="text-[10px] bg-white/10 text-neutral-300 px-2 py-0.5 rounded font-mono">420W - 2880W</span>
-                </div>
-                <h3 className="text-lg font-bold text-white mt-1.5">Dual MPPT Solar Controllers</h3>
-                <p className="text-[#adafb3] text-xs mt-2 leading-relaxed">
-                  Wide 12V–150V MPPT tracking accepting standard 720W bifacial high-efficiency panels for rapid replenishment during beach and stall operating hours.
-                </p>
-              </div>
-
-              <div onClick={() => setActiveHotspot(4)} className={`p-6 rounded-3xl border transition-all cursor-pointer ${activeHotspot === 4 ? 'bg-white/[0.08] border-[#adceff]/60 ring-1 ring-[#adceff]/40 shadow-lg' : 'bg-white/[0.02] border-white/[0.08] hover:border-white/30'}`}>
-                <div className="flex items-center justify-between">
-                  <span className="text-xs text-[#adceff] font-bold uppercase tracking-wider">Subsystem 04</span>
-                  <span className="text-[10px] bg-white/10 text-neutral-300 px-2 py-0.5 rounded font-mono">Quick-Connect</span>
-                </div>
-                <h3 className="text-lg font-bold text-white mt-1.5">Modular Expansion Bus</h3>
-                <p className="text-[#adafb3] text-xs mt-2 leading-relaxed">
-                  Heavy-duty direct DC coupling port allowing an additional 6.144 kWh secondary module to double capacity to 12.288 kWh without rewiring or extra inverters.
-                </p>
-              </div>
-            </div>
-
-          </div>
-        </div>
+      {/* SECTION 6: SCROLL-DRIVEN MODULAR HARDWARE ARCHITECTURE (EcoFlow Titan-C8 Pinned Track) */}
+      <section id="hardware" className="relative border-b border-white/[0.08]">
+        <EcoFlowScrollPinnedHardware />
       </section>
 
       {/* SECTION 7: COMMERCIAL PACKAGES CATALOG (Side-by-Side Configurator) */}
@@ -1752,117 +1646,29 @@ export default function AdbLabsTitanPage({ onNavigateToMember }) {
         </div>
       </section>
 
-      {/* SECTION 12: ROBOTICS & AI INDUSTRIAL INTERNSHIP (6-Week Program) */}
-      <section id="internship" className="py-24 px-6 border-b border-white/[0.08]">
+      {/* SECTION 11: ROBOTICS & AI INDUSTRIAL INTERNSHIP (6-Week Program) */}
+      <section id="internship" className="py-32 sm:py-40 px-4 sm:px-6 lg:px-8 border-b border-white/[0.08] relative">
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[850px] h-[500px] bg-[#38bdf8]/5 rounded-full blur-[140px] pointer-events-none -z-10"></div>
+
         <div className="max-w-6xl mx-auto">
-          
-          <div className="text-center max-w-3xl mx-auto mb-16">
-            <span className="text-xs font-semibold uppercase tracking-widest text-[#adceff]">
+          <div className="text-center max-w-3xl mx-auto mb-20 sm:mb-24">
+            <span className="text-xs font-semibold uppercase tracking-widest text-[#38bdf8]">
               Engineering Talent Incubator
             </span>
-            <h2 className="text-4xl sm:text-6xl font-black text-white mt-3 tracking-tight">
+            <h2 className="text-4xl sm:text-6xl lg:text-7xl font-black text-white mt-3 tracking-tight">
               Robotics & AI Industrial Internship.
             </h2>
-            <p className="text-[#adafb3] text-base sm:text-lg mt-4 leading-relaxed">
+            <p className="text-[#adafb3] text-base sm:text-xl mt-4 leading-relaxed font-normal">
               A 6-week, project-based industrial internship with live mentorship and a simulated autonomous robot capstone. Learn simulation-first without requiring expensive physical hardware.
             </p>
           </div>
 
-          {/* Program Highlights Matrix */}
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-12">
-            <div className="p-6 rounded-3xl bg-white/[0.02] border border-white/[0.08] text-center backdrop-blur-md">
-              <Calendar className="w-6 h-6 text-[#adceff] mx-auto mb-2" />
-              <div className="text-2xl font-bold text-white">6 Weeks</div>
-              <div className="text-xs text-neutral-400 mt-1">Structured Duration</div>
-            </div>
-
-            <div className="p-6 rounded-3xl bg-white/[0.02] border border-white/[0.08] text-center backdrop-blur-md">
-              <Activity className="w-6 h-6 text-[#adceff] mx-auto mb-2" />
-              <div className="text-2xl font-bold text-white">18 Sessions</div>
-              <div className="text-xs text-neutral-400 mt-1">Live Mentor-Led</div>
-            </div>
-
-            <div className="p-6 rounded-3xl bg-white/[0.02] border border-white/[0.08] text-center backdrop-blur-md">
-              <Award className="w-6 h-6 text-[#adceff] mx-auto mb-2" />
-              <div className="text-2xl font-bold text-white">1 Capstone</div>
-              <div className="text-xs text-neutral-400 mt-1">Autonomous Navigation</div>
-            </div>
-
-            <div className="p-6 rounded-3xl bg-white/[0.02] border border-white/[0.08] text-center backdrop-blur-md">
-              <Bot className="w-6 h-6 text-[#adceff] mx-auto mb-2" />
-              <div className="text-2xl font-bold text-white">All Disciplines</div>
-              <div className="text-xs text-neutral-400 mt-1">CSE, AI/ML, ECE, EEE, Mech</div>
-            </div>
-          </div>
-
-          {/* 6-Week Learning Roadmap Cards */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 text-left">
-            
-            <div className="p-6 rounded-3xl bg-white/[0.02] border border-white/[0.08] hover:border-white/20 transition backdrop-blur-xl">
-              <span className="text-xs text-[#adceff] font-bold uppercase tracking-wider">Week 01</span>
-              <h3 className="text-lg font-bold text-white mt-1.5">Robotics Foundations</h3>
-              <p className="text-[#adafb3] text-xs mt-2 leading-relaxed">
-                Robot anatomy, degrees of freedom, coordinate reference frames, sensors, Linux command-line, and Python for engineers.
-              </p>
-            </div>
-
-            <div className="p-6 rounded-3xl bg-white/[0.02] border border-white/[0.08] hover:border-white/20 transition backdrop-blur-xl">
-              <span className="text-xs text-[#adceff] font-bold uppercase tracking-wider">Week 02</span>
-              <h3 className="text-lg font-bold text-white mt-1.5">ROS 2 & Robot Modeling</h3>
-              <p className="text-[#adafb3] text-xs mt-2 leading-relaxed">
-                Nodes, topics, services, actions, URDF robot modeling, sensor publishing, and Gazebo world physics setup.
-              </p>
-            </div>
-
-            <div className="p-6 rounded-3xl bg-white/[0.02] border border-white/[0.08] hover:border-white/20 transition backdrop-blur-xl">
-              <span className="text-xs text-[#adceff] font-bold uppercase tracking-wider">Week 03</span>
-              <h3 className="text-lg font-bold text-white mt-1.5">Kinematics & Control</h3>
-              <p className="text-[#adafb3] text-xs mt-2 leading-relaxed">
-                Forward and inverse kinematics, differential drive controllers, wheel odometry calculations, and motor control theories.
-              </p>
-            </div>
-
-            <div className="p-6 rounded-3xl bg-white/[0.02] border border-white/[0.08] hover:border-white/20 transition backdrop-blur-xl">
-              <span className="text-xs text-[#adceff] font-bold uppercase tracking-wider">Week 04</span>
-              <h3 className="text-lg font-bold text-white mt-1.5">Computer Vision & AI</h3>
-              <p className="text-[#adafb3] text-xs mt-2 leading-relaxed">
-                OpenCV image processing, color masking, depth camera streams, point clouds, and object detection with neural networks.
-              </p>
-            </div>
-
-            <div className="p-6 rounded-3xl bg-white/[0.02] border border-white/[0.08] hover:border-white/20 transition backdrop-blur-xl">
-              <span className="text-xs text-[#adceff] font-bold uppercase tracking-wider">Week 05</span>
-              <h3 className="text-lg font-bold text-white mt-1.5">Autonomous Navigation (Nav2)</h3>
-              <p className="text-[#adafb3] text-xs mt-2 leading-relaxed">
-                2D/3D SLAM mapping, costmaps, global A* path planning, local DWB collision avoidance, and autonomous waypoint following.
-              </p>
-            </div>
-
-            <div className="p-6 rounded-3xl bg-white/[0.05] border border-white/20 transition backdrop-blur-xl">
-              <span className="text-xs text-[#adceff] font-bold uppercase tracking-wider">Week 06</span>
-              <h3 className="text-lg font-bold text-white mt-1.5">Capstone Demonstration</h3>
-              <p className="text-neutral-300 text-xs mt-2 leading-relaxed">
-                Full-mission deployment: simulated autonomous mobile robot completing warehouse delivery, obstacle evasion, and dock return.
-              </p>
-            </div>
-
-          </div>
-
-          {/* Internship Pre-Registration CTA */}
-          <div className="text-center mt-12">
-            <button 
-              onClick={() => { setModalType('internship'); setIsQuoteModalOpen(true); }}
-              className="bg-white hover:bg-neutral-200 text-black font-extrabold text-sm px-10 py-3.5 rounded-full transition shadow-[0_0_25px_rgba(255,255,255,0.2)]"
-            >
-              Apply / Join Internship Waitlist (Opening Soon)
-            </button>
-            <span className="block text-[#83868a] text-xs mt-3">
-              *Draft curriculum for upcoming cohort. Selected applicants receive syllabus & timetable.
-            </span>
-          </div>
-
+          <InternshipRoadmapInteractive onApplyClick={() => { setModalType('internship'); setIsQuoteModalOpen(true); }} />
         </div>
       </section>
+
+      {/* SECTION 12: OUR PROCESS (5-Phase Engineering Pipeline) */}
+      <ProcessSection />
 
       {/* SECTION 13: LEADERSHIP & ENGINEERING TEAM (Dossiers) */}
       <section id="team" className="py-24 px-6 border-b border-white/[0.08] bg-gradient-to-b from-black via-[#08090f] to-black relative">
