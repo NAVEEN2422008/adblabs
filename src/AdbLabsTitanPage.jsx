@@ -297,162 +297,221 @@ export default function AdbLabsTitanPage({ onNavigateToMember }) {
         </div>
       )}
 
-      {/* Top Global Announcement Ticker */}
-      <div className="glo-bar-top bg-[#07090e] border-b border-white/[0.08] text-xs py-2 px-4 text-center font-medium tracking-wide flex items-center justify-center gap-2">
-        <span className="bg-white/10 text-neutral-300 border border-white/15 px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider">
-          Pilot Announcement
-        </span>
-        <span className="text-neutral-300">
-          Commercial Off-Grid Pilot Deployments Now Accepting Registrations in Chennai & Tamil Nadu.
-        </span>
-        <button 
-          onClick={() => { setModalType('assessment'); setIsQuoteModalOpen(true); }}
-          className="text-[#adceff] underline hover:text-white ml-1 font-semibold transition"
-        >
-          Book Energy Audit →
-        </button>
-      </div>
-
-      {/* Tactical Industrial Telemetry Strip (DJI / Tesla Megapack style) */}
-      <div className="bg-[#050608] border-b border-white/[0.06] text-[10px] font-mono text-neutral-400 py-1.5 px-6 overflow-x-auto no-scrollbar whitespace-nowrap">
-        <div className="max-w-6xl mx-auto flex items-center justify-between gap-6">
-          <div className="flex items-center gap-2">
-            <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
-            <span className="text-white font-semibold">AC BUS: 230V PURE SINE (50.0 Hz)</span>
-          </div>
-          <div className="hidden md:flex items-center gap-4 text-neutral-500">
-            <span>CHEM: LiFePO₄ PRISMATIC</span>
-            <span className="text-neutral-700">|</span>
-            <span>CYCLE LIFE: 3,500+ @ 80% DoD</span>
-            <span className="text-neutral-700">|</span>
-            <span>MPPT: 98.4% DUAL TRACKING</span>
-            <span className="text-neutral-700">|</span>
-            <span className="text-[#adceff]">GRID RELIANCE: 0.0%</span>
-          </div>
-          <div className="text-[9px] text-[#adceff] font-bold tracking-wider">
-            TAMIL NADU FIELD TELEMETRY ACTIVE
-          </div>
-        </div>
-      </div>
-
-      {/* Global Navigation Header */}
-      <header className="global-header sticky top-0 z-50 bg-black/85 backdrop-blur-2xl border-b border-white/[0.08] transition-all">
-        <div className="max-w-6xl mx-auto px-6 lg:px-8 h-18 flex items-center justify-between">
+      {/* UNIFIED LUXURY HEADER (EcoFlow / Apple style) */}
+      <header className="sticky top-0 z-50 bg-black/80 backdrop-blur-2xl border-b border-white/[0.08] transition-all">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 h-16 sm:h-18 flex items-center justify-between">
           
-          {/* Brand Logo */}
-          <div className="flex items-center gap-3.5 cursor-pointer" onClick={() => scrollToSection('overview')}>
-            <div className="w-9 h-9 rounded-xl bg-gradient-to-b from-white to-neutral-500 p-[1px] shadow-sm">
+          {/* Brand Logo & Model Label */}
+          <div className="flex items-center gap-3 cursor-pointer" onClick={() => scrollToSection('overview')}>
+            <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-gradient-to-b from-white to-neutral-500 p-[1px] shadow-sm">
               <div className="w-full h-full bg-black rounded-[11px] flex items-center justify-center">
-                <span className="font-extrabold text-white text-sm tracking-tight">
+                <span className="font-extrabold text-white text-xs sm:text-sm tracking-tight">
                   ADB
                 </span>
               </div>
             </div>
-            <div>
-              <span className="font-extrabold text-lg tracking-tight text-white flex items-center gap-2">
-                ADB LABS
-                <span className="w-1.5 h-1.5 rounded-full bg-[#adceff] animate-pulse"></span>
-              </span>
-              <span className="block text-[9px] tracking-widest text-[#83868a] uppercase -mt-0.5">
-                Energy & Robotics R&D
+            <div className="flex items-center gap-2">
+              <div>
+                <span className="font-extrabold text-base sm:text-lg tracking-tight text-white flex items-center gap-1.5">
+                  ADB LABS
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#38bdf8] animate-pulse"></span>
+                </span>
+                <span className="block text-[8px] sm:text-[9px] tracking-widest text-[#83868a] uppercase -mt-0.5">
+                  PS1 TITAN SERIES
+                </span>
+              </div>
+              <span className="hidden sm:inline-block bg-white/[0.06] text-[#adceff] border border-[#adceff]/20 text-[9px] font-mono px-2 py-0.5 rounded-full uppercase tracking-wider ml-1">
+                Pilot Live
               </span>
             </div>
           </div>
 
-          {/* Desktop Nav Links */}
-          <nav className="hidden lg:flex items-center gap-7 text-xs font-semibold text-[#adafb3] uppercase tracking-wider">
-            <button onClick={() => scrollToSection('highlights')} className="hover:text-white transition">
-              Highlights
-            </button>
-            <button onClick={() => scrollToSection('comparison')} className="hover:text-white transition">
-              Why PS1
-            </button>
-            <button onClick={() => scrollToSection('appliances')} className="hover:text-white transition">
-              Appliances
-            </button>
-            <button onClick={() => scrollToSection('hardware')} className="hover:text-white transition">
-              Hardware
-            </button>
-            <button onClick={() => scrollToSection('packages')} className="hover:text-white transition">
-              Packages
-            </button>
-            <button onClick={() => scrollToSection('calculator')} className="hover:text-white transition">
-              Calculator
-            </button>
-            <button onClick={() => scrollToSection('besant')} className="hover:text-white transition">
-              Field Pilot
-            </button>
-            <button onClick={() => scrollToSection('robotics')} className="hover:text-white transition">
-              Robotics
-            </button>
-            <button onClick={() => scrollToSection('team')} className="hover:text-white transition">
-              Team
-            </button>
-            <button onClick={() => scrollToSection('faq')} className="hover:text-white transition">
-              FAQ
-            </button>
+          {/* Desktop Navigation Links with Active Spring Indicator */}
+          <nav className="hidden lg:flex items-center gap-6 xl:gap-7 text-xs font-semibold tracking-wide text-[#83868a]">
+            {[
+              { id: 'highlights', label: 'Highlights' },
+              { id: 'comparison', label: 'Why PS1' },
+              { id: 'appliances', label: 'Appliances' },
+              { id: 'hardware', label: 'Hardware' },
+              { id: 'packages', label: 'Packages' },
+              { id: 'calculator', label: 'Calculator' },
+              { id: 'besant', label: 'Field Pilot' },
+              { id: 'robotics', label: 'Robotics' },
+              { id: 'team', label: 'Team' },
+              { id: 'specs', label: 'Specs' },
+              { id: 'faq', label: 'FAQ' }
+            ].map((tab) => (
+              <button 
+                key={tab.id}
+                onClick={() => scrollToSection(tab.id)}
+                className={`relative py-2 hover:text-white transition font-medium ${
+                  activeNav === tab.id ? 'text-white' : 'text-[#83868a]'
+                }`}
+              >
+                <span>{tab.label}</span>
+                {activeNav === tab.id && (
+                  <motion.div 
+                    layoutId="headerActiveIndicator" 
+                    className="absolute -bottom-1 left-0 right-0 h-[2px] bg-white shadow-[0_0_8px_rgba(255,255,255,0.8)]" 
+                    transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                  />
+                )}
+              </button>
+            ))}
           </nav>
 
-          {/* Header Action Button */}
-          <div className="flex items-center gap-3">
+          {/* Header Actions */}
+          <div className="flex items-center gap-2 sm:gap-3">
             <button
               onClick={() => { setModalType('quote'); setIsQuoteModalOpen(true); }}
-              className="bg-white hover:bg-neutral-200 text-black font-bold text-xs px-5 py-2.5 rounded-full transition shadow-md flex items-center gap-2 group"
+              className="bg-white hover:bg-neutral-200 text-black font-extrabold text-xs px-4 sm:px-5 py-2 sm:py-2.5 rounded-full transition shadow-md flex items-center gap-1.5 group"
             >
-              <span>Get a Quote</span>
-              <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition" />
+              <span>Enquire Direct</span>
+              <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition hidden sm:inline-block" />
             </button>
 
-            {/* Mobile Menu Toggle */}
+            {/* Mobile Animated Hamburger / Close Button */}
             <button 
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="lg:hidden text-neutral-400 hover:text-white p-2"
+              className="lg:hidden relative w-9 h-9 sm:w-10 sm:h-10 flex flex-col items-center justify-center gap-1.5 p-2 rounded-full bg-white/[0.05] border border-white/10 text-white transition hover:bg-white/10"
               aria-label="Toggle Navigation"
             >
-              <Sliders className="w-5 h-5" />
+              <motion.span 
+                animate={mobileMenuOpen ? { rotate: 45, y: 6 } : { rotate: 0, y: 0 }}
+                transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
+                className="w-4 h-[2px] bg-white rounded-full origin-center"
+              />
+              <motion.span 
+                animate={mobileMenuOpen ? { opacity: 0, scaleX: 0 } : { opacity: 1, scaleX: 1 }}
+                transition={{ duration: 0.2 }}
+                className="w-4 h-[2px] bg-white rounded-full"
+              />
+              <motion.span 
+                animate={mobileMenuOpen ? { rotate: -45, y: -6 } : { rotate: 0, y: 0 }}
+                transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
+                className="w-4 h-[2px] bg-white rounded-full origin-center"
+              />
             </button>
           </div>
         </div>
 
-        {/* Mobile Dropdown Menu */}
-        {mobileMenuOpen && (
-          <div className="lg:hidden bg-neutral-950/95 backdrop-blur-2xl border-b border-neutral-800 px-6 py-5 space-y-4 text-sm font-medium">
-            <button onClick={() => { scrollToSection('highlights'); setMobileMenuOpen(false); }} className="block w-full text-left text-neutral-300 hover:text-white py-1">
-              Key Highlights
-            </button>
-            <button onClick={() => { scrollToSection('comparison'); setMobileMenuOpen(false); }} className="block w-full text-left text-neutral-300 hover:text-white py-1">
-              Why PS1 vs Generator
-            </button>
-            <button onClick={() => { scrollToSection('appliances'); setMobileMenuOpen(false); }} className="block w-full text-left text-neutral-300 hover:text-white py-1">
-              Essential Appliances
-            </button>
-            <button onClick={() => { scrollToSection('hardware'); setMobileMenuOpen(false); }} className="block w-full text-left text-neutral-300 hover:text-white py-1">
-              PS1 Hardware
-            </button>
-            <button onClick={() => { scrollToSection('packages'); setMobileMenuOpen(false); }} className="block w-full text-left text-neutral-300 hover:text-white py-1">
-              Commercial Packages
-            </button>
-            <button onClick={() => { scrollToSection('calculator'); setMobileMenuOpen(false); }} className="block w-full text-left text-neutral-300 hover:text-white py-1">
-              Runtime Calculator
-            </button>
-            <button onClick={() => { scrollToSection('besant'); setMobileMenuOpen(false); }} className="block w-full text-left text-neutral-300 hover:text-white py-1">
-              Besant Nagar Field Pilot
-            </button>
-            <button onClick={() => { scrollToSection('robotics'); setMobileMenuOpen(false); }} className="block w-full text-left text-neutral-300 hover:text-white py-1">
-              Robotics & AI Division
-            </button>
-            <button onClick={() => { scrollToSection('internship'); setMobileMenuOpen(false); }} className="block w-full text-left text-neutral-300 hover:text-white py-1">
-              6-Week Industrial Internship
-            </button>
-            <button onClick={() => { scrollToSection('team'); setMobileMenuOpen(false); }} className="block w-full text-left text-neutral-300 hover:text-white py-1">
-              Engineering Team & Dossiers
-            </button>
-            <button onClick={() => { scrollToSection('faq'); setMobileMenuOpen(false); }} className="block w-full text-left text-neutral-300 hover:text-white py-1">
-              Technical FAQ
-            </button>
-          </div>
-        )}
+        {/* Animated Full-Screen / Drop-Down Mobile Drawer (Phone Optimized) */}
+        <AnimatePresence>
+          {mobileMenuOpen && (
+            <motion.div 
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: 'calc(100vh - 64px)' }}
+              exit={{ opacity: 0, height: 0 }}
+              transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+              className="lg:hidden fixed top-16 left-0 right-0 z-40 bg-black/95 backdrop-blur-2xl border-b border-white/10 px-5 py-6 overflow-y-auto flex flex-col justify-between"
+            >
+              <div className="space-y-1.5">
+                <div className="flex items-center justify-between text-[10px] font-mono uppercase tracking-widest text-[#83868a] mb-3 px-2">
+                  <span>PS1 System Directory</span>
+                  <span className="text-emerald-400">● Live 230V</span>
+                </div>
+
+                {[
+                  { id: 'overview', label: 'Overview & 3D Stage', icon: Zap },
+                  { id: 'highlights', label: 'Key Highlights', icon: Award },
+                  { id: 'comparison', label: 'Why PS1 vs Generator', icon: Leaf },
+                  { id: 'appliances', label: 'Stall Appliances', icon: Snowflake },
+                  { id: 'hardware', label: 'Hardware Subsystems', icon: Cpu },
+                  { id: 'packages', label: 'Commercial Packages', icon: ShieldCheck },
+                  { id: 'calculator', label: 'Autonomy Calculator', icon: Sliders },
+                  { id: 'besant', label: 'Besant Nagar Field Pilot', icon: MapPin },
+                  { id: 'robotics', label: 'Robotics & AI Division', icon: Bot },
+                  { id: 'team', label: 'Engineering Team', icon: Award },
+                  { id: 'specs', label: 'Technical Specs', icon: Activity },
+                  { id: 'faq', label: 'Technical FAQ', icon: ChevronDown }
+                ].map((item, idx) => {
+                  const Icon = item.icon;
+                  const isActive = activeNav === item.id;
+                  return (
+                    <motion.button 
+                      key={item.id}
+                      initial={{ opacity: 0, x: -16 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ delay: idx * 0.025, duration: 0.25 }}
+                      whileTap={{ scale: 0.98 }}
+                      onClick={() => {
+                        scrollToSection(item.id);
+                        setMobileMenuOpen(false);
+                      }}
+                      className={`w-full flex items-center justify-between p-3 rounded-2xl text-left transition font-medium ${
+                        isActive ? 'bg-white/10 text-white font-bold' : 'text-neutral-400 hover:text-white hover:bg-white/[0.04]'
+                      }`}
+                    >
+                      <div className="flex items-center gap-3">
+                        <Icon className={`w-4 h-4 ${isActive ? 'text-[#38bdf8]' : 'text-neutral-500'}`} />
+                        <span className="text-sm">{item.label}</span>
+                      </div>
+                      {isActive && (
+                        <span className="w-1.5 h-1.5 rounded-full bg-[#38bdf8] shadow-[0_0_8px_#38bdf8]"></span>
+                      )}
+                    </motion.button>
+                  );
+                })}
+              </div>
+
+              {/* Mobile Drawer Action Deck */}
+              <div className="mt-6 pt-5 border-t border-white/10 space-y-2.5">
+                <button
+                  onClick={() => {
+                    setModalType('quote');
+                    setIsQuoteModalOpen(true);
+                    setMobileMenuOpen(false);
+                  }}
+                  className="w-full bg-white hover:bg-neutral-200 text-black font-extrabold text-sm py-3.5 rounded-full shadow-lg transition flex items-center justify-center gap-2"
+                >
+                  <span>Request System Quote</span>
+                  <ArrowRight className="w-4 h-4" />
+                </button>
+
+                <a 
+                  href="tel:+918310704488"
+                  className="w-full bg-white/[0.06] hover:bg-white/[0.12] text-white border border-white/15 font-semibold text-xs py-3 rounded-full transition flex items-center justify-center gap-2"
+                >
+                  <Phone className="w-3.5 h-3.5 text-[#adceff]" />
+                  <span>Call Engineering: +91 8310704488</span>
+                </a>
+
+                <div className="text-[10px] font-mono text-center text-neutral-500 pt-1">
+                  100% OFF-GRID SOLAR · CHENNAI FIELD VALIDATED
+                </div>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </header>
+
+      {/* Floating Mobile Bottom Action Pill (Phone Only) */}
+      <motion.div 
+        initial={{ y: 60, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ delay: 0.6, duration: 0.4 }}
+        className="sm:hidden fixed bottom-4 left-4 right-4 z-40 bg-black/85 backdrop-blur-xl border border-white/15 rounded-full p-2 flex items-center justify-between shadow-[0_10px_35px_rgba(0,0,0,0.95)]"
+      >
+        <div className="flex items-center gap-2 pl-3">
+          <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+          <span className="text-xs font-mono font-bold text-white tracking-tight">PS1 · 3kW / 12kWh</span>
+        </div>
+        <div className="flex items-center gap-2">
+          <a
+            href="tel:+918310704488"
+            className="w-8 h-8 rounded-full bg-white/10 text-white flex items-center justify-center hover:bg-white/20 transition"
+            aria-label="Call"
+          >
+            <Phone className="w-3.5 h-3.5 text-[#adceff]" />
+          </a>
+          <button
+            onClick={() => { setModalType('quote'); setIsQuoteModalOpen(true); }}
+            className="bg-white text-black font-extrabold text-xs px-4 py-1.5 rounded-full transition shadow"
+          >
+            Enquire
+          </button>
+        </div>
+      </motion.div>
 
       {/* SECTION 1: CINEMATIC FULL-BLEED HERO (EcoFlow Titan Stage Replica) */}
       <section id="overview" className="relative pt-24 pb-20 px-6 overflow-hidden flex flex-col items-center justify-center text-center">
@@ -541,62 +600,7 @@ export default function AdbLabsTitanPage({ onNavigateToMember }) {
         </div>
       </section>
 
-      {/* SECTION 2: SLIM STICKY SUB-NAV BAR (EcoFlow Titan-C2 Replica) */}
-      <div 
-        id="subnav" 
-        className={`w-full transition-all duration-300 z-40 bg-black/90 backdrop-blur-2xl border-y border-white/[0.08] ${
-          isSubNavSticky ? 'sticky top-0 shadow-2xl' : 'relative'
-        }`}
-      >
-        <div className="max-w-6xl mx-auto px-6 lg:px-8 h-13 flex items-center justify-between overflow-x-auto no-scrollbar">
-          <div className="flex items-center gap-2 sm:gap-3 text-xs font-bold text-white whitespace-nowrap pr-4 border-r border-white/10 flex-shrink-0">
-            <span>ADB LABS PS1</span>
-            <span className="w-2 h-2 rounded-full bg-[#adceff] animate-pulse"></span>
-          </div>
-
-          <div className="flex items-center gap-6 text-xs font-semibold tracking-wide whitespace-nowrap text-[#83868a] overflow-x-auto no-scrollbar pl-4">
-            {[
-              { id: 'highlights', label: 'Highlights' },
-              { id: 'comparison', label: 'Why PS1' },
-              { id: 'appliances', label: 'Appliances' },
-              { id: 'hardware', label: 'Hardware' },
-              { id: 'packages', label: 'Packages' },
-              { id: 'calculator', label: 'Calculator' },
-              { id: 'besant', label: 'Field Pilot' },
-              { id: 'robotics', label: 'Robotics' },
-              { id: 'team', label: 'Team' },
-              { id: 'specs', label: 'Specs' },
-              { id: 'faq', label: 'FAQ' }
-            ].map((tab) => (
-              <button 
-                key={tab.id}
-                onClick={() => scrollToSection(tab.id)}
-                className={`relative py-3.5 hover:text-white transition font-medium ${
-                  activeNav === tab.id ? 'text-white' : 'text-[#83868a]'
-                }`}
-              >
-                <span>{tab.label}</span>
-                {activeNav === tab.id && (
-                  <motion.div 
-                    layoutId="subnavActiveIndicator" 
-                    className="absolute bottom-0 left-0 right-0 h-0.5 bg-white shadow-[0_0_8px_rgba(255,255,255,0.8)]" 
-                    transition={{ type: "spring", stiffness: 380, damping: 30 }}
-                  />
-                )}
-              </button>
-            ))}
-          </div>
-
-          <button
-            onClick={() => { setModalType('quote'); setIsQuoteModalOpen(true); }}
-            className="hidden sm:inline-flex bg-white hover:bg-neutral-200 text-black font-bold text-xs px-5 py-2 rounded-full transition whitespace-nowrap ml-4 flex-shrink-0"
-          >
-            Enquire Now
-          </button>
-        </div>
-      </div>
-
-      {/* SECTION 3: ECOFLOW TITAN SIGNATURE BENTO HIGHLIGHTS (Titan-C4 Replica) */}
+      {/* SECTION 2: ECOFLOW TITAN SIGNATURE BENTO HIGHLIGHTS (Titan-C4 Replica) */}
       <section id="highlights" className="py-24 px-6 border-b border-white/[0.08]">
         <div className="max-w-6xl mx-auto">
           
@@ -1332,7 +1336,8 @@ export default function AdbLabsTitanPage({ onNavigateToMember }) {
 
             {/* Appliance Toggle Grid */}
             <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-7 gap-3 mb-8">
-              <button
+              <motion.button
+                whileTap={{ scale: 0.95 }}
                 onClick={() => setCustomLoads(p => ({ ...p, chiller: !p.chiller }))}
                 className={`p-4 rounded-2xl border text-center transition flex flex-col items-center gap-2 ${
                   customLoads.chiller ? 'bg-white/10 border-[#adceff]/60 text-white shadow' : 'bg-white/[0.02] border-white/[0.06] text-[#83868a]'
@@ -1341,9 +1346,10 @@ export default function AdbLabsTitanPage({ onNavigateToMember }) {
                 <Snowflake className="w-5 h-5 text-[#adceff]" />
                 <span className="text-xs font-bold">Chiller (280W)</span>
                 <span className="text-[10px] font-mono">{customLoads.chiller ? 'ACTIVE' : 'OFF'}</span>
-              </button>
+              </motion.button>
 
-              <button
+              <motion.button
+                whileTap={{ scale: 0.95 }}
                 onClick={() => setCustomLoads(p => ({ ...p, sign: !p.sign }))}
                 className={`p-4 rounded-2xl border text-center transition flex flex-col items-center gap-2 ${
                   customLoads.sign ? 'bg-white/10 border-[#adceff]/60 text-white shadow' : 'bg-white/[0.02] border-white/[0.06] text-[#83868a]'
@@ -1352,9 +1358,10 @@ export default function AdbLabsTitanPage({ onNavigateToMember }) {
                 <Radio className="w-5 h-5 text-[#adceff]" />
                 <span className="text-xs font-bold">Sign (150W)</span>
                 <span className="text-[10px] font-mono">{customLoads.sign ? 'ACTIVE' : 'OFF'}</span>
-              </button>
+              </motion.button>
 
-              <button
+              <motion.button
+                whileTap={{ scale: 0.95 }}
                 onClick={() => setCustomLoads(p => ({ ...p, led: !p.led }))}
                 className={`p-4 rounded-2xl border text-center transition flex flex-col items-center gap-2 ${
                   customLoads.led ? 'bg-white/10 border-[#adceff]/60 text-white shadow' : 'bg-white/[0.02] border-white/[0.06] text-[#83868a]'
@@ -1363,9 +1370,10 @@ export default function AdbLabsTitanPage({ onNavigateToMember }) {
                 <Lightbulb className="w-5 h-5 text-[#adceff]" />
                 <span className="text-xs font-bold">LEDs (80W)</span>
                 <span className="text-[10px] font-mono">{customLoads.led ? 'ACTIVE' : 'OFF'}</span>
-              </button>
+              </motion.button>
 
-              <button
+              <motion.button
+                whileTap={{ scale: 0.95 }}
                 onClick={() => setCustomLoads(p => ({ ...p, blender: !p.blender }))}
                 className={`p-4 rounded-2xl border text-center transition flex flex-col items-center gap-2 ${
                   customLoads.blender ? 'bg-white/10 border-[#adceff]/60 text-white shadow' : 'bg-white/[0.02] border-white/[0.06] text-[#83868a]'
@@ -1374,9 +1382,10 @@ export default function AdbLabsTitanPage({ onNavigateToMember }) {
                 <Zap className="w-5 h-5 text-[#adceff]" />
                 <span className="text-xs font-bold">Blender (600W)</span>
                 <span className="text-[10px] font-mono">{customLoads.blender ? 'ACTIVE' : 'OFF'}</span>
-              </button>
+              </motion.button>
 
-              <button
+              <motion.button
+                whileTap={{ scale: 0.95 }}
                 onClick={() => setCustomLoads(p => ({ ...p, waffle: !p.waffle }))}
                 className={`p-4 rounded-2xl border text-center transition flex flex-col items-center gap-2 ${
                   customLoads.waffle ? 'bg-white/10 border-[#adceff]/60 text-white shadow' : 'bg-white/[0.02] border-white/[0.06] text-[#83868a]'
@@ -1385,9 +1394,10 @@ export default function AdbLabsTitanPage({ onNavigateToMember }) {
                 <Coffee className="w-5 h-5 text-[#adceff]" />
                 <span className="text-xs font-bold">Waffle (1kW)</span>
                 <span className="text-[10px] font-mono">{customLoads.waffle ? 'ACTIVE' : 'OFF'}</span>
-              </button>
+              </motion.button>
 
-              <button
+              <motion.button
+                whileTap={{ scale: 0.95 }}
                 onClick={() => setCustomLoads(p => ({ ...p, pos: !p.pos }))}
                 className={`p-4 rounded-2xl border text-center transition flex flex-col items-center gap-2 ${
                   customLoads.pos ? 'bg-white/10 border-[#adceff]/60 text-white shadow' : 'bg-white/[0.02] border-white/[0.06] text-[#83868a]'
@@ -1396,9 +1406,10 @@ export default function AdbLabsTitanPage({ onNavigateToMember }) {
                 <Tv className="w-5 h-5 text-[#adceff]" />
                 <span className="text-xs font-bold">POS (40W)</span>
                 <span className="text-[10px] font-mono">{customLoads.pos ? 'ACTIVE' : 'OFF'}</span>
-              </button>
+              </motion.button>
 
-              <button
+              <motion.button
+                whileTap={{ scale: 0.95 }}
                 onClick={() => setCustomLoads(p => ({ ...p, ac: !p.ac }))}
                 className={`p-4 rounded-2xl border text-center transition flex flex-col items-center gap-2 ${
                   customLoads.ac ? 'bg-white/10 border-[#adceff]/60 text-white shadow' : 'bg-white/[0.02] border-white/[0.06] text-[#83868a]'
@@ -1407,7 +1418,7 @@ export default function AdbLabsTitanPage({ onNavigateToMember }) {
                 <Activity className="w-5 h-5 text-[#adceff]" />
                 <span className="text-xs font-bold">AC (1.2kW)</span>
                 <span className="text-[10px] font-mono">{customLoads.ac ? 'ACTIVE' : 'OFF'}</span>
-              </button>
+              </motion.button>
             </div>
 
             {/* Solar Generation & Stack Options */}
@@ -1568,20 +1579,22 @@ export default function AdbLabsTitanPage({ onNavigateToMember }) {
                 </div>
 
                 <div className="flex items-center gap-3">
-                  <button
+                  <motion.button
+                    whileTap={{ scale: 0.9 }}
                     onClick={() => setActiveStoryIdx((activeStoryIdx - 1 + fieldStories.length) % fieldStories.length)}
-                    className="w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center transition"
+                    className="w-11 h-11 rounded-full bg-white/10 hover:bg-white/20 active:bg-white/30 text-white flex items-center justify-center transition"
                     aria-label="Previous Testimonial"
                   >
                     <ChevronLeft className="w-5 h-5" />
-                  </button>
-                  <button
+                  </motion.button>
+                  <motion.button
+                    whileTap={{ scale: 0.9 }}
                     onClick={() => setActiveStoryIdx((activeStoryIdx + 1) % fieldStories.length)}
-                    className="w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center transition"
+                    className="w-11 h-11 rounded-full bg-white/10 hover:bg-white/20 active:bg-white/30 text-white flex items-center justify-center transition"
                     aria-label="Next Testimonial"
                   >
                     <ChevronRight className="w-5 h-5" />
-                  </button>
+                  </motion.button>
                 </div>
               </div>
 
