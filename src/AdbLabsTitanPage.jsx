@@ -35,7 +35,8 @@ import {
 // Scoped clean styles loaded via index.css
 import { TEAM_MEMBERS } from './data/teamData';
 import { motion, AnimatePresence, useScroll, useSpring } from 'framer-motion';
-import OscilloscopeCanvas from './components/OscilloscopeCanvas';
+import CleanWaveformComparison from './components/CleanWaveformComparison';
+import RoboticsTitanGallery from './components/RoboticsTitanGallery';
 import PowerFlowDiagram from './components/PowerFlowDiagram';
 import ModularStackingSimulator from './components/ModularStackingSimulator';
 import Interactive3DTiltCard from './components/Interactive3DTiltCard';
@@ -85,9 +86,6 @@ export default function AdbLabsTitanPage({ onNavigateToMember }) {
   // FAQ Accordion state (single open index for predictable, buttery UX)
   const [activeFaq, setActiveFaq] = useState(0);
 
-  // Robotics Terminal simulation state
-  const [rosLogIdx, setRosLogIdx] = useState(0);
-
   // Form states
   const [waitlistEmail, setWaitlistEmail] = useState('');
   const [quoteForm, setQuoteForm] = useState({
@@ -97,15 +95,6 @@ export default function AdbLabsTitanPage({ onNavigateToMember }) {
     solution: 'Shop 2 Expanded Heavy-Duty (12.288 kWh)',
     notes: ''
   });
-
-  const rosLogs = [
-    "[INFO] [nav2_controller]: Tracking path trajectory with 0.02m cross-track error",
-    "[INFO] [lidar_slam_toolbox]: 2D Occupancy grid published. 1420 points mapped",
-    "[INFO] [can_bms_telemetry]: ADB Labs PS1 linked via CAN-bus. State of Charge: 82.4%",
-    "[INFO] [perception_node]: Stereo depth camera detected obstacle at +1.84m [Clearing]",
-    "[INFO] [stm32_motor_driver]: Quadruped trotting gait frequency: 1.8 Hz. Current draw nominal",
-    "[INFO] [nav2_bt_navigator]: Waypoint #04 reached. Yaw stabilized at +34.2°"
-  ];
 
   const fieldStories = [
     {
@@ -145,14 +134,6 @@ export default function AdbLabsTitanPage({ onNavigateToMember }) {
       stat2Label: "Safe Usable Capacity"
     }
   ];
-
-  // Rotate ROS terminal logs
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setRosLogIdx(prev => (prev + 1) % rosLogs.length);
-    }, 2400);
-    return () => clearInterval(interval);
-  }, [rosLogs.length]);
 
   // Scroll spy & sub-nav stickiness
   useEffect(() => {
@@ -605,23 +586,26 @@ export default function AdbLabsTitanPage({ onNavigateToMember }) {
       </section>
 
       {/* SECTION 2: ECOFLOW TITAN SIGNATURE BENTO HIGHLIGHTS (Titan-C4 Replica) */}
-      <section id="highlights" className="py-24 px-6 border-b border-white/[0.08]">
+      <section id="highlights" className="py-32 sm:py-40 px-4 sm:px-6 lg:px-8 border-b border-white/[0.08] relative">
+        {/* Ambient section halo */}
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[500px] bg-[#38bdf8]/5 rounded-full blur-[140px] pointer-events-none -z-10"></div>
+
         <div className="max-w-6xl mx-auto">
           
-          <div className="text-center max-w-3xl mx-auto mb-16">
+          <div className="text-center max-w-3xl mx-auto mb-20 sm:mb-24">
             <span className="text-xs font-semibold uppercase tracking-widest text-[#adceff]">
               Core Innovations
             </span>
-            <h2 className="text-4xl sm:text-6xl font-black text-white mt-3 tracking-tight">
+            <h2 className="text-4xl sm:text-6xl lg:text-7xl font-black text-white mt-3 tracking-tight">
               Get the Highlights.
             </h2>
-            <p className="text-[#adafb3] text-base sm:text-lg mt-4 leading-relaxed">
+            <p className="text-[#adafb3] text-base sm:text-xl mt-4 leading-relaxed font-normal">
               Engineered to replace smoky commercial generators with silent, automated LiFePO₄ storage and autonomous robotics.
             </p>
           </div>
 
           {/* 4 Bento Highlight Cards */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 sm:gap-10">
             
             {/* Bento Card 1: Full-width Power & Capacity */}
             <motion.div 
@@ -751,17 +735,20 @@ export default function AdbLabsTitanPage({ onNavigateToMember }) {
       </section>
 
       {/* SECTION 4: TRADITIONAL DIESEL VS ADB LABS PS1 (EcoFlow Titan-C3 Comparison) */}
-      <section id="comparison" className="py-24 px-6 border-b border-white/[0.08] bg-gradient-to-b from-black via-[#080a10] to-black">
+      <section id="comparison" className="py-32 sm:py-40 px-4 sm:px-6 lg:px-8 border-b border-white/[0.08] bg-gradient-to-b from-black via-[#080a10] to-black relative">
+        {/* Ambient section halo */}
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[900px] h-[550px] bg-[#38bdf8]/5 rounded-full blur-[150px] pointer-events-none -z-10"></div>
+
         <div className="max-w-6xl mx-auto">
           
-          <div className="text-center max-w-3xl mx-auto mb-16">
+          <div className="text-center max-w-3xl mx-auto mb-20 sm:mb-24">
             <span className="text-xs font-semibold uppercase tracking-widest text-[#adceff]">
               Economic & Environmental Breakthrough
             </span>
-            <h2 className="text-4xl sm:text-6xl font-black text-white mt-3 tracking-tight">
+            <h2 className="text-4xl sm:text-6xl lg:text-7xl font-black text-white mt-3 tracking-tight">
               Power More. Spend Less.
             </h2>
-            <p className="text-[#adafb3] text-base sm:text-lg mt-4 leading-relaxed">
+            <p className="text-[#adafb3] text-base sm:text-xl mt-4 leading-relaxed font-normal">
               Replacing smoky 5kVA diesel generators with silent, automated solar-charged LiFePO₄ storage.
             </p>
           </div>
@@ -868,9 +855,9 @@ export default function AdbLabsTitanPage({ onNavigateToMember }) {
 
           </div>
 
-          {/* Interactive Laboratory Oscilloscope (Teenage Engineering / Fluke style) */}
-          <div className="mt-14">
-            <OscilloscopeCanvas />
+          {/* Clean AC Pure Sine Wave vs Harmonic Distortion Comparison (EcoFlow Titan-C3 Replica) */}
+          <div className="mt-16 sm:mt-20">
+            <CleanWaveformComparison />
           </div>
         </div>
       </section>
@@ -1741,126 +1728,27 @@ export default function AdbLabsTitanPage({ onNavigateToMember }) {
         </div>
       </section>
 
-      {/* SECTION 11: ROBOTICS & AI R&D DIVISION */}
-      <section id="robotics" className="py-24 px-6 border-b border-white/[0.08] bg-black relative">
+      {/* SECTION 11: ROBOTICS & AI R&D DIVISION (Apple / Tesla Hardware Deck) */}
+      <section id="robotics" className="py-32 sm:py-40 px-4 sm:px-6 lg:px-8 border-b border-white/[0.08] bg-black relative">
+        {/* Ambient Halo */}
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[900px] h-[550px] bg-[#38bdf8]/5 rounded-full blur-[150px] pointer-events-none -z-10"></div>
+
         <div className="max-w-6xl mx-auto">
           
-          <div className="text-center max-w-3xl mx-auto mb-16">
+          <div className="text-center max-w-3xl mx-auto mb-20 sm:mb-24">
             <span className="text-xs font-semibold uppercase tracking-widest text-[#adceff]">
               Autonomous Systems & Intelligence
             </span>
-            <h2 className="text-4xl sm:text-6xl font-black text-white mt-3 tracking-tight">
+            <h2 className="text-4xl sm:text-6xl lg:text-7xl font-black text-white mt-3 tracking-tight">
               Robotics & AI R&D Division.
             </h2>
-            <p className="text-[#adafb3] text-base sm:text-lg mt-4 leading-relaxed">
+            <p className="text-[#adafb3] text-base sm:text-xl mt-4 leading-relaxed font-normal">
               Advancing practical autonomous mobile robots, computer vision perception, embedded STM32/CAN firmware, and kinematic simulation.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-            
-            {/* Live Terminal & Simulation Preview */}
-            <div className="lg:col-span-7 bg-[#08090d] rounded-[32px] border border-white/[0.08] p-6 sm:p-8 font-mono text-xs shadow-2xl">
-              
-              {/* Terminal Title Bar */}
-              <div className="flex items-center justify-between pb-4 border-b border-white/[0.08] mb-6">
-                <div className="flex items-center gap-2">
-                  <div className="w-3 h-3 rounded-full bg-red-500/80"></div>
-                  <div className="w-3 h-3 rounded-full bg-yellow-500/80"></div>
-                  <div className="w-3 h-3 rounded-full bg-green-500/80"></div>
-                  <span className="text-neutral-400 ml-2">adb_robotics@ros2_jazzy_node: ~</span>
-                </div>
-                <span className="text-[#adceff] flex items-center gap-1.5 text-[10px]">
-                  <span className="w-2 h-2 rounded-full bg-[#adceff] animate-ping"></span>
-                  TELEMETRY LIVE
-                </span>
-              </div>
-
-              {/* Terminal Screen & Animated Radar Sweep */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 items-center">
-                
-                {/* Radar Sweep Graphic */}
-                <div className="relative aspect-square rounded-full border border-white/10 bg-white/[0.02] flex items-center justify-center p-4">
-                  <div className="absolute inset-4 rounded-full border border-white/[0.08]"></div>
-                  <div className="absolute inset-10 rounded-full border border-white/[0.04]"></div>
-                  <div className="w-2.5 h-2.5 rounded-full bg-[#adceff] shadow-[0_0_15px_#adceff]"></div>
-                  
-                  {/* Rotating beam */}
-                  <div className="absolute inset-0 rounded-full animate-spin [animation-duration:4s] border-t-2 border-[#adceff]/80 pointer-events-none"></div>
-
-                  <span className="absolute bottom-3 text-[10px] text-[#adceff]/80 font-mono">
-                    3D LiDAR SLAM · Active
-                  </span>
-                </div>
-
-                {/* Live Console Output */}
-                <div className="space-y-3 font-mono text-[11px] text-neutral-300 text-left">
-                  <div className="text-white font-bold">$ ros2 run adb_navigation2 slam_cartographer</div>
-                  <div className="text-neutral-500">[INFO] Node initialized at 50 Hz</div>
-                  <div className="text-[#adceff] bg-white/[0.04] p-3 rounded-xl border border-white/[0.08]">
-                    {rosLogs[rosLogIdx]}
-                  </div>
-                  <div className="text-neutral-500 text-[10px]">
-                    Depth Camera: RealSense D435i · IMU: BNO085 9-DoF · Odom: 4-Wheel Hall
-                  </div>
-                </div>
-
-              </div>
-
-              {/* Robot Preview Images (3 Core Platforms) */}
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mt-6 pt-6 border-t border-white/[0.08]">
-                <div className="aspect-[16/9] rounded-2xl overflow-hidden border border-white/[0.06] bg-black flex flex-col items-center justify-center p-2 group">
-                  <img src="/images/robot_dog_titan.jpg" alt="Autonomous Quadruped Robot" className="max-h-[82%] object-contain" />
-                  <span className="text-[10px] text-neutral-400 font-sans mt-1">Quadruped Locomotion</span>
-                </div>
-                <div className="aspect-[16/9] rounded-2xl overflow-hidden border border-white/[0.06] bg-black flex flex-col items-center justify-center p-2 group">
-                  <img src="/images/amr_lidar_robot_titan.jpg" alt="LiDAR Autonomous Mobile Robot" className="max-h-[82%] object-contain" />
-                  <span className="text-[10px] text-[#adceff] font-sans mt-1">3D LiDAR AMR</span>
-                </div>
-                <div className="aspect-[16/9] rounded-2xl overflow-hidden border border-white/[0.06] bg-black flex flex-col items-center justify-center p-2 group">
-                  <img src="/images/robotic_arm_titan.jpg" alt="6-Axis Precision Manipulator" className="max-h-[82%] object-contain" />
-                  <span className="text-[10px] text-neutral-400 font-sans mt-1">6-Axis Manipulator</span>
-                </div>
-              </div>
-
-            </div>
-
-            {/* 4 R&D Capability Pillars */}
-            <div className="lg:col-span-5 space-y-4 text-left">
-              <div className="p-6 rounded-3xl bg-white/[0.02] border border-white/[0.08] backdrop-blur-xl">
-                <div className="text-xs text-[#adceff] uppercase font-bold tracking-wider">Pillar 01</div>
-                <h3 className="text-lg font-bold text-white mt-1">Robotics Systems & Kinematics</h3>
-                <p className="text-[#adafb3] text-xs mt-2 leading-relaxed">
-                  Mathematical modeling, inverse kinematics, quadruped trotting stabilization, and Gazebo physics simulation.
-                </p>
-              </div>
-
-              <div className="p-6 rounded-3xl bg-white/[0.02] border border-white/[0.08] backdrop-blur-xl">
-                <div className="text-xs text-[#adceff] uppercase font-bold tracking-wider">Pillar 02</div>
-                <h3 className="text-lg font-bold text-white mt-1">AI & Computer Vision Integration</h3>
-                <p className="text-[#adafb3] text-xs mt-2 leading-relaxed">
-                  Real-time edge perception with YOLO, point-cloud segmentation, obstacle detection, and camera-LiDAR sensor fusion.
-                </p>
-              </div>
-
-              <div className="p-6 rounded-3xl bg-white/[0.02] border border-white/[0.08] backdrop-blur-xl">
-                <div className="text-xs text-[#adceff] uppercase font-bold tracking-wider">Pillar 03</div>
-                <h3 className="text-lg font-bold text-white mt-1">Embedded Systems & CAN Firmware</h3>
-                <p className="text-[#adafb3] text-xs mt-2 leading-relaxed">
-                  Low-latency STM32 microcontrollers, CAN-bus inter-module communication, real-time BMS monitors, and brushless motor drivers.
-                </p>
-              </div>
-
-              <div className="p-6 rounded-3xl bg-white/[0.02] border border-white/[0.08] backdrop-blur-xl">
-                <div className="text-xs text-[#adceff] uppercase font-bold tracking-wider">Pillar 04</div>
-                <h3 className="text-lg font-bold text-white mt-1">Rapid Additive Prototyping</h3>
-                <p className="text-[#adafb3] text-xs mt-2 leading-relaxed">
-                  Carbon-fiber reinforced 3D printed mechanical structures, CNC aluminum joints, and fast iterative hardware testing.
-                </p>
-              </div>
-            </div>
-
-          </div>
+          {/* Full-Bleed 3-Platform Hardware Gallery */}
+          <RoboticsTitanGallery />
         </div>
       </section>
 
