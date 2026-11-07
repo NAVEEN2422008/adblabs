@@ -112,7 +112,7 @@ export default function AdbLabsTitanPage({ onNavigateToMember }) {
       author: "ECR Beach Promenade Kiosk",
       role: "Retail Vendor Partner",
       badge: "Validated High-Surge Load",
-      image: "/images/fish_stall_night.jpg",
+      image: "/images/waffle_stall_titan.jpg",
       quote: "Commercial waffle irons and blenders pull massive surge currents that trip standard consumer inverters. The PS1's 3kW continuous pure sine output and 6kW peak surge handles our 1kW iron and 600W blender simultaneously without flicker, even during evening beach peak hours.",
       stat1: "6 kW",
       stat1Label: "Peak Surge Absorbed",
@@ -1087,7 +1087,7 @@ export default function AdbLabsTitanPage({ onNavigateToMember }) {
                 </p>
 
                 <div className="my-8 aspect-[16/9] rounded-2xl overflow-hidden bg-black/60 border border-white/[0.06] flex items-center justify-center p-4">
-                  <img src="/images/besant_wide.png" alt="Shop 2 Expanded Package" className="max-h-full object-contain" />
+                  <img src="/images/ps1_dual_stack_titan.jpg" alt="Shop 2 Expanded Heavy-Duty 12.288 kWh Stack" className="max-h-full max-w-full object-contain rounded-xl" />
                 </div>
 
                 <div className="space-y-3.5 border-t border-white/[0.08] pt-6 text-sm text-left">
@@ -1372,11 +1372,11 @@ export default function AdbLabsTitanPage({ onNavigateToMember }) {
               <div className="absolute top-0 right-0 w-80 h-80 bg-[#adceff]/5 rounded-full blur-3xl pointer-events-none"></div>
 
               <div className="flex flex-col md:flex-row gap-8 items-center">
-                <div className="w-full md:w-1/2 aspect-[4/3] rounded-2xl overflow-hidden bg-black/60 border border-white/[0.08] flex-shrink-0">
+                <div className="w-full md:w-1/2 aspect-[4/3] rounded-2xl overflow-hidden bg-black/80 border border-white/[0.08] flex-shrink-0 flex items-center justify-center p-3">
                   <img 
                     src={fieldStories[activeStoryIdx].image} 
                     alt={fieldStories[activeStoryIdx].title} 
-                    className="w-full h-full object-cover"
+                    className="max-h-full max-w-full object-contain rounded-xl"
                   />
                 </div>
 
@@ -1523,24 +1523,24 @@ export default function AdbLabsTitanPage({ onNavigateToMember }) {
 
             {/* Project Imagery */}
             <div className="lg:col-span-6 space-y-4">
-              <div className="aspect-[16/10] rounded-3xl overflow-hidden border border-white/[0.08] bg-neutral-950 relative group">
+              <div className="aspect-[16/10] rounded-3xl overflow-hidden border border-white/[0.08] bg-black relative group flex items-center justify-center p-3">
                 <img 
                   src="/images/besant_wide.png" 
                   alt="Besant Nagar Commercial Solar Setup" 
-                  className="w-full h-full object-cover group-hover:scale-105 transition duration-500"
+                  className="max-h-full max-w-full object-contain rounded-2xl group-hover:scale-[1.02] transition duration-500"
                 />
-                <div className="absolute bottom-4 left-4 right-4 p-4 rounded-2xl bg-black/80 backdrop-blur-md border border-white/[0.08] text-xs text-left">
+                <div className="absolute bottom-4 left-4 right-4 p-4 rounded-2xl bg-black/85 backdrop-blur-md border border-white/[0.08] text-xs text-left">
                   <span className="font-bold text-white block">Daytime Solar Harvesting (2.88 kWp)</span>
                   <span className="text-neutral-400">Captures intense coastal irradiation to power live chiller cooling and store night reserve.</span>
                 </div>
               </div>
 
               <div className="grid grid-cols-2 gap-4">
-                <div className="aspect-[4/3] rounded-2xl overflow-hidden border border-white/[0.08] bg-neutral-950">
-                  <img src="/images/fish_stall_night.jpg" alt="Night Stall Lighting" className="w-full h-full object-cover" />
+                <div className="aspect-[4/3] rounded-2xl overflow-hidden border border-white/[0.08] bg-black flex items-center justify-center p-2">
+                  <img src="/images/fish_stall_night.jpg" alt="Night Stall Lighting" className="max-h-full max-w-full object-contain rounded-xl" />
                 </div>
-                <div className="aspect-[4/3] rounded-2xl overflow-hidden border border-white/[0.08] bg-neutral-950">
-                  <img src="/images/besant_detail_night.png" alt="Silent LiFePO₄ Inverter" className="w-full h-full object-cover" />
+                <div className="aspect-[4/3] rounded-2xl overflow-hidden border border-white/[0.08] bg-black flex items-center justify-center p-2">
+                  <img src="/images/besant_detail_night.png" alt="Silent LiFePO₄ Inverter" className="max-h-full max-w-full object-contain rounded-xl" />
                 </div>
               </div>
             </div>
@@ -1615,13 +1615,19 @@ export default function AdbLabsTitanPage({ onNavigateToMember }) {
 
               </div>
 
-              {/* Robot Preview Images */}
-              <div className="grid grid-cols-2 gap-4 mt-6 pt-6 border-t border-white/[0.08]">
-                <div className="aspect-[16/9] rounded-2xl overflow-hidden border border-white/[0.06] bg-black flex items-center justify-center p-2">
-                  <img src="/images/robot_dog_titan.jpg" alt="Autonomous Quadruped Robot" className="max-h-full object-contain" />
+              {/* Robot Preview Images (3 Core Platforms) */}
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mt-6 pt-6 border-t border-white/[0.08]">
+                <div className="aspect-[16/9] rounded-2xl overflow-hidden border border-white/[0.06] bg-black flex flex-col items-center justify-center p-2 group">
+                  <img src="/images/robot_dog_titan.jpg" alt="Autonomous Quadruped Robot" className="max-h-[82%] object-contain" />
+                  <span className="text-[10px] text-neutral-400 font-sans mt-1">Quadruped Locomotion</span>
                 </div>
-                <div className="aspect-[16/9] rounded-2xl overflow-hidden border border-white/[0.06] bg-black flex items-center justify-center p-2">
-                  <img src="/images/robotic_arm_titan.jpg" alt="6-Axis Precision Manipulator" className="max-h-full object-contain" />
+                <div className="aspect-[16/9] rounded-2xl overflow-hidden border border-white/[0.06] bg-black flex flex-col items-center justify-center p-2 group">
+                  <img src="/images/amr_lidar_robot_titan.jpg" alt="LiDAR Autonomous Mobile Robot" className="max-h-[82%] object-contain" />
+                  <span className="text-[10px] text-[#adceff] font-sans mt-1">3D LiDAR AMR</span>
+                </div>
+                <div className="aspect-[16/9] rounded-2xl overflow-hidden border border-white/[0.06] bg-black flex flex-col items-center justify-center p-2 group">
+                  <img src="/images/robotic_arm_titan.jpg" alt="6-Axis Precision Manipulator" className="max-h-[82%] object-contain" />
+                  <span className="text-[10px] text-neutral-400 font-sans mt-1">6-Axis Manipulator</span>
                 </div>
               </div>
 
@@ -1914,6 +1920,35 @@ export default function AdbLabsTitanPage({ onNavigateToMember }) {
             </table>
           </div>
 
+          {/* Engineering Reference Document Showcase */}
+          <div className="mt-12 p-8 sm:p-10 rounded-[32px] glass-panel glass-panel-hover flex flex-col md:flex-row items-center gap-8 text-left">
+            <div className="w-full md:w-1/3 aspect-[3/4] max-h-[380px] rounded-2xl overflow-hidden bg-black/80 border border-white/10 flex items-center justify-center p-2 shadow-2xl">
+              <img 
+                src="/images/adb_labs_brochure.jpg" 
+                alt="ADB Labs Official Engineering Reference Brochure" 
+                className="max-h-full max-w-full object-contain rounded-xl"
+              />
+            </div>
+            <div className="w-full md:w-2/3 space-y-4">
+              <span className="text-xs uppercase font-mono tracking-wider text-[#adceff] font-bold">Primary Documentation</span>
+              <h3 className="text-2xl font-bold text-white">Official Engineering Handover & Brochure</h3>
+              <p className="text-neutral-300 text-sm leading-relaxed">
+                Review the uncropped reference documentation from the ADB Labs technical handover detailing PS1 nominal capacities, Shop 1 & Shop 2 small-business solar sizing, and preliminary commercial deployment guidelines.
+              </p>
+              <div className="pt-2 flex flex-wrap gap-4 text-xs font-semibold">
+                <a 
+                  href="/images/adb_labs_brochure.jpg" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="bg-white hover:bg-neutral-200 text-black px-6 py-2.5 rounded-full transition flex items-center gap-2"
+                >
+                  <span>Open Full-Resolution Document</span>
+                  <ArrowRight className="w-3.5 h-3.5" />
+                </a>
+              </div>
+            </div>
+          </div>
+
         </div>
       </section>
 
@@ -2122,7 +2157,7 @@ export default function AdbLabsTitanPage({ onNavigateToMember }) {
             {modalType === 'video' ? (
               <div className="mt-4 space-y-4">
                 <div className="aspect-[16/9] rounded-2xl overflow-hidden border border-white/10 bg-black flex items-center justify-center relative">
-                  <img src="/images/besant_wide.png" alt="Video thumbnail" className="w-full h-full object-cover opacity-60" />
+                  <img src="/images/besant_wide.png" alt="Video thumbnail" className="max-h-full max-w-full object-contain opacity-75" />
                   <div className="absolute inset-0 flex flex-col items-center justify-center text-center p-4">
                     <div className="w-16 h-16 rounded-full bg-white text-black flex items-center justify-center shadow-2xl mb-3 cursor-pointer hover:scale-110 transition">
                       <Play className="w-6 h-6 fill-current ml-1" />
