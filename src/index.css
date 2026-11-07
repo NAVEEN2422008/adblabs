@@ -166,3 +166,42 @@
 .faq-inner {
   overflow: hidden;
 }
+
+/* CAD Technical Grid Backdrop (Apple Pro / DJI Industrial style) */
+.bg-cad-grid {
+  background-image: linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+                    linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+/* Mechanical corner crosshairs */
+.cad-corner-tl {
+  position: relative;
+}
+.cad-corner-tl::before {
+  content: '';
+  position: absolute;
+  top: -1px;
+  left: -1px;
+  width: 8px;
+  height: 8px;
+  border-top: 2px solid #38bdf8;
+  border-left: 2px solid #38bdf8;
+  pointer-events: none;
+}
+.cad-corner-tl::after {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  right: -1px;
+  width: 8px;
+  height: 8px;
+  border-bottom: 2px solid #38bdf8;
+  border-right: 2px solid #38bdf8;
+  pointer-events: none;
+}
+
+/* Scroll telemetry rail */
+.scroll-progress-bar {
+  transform-origin: 0%;
+}

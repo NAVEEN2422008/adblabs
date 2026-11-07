@@ -34,9 +34,17 @@ import {
 } from 'lucide-react';
 // Scoped clean styles loaded via index.css
 import { TEAM_MEMBERS } from './data/teamData';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence, useScroll, useSpring } from 'framer-motion';
 
 export default function AdbLabsTitanPage({ onNavigateToMember }) {
+  // Global Scroll-Linked Progress (Apple Pro / Tesla style)
+  const { scrollYProgress } = useScroll();
+  const scaleX = useSpring(scrollYProgress, {
+    stiffness: 120,
+    damping: 30,
+    restDelta: 0.001
+  });
+
   // Navigation & Sub-nav state
   const [activeNav, setActiveNav] = useState('overview');
   const [isSubNavSticky, setIsSubNavSticky] = useState(false);
@@ -238,6 +246,49 @@ export default function AdbLabsTitanPage({ onNavigateToMember }) {
   return (
     <div className="bg-black text-white min-h-screen selection:bg-white selection:text-black font-sans antialiased overflow-x-hidden">
       
+      {/* Scroll-Linked Progress Bar (Apple Pro / Tesla style) */}
+      <motion.div 
+        className="fixed top-0 left-0 right-0 h-[2.5px] bg-gradient-to-r from-[#38bdf8] via-[#adceff] to-[#60a5fa] z-[100000] origin-left shadow-[0_0_12px_rgba(56,189,248,0.8)]" 
+        style={{ scaleX }}
+      />
+
+      {/* Minimalist Desktop Right Rail HUD (Apple / Tesla style) */}
+      <div className="fixed right-6 top-1/2 -translate-y-1/2 z-40 hidden 2xl:flex flex-col items-end gap-3 text-[10px] font-mono tracking-widest text-neutral-500 pointer-events-auto">
+        {[
+          { id: 'overview', num: '01', name: 'TITAN' },
+          { id: 'highlights', num: '02', name: 'CORE' },
+          { id: 'comparison', num: '03', name: 'DIESEL VS PS1' },
+          { id: 'appliances', num: '04', name: 'LOADS' },
+          { id: 'hardware', num: '05', name: 'SUBSYSTEM' },
+          { id: 'calculator', num: '06', name: 'AUTONOMY' },
+          { id: 'besant', num: '07', name: 'PILOT' },
+          { id: 'robotics', num: '08', name: 'ROBOTICS' },
+          { id: 'specs', num: '09', name: 'SPECS' }
+        ].map((sec) => (
+          <button
+            key={sec.id}
+            onClick={() => scrollToSection(sec.id)}
+            className={`group flex items-center gap-2.5 transition-all duration-300 py-1 ${
+              activeNav === sec.id ? 'text-white' : 'hover:text-neutral-300'
+            }`}
+          >
+            <span className={`opacity-0 group-hover:opacity-100 transition-opacity uppercase text-[9px] ${
+              activeNav === sec.id ? 'opacity-100 text-[#adceff]' : ''
+            }`}>
+              {sec.name}
+            </span>
+            <span className={`transition-all duration-300 font-bold ${
+              activeNav === sec.id ? 'text-[#adceff]' : ''
+            }`}>
+              {sec.num}
+            </span>
+            <span className={`h-1.5 rounded-full transition-all duration-300 ${
+              activeNav === sec.id ? 'w-6 bg-[#adceff] shadow-[0_0_8px_#38bdf8]' : 'w-1.5 bg-white/20 group-hover:w-3 group-hover:bg-white/50'
+            }`} />
+          </button>
+        ))}
+      </div>
+
       {/* Toast Notification */}
       {toastMessage && (
         <div className="fixed top-8 left-1/2 -translate-x-1/2 z-[99999] bg-[#121316] border border-white/20 text-white px-6 py-3.5 rounded-full font-medium shadow-[0_0_40px_rgba(0,0,0,0.8)] flex items-center gap-3 transition-all animate-bounce">
@@ -260,6 +311,28 @@ export default function AdbLabsTitanPage({ onNavigateToMember }) {
         >
           Book Energy Audit →
         </button>
+      </div>
+
+      {/* Tactical Industrial Telemetry Strip (DJI / Tesla Megapack style) */}
+      <div className="bg-[#050608] border-b border-white/[0.06] text-[10px] font-mono text-neutral-400 py-1.5 px-6 overflow-x-auto no-scrollbar whitespace-nowrap">
+        <div className="max-w-6xl mx-auto flex items-center justify-between gap-6">
+          <div className="flex items-center gap-2">
+            <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+            <span className="text-white font-semibold">AC BUS: 230V PURE SINE (50.0 Hz)</span>
+          </div>
+          <div className="hidden md:flex items-center gap-4 text-neutral-500">
+            <span>CHEM: LiFePO₄ PRISMATIC</span>
+            <span className="text-neutral-700">|</span>
+            <span>CYCLE LIFE: 3,500+ @ 80% DoD</span>
+            <span className="text-neutral-700">|</span>
+            <span>MPPT: 98.4% DUAL TRACKING</span>
+            <span className="text-neutral-700">|</span>
+            <span className="text-[#adceff]">GRID RELIANCE: 0.0%</span>
+          </div>
+          <div className="text-[9px] text-[#adceff] font-bold tracking-wider">
+            TAMIL NADU FIELD TELEMETRY ACTIVE
+          </div>
+        </div>
       </div>
 
       {/* Global Navigation Header */}
@@ -891,8 +964,21 @@ export default function AdbLabsTitanPage({ onNavigateToMember }) {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center bg-white/[0.02] rounded-[32px] border border-white/[0.08] backdrop-blur-xl p-6 sm:p-10">
             
             {/* Visual Display with Hotspots */}
-            <div className="lg:col-span-8 relative flex flex-col items-center justify-center min-h-[460px] bg-black/60 rounded-3xl border border-white/[0.06] p-6">
+            <div className="lg:col-span-8 relative flex flex-col items-center justify-center min-h-[460px] bg-black/60 rounded-3xl border border-white/[0.06] p-6 bg-cad-grid cad-corner-tl">
               
+              {/* CAD Subsystem Top Telemetry Header */}
+              <div className="w-full flex items-center justify-between pb-4 border-b border-white/[0.06] mb-4 text-[10px] font-mono text-[#83868a]">
+                <div className="flex items-center gap-2">
+                  <span className="w-2 h-2 rounded-full bg-[#38bdf8] animate-ping"></span>
+                  <span className="text-white font-bold tracking-wider">CAD SUBSYSTEM EXPLORER // REV 3.2</span>
+                </div>
+                <div className="hidden sm:flex items-center gap-3">
+                  <span>SCALE: 1:1 FIELD SPEC</span>
+                  <span>•</span>
+                  <span className="text-[#38bdf8] font-bold">CLICK HOTSPOTS (1-4)</span>
+                </div>
+              </div>
+
               {/* Product View Display */}
               <div className="relative w-full max-w-md aspect-[4/3] flex items-center justify-center">
                 <AnimatePresence mode="wait">
@@ -1214,6 +1300,34 @@ export default function AdbLabsTitanPage({ onNavigateToMember }) {
               >
                 🏠 Home Essential Backup (AC + Lights)
               </button>
+            </div>
+
+            {/* Real-time Inverter Load Bar Gauge (Tesla Megapack / EcoFlow Smart Panel style) */}
+            <div className="mb-8 p-5 rounded-2xl bg-black/60 border border-white/[0.08] backdrop-blur-md">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between text-xs font-mono gap-2 mb-2.5">
+                <div className="flex items-center gap-2">
+                  <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                  <span className="text-[#83868a]">ACTIVE COMBINED LOAD:</span>
+                  <span className="text-white font-bold text-base">{activeWatts} W</span>
+                  <span className="text-neutral-500">/ 3,000 W CONTINUOUS</span>
+                </div>
+                <div className="flex items-center gap-2 font-mono text-xs">
+                  <span className="text-[#83868a]">INVERTER UTILIZATION:</span>
+                  <span className={`font-bold px-2 py-0.5 rounded text-[11px] ${
+                    activeWatts > 2400 ? 'bg-amber-400/20 text-amber-300 border border-amber-400/40' : 'bg-[#38bdf8]/15 text-[#38bdf8] border border-[#38bdf8]/30'
+                  }`}>
+                    {((activeWatts / 3000) * 100).toFixed(1)}% CAPACITY
+                  </span>
+                </div>
+              </div>
+              <div className="w-full h-3 bg-white/10 rounded-full overflow-hidden relative p-[1px]">
+                <motion.div 
+                  className={`h-full rounded-full transition-all duration-300 ${
+                    activeWatts > 2400 ? 'bg-gradient-to-r from-amber-400 to-red-400' : 'bg-gradient-to-r from-[#38bdf8] via-[#adceff] to-[#60a5fa]'
+                  }`}
+                  style={{ width: `${Math.min(100, (activeWatts / 3000) * 100)}%` }}
+                />
+              </div>
             </div>
 
             {/* Appliance Toggle Grid */}
