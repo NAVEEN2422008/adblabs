@@ -32,7 +32,7 @@ import {
   Flame,
   Plus
 } from 'lucide-react';
-import './titan.css';
+// Scoped clean styles loaded via index.css
 import { TEAM_MEMBERS } from './data/teamData';
 
 export default function AdbLabsTitanPage({ onNavigateToMember }) {
@@ -235,7 +235,7 @@ export default function AdbLabsTitanPage({ onNavigateToMember }) {
   const solarGenerationW = solarBoost ? (moduleMode === 'single' ? 1440 * 0.75 : 2880 * 0.75) : 0;
 
   return (
-    <div className="Titan-Page bg-black text-white min-h-screen selection:bg-white selection:text-black font-sans antialiased">
+    <div className="bg-black text-white min-h-screen selection:bg-white selection:text-black font-sans antialiased overflow-x-hidden">
       
       {/* Toast Notification */}
       {toastMessage && (
@@ -445,7 +445,7 @@ export default function AdbLabsTitanPage({ onNavigateToMember }) {
       {/* SECTION 2: SLIM STICKY SUB-NAV BAR (EcoFlow Titan-C2 Replica) */}
       <div 
         id="subnav" 
-        className={`Titan-C2 transition-all duration-300 z-40 bg-black/90 backdrop-blur-2xl border-y border-white/[0.08] ${
+        className={`w-full transition-all duration-300 z-40 bg-black/90 backdrop-blur-2xl border-y border-white/[0.08] ${
           isSubNavSticky ? 'sticky top-0 shadow-2xl' : 'relative'
         }`}
       >
