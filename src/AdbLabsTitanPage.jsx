@@ -35,6 +35,10 @@ import {
 // Scoped clean styles loaded via index.css
 import { TEAM_MEMBERS } from './data/teamData';
 import { motion, AnimatePresence, useScroll, useSpring } from 'framer-motion';
+import OscilloscopeCanvas from './components/OscilloscopeCanvas';
+import PowerFlowDiagram from './components/PowerFlowDiagram';
+import ModularStackingSimulator from './components/ModularStackingSimulator';
+import Interactive3DTiltCard from './components/Interactive3DTiltCard';
 
 export default function AdbLabsTitanPage({ onNavigateToMember }) {
   // Global Scroll-Linked Progress (Apple Pro / Tesla style)
@@ -625,46 +629,48 @@ export default function AdbLabsTitanPage({ onNavigateToMember }) {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-50px" }}
               transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-              className="md:col-span-2 p-8 sm:p-12 rounded-[32px] glass-panel glass-panel-hover relative overflow-hidden text-left shadow-2xl"
+              className="md:col-span-2"
             >
-              <div className="absolute top-0 right-0 w-96 h-96 bg-[#adceff]/10 rounded-full blur-3xl pointer-events-none"></div>
+              <Interactive3DTiltCard className="p-8 sm:p-12 rounded-[32px] glass-panel glass-panel-hover relative overflow-hidden text-left shadow-2xl">
+                <div className="absolute top-0 right-0 w-96 h-96 bg-[#adceff]/10 rounded-full blur-3xl pointer-events-none"></div>
 
-              <div className="max-w-xl">
-                <span className="text-xs uppercase tracking-wider text-[#adceff] font-bold">Commercial Power Architecture</span>
-                <h3 className="text-2xl sm:text-4xl font-extrabold text-white mt-2 leading-tight">
-                  Whole-Stall Power for Everyday Living
-                </h3>
-                <p className="text-[#adafb3] text-sm mt-3 leading-relaxed">
-                  Run high-surge commercial chillers, waffle irons, blenders, and POS terminals simultaneously without tripping breakers or flickering lights.
-                </p>
-              </div>
-
-              {/* 4 Stat Columns */}
-              <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 mt-10 pt-8 border-t border-white/[0.08]">
-                <div>
-                  <div className="text-xs text-[#83868a] font-medium">Output</div>
-                  <div className="text-3xl sm:text-4xl stat-cyan mt-1">3.0 kW</div>
-                  <div className="text-xs text-neutral-400 mt-1">6 kW Peak Surge</div>
+                <div className="max-w-xl">
+                  <span className="text-xs uppercase tracking-wider text-[#adceff] font-bold">Commercial Power Architecture</span>
+                  <h3 className="text-2xl sm:text-4xl font-extrabold text-white mt-2 leading-tight">
+                    Whole-Stall Power for Everyday Living
+                  </h3>
+                  <p className="text-[#adafb3] text-sm mt-3 leading-relaxed">
+                    Run high-surge commercial chillers, waffle irons, blenders, and POS terminals simultaneously without tripping breakers or flickering lights.
+                  </p>
                 </div>
 
-                <div>
-                  <div className="text-xs text-[#83868a] font-medium">Capacity</div>
-                  <div className="text-3xl sm:text-4xl stat-cyan mt-1">6.1 ~ 12.3 kWh</div>
-                  <div className="text-xs text-neutral-400 mt-1">Dual Stack Modular Bus</div>
-                </div>
+                {/* 4 Stat Columns */}
+                <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 mt-10 pt-8 border-t border-white/[0.08]">
+                  <div>
+                    <div className="text-xs text-[#83868a] font-medium">Output</div>
+                    <div className="text-3xl sm:text-4xl stat-cyan mt-1">3.0 kW</div>
+                    <div className="text-xs text-neutral-400 mt-1">6 kW Peak Surge</div>
+                  </div>
 
-                <div>
-                  <div className="text-xs text-[#83868a] font-medium">Monthly Savings</div>
-                  <div className="text-3xl sm:text-4xl stat-metallic mt-1">₹14,000</div>
-                  <div className="text-xs text-neutral-400 mt-1">~14 Month Payback</div>
-                </div>
+                  <div>
+                    <div className="text-xs text-[#83868a] font-medium">Capacity</div>
+                    <div className="text-3xl sm:text-4xl stat-cyan mt-1">6.1 ~ 12.3 kWh</div>
+                    <div className="text-xs text-neutral-400 mt-1">Dual Stack Modular Bus</div>
+                  </div>
 
-                <div>
-                  <div className="text-xs text-[#83868a] font-medium">Day Solar Array</div>
-                  <div className="text-3xl sm:text-4xl stat-metallic mt-1">2.88 kWp</div>
-                  <div className="text-xs text-neutral-400 mt-1">Dual MPPT Tracking</div>
+                  <div>
+                    <div className="text-xs text-[#83868a] font-medium">Monthly Savings</div>
+                    <div className="text-3xl sm:text-4xl stat-metallic mt-1">₹14,000</div>
+                    <div className="text-xs text-neutral-400 mt-1">~14 Month Payback</div>
+                  </div>
+
+                  <div>
+                    <div className="text-xs text-[#83868a] font-medium">Day Solar Array</div>
+                    <div className="text-3xl sm:text-4xl stat-metallic mt-1">2.88 kWp</div>
+                    <div className="text-xs text-neutral-400 mt-1">Dual MPPT Tracking</div>
+                  </div>
                 </div>
-              </div>
+              </Interactive3DTiltCard>
             </motion.div>
 
             {/* Bento Card 2: Spend Less From Day One */}
@@ -673,33 +679,34 @@ export default function AdbLabsTitanPage({ onNavigateToMember }) {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-50px" }}
               transition={{ duration: 0.7, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-              className="p-8 sm:p-10 rounded-[32px] glass-panel glass-panel-hover text-left flex flex-col justify-between"
             >
-              <div>
-                <span className="text-xs uppercase tracking-wider text-[#adceff] font-bold">Economic Payback</span>
-                <h3 className="text-2xl font-bold text-white mt-2">Spend ₹0 on Fuel From Day One</h3>
-                <p className="text-[#adafb3] text-xs sm:text-sm mt-3 leading-relaxed">
-                  Eliminate ₹1.5+ Lakhs in annual diesel expenses. Sealed LiFePO₄ prismatic cells eliminate alternator corrosion, frequent oil changes, and exhaust fumes.
-                </p>
+              <Interactive3DTiltCard className="h-full p-8 sm:p-10 rounded-[32px] glass-panel glass-panel-hover text-left flex flex-col justify-between">
+                <div>
+                  <span className="text-xs uppercase tracking-wider text-[#adceff] font-bold">Economic Payback</span>
+                  <h3 className="text-2xl font-bold text-white mt-2">Spend ₹0 on Fuel From Day One</h3>
+                  <p className="text-[#adafb3] text-xs sm:text-sm mt-3 leading-relaxed">
+                    Eliminate ₹1.5+ Lakhs in annual diesel expenses. Sealed LiFePO₄ prismatic cells eliminate alternator corrosion, frequent oil changes, and exhaust fumes.
+                  </p>
 
-                <div className="grid grid-cols-2 gap-4 mt-8 pt-6 border-t border-white/[0.08]">
-                  <div>
-                    <div className="text-xs text-neutral-400">Fuel Expense</div>
-                    <div className="text-4xl stat-cyan mt-1">100%</div>
-                    <div className="text-xs text-neutral-500 mt-0.5">Eliminated vs Diesel</div>
-                  </div>
-                  <div>
-                    <div className="text-xs text-neutral-400">Cell Longevity</div>
-                    <div className="text-4xl stat-metallic mt-1">3,500+</div>
-                    <div className="text-xs text-neutral-500 mt-0.5">Cycles to 80% DoD</div>
+                  <div className="grid grid-cols-2 gap-4 mt-8 pt-6 border-t border-white/[0.08]">
+                    <div>
+                      <div className="text-xs text-neutral-400">Fuel Expense</div>
+                      <div className="text-4xl stat-cyan mt-1">100%</div>
+                      <div className="text-xs text-neutral-500 mt-0.5">Eliminated vs Diesel</div>
+                    </div>
+                    <div>
+                      <div className="text-xs text-neutral-400">Cell Longevity</div>
+                      <div className="text-4xl stat-metallic mt-1">3,500+</div>
+                      <div className="text-xs text-neutral-500 mt-0.5">Cycles to 80% DoD</div>
+                    </div>
                   </div>
                 </div>
-              </div>
 
-              <div className="mt-8 flex items-center justify-between text-xs text-[#adceff] font-bold">
-                <span>See Fuel Comparison</span>
-                <ArrowRight className="w-4 h-4" />
-              </div>
+                <div className="mt-8 flex items-center justify-between text-xs text-[#adceff] font-bold">
+                  <span>See Fuel Comparison</span>
+                  <ArrowRight className="w-4 h-4" />
+                </div>
+              </Interactive3DTiltCard>
             </motion.div>
 
             {/* Bento Card 3: Autonomous Robotics & AI */}
@@ -708,33 +715,34 @@ export default function AdbLabsTitanPage({ onNavigateToMember }) {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-50px" }}
               transition={{ duration: 0.7, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-              className="p-8 sm:p-10 rounded-[32px] glass-panel glass-panel-hover text-left flex flex-col justify-between"
             >
-              <div>
-                <span className="text-xs uppercase tracking-wider text-[#adceff] font-bold">Autonomous Robotics & AI</span>
-                <h3 className="text-2xl font-bold text-white mt-2">Field Robotics & ROS 2 Intelligence</h3>
-                <p className="text-[#adafb3] text-xs sm:text-sm mt-3 leading-relaxed">
-                  Advanced 3D LiDAR SLAM, depth camera perception, quadruped locomotion gait stabilization, and simulation-first capstone curricula.
-                </p>
+              <Interactive3DTiltCard className="h-full p-8 sm:p-10 rounded-[32px] glass-panel glass-panel-hover text-left flex flex-col justify-between">
+                <div>
+                  <span className="text-xs uppercase tracking-wider text-[#adceff] font-bold">Autonomous Robotics & AI</span>
+                  <h3 className="text-2xl font-bold text-white mt-2">Field Robotics & ROS 2 Intelligence</h3>
+                  <p className="text-[#adafb3] text-xs sm:text-sm mt-3 leading-relaxed">
+                    Advanced 3D LiDAR SLAM, depth camera perception, quadruped locomotion gait stabilization, and simulation-first capstone curricula.
+                  </p>
 
-                <div className="grid grid-cols-2 gap-4 mt-8 pt-6 border-t border-white/[0.08]">
-                  <div>
-                    <div className="text-xs text-neutral-400">Navigation Stack</div>
-                    <div className="text-2xl font-bold text-white mt-1">ROS 2 Nav2</div>
-                    <div className="text-xs text-neutral-500 mt-0.5">2D/3D SLAM Mapping</div>
-                  </div>
-                  <div>
-                    <div className="text-xs text-neutral-400">Vision Perception</div>
-                    <div className="text-2xl font-bold text-white mt-1">YOLO + Depth</div>
-                    <div className="text-xs text-neutral-500 mt-0.5">Real-time Obstacle Evasion</div>
+                  <div className="grid grid-cols-2 gap-4 mt-8 pt-6 border-t border-white/[0.08]">
+                    <div>
+                      <div className="text-xs text-neutral-400">Navigation Stack</div>
+                      <div className="text-2xl font-bold text-white mt-1">ROS 2 Nav2</div>
+                      <div className="text-xs text-neutral-500 mt-0.5">2D/3D SLAM Mapping</div>
+                    </div>
+                    <div>
+                      <div className="text-xs text-neutral-400">Vision Perception</div>
+                      <div className="text-2xl font-bold text-white mt-1">YOLO + Depth</div>
+                      <div className="text-xs text-neutral-500 mt-0.5">Real-time Obstacle Evasion</div>
+                    </div>
                   </div>
                 </div>
-              </div>
 
-              <div className="mt-8 flex items-center justify-between text-xs text-[#adceff] font-bold">
-                <span>Explore Robotics Division</span>
-                <ArrowRight className="w-4 h-4" />
-              </div>
+                <div className="mt-8 flex items-center justify-between text-xs text-[#adceff] font-bold">
+                  <span>Explore Robotics Division</span>
+                  <ArrowRight className="w-4 h-4" />
+                </div>
+              </Interactive3DTiltCard>
             </motion.div>
 
           </div>
@@ -858,6 +866,11 @@ export default function AdbLabsTitanPage({ onNavigateToMember }) {
               </div>
             </motion.div>
 
+          </div>
+
+          {/* Interactive Laboratory Oscilloscope (Teenage Engineering / Fluke style) */}
+          <div className="mt-14">
+            <OscilloscopeCanvas />
           </div>
         </div>
       </section>
@@ -1129,6 +1142,17 @@ export default function AdbLabsTitanPage({ onNavigateToMember }) {
             <p className="text-[#adafb3] text-base sm:text-lg mt-4 leading-relaxed">
               Pre-configured, field-tested off-grid packages designed to replace noisy diesel generators for retail stalls, kiosks, and food service.
             </p>
+          </div>
+
+          {/* Interactive Modular Stacking Configurator (EcoFlow Delta Pro Ultra / Framework style) */}
+          <div className="mb-14">
+            <ModularStackingSimulator 
+              onSelectPackage={(sol) => {
+                setQuoteForm(prev => ({ ...prev, solution: sol }));
+                setModalType('quote');
+                setIsQuoteModalOpen(true);
+              }}
+            />
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -1634,6 +1658,11 @@ export default function AdbLabsTitanPage({ onNavigateToMember }) {
       <section id="besant" className="py-24 px-6 border-b border-white/[0.08] relative">
         <div className="max-w-6xl mx-auto">
           
+          {/* Dynamic 24-Hour Energy Flow Simulation (Tesla Energy / EcoFlow style) */}
+          <div className="mb-16">
+            <PowerFlowDiagram />
+          </div>
+
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
             
             <div className="lg:col-span-6 space-y-6 text-left">
