@@ -1,52 +1,52 @@
-import React, { useState, useEffect } from 'react';
-import AdbLabsTitanPage from './AdbLabsTitanPage';
-import MemberPortfolio from './components/MemberPortfolio';
-import { TEAM_MEMBERS } from './data/teamData';
+import React from 'react';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import Navbar from './components/layout/Navbar';
+import Footer from './components/layout/Footer';
+import ScrollToTop from './components/layout/ScrollToTop';
 
-function parseLocation() {
-  if (typeof window === 'undefined') return { view: 'home', code: null };
-  const rawPath = window.location.pathname.replace(/\/+$/, '') || '/';
-  
-  // Match /about/:code or /about/ADB-446-001
-  const memberMatch = rawPath.match(/^\/about\/(.+)$/i);
-  if (memberMatch) {
-    let code = decodeURIComponent(memberMatch[1]).toUpperCase();
-    if (/^\d{3}$/.test(code)) {
-      code = `ADB-446-${code}`;
-    }
-    return { view: 'portfolio', code };
-  }
-
-  return { view: 'home', code: null };
-}
+// Pages
+import HomePage from './pages/HomePage';
+import EnergySolutionsPage from './pages/EnergySolutionsPage';
+import PowerStationsPage from './pages/PowerStationsPage';
+import PS1ProductPage from './pages/PS1ProductPage';
+import ProjectsPage from './pages/ProjectsPage';
+import BesantNagarCaseStudyPage from './pages/BesantNagarCaseStudyPage';
+import RoboticsPage from './pages/RoboticsPage';
+import InternshipPage from './pages/InternshipPage';
+import AboutPage from './pages/AboutPage';
+import MemberPortfolioPage from './pages/MemberPortfolioPage';
+import ContactPage from './pages/ContactPage';
+import GetAQuotePage from './pages/GetAQuotePage';
 
 export default function App() {
-  const [route, setRoute] = useState(() => parseLocation());
+  return (
+    <BrowserRouter>
+      <div className="bg-[#050B0A] text-[#F5F7F2] min-h-screen flex flex-col font-sans selection:bg-[#A3FF35] selection:text-black">
+        <ScrollToTop />
+        <Navbar />
+        
+        <main className="flex-grow">
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/energy-solutions" element={<EnergySolutionsPage />} />
+            <Route path="/power-stations" element={<PowerStationsPage />} />
+            <Route path="/power-stations/adb-ps1" element={<PS1ProductPage />} />
+            <Route path="/projects" element={<ProjectsPage />} />
+            <Route path="/projects/besant-nagar-off-grid-system" element={<BesantNagarCaseStudyPage />} />
+            <Route path="/robotics-rd" element={<RoboticsPage />} />
+            <Route path="/internship" element={<InternshipPage />} />
+            <Route path="/about" element={<AboutPage />} />
+            <Route path="/about/:memberId" element={<MemberPortfolioPage />} />
+            <Route path="/contact" element={<ContactPage />} />
+            <Route path="/get-a-quote" element={<GetAQuotePage />} />
+            
+            {/* Catch-all redirect to Home */}
+            <Route path="*" element={<Navigate to="/" replace />} />
+          </Routes>
+        </main>
 
-  useEffect(() => {
-    const onPopState = () => setRoute(parseLocation());
-    window.addEventListener('popstate', onPopState);
-    return () => window.removeEventListener('popstate', onPopState);
-  }, []);
-
-  const navigateTo = (path) => {
-    if (typeof window !== 'undefined') {
-      window.history.pushState({}, '', path);
-      setRoute(parseLocation());
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
-  };
-
-  if (route.view === 'portfolio' && route.code) {
-    const member = TEAM_MEMBERS.find((m) => m.id.toUpperCase() === route.code.toUpperCase());
-    return (
-      <MemberPortfolio 
-        member={member} 
-        onBack={() => navigateTo('/')} 
-        onSelectMember={(code) => navigateTo(`/about/${code}`)} 
-      />
-    );
-  }
-
-  return <AdbLabsTitanPage onNavigateToMember={(code) => navigateTo(`/about/${code}`)} />;
+        <Footer />
+      </div>
+    </BrowserRouter>
+  );
 }
