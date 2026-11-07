@@ -28,7 +28,9 @@ import {
   Leaf,
   ChevronLeft,
   ChevronRight,
-  Play
+  Play,
+  Flame,
+  Plus
 } from 'lucide-react';
 import './titan.css';
 import { TEAM_MEMBERS } from './data/teamData';
@@ -67,8 +69,8 @@ export default function AdbLabsTitanPage({ onNavigateToMember }) {
   // Testimonial Carousel state
   const [activeStoryIdx, setActiveStoryIdx] = useState(0);
 
-  // FAQ Accordion state
-  const [activeFaq, setActiveFaq] = useState(0); // first open by default
+  // FAQ Accordion state (single open index for predictable, buttery UX)
+  const [activeFaq, setActiveFaq] = useState(0);
 
   // Robotics Terminal simulation state
   const [rosLogIdx, setRosLogIdx] = useState(0);
@@ -143,12 +145,14 @@ export default function AdbLabsTitanPage({ onNavigateToMember }) {
   useEffect(() => {
     const handleScroll = () => {
       const scrollY = window.scrollY;
-      setIsSubNavSticky(scrollY > 500);
+      setIsSubNavSticky(scrollY > 550);
 
       const sections = [
         'overview',
-        'hardware',
+        'highlights',
         'comparison',
+        'appliances',
+        'hardware',
         'packages',
         'calculator',
         'stories',
@@ -180,7 +184,7 @@ export default function AdbLabsTitanPage({ onNavigateToMember }) {
     setActiveNav(id);
     const el = document.getElementById(id);
     if (el) {
-      const offset = 80;
+      const offset = 70;
       const targetPos = el.getBoundingClientRect().top + window.pageYOffset - offset;
       window.scrollTo({ top: targetPos, behavior: 'smooth' });
     }
@@ -259,7 +263,7 @@ export default function AdbLabsTitanPage({ onNavigateToMember }) {
 
       {/* Global Navigation Header */}
       <header className="global-header sticky top-0 z-50 bg-black/85 backdrop-blur-2xl border-b border-white/[0.08] transition-all">
-        <div className="max-w-[1440px] mx-auto px-6 h-18 flex items-center justify-between">
+        <div className="max-w-6xl mx-auto px-6 lg:px-8 h-18 flex items-center justify-between">
           
           {/* Brand Logo */}
           <div className="flex items-center gap-3.5 cursor-pointer" onClick={() => scrollToSection('overview')}>
@@ -282,33 +286,33 @@ export default function AdbLabsTitanPage({ onNavigateToMember }) {
           </div>
 
           {/* Desktop Nav Links */}
-          <nav className="hidden lg:flex items-center gap-8 text-sm font-medium text-[#adafb3]">
-            <button onClick={() => scrollToSection('hardware')} className="hover:text-white transition">
-              PS1 Hardware
+          <nav className="hidden lg:flex items-center gap-7 text-xs font-semibold text-[#adafb3] uppercase tracking-wider">
+            <button onClick={() => scrollToSection('highlights')} className="hover:text-white transition">
+              Highlights
             </button>
             <button onClick={() => scrollToSection('comparison')} className="hover:text-white transition">
               Why PS1
             </button>
+            <button onClick={() => scrollToSection('appliances')} className="hover:text-white transition">
+              Appliances
+            </button>
+            <button onClick={() => scrollToSection('hardware')} className="hover:text-white transition">
+              Hardware
+            </button>
             <button onClick={() => scrollToSection('packages')} className="hover:text-white transition">
-              Shop Packages
+              Packages
             </button>
             <button onClick={() => scrollToSection('calculator')} className="hover:text-white transition">
-              Runtime Calculator
+              Calculator
             </button>
-            <button onClick={() => scrollToSection('stories')} className="hover:text-white transition">
-              Field Stories
+            <button onClick={() => scrollToSection('besant')} className="hover:text-white transition">
+              Field Pilot
             </button>
             <button onClick={() => scrollToSection('robotics')} className="hover:text-white transition">
-              Robotics & AI
-            </button>
-            <button onClick={() => scrollToSection('internship')} className="hover:text-white transition">
-              Internship
+              Robotics
             </button>
             <button onClick={() => scrollToSection('team')} className="hover:text-white transition">
               Team
-            </button>
-            <button onClick={() => scrollToSection('specs')} className="hover:text-white transition">
-              Specs
             </button>
             <button onClick={() => scrollToSection('faq')} className="hover:text-white transition">
               FAQ
@@ -339,11 +343,17 @@ export default function AdbLabsTitanPage({ onNavigateToMember }) {
         {/* Mobile Dropdown Menu */}
         {mobileMenuOpen && (
           <div className="lg:hidden bg-neutral-950/95 backdrop-blur-2xl border-b border-neutral-800 px-6 py-5 space-y-4 text-sm font-medium">
-            <button onClick={() => { scrollToSection('hardware'); setMobileMenuOpen(false); }} className="block w-full text-left text-neutral-300 hover:text-white py-1">
-              PS1 Power Station
+            <button onClick={() => { scrollToSection('highlights'); setMobileMenuOpen(false); }} className="block w-full text-left text-neutral-300 hover:text-white py-1">
+              Key Highlights
             </button>
             <button onClick={() => { scrollToSection('comparison'); setMobileMenuOpen(false); }} className="block w-full text-left text-neutral-300 hover:text-white py-1">
               Why PS1 vs Generator
+            </button>
+            <button onClick={() => { scrollToSection('appliances'); setMobileMenuOpen(false); }} className="block w-full text-left text-neutral-300 hover:text-white py-1">
+              Essential Appliances
+            </button>
+            <button onClick={() => { scrollToSection('hardware'); setMobileMenuOpen(false); }} className="block w-full text-left text-neutral-300 hover:text-white py-1">
+              PS1 Hardware
             </button>
             <button onClick={() => { scrollToSection('packages'); setMobileMenuOpen(false); }} className="block w-full text-left text-neutral-300 hover:text-white py-1">
               Commercial Packages
@@ -351,8 +361,8 @@ export default function AdbLabsTitanPage({ onNavigateToMember }) {
             <button onClick={() => { scrollToSection('calculator'); setMobileMenuOpen(false); }} className="block w-full text-left text-neutral-300 hover:text-white py-1">
               Runtime Calculator
             </button>
-            <button onClick={() => { scrollToSection('stories'); setMobileMenuOpen(false); }} className="block w-full text-left text-neutral-300 hover:text-white py-1">
-              Field Stories & Trials
+            <button onClick={() => { scrollToSection('besant'); setMobileMenuOpen(false); }} className="block w-full text-left text-neutral-300 hover:text-white py-1">
+              Besant Nagar Field Pilot
             </button>
             <button onClick={() => { scrollToSection('robotics'); setMobileMenuOpen(false); }} className="block w-full text-left text-neutral-300 hover:text-white py-1">
               Robotics & AI Division
@@ -371,12 +381,12 @@ export default function AdbLabsTitanPage({ onNavigateToMember }) {
       </header>
 
       {/* SECTION 1: CINEMATIC FULL-BLEED HERO (EcoFlow Titan Stage Replica) */}
-      <section id="overview" className="relative pt-20 pb-32 px-6 overflow-hidden flex flex-col items-center justify-center text-center">
+      <section id="overview" className="relative pt-24 pb-20 px-6 overflow-hidden flex flex-col items-center justify-center text-center">
         
         {/* Atmospheric Radial Backdrop Halo */}
         <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[900px] h-[550px] bg-gradient-to-b from-[#adceff]/15 via-[#3f68e0]/05 to-transparent rounded-full blur-[140px] pointer-events-none -z-10"></div>
 
-        <div className="max-w-[1440px] mx-auto w-full">
+        <div className="max-w-6xl mx-auto w-full">
           
           {/* Eyebrow badge */}
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/[0.04] border border-white/10 text-xs text-[#adceff] font-medium mb-6 backdrop-blur-md">
@@ -395,7 +405,7 @@ export default function AdbLabsTitanPage({ onNavigateToMember }) {
           </p>
 
           {/* Hero CTAs */}
-          <div className="flex flex-wrap items-center justify-center gap-4 mt-9">
+          <div className="flex flex-wrap items-center justify-center gap-4 mt-8">
             <button 
               onClick={() => { setModalType('quote'); setIsQuoteModalOpen(true); }}
               className="bg-white hover:bg-neutral-200 text-black font-bold text-sm px-8 py-3.5 rounded-full transition shadow-[0_0_35px_rgba(255,255,255,0.2)] flex items-center gap-2"
@@ -404,10 +414,10 @@ export default function AdbLabsTitanPage({ onNavigateToMember }) {
               <ArrowRight className="w-4 h-4" />
             </button>
             <button 
-              onClick={() => scrollToSection('hardware')}
+              onClick={() => scrollToSection('highlights')}
               className="bg-white/[0.06] hover:bg-white/[0.12] text-white border border-white/20 font-semibold text-sm px-8 py-3.5 rounded-full transition backdrop-blur-md flex items-center gap-2"
             >
-              <span>Explore Architecture</span>
+              <span>Get the Highlights</span>
             </button>
             <button 
               onClick={() => { setModalType('video'); setIsQuoteModalOpen(true); }}
@@ -418,78 +428,14 @@ export default function AdbLabsTitanPage({ onNavigateToMember }) {
             </button>
           </div>
 
-          {/* Floating Hardware Graphic (Edge-to-edge Luxury Presentation) */}
-          <div className="relative mt-14 max-w-5xl mx-auto flex flex-col items-center justify-center">
-            
-            <div className="relative aspect-[16/9] w-full max-w-4xl flex items-center justify-center">
+          {/* Floating Hardware Graphic (Clean, edge-to-edge Luxury Presentation) */}
+          <div className="relative mt-12 max-w-4xl mx-auto flex flex-col items-center justify-center">
+            <div className="relative aspect-[16/9] w-full flex items-center justify-center">
               <img 
                 src="/images/ps1_titan_studio.jpg"
                 alt="ADB Labs PS1 Power Station Flagship Hardware"
                 className="max-h-full max-w-full object-contain filter drop-shadow-[0_35px_50px_rgba(0,0,0,0.95)]"
               />
-            </div>
-
-            {/* Hardware Key Specs Banner (EcoFlow Titan-C1 Key Metrics) */}
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 sm:gap-6 w-full max-w-4xl mt-10 pt-8 border-t border-white/[0.08] text-left">
-              <div className="p-5 rounded-2xl bg-white/[0.03] border border-white/[0.08] backdrop-blur-xl">
-                <div className="text-[#83868a] text-xs font-medium uppercase tracking-wider">Core Chemistry</div>
-                <div className="text-3xl font-black bg-gradient-to-b from-[#adceff] to-white bg-clip-text text-transparent mt-1">6.144 kWh</div>
-                <div className="text-xs text-neutral-400 mt-1">Automotive LiFePO₄</div>
-              </div>
-
-              <div className="p-5 rounded-2xl bg-white/[0.03] border border-white/[0.08] backdrop-blur-xl">
-                <div className="text-[#83868a] text-xs font-medium uppercase tracking-wider">Inverter Output</div>
-                <div className="text-3xl font-black bg-gradient-to-b from-[#adceff] to-white bg-clip-text text-transparent mt-1">3 kW Target</div>
-                <div className="text-xs text-neutral-400 mt-1">Pure Sine · 6kW Surge</div>
-              </div>
-
-              <div className="p-5 rounded-2xl bg-white/[0.03] border border-white/[0.08] backdrop-blur-xl">
-                <div className="text-[#83868a] text-xs font-medium uppercase tracking-wider">Solar Charging</div>
-                <div className="text-3xl font-black bg-gradient-to-b from-[#adceff] to-white bg-clip-text text-transparent mt-1">2.88 kWp</div>
-                <div className="text-xs text-neutral-400 mt-1">High-Voltage Dual MPPT</div>
-              </div>
-
-              <div className="p-5 rounded-2xl bg-white/[0.03] border border-white/[0.08] backdrop-blur-xl">
-                <div className="text-[#83868a] text-xs font-medium uppercase tracking-wider">Expansion Bus</div>
-                <div className="text-3xl font-black bg-gradient-to-b from-[#adceff] to-white bg-clip-text text-transparent mt-1">12.288 kWh</div>
-                <div className="text-xs text-neutral-400 mt-1">Dual Stack Modular Bus</div>
-              </div>
-            </div>
-
-          </div>
-
-          {/* 4 Core Value Pillars */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mt-16 max-w-5xl mx-auto">
-            <div className="p-6 rounded-3xl bg-white/[0.02] border border-white/[0.08] backdrop-blur-md text-left hover:border-white/20 transition">
-              <Zap className="w-6 h-6 text-[#adceff] mb-3" />
-              <h2 className="font-bold text-base text-white">Power Solutions</h2>
-              <p className="text-[#adafb3] text-xs mt-1.5 leading-relaxed">
-                Reliable, scalable LiFePO₄ storage and solar generation for commercial off-grid sites.
-              </p>
-            </div>
-
-            <div className="p-6 rounded-3xl bg-white/[0.02] border border-white/[0.08] backdrop-blur-md text-left hover:border-white/20 transition">
-              <Bot className="w-6 h-6 text-[#adceff] mb-3" />
-              <h2 className="font-bold text-base text-white">Robotics R&D</h2>
-              <p className="text-[#adafb3] text-xs mt-1.5 leading-relaxed">
-                Autonomous mobile robots, ROS 2 navigation, 3D LiDAR SLAM, and depth perception.
-              </p>
-            </div>
-
-            <div className="p-6 rounded-3xl bg-white/[0.02] border border-white/[0.08] backdrop-blur-md text-left hover:border-white/20 transition">
-              <Cpu className="w-6 h-6 text-[#adceff] mb-3" />
-              <h2 className="font-bold text-base text-white">Product Development</h2>
-              <p className="text-[#adafb3] text-xs mt-1.5 leading-relaxed">
-                End-to-end hardware prototyping, CAN-bus BMS firmware, and rugged thermal enclosures.
-              </p>
-            </div>
-
-            <div className="p-6 rounded-3xl bg-white/[0.02] border border-white/[0.08] backdrop-blur-md text-left hover:border-white/20 transition">
-              <Award className="w-6 h-6 text-[#adceff] mb-3" />
-              <h2 className="font-bold text-base text-white">Internship Program</h2>
-              <p className="text-[#adafb3] text-xs mt-1.5 leading-relaxed">
-                6-Week simulation-first industrial curriculum with 18 live mentor-led sessions.
-              </p>
             </div>
           </div>
 
@@ -500,22 +446,21 @@ export default function AdbLabsTitanPage({ onNavigateToMember }) {
       <div 
         id="subnav" 
         className={`Titan-C2 transition-all duration-300 z-40 bg-black/90 backdrop-blur-2xl border-y border-white/[0.08] ${
-          isSubNavSticky ? 'sticky top-18 shadow-2xl' : 'relative'
+          isSubNavSticky ? 'sticky top-0 shadow-2xl' : 'relative'
         }`}
       >
-        <div className="max-w-[1440px] mx-auto px-6 h-13 flex items-center justify-between overflow-x-auto no-scrollbar">
-          <div className="flex items-center gap-7 text-xs font-semibold tracking-wide whitespace-nowrap text-[#83868a]">
+        <div className="max-w-6xl mx-auto px-6 lg:px-8 h-13 flex items-center justify-between overflow-x-auto no-scrollbar">
+          <div className="flex items-center gap-2 sm:gap-3 text-xs font-bold text-white whitespace-nowrap pr-4 border-r border-white/10 flex-shrink-0">
+            <span>ADB LABS PS1</span>
+            <span className="w-2 h-2 rounded-full bg-[#adceff] animate-pulse"></span>
+          </div>
+
+          <div className="flex items-center gap-6 text-xs font-semibold tracking-wide whitespace-nowrap text-[#83868a] overflow-x-auto no-scrollbar pl-4">
             <button 
-              onClick={() => scrollToSection('overview')}
-              className={`hover:text-white transition py-3.5 border-b-2 ${activeNav === 'overview' ? 'text-white border-white' : 'border-transparent'}`}
+              onClick={() => scrollToSection('highlights')}
+              className={`hover:text-white transition py-3.5 border-b-2 ${activeNav === 'highlights' ? 'text-white border-white' : 'border-transparent'}`}
             >
-              Overview
-            </button>
-            <button 
-              onClick={() => scrollToSection('hardware')}
-              className={`hover:text-white transition py-3.5 border-b-2 ${activeNav === 'hardware' ? 'text-white border-white' : 'border-transparent'}`}
-            >
-              PS1 Hardware
+              Highlights
             </button>
             <button 
               onClick={() => scrollToSection('comparison')}
@@ -524,34 +469,40 @@ export default function AdbLabsTitanPage({ onNavigateToMember }) {
               Why PS1
             </button>
             <button 
+              onClick={() => scrollToSection('appliances')}
+              className={`hover:text-white transition py-3.5 border-b-2 ${activeNav === 'appliances' ? 'text-white border-white' : 'border-transparent'}`}
+            >
+              Appliances
+            </button>
+            <button 
+              onClick={() => scrollToSection('hardware')}
+              className={`hover:text-white transition py-3.5 border-b-2 ${activeNav === 'hardware' ? 'text-white border-white' : 'border-transparent'}`}
+            >
+              Hardware
+            </button>
+            <button 
               onClick={() => scrollToSection('packages')}
               className={`hover:text-white transition py-3.5 border-b-2 ${activeNav === 'packages' ? 'text-white border-white' : 'border-transparent'}`}
             >
-              Shop Packages
+              Packages
             </button>
             <button 
               onClick={() => scrollToSection('calculator')}
               className={`hover:text-white transition py-3.5 border-b-2 ${activeNav === 'calculator' ? 'text-white border-white' : 'border-transparent'}`}
             >
-              Autonomy Calculator
+              Calculator
             </button>
             <button 
-              onClick={() => scrollToSection('stories')}
-              className={`hover:text-white transition py-3.5 border-b-2 ${activeNav === 'stories' ? 'text-white border-white' : 'border-transparent'}`}
+              onClick={() => scrollToSection('besant')}
+              className={`hover:text-white transition py-3.5 border-b-2 ${activeNav === 'besant' ? 'text-white border-white' : 'border-transparent'}`}
             >
-              Field Stories
+              Field Pilot
             </button>
             <button 
               onClick={() => scrollToSection('robotics')}
               className={`hover:text-white transition py-3.5 border-b-2 ${activeNav === 'robotics' ? 'text-white border-white' : 'border-transparent'}`}
             >
-              Robotics R&D
-            </button>
-            <button 
-              onClick={() => scrollToSection('internship')}
-              className={`hover:text-white transition py-3.5 border-b-2 ${activeNav === 'internship' ? 'text-white border-white' : 'border-transparent'}`}
-            >
-              Internship
+              Robotics
             </button>
             <button 
               onClick={() => scrollToSection('team')}
@@ -575,16 +526,334 @@ export default function AdbLabsTitanPage({ onNavigateToMember }) {
 
           <button
             onClick={() => { setModalType('quote'); setIsQuoteModalOpen(true); }}
-            className="hidden sm:inline-flex bg-white hover:bg-neutral-200 text-black font-bold text-xs px-5 py-2 rounded-full transition whitespace-nowrap ml-4"
+            className="hidden sm:inline-flex bg-white hover:bg-neutral-200 text-black font-bold text-xs px-5 py-2 rounded-full transition whitespace-nowrap ml-4 flex-shrink-0"
           >
             Enquire Now
           </button>
         </div>
       </div>
 
-      {/* SECTION 3: PS1 HARDWARE ARCHITECTURE & INTERACTIVE HOTSPOTS */}
-      <section id="hardware" className="py-28 px-6 border-b border-white/[0.08] relative">
-        <div className="max-w-[1440px] mx-auto">
+      {/* SECTION 3: ECOFLOW TITAN SIGNATURE BENTO HIGHLIGHTS (Titan-C4 Replica) */}
+      <section id="highlights" className="py-24 px-6 border-b border-white/[0.08]">
+        <div className="max-w-6xl mx-auto">
+          
+          <div className="text-center max-w-3xl mx-auto mb-16">
+            <span className="text-xs font-semibold uppercase tracking-widest text-[#adceff]">
+              Core Innovations
+            </span>
+            <h2 className="text-4xl sm:text-6xl font-black text-white mt-3 tracking-tight">
+              Get the Highlights.
+            </h2>
+            <p className="text-[#adafb3] text-base sm:text-lg mt-4 leading-relaxed">
+              Engineered to replace smoky commercial generators with silent, automated LiFePO₄ storage and autonomous robotics.
+            </p>
+          </div>
+
+          {/* 4 Bento Highlight Cards */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            
+            {/* Bento Card 1: Full-width Power & Capacity */}
+            <div className="md:col-span-2 p-8 sm:p-12 rounded-[32px] bg-gradient-to-br from-white/[0.05] via-white/[0.02] to-black border border-white/[0.08] backdrop-blur-2xl relative overflow-hidden text-left shadow-2xl">
+              <div className="absolute top-0 right-0 w-96 h-96 bg-[#adceff]/10 rounded-full blur-3xl pointer-events-none"></div>
+
+              <div className="max-w-xl">
+                <span className="text-xs uppercase tracking-wider text-[#adceff] font-bold">Commercial Power Architecture</span>
+                <h3 className="text-2xl sm:text-4xl font-extrabold text-white mt-2 leading-tight">
+                  Whole-Stall Power for Everyday Living
+                </h3>
+                <p className="text-[#adafb3] text-sm mt-3 leading-relaxed">
+                  Run high-surge commercial chillers, waffle irons, blenders, and POS terminals simultaneously without tripping breakers or flickering lights.
+                </p>
+              </div>
+
+              {/* 4 Stat Columns */}
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 mt-10 pt-8 border-t border-white/[0.08]">
+                <div>
+                  <div className="text-xs text-[#83868a] font-medium">Output</div>
+                  <div className="text-2xl sm:text-3xl font-black bg-gradient-to-b from-[#adceff] to-white bg-clip-text text-transparent mt-1">3.0 kW</div>
+                  <div className="text-xs text-neutral-400 mt-1">6 kW Peak Surge</div>
+                </div>
+
+                <div>
+                  <div className="text-xs text-[#83868a] font-medium">Capacity</div>
+                  <div className="text-2xl sm:text-3xl font-black bg-gradient-to-b from-[#adceff] to-white bg-clip-text text-transparent mt-1">6.1 ~ 12.3 kWh</div>
+                  <div className="text-xs text-neutral-400 mt-1">Dual Stack Modular Bus</div>
+                </div>
+
+                <div>
+                  <div className="text-xs text-[#83868a] font-medium">Monthly Savings</div>
+                  <div className="text-2xl sm:text-3xl font-black text-white mt-1">₹14,000</div>
+                  <div className="text-xs text-neutral-400 mt-1">~14 Month Payback</div>
+                </div>
+
+                <div>
+                  <div className="text-xs text-[#83868a] font-medium">Day Solar Array</div>
+                  <div className="text-2xl sm:text-3xl font-black text-white mt-1">2.88 kWp</div>
+                  <div className="text-xs text-neutral-400 mt-1">Dual MPPT Tracking</div>
+                </div>
+              </div>
+            </div>
+
+            {/* Bento Card 2: Spend Less From Day One */}
+            <div className="p-8 sm:p-10 rounded-[32px] bg-white/[0.02] border border-white/[0.08] backdrop-blur-xl text-left flex flex-col justify-between hover:border-white/20 transition">
+              <div>
+                <span className="text-xs uppercase tracking-wider text-[#adceff] font-bold">Economic Payback</span>
+                <h3 className="text-2xl font-bold text-white mt-2">Spend ₹0 on Fuel From Day One</h3>
+                <p className="text-[#adafb3] text-xs sm:text-sm mt-3 leading-relaxed">
+                  Eliminate ₹1.5+ Lakhs in annual diesel expenses. Sealed LiFePO₄ prismatic cells eliminate alternator corrosion, frequent oil changes, and exhaust fumes.
+                </p>
+
+                <div className="grid grid-cols-2 gap-4 mt-8 pt-6 border-t border-white/[0.08]">
+                  <div>
+                    <div className="text-xs text-neutral-400">Fuel Expense</div>
+                    <div className="text-3xl font-black text-[#adceff] mt-1">100%</div>
+                    <div className="text-xs text-neutral-500 mt-0.5">Eliminated vs Diesel</div>
+                  </div>
+                  <div>
+                    <div className="text-xs text-neutral-400">Cell Longevity</div>
+                    <div className="text-3xl font-black text-white mt-1">3,500+</div>
+                    <div className="text-xs text-neutral-500 mt-0.5">Cycles to 80% DoD</div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="mt-8 flex items-center justify-between text-xs text-[#adceff] font-bold">
+                <span>See Fuel Comparison</span>
+                <ArrowRight className="w-4 h-4" />
+              </div>
+            </div>
+
+            {/* Bento Card 3: Autonomous Robotics & AI */}
+            <div className="p-8 sm:p-10 rounded-[32px] bg-white/[0.02] border border-white/[0.08] backdrop-blur-xl text-left flex flex-col justify-between hover:border-white/20 transition">
+              <div>
+                <span className="text-xs uppercase tracking-wider text-[#adceff] font-bold">Autonomous Robotics & AI</span>
+                <h3 className="text-2xl font-bold text-white mt-2">Field Robotics & ROS 2 Intelligence</h3>
+                <p className="text-[#adafb3] text-xs sm:text-sm mt-3 leading-relaxed">
+                  Advanced 3D LiDAR SLAM, depth camera perception, quadruped locomotion gait stabilization, and simulation-first capstone curricula.
+                </p>
+
+                <div className="grid grid-cols-2 gap-4 mt-8 pt-6 border-t border-white/[0.08]">
+                  <div>
+                    <div className="text-xs text-neutral-400">Navigation Stack</div>
+                    <div className="text-2xl font-bold text-white mt-1">ROS 2 Nav2</div>
+                    <div className="text-xs text-neutral-500 mt-0.5">2D/3D SLAM Mapping</div>
+                  </div>
+                  <div>
+                    <div className="text-xs text-neutral-400">Vision Perception</div>
+                    <div className="text-2xl font-bold text-white mt-1">YOLO + Depth</div>
+                    <div className="text-xs text-neutral-500 mt-0.5">Real-time Obstacle Evasion</div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="mt-8 flex items-center justify-between text-xs text-[#adceff] font-bold">
+                <span>Explore Robotics Division</span>
+                <ArrowRight className="w-4 h-4" />
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+      </section>
+
+      {/* SECTION 4: TRADITIONAL DIESEL VS ADB LABS PS1 (EcoFlow Titan-C3 Comparison) */}
+      <section id="comparison" className="py-24 px-6 border-b border-white/[0.08] bg-gradient-to-b from-black via-[#080a10] to-black">
+        <div className="max-w-6xl mx-auto">
+          
+          <div className="text-center max-w-3xl mx-auto mb-16">
+            <span className="text-xs font-semibold uppercase tracking-widest text-[#adceff]">
+              Economic & Environmental Breakthrough
+            </span>
+            <h2 className="text-4xl sm:text-6xl font-black text-white mt-3 tracking-tight">
+              Power More. Spend Less.
+            </h2>
+            <p className="text-[#adafb3] text-base sm:text-lg mt-4 leading-relaxed">
+              Replacing smoky 5kVA diesel generators with silent, automated solar-charged LiFePO₄ storage.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            
+            {/* Card 1: Traditional 5kVA Diesel Generator */}
+            <div className="p-8 sm:p-10 rounded-[32px] bg-white/[0.02] border border-white/[0.08] text-left relative overflow-hidden backdrop-blur-xl">
+              <div className="text-xs font-mono uppercase tracking-wider text-red-400 font-bold mb-2">
+                Traditional Setup
+              </div>
+              <h3 className="text-2xl font-bold text-white">5kVA Commercial Diesel Generator</h3>
+              <p className="text-[#83868a] text-sm mt-2">
+                Standard fossil fuel solution used across retail stalls and beach food kiosks.
+              </p>
+
+              <div className="space-y-6 mt-8 pt-8 border-t border-white/[0.08]">
+                <div>
+                  <div className="text-xs text-[#83868a] font-medium">Monthly Fuel Expense</div>
+                  <div className="text-3xl font-extrabold text-neutral-300 mt-1 flex items-center gap-2">
+                    <span>₹12,000 – ₹15,000</span>
+                    <TrendingDown className="w-5 h-5 text-red-400 rotate-180" />
+                  </div>
+                  <div className="text-xs text-neutral-500 mt-1">Endless sinking cost consuming retail margins</div>
+                </div>
+
+                <div>
+                  <div className="text-xs text-[#83868a] font-medium">Noise & Disturbance</div>
+                  <div className="text-2xl font-bold text-neutral-300 mt-1">92 dB(A) Engine Roar</div>
+                  <div className="text-xs text-neutral-500 mt-1">Loud exhaust repelling evening dining customers</div>
+                </div>
+
+                <div>
+                  <div className="text-xs text-[#83868a] font-medium">Emissions & Food Hygiene</div>
+                  <div className="text-2xl font-bold text-red-400 mt-1">Toxic Diesel Exhaust Fumes</div>
+                  <div className="text-xs text-neutral-500 mt-1">Soot and particulate matter settling over fresh food</div>
+                </div>
+
+                <div>
+                  <div className="text-xs text-[#83868a] font-medium">Service & Maintenance</div>
+                  <div className="text-xl font-bold text-neutral-300 mt-1">Frequent Oil & Alternator Overhauls</div>
+                  <div className="text-xs text-neutral-500 mt-1">Costly repairs caused by coastal salt air corrosion</div>
+                </div>
+              </div>
+            </div>
+
+            {/* Card 2: ADB Labs PS1 Solar Solution */}
+            <div className="p-8 sm:p-10 rounded-[32px] bg-gradient-to-b from-white/[0.06] to-white/[0.02] border border-white/20 text-left relative overflow-hidden backdrop-blur-xl shadow-2xl">
+              <div className="inline-block bg-[#adceff]/15 text-[#adceff] text-[10px] font-bold uppercase tracking-wider px-3 py-1 rounded-full mb-2">
+                ADB Labs Breakthrough ★
+              </div>
+              <h3 className="text-2xl font-bold text-white">ADB Labs PS1 Off-Grid System</h3>
+              <p className="text-neutral-400 text-sm mt-2">
+                12.288 kWh LiFePO₄ storage paired with 2.88 kWp bifacial solar array.
+              </p>
+
+              <div className="space-y-6 mt-8 pt-8 border-t border-white/[0.08]">
+                <div>
+                  <div className="text-xs text-[#adceff] font-medium">Monthly Fuel Expense</div>
+                  <div className="text-4xl font-black bg-gradient-to-b from-[#adceff] to-white bg-clip-text text-transparent mt-1 flex items-center gap-2">
+                    <span>₹0 / month</span>
+                    <Leaf className="w-6 h-6 text-[#adceff]" />
+                  </div>
+                  <div className="text-xs text-neutral-400 mt-1">100% powered by daylight tropical solar harvest</div>
+                </div>
+
+                <div>
+                  <div className="text-xs text-[#adceff] font-medium">Operational Noise</div>
+                  <div className="text-2xl font-bold text-white mt-1 flex items-center gap-2">
+                    <span>&lt; 30 dB Silent</span>
+                    <VolumeX className="w-5 h-5 text-[#adceff]" />
+                  </div>
+                  <div className="text-xs text-neutral-400 mt-1">Whisper-quiet operation preserving stall ambiance</div>
+                </div>
+
+                <div>
+                  <div className="text-xs text-[#adceff] font-medium">Air Quality & Safety</div>
+                  <div className="text-2xl font-bold text-white mt-1 flex items-center gap-2">
+                    <span>0 g CO₂ Emissions</span>
+                    <ShieldCheck className="w-5 h-5 text-[#adceff]" />
+                  </div>
+                  <div className="text-xs text-neutral-400 mt-1">100% clean indoor/outdoor safe for seafood & food</div>
+                </div>
+
+                <div>
+                  <div className="text-xs text-[#adceff] font-medium">Return on Investment</div>
+                  <div className="text-xl font-bold text-white mt-1">~14 Months Payback</div>
+                  <div className="text-xs text-neutral-400 mt-1">3,500+ lifecycle prismatic cells lasting over 10 years</div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      {/* SECTION 5: ICONIC ESSENTIAL APPLIANCES ENERGY FLOW (EcoFlow Titan-C6 Replica) */}
+      <section id="appliances" className="py-24 px-6 border-b border-white/[0.08]">
+        <div className="max-w-6xl mx-auto text-center">
+          
+          <span className="text-xs font-semibold uppercase tracking-widest text-[#adceff]">
+            High-Surge Multi-Load Delivery
+          </span>
+          <h2 className="text-4xl sm:text-6xl font-black text-white mt-3 tracking-tight">
+            Run Your Deep Chiller — and More.
+          </h2>
+          <p className="text-[#adafb3] text-base sm:text-lg max-w-3xl mx-auto mt-4 leading-relaxed">
+            With 3kW continuous pure sine output and 6kW peak surge absorption, the PS1 runs all your essential commercial loads together without flicker.
+          </p>
+
+          {/* Connected Appliance Equation Bar */}
+          <div className="mt-16 p-8 sm:p-12 rounded-[32px] bg-white/[0.02] border border-white/[0.08] backdrop-blur-2xl">
+            <div className="text-xs uppercase tracking-wider text-neutral-400 font-semibold mb-8">
+              Keep These Commercial Essentials Running Together Off-Grid:
+            </div>
+
+            <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-6">
+              
+              <div className="p-4 sm:p-5 rounded-2xl bg-white/[0.04] border border-white/10 flex flex-col items-center min-w-[110px]">
+                <Snowflake className="w-6 h-6 text-[#adceff] mb-2" />
+                <span className="text-lg font-black text-white">280W</span>
+                <span className="text-xs text-neutral-400 mt-0.5">Deep Chiller</span>
+              </div>
+
+              <Plus className="w-5 h-5 text-neutral-500" />
+
+              <div className="p-4 sm:p-5 rounded-2xl bg-white/[0.04] border border-white/10 flex flex-col items-center min-w-[110px]">
+                <Radio className="w-6 h-6 text-[#adceff] mb-2" />
+                <span className="text-lg font-black text-white">150W</span>
+                <span className="text-xs text-neutral-400 mt-0.5">Night Sign</span>
+              </div>
+
+              <Plus className="w-5 h-5 text-neutral-500" />
+
+              <div className="p-4 sm:p-5 rounded-2xl bg-white/[0.04] border border-white/10 flex flex-col items-center min-w-[110px]">
+                <Lightbulb className="w-6 h-6 text-[#adceff] mb-2" />
+                <span className="text-lg font-black text-white">80W</span>
+                <span className="text-xs text-neutral-400 mt-0.5">Stall LEDs</span>
+              </div>
+
+              <Plus className="w-5 h-5 text-neutral-500" />
+
+              <div className="p-4 sm:p-5 rounded-2xl bg-white/[0.04] border border-white/10 flex flex-col items-center min-w-[110px]">
+                <Zap className="w-6 h-6 text-[#adceff] mb-2" />
+                <span className="text-lg font-black text-white">600W</span>
+                <span className="text-xs text-neutral-400 mt-0.5">Blender</span>
+              </div>
+
+              <Plus className="w-5 h-5 text-neutral-500" />
+
+              <div className="p-4 sm:p-5 rounded-2xl bg-white/[0.04] border border-white/10 flex flex-col items-center min-w-[110px]">
+                <Coffee className="w-6 h-6 text-[#adceff] mb-2" />
+                <span className="text-lg font-black text-white">1,000W</span>
+                <span className="text-xs text-neutral-400 mt-0.5">Waffle Iron</span>
+              </div>
+
+              <Plus className="w-5 h-5 text-neutral-500" />
+
+              <div className="p-4 sm:p-5 rounded-2xl bg-white/[0.04] border border-white/10 flex flex-col items-center min-w-[110px]">
+                <Tv className="w-6 h-6 text-[#adceff] mb-2" />
+                <span className="text-lg font-black text-white">40W</span>
+                <span className="text-xs text-neutral-400 mt-0.5">POS Billing</span>
+              </div>
+
+            </div>
+
+            {/* Total Active Load Meter */}
+            <div className="mt-10 pt-8 border-t border-white/[0.08] flex flex-col sm:flex-row items-center justify-between gap-4 max-w-3xl mx-auto">
+              <div className="text-left">
+                <span className="text-xs text-neutral-400 uppercase tracking-wider block">Combined Operating Load</span>
+                <span className="text-3xl font-extrabold text-white">2,150 Watts</span>
+              </div>
+              <div className="text-right">
+                <span className="text-xs text-[#adceff] uppercase tracking-wider block font-bold">PS1 Continuous Headroom</span>
+                <span className="text-3xl font-extrabold text-[#adceff]">3,000 W Output (850W Buffer)</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      {/* SECTION 6: PS1 HARDWARE ARCHITECTURE & INTERACTIVE HOTSPOTS */}
+      <section id="hardware" className="py-24 px-6 border-b border-white/[0.08] relative">
+        <div className="max-w-6xl mx-auto">
           
           <div className="text-center max-w-3xl mx-auto mb-16">
             <span className="text-xs font-semibold uppercase tracking-widest text-[#adceff]">
@@ -599,7 +868,7 @@ export default function AdbLabsTitanPage({ onNavigateToMember }) {
           </div>
 
           {/* Interactive Multi-angle Hardware Viewer */}
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center bg-white/[0.02] rounded-3xl border border-white/[0.08] backdrop-blur-xl p-6 sm:p-10">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center bg-white/[0.02] rounded-[32px] border border-white/[0.08] backdrop-blur-xl p-6 sm:p-10">
             
             {/* Visual Display with Hotspots */}
             <div className="lg:col-span-8 relative flex flex-col items-center justify-center min-h-[460px] bg-black/60 rounded-3xl border border-white/[0.06] p-6">
@@ -678,7 +947,7 @@ export default function AdbLabsTitanPage({ onNavigateToMember }) {
               </div>
             </div>
 
-            {/* Hotspot Deep-Dive Information Card */}
+            {/* Hotspot Deep-Dive Information Cards (Clickable Two-Way Sync) */}
             <div className="lg:col-span-4 space-y-4">
               <div onClick={() => setActiveHotspot(1)} className={`p-6 rounded-3xl border transition-all cursor-pointer ${activeHotspot === 1 ? 'bg-white/[0.08] border-[#adceff]/60 ring-1 ring-[#adceff]/40 shadow-lg' : 'bg-white/[0.02] border-white/[0.08] hover:border-white/30'}`}>
                 <div className="flex items-center justify-between">
@@ -729,117 +998,9 @@ export default function AdbLabsTitanPage({ onNavigateToMember }) {
         </div>
       </section>
 
-      {/* SECTION 4: TRADITIONAL DIESEL VS ADB LABS PS1 (EcoFlow Titan-C3 Comparison) */}
-      <section id="comparison" className="py-28 px-6 border-b border-white/[0.08] relative bg-gradient-to-b from-black via-[#080a10] to-black">
-        <div className="max-w-[1440px] mx-auto">
-          
-          <div className="text-center max-w-3xl mx-auto mb-20">
-            <span className="text-xs font-semibold uppercase tracking-widest text-[#adceff]">
-              Economic & Environmental Breakthrough
-            </span>
-            <h2 className="text-4xl sm:text-6xl font-black text-white mt-3 tracking-tight">
-              Power More. Spend Less.
-            </h2>
-            <p className="text-[#adafb3] text-base sm:text-lg mt-4 leading-relaxed">
-              Replacing smoky 5kVA diesel generators with silent, automated solar-charged LiFePO₄ storage.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-5xl mx-auto">
-            
-            {/* Card 1: Traditional 5kVA Diesel Generator */}
-            <div className="p-8 sm:p-10 rounded-3xl bg-white/[0.02] border border-white/[0.08] text-left relative overflow-hidden backdrop-blur-xl">
-              <div className="text-xs font-mono uppercase tracking-wider text-red-400 font-bold mb-2">
-                Traditional Setup
-              </div>
-              <h3 className="text-2xl font-bold text-white">5kVA Commercial Diesel Generator</h3>
-              <p className="text-[#83868a] text-sm mt-2">
-                Standard fossil fuel solution used across retail stalls and beach food kiosks.
-              </p>
-
-              <div className="space-y-6 mt-8 pt-8 border-t border-white/[0.08]">
-                <div>
-                  <div className="text-xs text-[#83868a] font-medium">Monthly Fuel Expense</div>
-                  <div className="text-3xl font-extrabold text-neutral-300 mt-1 flex items-center gap-2">
-                    <span>₹12,000 – ₹15,000</span>
-                    <TrendingDown className="w-5 h-5 text-red-400 rotate-180" />
-                  </div>
-                  <div className="text-xs text-neutral-500 mt-1">Endless sinking cost consuming retail margins</div>
-                </div>
-
-                <div>
-                  <div className="text-xs text-[#83868a] font-medium">Noise & Disturbance</div>
-                  <div className="text-2xl font-bold text-neutral-300 mt-1">92 dB(A) Engine Roar</div>
-                  <div className="text-xs text-neutral-500 mt-1">Loud exhaust repelling evening dining customers</div>
-                </div>
-
-                <div>
-                  <div className="text-xs text-[#83868a] font-medium">Emissions & Food Hygiene</div>
-                  <div className="text-2xl font-bold text-red-400 mt-1">Toxic Diesel Exhaust Fumes</div>
-                  <div className="text-xs text-neutral-500 mt-1">Soot and particulate matter settling over fresh food</div>
-                </div>
-
-                <div>
-                  <div className="text-xs text-[#83868a] font-medium">Service & Maintenance</div>
-                  <div className="text-xl font-bold text-neutral-300 mt-1">Frequent Oil & Alternator Overhauls</div>
-                  <div className="text-xs text-neutral-500 mt-1">Costly repairs caused by coastal salt air corrosion</div>
-                </div>
-              </div>
-            </div>
-
-            {/* Card 2: ADB Labs PS1 Solar Solution */}
-            <div className="p-8 sm:p-10 rounded-3xl bg-gradient-to-b from-white/[0.06] to-white/[0.02] border border-white/20 text-left relative overflow-hidden backdrop-blur-xl shadow-2xl">
-              <div className="inline-block bg-[#adceff]/15 text-[#adceff] text-[10px] font-bold uppercase tracking-wider px-3 py-1 rounded-full mb-2">
-                ADB Labs Breakthrough ★
-              </div>
-              <h3 className="text-2xl font-bold text-white">ADB Labs PS1 Off-Grid System</h3>
-              <p className="text-neutral-400 text-sm mt-2">
-                12.288 kWh LiFePO₄ storage paired with 2.88 kWp bifacial solar array.
-              </p>
-
-              <div className="space-y-6 mt-8 pt-8 border-t border-white/[0.08]">
-                <div>
-                  <div className="text-xs text-[#adceff] font-medium">Monthly Fuel Expense</div>
-                  <div className="text-4xl font-black bg-gradient-to-b from-[#adceff] to-white bg-clip-text text-transparent mt-1 flex items-center gap-2">
-                    <span>₹0 / month</span>
-                    <Leaf className="w-6 h-6 text-[#adceff]" />
-                  </div>
-                  <div className="text-xs text-neutral-400 mt-1">100% powered by daylight tropical solar harvest</div>
-                </div>
-
-                <div>
-                  <div className="text-xs text-[#adceff] font-medium">Operational Noise</div>
-                  <div className="text-2xl font-bold text-white mt-1 flex items-center gap-2">
-                    <span>&lt; 30 dB Silent</span>
-                    <VolumeX className="w-5 h-5 text-[#adceff]" />
-                  </div>
-                  <div className="text-xs text-neutral-400 mt-1">Whisper-quiet operation preserving stall ambiance</div>
-                </div>
-
-                <div>
-                  <div className="text-xs text-[#adceff] font-medium">Air Quality & Safety</div>
-                  <div className="text-2xl font-bold text-white mt-1 flex items-center gap-2">
-                    <span>0 g CO₂ Emissions</span>
-                    <ShieldCheck className="w-5 h-5 text-[#adceff]" />
-                  </div>
-                  <div className="text-xs text-neutral-400 mt-1">100% clean indoor/outdoor safe for seafood & food</div>
-                </div>
-
-                <div>
-                  <div className="text-xs text-[#adceff] font-medium">Return on Investment</div>
-                  <div className="text-xl font-bold text-white mt-1">~14 Months Payback</div>
-                  <div className="text-xs text-neutral-400 mt-1">3,500+ lifecycle prismatic cells lasting over 10 years</div>
-                </div>
-              </div>
-            </div>
-
-          </div>
-        </div>
-      </section>
-
-      {/* SECTION 5: COMMERCIAL PACKAGES CATALOG (Side-by-Side Configurator) */}
-      <section id="packages" className="py-28 px-6 border-b border-white/[0.08]">
-        <div className="max-w-[1440px] mx-auto">
+      {/* SECTION 7: COMMERCIAL PACKAGES CATALOG (Side-by-Side Configurator) */}
+      <section id="packages" className="py-24 px-6 border-b border-white/[0.08]">
+        <div className="max-w-6xl mx-auto">
           
           <div className="text-center max-w-3xl mx-auto mb-16">
             <span className="text-xs font-semibold uppercase tracking-widest text-[#adceff]">
@@ -853,10 +1014,10 @@ export default function AdbLabsTitanPage({ onNavigateToMember }) {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             
             {/* Package 1: Shop 1 Standard System */}
-            <div className="p-8 sm:p-10 rounded-3xl bg-white/[0.02] border border-white/[0.08] hover:border-white/20 transition flex flex-col justify-between backdrop-blur-xl">
+            <div className="p-8 sm:p-10 rounded-[32px] bg-white/[0.02] border border-white/[0.08] hover:border-white/20 transition flex flex-col justify-between backdrop-blur-xl">
               <div>
                 <div className="flex items-center justify-between">
                   <span className="text-xs text-[#83868a] uppercase tracking-wider font-semibold">Tier 1 · Starter Setup</span>
@@ -871,7 +1032,7 @@ export default function AdbLabsTitanPage({ onNavigateToMember }) {
                   <img src="/images/sol_solar.png" alt="Shop 1 Standard Package" className="max-h-full object-contain" />
                 </div>
 
-                <div className="space-y-3.5 border-t border-white/[0.08] pt-6 text-sm">
+                <div className="space-y-3.5 border-t border-white/[0.08] pt-6 text-sm text-left">
                   <div className="flex items-center gap-2.5 text-neutral-300">
                     <Check className="w-4 h-4 text-[#adceff] flex-shrink-0" />
                     <span><strong>1x ADB Labs PS1</strong> (6.144 kWh LiFePO₄ nominal)</span>
@@ -893,7 +1054,7 @@ export default function AdbLabsTitanPage({ onNavigateToMember }) {
 
               <div className="mt-10 pt-6 border-t border-white/[0.08] flex items-center justify-between">
                 <div>
-                  <span className="text-xs text-[#83868a] block">Pricing status</span>
+                  <span className="text-xs text-[#83868a] block text-left">Pricing status</span>
                   <span className="text-lg font-bold text-white">Commercial Quote</span>
                 </div>
                 <button 
@@ -910,7 +1071,7 @@ export default function AdbLabsTitanPage({ onNavigateToMember }) {
             </div>
 
             {/* Package 2: Shop 2 Expanded Heavy-Duty System */}
-            <div className="p-8 sm:p-10 rounded-3xl bg-gradient-to-b from-white/[0.05] to-white/[0.02] border border-white/20 hover:border-white/30 transition flex flex-col justify-between backdrop-blur-xl relative shadow-2xl">
+            <div className="p-8 sm:p-10 rounded-[32px] bg-gradient-to-b from-white/[0.05] to-white/[0.02] border border-white/20 hover:border-white/30 transition flex flex-col justify-between backdrop-blur-xl relative shadow-2xl">
               <div className="absolute -top-3.5 right-8 bg-white text-black font-extrabold text-[10px] tracking-wider uppercase px-3.5 py-1 rounded-full shadow-lg">
                 Recommended for Beach & Fish Stalls
               </div>
@@ -929,7 +1090,7 @@ export default function AdbLabsTitanPage({ onNavigateToMember }) {
                   <img src="/images/besant_wide.png" alt="Shop 2 Expanded Package" className="max-h-full object-contain" />
                 </div>
 
-                <div className="space-y-3.5 border-t border-white/[0.08] pt-6 text-sm">
+                <div className="space-y-3.5 border-t border-white/[0.08] pt-6 text-sm text-left">
                   <div className="flex items-center gap-2.5 text-neutral-300">
                     <Check className="w-4 h-4 text-[#adceff] flex-shrink-0" />
                     <span><strong>1x ADB Labs PS1 Main Unit</strong> (6.144 kWh nominal)</span>
@@ -951,7 +1112,7 @@ export default function AdbLabsTitanPage({ onNavigateToMember }) {
 
               <div className="mt-10 pt-6 border-t border-white/[0.08] flex items-center justify-between">
                 <div>
-                  <span className="text-xs text-[#83868a] block">Pricing status</span>
+                  <span className="text-xs text-[#83868a] block text-left">Pricing status</span>
                   <span className="text-lg font-bold text-[#adceff]">Validated Pilot Tier</span>
                 </div>
                 <button 
@@ -971,9 +1132,9 @@ export default function AdbLabsTitanPage({ onNavigateToMember }) {
         </div>
       </section>
 
-      {/* SECTION 6: INTERACTIVE AUTONOMY & RUNTIME CALCULATOR (EcoFlow Smart Panel Replica) */}
-      <section id="calculator" className="py-28 px-6 border-b border-white/[0.08] bg-black">
-        <div className="max-w-[1440px] mx-auto">
+      {/* SECTION 8: INTERACTIVE AUTONOMY & RUNTIME CALCULATOR (EcoFlow Smart Panel Replica) */}
+      <section id="calculator" className="py-24 px-6 border-b border-white/[0.08] bg-black">
+        <div className="max-w-6xl mx-auto">
           
           <div className="text-center max-w-3xl mx-auto mb-16">
             <span className="text-xs font-semibold uppercase tracking-widest text-[#adceff]">
@@ -987,7 +1148,7 @@ export default function AdbLabsTitanPage({ onNavigateToMember }) {
             </p>
           </div>
 
-          <div className="max-w-5xl mx-auto bg-white/[0.02] rounded-3xl border border-white/[0.08] p-6 sm:p-10 backdrop-blur-xl shadow-2xl">
+          <div className="p-6 sm:p-10 rounded-[32px] bg-white/[0.02] border border-white/[0.08] backdrop-blur-xl shadow-2xl">
             
             {/* Scenario Preset Switcher */}
             <div className="flex flex-wrap items-center justify-center gap-3 mb-9">
@@ -1033,7 +1194,7 @@ export default function AdbLabsTitanPage({ onNavigateToMember }) {
               <button
                 onClick={() => setCustomLoads(p => ({ ...p, chiller: !p.chiller }))}
                 className={`p-4 rounded-2xl border text-center transition flex flex-col items-center gap-2 ${
-                  customLoads.chiller ? 'bg-white/10 border-white/40 text-white shadow' : 'bg-white/[0.02] border-white/[0.06] text-[#83868a]'
+                  customLoads.chiller ? 'bg-white/10 border-[#adceff]/60 text-white shadow' : 'bg-white/[0.02] border-white/[0.06] text-[#83868a]'
                 }`}
               >
                 <Snowflake className="w-5 h-5 text-[#adceff]" />
@@ -1044,7 +1205,7 @@ export default function AdbLabsTitanPage({ onNavigateToMember }) {
               <button
                 onClick={() => setCustomLoads(p => ({ ...p, sign: !p.sign }))}
                 className={`p-4 rounded-2xl border text-center transition flex flex-col items-center gap-2 ${
-                  customLoads.sign ? 'bg-white/10 border-white/40 text-white shadow' : 'bg-white/[0.02] border-white/[0.06] text-[#83868a]'
+                  customLoads.sign ? 'bg-white/10 border-[#adceff]/60 text-white shadow' : 'bg-white/[0.02] border-white/[0.06] text-[#83868a]'
                 }`}
               >
                 <Radio className="w-5 h-5 text-[#adceff]" />
@@ -1055,7 +1216,7 @@ export default function AdbLabsTitanPage({ onNavigateToMember }) {
               <button
                 onClick={() => setCustomLoads(p => ({ ...p, led: !p.led }))}
                 className={`p-4 rounded-2xl border text-center transition flex flex-col items-center gap-2 ${
-                  customLoads.led ? 'bg-white/10 border-white/40 text-white shadow' : 'bg-white/[0.02] border-white/[0.06] text-[#83868a]'
+                  customLoads.led ? 'bg-white/10 border-[#adceff]/60 text-white shadow' : 'bg-white/[0.02] border-white/[0.06] text-[#83868a]'
                 }`}
               >
                 <Lightbulb className="w-5 h-5 text-[#adceff]" />
@@ -1066,7 +1227,7 @@ export default function AdbLabsTitanPage({ onNavigateToMember }) {
               <button
                 onClick={() => setCustomLoads(p => ({ ...p, blender: !p.blender }))}
                 className={`p-4 rounded-2xl border text-center transition flex flex-col items-center gap-2 ${
-                  customLoads.blender ? 'bg-white/10 border-white/40 text-white shadow' : 'bg-white/[0.02] border-white/[0.06] text-[#83868a]'
+                  customLoads.blender ? 'bg-white/10 border-[#adceff]/60 text-white shadow' : 'bg-white/[0.02] border-white/[0.06] text-[#83868a]'
                 }`}
               >
                 <Zap className="w-5 h-5 text-[#adceff]" />
@@ -1077,7 +1238,7 @@ export default function AdbLabsTitanPage({ onNavigateToMember }) {
               <button
                 onClick={() => setCustomLoads(p => ({ ...p, waffle: !p.waffle }))}
                 className={`p-4 rounded-2xl border text-center transition flex flex-col items-center gap-2 ${
-                  customLoads.waffle ? 'bg-white/10 border-white/40 text-white shadow' : 'bg-white/[0.02] border-white/[0.06] text-[#83868a]'
+                  customLoads.waffle ? 'bg-white/10 border-[#adceff]/60 text-white shadow' : 'bg-white/[0.02] border-white/[0.06] text-[#83868a]'
                 }`}
               >
                 <Coffee className="w-5 h-5 text-[#adceff]" />
@@ -1088,7 +1249,7 @@ export default function AdbLabsTitanPage({ onNavigateToMember }) {
               <button
                 onClick={() => setCustomLoads(p => ({ ...p, pos: !p.pos }))}
                 className={`p-4 rounded-2xl border text-center transition flex flex-col items-center gap-2 ${
-                  customLoads.pos ? 'bg-white/10 border-white/40 text-white shadow' : 'bg-white/[0.02] border-white/[0.06] text-[#83868a]'
+                  customLoads.pos ? 'bg-white/10 border-[#adceff]/60 text-white shadow' : 'bg-white/[0.02] border-white/[0.06] text-[#83868a]'
                 }`}
               >
                 <Tv className="w-5 h-5 text-[#adceff]" />
@@ -1099,7 +1260,7 @@ export default function AdbLabsTitanPage({ onNavigateToMember }) {
               <button
                 onClick={() => setCustomLoads(p => ({ ...p, ac: !p.ac }))}
                 className={`p-4 rounded-2xl border text-center transition flex flex-col items-center gap-2 ${
-                  customLoads.ac ? 'bg-white/10 border-white/40 text-white shadow' : 'bg-white/[0.02] border-white/[0.06] text-[#83868a]'
+                  customLoads.ac ? 'bg-white/10 border-[#adceff]/60 text-white shadow' : 'bg-white/[0.02] border-white/[0.06] text-[#83868a]'
                 }`}
               >
                 <Activity className="w-5 h-5 text-[#adceff]" />
@@ -1112,7 +1273,7 @@ export default function AdbLabsTitanPage({ onNavigateToMember }) {
             <div className="flex flex-wrap items-center justify-between gap-4 p-4 rounded-2xl bg-white/[0.03] border border-white/[0.08] mb-6">
               <div className="flex items-center gap-3">
                 <Sun className={`w-5 h-5 ${solarBoost ? 'text-amber-300 animate-spin [animation-duration:12s]' : 'text-[#83868a]'}`} />
-                <div>
+                <div className="text-left">
                   <div className="text-xs font-bold text-white">Solar Generation Buffer</div>
                   <div className="text-[10px] text-[#adafb3]">
                     {solarBoost ? `Active: +${solarGenerationW.toFixed(0)}W effective tropical irradiance` : 'Night / Off-Peak (Battery Only)'}
@@ -1188,9 +1349,9 @@ export default function AdbLabsTitanPage({ onNavigateToMember }) {
         </div>
       </section>
 
-      {/* SECTION 7: FIELD STORIES & COMMUNITY TRIALS (EcoFlow Titan-C31 3D Deck Replica) */}
-      <section id="stories" className="py-28 px-6 border-b border-white/[0.08] relative bg-gradient-to-b from-black via-[#06080d] to-black">
-        <div className="max-w-[1440px] mx-auto">
+      {/* SECTION 9: FIELD STORIES & COMMUNITY TRIALS (EcoFlow Titan-C31 3D Deck Replica) */}
+      <section id="stories" className="py-24 px-6 border-b border-white/[0.08] relative bg-gradient-to-b from-black via-[#06080d] to-black">
+        <div className="max-w-6xl mx-auto">
           
           <div className="text-center max-w-3xl mx-auto mb-16">
             <span className="text-xs font-semibold uppercase tracking-widest text-[#adceff]">
@@ -1205,9 +1366,9 @@ export default function AdbLabsTitanPage({ onNavigateToMember }) {
           </div>
 
           {/* Testimonial Active Card Deck */}
-          <div className="max-w-4xl mx-auto relative">
+          <div className="relative">
             
-            <div className="p-8 sm:p-12 rounded-3xl bg-white/[0.03] border border-white/[0.08] backdrop-blur-2xl relative shadow-2xl overflow-hidden">
+            <div className="p-8 sm:p-12 rounded-[32px] bg-white/[0.03] border border-white/[0.08] backdrop-blur-2xl relative shadow-2xl overflow-hidden">
               <div className="absolute top-0 right-0 w-80 h-80 bg-[#adceff]/5 rounded-full blur-3xl pointer-events-none"></div>
 
               <div className="flex flex-col md:flex-row gap-8 items-center">
@@ -1277,7 +1438,7 @@ export default function AdbLabsTitanPage({ onNavigateToMember }) {
             </div>
 
             {/* EcoFlow-style Newsletter & Pilot Allocation Banner */}
-            <div className="mt-12 p-8 sm:p-10 rounded-3xl bg-white/[0.02] border border-white/[0.08] backdrop-blur-xl flex flex-col md:flex-row items-center justify-between gap-6 text-left">
+            <div className="mt-10 p-8 sm:p-10 rounded-[32px] bg-white/[0.02] border border-white/[0.08] backdrop-blur-xl flex flex-col md:flex-row items-center justify-between gap-6 text-left">
               <div>
                 <span className="text-xs uppercase tracking-widest text-[#adceff] font-bold">Priority Commercial Pilot Queue</span>
                 <h3 className="text-xl sm:text-2xl font-bold text-white mt-1">Get First Access to PS1 Field Deployments</h3>
@@ -1306,9 +1467,9 @@ export default function AdbLabsTitanPage({ onNavigateToMember }) {
         </div>
       </section>
 
-      {/* SECTION 8: BESANT NAGAR FIELD PILOT (Featured Project Deep-Dive) */}
-      <section id="besant" className="py-28 px-6 border-b border-white/[0.08] relative">
-        <div className="max-w-[1440px] mx-auto">
+      {/* SECTION 10: BESANT NAGAR FIELD PILOT (Featured Project Deep-Dive) */}
+      <section id="besant" className="py-24 px-6 border-b border-white/[0.08] relative">
+        <div className="max-w-6xl mx-auto">
           
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
             
@@ -1388,9 +1549,9 @@ export default function AdbLabsTitanPage({ onNavigateToMember }) {
         </div>
       </section>
 
-      {/* SECTION 9: ROBOTICS & AI R&D DIVISION */}
-      <section id="robotics" className="py-28 px-6 border-b border-white/[0.08] bg-black relative">
-        <div className="max-w-[1440px] mx-auto">
+      {/* SECTION 11: ROBOTICS & AI R&D DIVISION */}
+      <section id="robotics" className="py-24 px-6 border-b border-white/[0.08] bg-black relative">
+        <div className="max-w-6xl mx-auto">
           
           <div className="text-center max-w-3xl mx-auto mb-16">
             <span className="text-xs font-semibold uppercase tracking-widest text-[#adceff]">
@@ -1407,7 +1568,7 @@ export default function AdbLabsTitanPage({ onNavigateToMember }) {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
             
             {/* Live Terminal & Simulation Preview */}
-            <div className="lg:col-span-7 bg-[#08090d] rounded-3xl border border-white/[0.08] p-6 sm:p-8 font-mono text-xs shadow-2xl">
+            <div className="lg:col-span-7 bg-[#08090d] rounded-[32px] border border-white/[0.08] p-6 sm:p-8 font-mono text-xs shadow-2xl">
               
               {/* Terminal Title Bar */}
               <div className="flex items-center justify-between pb-4 border-b border-white/[0.08] mb-6">
@@ -1505,9 +1666,9 @@ export default function AdbLabsTitanPage({ onNavigateToMember }) {
         </div>
       </section>
 
-      {/* SECTION 10: ROBOTICS & AI INDUSTRIAL INTERNSHIP (6-Week Program) */}
-      <section id="internship" className="py-28 px-6 border-b border-white/[0.08]">
-        <div className="max-w-[1440px] mx-auto">
+      {/* SECTION 12: ROBOTICS & AI INDUSTRIAL INTERNSHIP (6-Week Program) */}
+      <section id="internship" className="py-24 px-6 border-b border-white/[0.08]">
+        <div className="max-w-6xl mx-auto">
           
           <div className="text-center max-w-3xl mx-auto mb-16">
             <span className="text-xs font-semibold uppercase tracking-widest text-[#adceff]">
@@ -1522,7 +1683,7 @@ export default function AdbLabsTitanPage({ onNavigateToMember }) {
           </div>
 
           {/* Program Highlights Matrix */}
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 max-w-5xl mx-auto mb-12">
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-12">
             <div className="p-6 rounded-3xl bg-white/[0.02] border border-white/[0.08] text-center backdrop-blur-md">
               <Calendar className="w-6 h-6 text-[#adceff] mx-auto mb-2" />
               <div className="text-2xl font-bold text-white">6 Weeks</div>
@@ -1549,7 +1710,7 @@ export default function AdbLabsTitanPage({ onNavigateToMember }) {
           </div>
 
           {/* 6-Week Learning Roadmap Cards */}
-          <div className="max-w-5xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 text-left">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 text-left">
             
             <div className="p-6 rounded-3xl bg-white/[0.02] border border-white/[0.08] hover:border-white/20 transition backdrop-blur-xl">
               <span className="text-xs text-[#adceff] font-bold uppercase tracking-wider">Week 01</span>
@@ -1617,10 +1778,9 @@ export default function AdbLabsTitanPage({ onNavigateToMember }) {
         </div>
       </section>
 
-      
-      {/* SECTION: LEADERSHIP & ENGINEERING TEAM (Dossiers) */}
-      <section id="team" className="py-28 px-6 border-b border-white/[0.08] bg-gradient-to-b from-black via-[#08090f] to-black relative">
-        <div className="max-w-[1440px] mx-auto">
+      {/* SECTION 13: LEADERSHIP & ENGINEERING TEAM (Dossiers) */}
+      <section id="team" className="py-24 px-6 border-b border-white/[0.08] bg-gradient-to-b from-black via-[#08090f] to-black relative">
+        <div className="max-w-6xl mx-auto">
           
           <div className="text-center max-w-3xl mx-auto mb-16">
             <span className="text-xs font-semibold uppercase tracking-widest text-[#adceff]">
@@ -1634,12 +1794,12 @@ export default function AdbLabsTitanPage({ onNavigateToMember }) {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {TEAM_MEMBERS.map((member) => (
               <div 
                 key={member.id}
                 onClick={() => onNavigateToMember && onNavigateToMember(member.id)}
-                className="group p-6 rounded-3xl bg-white/[0.02] border border-white/[0.08] hover:border-white/30 hover:bg-white/[0.04] transition-all backdrop-blur-xl flex flex-col justify-between cursor-pointer relative overflow-hidden"
+                className="group p-6 rounded-3xl bg-white/[0.02] border border-white/[0.08] hover:border-white/30 hover:bg-white/[0.04] transition-all backdrop-blur-xl flex flex-col justify-between cursor-pointer relative overflow-hidden text-left"
               >
                 <div className="absolute top-0 right-0 w-24 h-24 bg-[#adceff]/5 rounded-full blur-xl group-hover:bg-[#adceff]/15 transition"></div>
 
@@ -1679,70 +1839,9 @@ export default function AdbLabsTitanPage({ onNavigateToMember }) {
         </div>
       </section>
 
-      {/* SECTION 11: 5-STAGE ENGINEERING PROCESS */}
-      <section className="py-28 px-6 border-b border-white/[0.08] bg-white/[0.01]">
-        <div className="max-w-[1440px] mx-auto">
-          
-          <div className="text-center max-w-3xl mx-auto mb-16">
-            <span className="text-xs font-semibold uppercase tracking-widest text-[#adceff]">
-              Engineering Rigor
-            </span>
-            <h2 className="text-4xl sm:text-6xl font-black text-white mt-3 tracking-tight">
-              Our 5-Stage Process.
-            </h2>
-            <p className="text-[#adafb3] text-base sm:text-lg mt-4 leading-relaxed">
-              From idea to real-world deployment — how ADB Labs designs and validates practical hardware and software.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-5 gap-4 max-w-5xl mx-auto">
-            <div className="p-6 rounded-3xl bg-white/[0.02] border border-white/[0.08] text-center">
-              <div className="w-10 h-10 rounded-full bg-white/10 text-white flex items-center justify-center mx-auto mb-3 font-bold text-sm">
-                01
-              </div>
-              <h3 className="font-bold text-white text-base">Research</h3>
-              <p className="text-[#adafb3] text-xs mt-1.5">Explore problems & audit real energy loads.</p>
-            </div>
-
-            <div className="p-6 rounded-3xl bg-white/[0.02] border border-white/[0.08] text-center">
-              <div className="w-10 h-10 rounded-full bg-white/10 text-white flex items-center justify-center mx-auto mb-3 font-bold text-sm">
-                02
-              </div>
-              <h3 className="font-bold text-white text-base">Design</h3>
-              <p className="text-[#adafb3] text-xs mt-1.5">Architect electronics, BMS & enclosures.</p>
-            </div>
-
-            <div className="p-6 rounded-3xl bg-white/[0.02] border border-white/[0.08] text-center">
-              <div className="w-10 h-10 rounded-full bg-white/10 text-white flex items-center justify-center mx-auto mb-3 font-bold text-sm">
-                03
-              </div>
-              <h3 className="font-bold text-white text-base">Prototype</h3>
-              <p className="text-[#adafb3] text-xs mt-1.5">Fabricate circuit boards, assemblies & models.</p>
-            </div>
-
-            <div className="p-6 rounded-3xl bg-white/[0.02] border border-white/[0.08] text-center">
-              <div className="w-10 h-10 rounded-full bg-white/10 text-white flex items-center justify-center mx-auto mb-3 font-bold text-sm">
-                04
-              </div>
-              <h3 className="font-bold text-white text-base">Test</h3>
-              <p className="text-[#adafb3] text-xs mt-1.5">Validate thermal safety, surge limits & runtimes.</p>
-            </div>
-
-            <div className="p-6 rounded-3xl bg-white/[0.06] border border-white/20 text-center">
-              <div className="w-10 h-10 rounded-full bg-white text-black flex items-center justify-center mx-auto mb-3 font-bold text-sm">
-                05
-              </div>
-              <h3 className="font-bold text-white text-base">Deploy</h3>
-              <p className="text-neutral-300 text-xs mt-1.5">Real-world commercial and pilot usage.</p>
-            </div>
-          </div>
-
-        </div>
-      </section>
-
-      {/* SECTION 12: TECHNICAL SPEC MATRIX (Specs) */}
-      <section id="specs" className="py-28 px-6 border-b border-white/[0.08]">
-        <div className="max-w-[1440px] mx-auto">
+      {/* SECTION 14: TECHNICAL SPEC MATRIX (Specs) */}
+      <section id="specs" className="py-24 px-6 border-b border-white/[0.08]">
+        <div className="max-w-6xl mx-auto">
           
           <div className="text-center max-w-3xl mx-auto mb-16">
             <span className="text-xs font-semibold uppercase tracking-widest text-[#adceff]">
@@ -1756,60 +1855,60 @@ export default function AdbLabsTitanPage({ onNavigateToMember }) {
             </p>
           </div>
 
-          <div className="max-w-4xl mx-auto bg-white/[0.02] rounded-3xl border border-white/[0.08] overflow-hidden text-xs backdrop-blur-xl">
+          <div className="bg-white/[0.02] rounded-[32px] border border-white/[0.08] overflow-hidden text-xs backdrop-blur-xl">
             <table className="w-full border-collapse text-left">
               <thead>
                 <tr className="bg-white/[0.04] border-b border-white/[0.08]">
-                  <th className="p-4 text-[#83868a] font-bold uppercase tracking-wider">Subsystem Parameter</th>
-                  <th className="p-4 text-white font-bold uppercase tracking-wider">ADB Labs PS1 (Base Unit)</th>
-                  <th className="p-4 text-[#adceff] font-bold uppercase tracking-wider">PS1 + Expansion Stack</th>
+                  <th className="p-4 sm:p-5 text-[#83868a] font-bold uppercase tracking-wider">Subsystem Parameter</th>
+                  <th className="p-4 sm:p-5 text-white font-bold uppercase tracking-wider">ADB Labs PS1 (Base Unit)</th>
+                  <th className="p-4 sm:p-5 text-[#adceff] font-bold uppercase tracking-wider">PS1 + Expansion Stack</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-white/[0.06] text-neutral-300">
                 <tr>
-                  <td className="p-4 text-[#adafb3]">Nominal Battery Capacity</td>
-                  <td className="p-4 font-bold text-white">6.144 kWh</td>
-                  <td className="p-4 font-bold text-[#adceff]">12.288 kWh (Modular Dual Stack)</td>
+                  <td className="p-4 sm:p-5 text-[#adafb3]">Nominal Battery Capacity</td>
+                  <td className="p-4 sm:p-5 font-bold text-white">6.144 kWh</td>
+                  <td className="p-4 sm:p-5 font-bold text-[#adceff]">12.288 kWh (Modular Dual Stack)</td>
                 </tr>
                 <tr>
-                  <td className="p-4 text-[#adafb3]">Cell Chemistry</td>
-                  <td className="p-4">Automotive Prismatic LiFePO₄</td>
-                  <td className="p-4">Automotive Prismatic LiFePO₄</td>
+                  <td className="p-4 sm:p-5 text-[#adafb3]">Cell Chemistry</td>
+                  <td className="p-4 sm:p-5">Automotive Prismatic LiFePO₄</td>
+                  <td className="p-4 sm:p-5">Automotive Prismatic LiFePO₄</td>
                 </tr>
                 <tr>
-                  <td className="p-4 text-[#adafb3]">Continuous AC Output</td>
-                  <td className="p-4">3 kW Target Pure Sine Wave</td>
-                  <td className="p-4">3 kW Target Pure Sine Wave</td>
+                  <td className="p-4 sm:p-5 text-[#adafb3]">Continuous AC Output</td>
+                  <td className="p-4 sm:p-5">3 kW Target Pure Sine Wave</td>
+                  <td className="p-4 sm:p-5">3 kW Target Pure Sine Wave</td>
                 </tr>
                 <tr>
-                  <td className="p-4 text-[#adafb3]">Peak Surge Output</td>
-                  <td className="p-4">6 kW Surge Handling</td>
-                  <td className="p-4">6 kW Surge Handling</td>
+                  <td className="p-4 sm:p-5 text-[#adafb3]">Peak Surge Output</td>
+                  <td className="p-4 sm:p-5">6 kW Surge Handling</td>
+                  <td className="p-4 sm:p-5">6 kW Surge Handling</td>
                 </tr>
                 <tr>
-                  <td className="p-4 text-[#adafb3]">Solar Charging Input</td>
-                  <td className="p-4">Up to 420W (Internal MPPT)</td>
-                  <td className="p-4">Up to 2.88 kWp (with Dual Array)</td>
+                  <td className="p-4 sm:p-5 text-[#adafb3]">Solar Charging Input</td>
+                  <td className="p-4 sm:p-5">Up to 420W (Internal MPPT)</td>
+                  <td className="p-4 sm:p-5">Up to 2.88 kWp (with Dual Array)</td>
                 </tr>
                 <tr>
-                  <td className="p-4 text-[#adafb3]">Cycle Life</td>
-                  <td className="p-4">&gt;3,500 Cycles to 80% Capacity</td>
-                  <td className="p-4">&gt;3,500 Cycles to 80% Capacity</td>
+                  <td className="p-4 sm:p-5 text-[#adafb3]">Cycle Life</td>
+                  <td className="p-4 sm:p-5">&gt;3,500 Cycles to 80% Capacity</td>
+                  <td className="p-4 sm:p-5">&gt;3,500 Cycles to 80% Capacity</td>
                 </tr>
                 <tr>
-                  <td className="p-4 text-[#adafb3]">Telemetry & BMS Protocol</td>
-                  <td className="p-4">CAN-bus 2.0B / Bluetooth BLE</td>
-                  <td className="p-4">Synchronized CAN-bus Master/Slave</td>
+                  <td className="p-4 sm:p-5 text-[#adafb3]">Telemetry & BMS Protocol</td>
+                  <td className="p-4 sm:p-5">CAN-bus 2.0B / Bluetooth BLE</td>
+                  <td className="p-4 sm:p-5">Synchronized CAN-bus Master/Slave</td>
                 </tr>
                 <tr>
-                  <td className="p-4 text-[#adafb3]">Mobility & Enclosure</td>
-                  <td className="p-4">Heavy-Duty Caster Wheels & Handles</td>
-                  <td className="p-4">Modular Stack Latches & Locking Wheels</td>
+                  <td className="p-4 sm:p-5 text-[#adafb3]">Mobility & Enclosure</td>
+                  <td className="p-4 sm:p-5">Heavy-Duty Caster Wheels & Handles</td>
+                  <td className="p-4 sm:p-5">Modular Stack Latches & Locking Wheels</td>
                 </tr>
                 <tr>
-                  <td className="p-4 text-[#adafb3]">Engineering Status</td>
-                  <td className="p-4 text-white font-bold">In Development (Phase 3)</td>
-                  <td className="p-4 text-[#adceff] font-bold">Field Pilot Tested (Besant Nagar)</td>
+                  <td className="p-4 sm:p-5 text-[#adafb3]">Engineering Status</td>
+                  <td className="p-4 sm:p-5 text-white font-bold">In Development (Phase 3)</td>
+                  <td className="p-4 sm:p-5 text-[#adceff] font-bold">Field Pilot Tested (Besant Nagar)</td>
                 </tr>
               </tbody>
             </table>
@@ -1818,9 +1917,9 @@ export default function AdbLabsTitanPage({ onNavigateToMember }) {
         </div>
       </section>
 
-      {/* SECTION 13: ENGINEERING FAQ ACCORDION */}
-      <section id="faq" className="py-28 px-6 border-b border-white/[0.08]">
-        <div className="max-w-[1440px] mx-auto">
+      {/* SECTION 15: ENGINEERING FAQ ACCORDION */}
+      <section id="faq" className="py-24 px-6 border-b border-white/[0.08]">
+        <div className="max-w-6xl mx-auto">
           
           <div className="text-center max-w-3xl mx-auto mb-16">
             <span className="text-xs font-semibold uppercase tracking-widest text-[#adceff]">
@@ -1834,7 +1933,7 @@ export default function AdbLabsTitanPage({ onNavigateToMember }) {
             </p>
           </div>
 
-          <div className="max-w-4xl mx-auto space-y-4">
+          <div className="max-w-3xl mx-auto space-y-4">
             
             {[
               {
@@ -1897,9 +1996,9 @@ export default function AdbLabsTitanPage({ onNavigateToMember }) {
         </div>
       </section>
 
-      {/* SECTION 14: ENGINEERING DISCLAIMERS & REGULATORY DISCLOSURES */}
+      {/* SECTION 16: ENGINEERING DISCLAIMERS & REGULATORY DISCLOSURES */}
       <section className="py-16 px-6 border-b border-white/[0.08] bg-black text-[#83868a] text-xs leading-relaxed text-left">
-        <div className="max-w-[1440px] mx-auto space-y-3">
+        <div className="max-w-6xl mx-auto space-y-3">
           <p className="font-bold text-neutral-400 uppercase tracking-wider mb-2">Engineering & Regulatory Notices:</p>
           <p>
             1. <strong>Preliminary Engineering Status:</strong> The ADB Labs PS1 is in developmental prototype testing. Stated metrics (including 6.144 kWh nominal capacity, 3 kW target inverter output, and charging efficiency) are developmental objectives subject to comprehensive third-party lab verification.
@@ -1916,9 +2015,9 @@ export default function AdbLabsTitanPage({ onNavigateToMember }) {
         </div>
       </section>
 
-      {/* SECTION 15: OFFICIAL ADB LABS GLOBAL FOOTER */}
+      {/* SECTION 17: OFFICIAL ADB LABS GLOBAL FOOTER */}
       <footer id="footer" className="bg-[#050609] py-20 px-6 text-[#adafb3] text-xs font-sans text-left">
-        <div className="max-w-[1440px] mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10">
+        <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10">
           
           {/* Brand Info */}
           <div className="lg:col-span-2 space-y-4">
@@ -1988,7 +2087,7 @@ export default function AdbLabsTitanPage({ onNavigateToMember }) {
         </div>
 
         {/* Bottom Copyright */}
-        <div className="max-w-[1440px] mx-auto mt-14 pt-8 border-t border-white/[0.08] flex flex-col sm:flex-row items-center justify-between text-[#83868a] text-xs gap-4">
+        <div className="max-w-6xl mx-auto mt-14 pt-8 border-t border-white/[0.08] flex flex-col sm:flex-row items-center justify-between text-[#83868a] text-xs gap-4">
           <div>
             © 2026 ADB Labs. All rights reserved. Technology & R&D Initiative.
           </div>
