@@ -15,6 +15,7 @@ import {
   Sparkles
 } from 'lucide-react';
 import CleanWaveformComparison from '../components/CleanWaveformComparison';
+import PowerFlowDiagram from '../components/PowerFlowDiagram';
 import ProcessSection from '../components/ProcessSection';
 
 export default function EnergySolutionsPage() {
@@ -177,6 +178,24 @@ export default function EnergySolutionsPage() {
               </div>
             </div>
           ))}
+        </div>
+      </section>
+
+      {/* SECTION: INTERACTIVE REAL-TIME POWER DISPATCH SCHEMATIC */}
+      <section className="py-20 px-4 sm:px-6 lg:px-8 border-b border-white/10 bg-[#06080D]">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center max-w-3xl mx-auto mb-12">
+            <span className="text-xs font-mono uppercase tracking-widest text-[#A3FF35] font-bold block mb-2">
+              REAL-TIME SIMULATION
+            </span>
+            <h2 className="text-3xl sm:text-5xl font-black font-heading text-white tracking-tight">
+              Interactive Energy Routing Diagram
+            </h2>
+            <p className="text-[#A3ADA5] text-base mt-3 leading-relaxed">
+              Explore how high-voltage solar generation, MPPT charge algorithms, LiFePO₄ storage, and 230V pure sine inverters dispatch energy across 24-hour cycles.
+            </p>
+          </div>
+          <PowerFlowDiagram />
         </div>
       </section>
 

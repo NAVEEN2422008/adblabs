@@ -18,7 +18,6 @@ import {
   ChevronRight,
   Sparkles
 } from 'lucide-react';
-import Cinematic3DHero from '../components/home/Cinematic3DHero';
 import OurSolutionsBento from '../components/OurSolutionsBento';
 import CleanWaveformComparison from '../components/CleanWaveformComparison';
 import EcoFlowScrollPinnedHardware from '../components/EcoFlowScrollPinnedHardware';
@@ -30,8 +29,102 @@ export default function HomePage() {
   return (
     <div className="bg-[#050B0A] text-[#F5F7F2] min-h-screen selection:bg-[#A3FF35] selection:text-black">
       
-      {/* SECTION 1: CINEMATIC 3D WEBGL HERO */}
-      <Cinematic3DHero />
+      {/* SECTION 1: CINEMATIC HERO (EcoFlow Titan / Apple Pro Aesthetic) */}
+      <section className="relative min-h-[92vh] flex flex-col items-center justify-center text-center px-4 sm:px-6 lg:px-8 pt-16 pb-20 overflow-hidden">
+        
+        {/* Subtle Atmospheric Studio Halo (Deep Forest & Acid Lime Glow) */}
+        <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[850px] h-[500px] bg-gradient-to-b from-[#A3FF35]/10 via-[#101C17]/40 to-transparent rounded-full blur-[160px] pointer-events-none -z-10 animate-pulse [animation-duration:8s]"></div>
+
+        <div className="max-w-6xl mx-auto w-full">
+          
+          {/* Eyebrow Pill */}
+          <motion.div
+            initial={{ opacity: 0, y: -16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+            className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-[#101C17] border border-white/12 text-xs text-[#A3FF35] font-mono tracking-widest uppercase mb-8 backdrop-blur-md"
+          >
+            <span className="w-2 h-2 rounded-full bg-[#A3FF35] animate-ping"></span>
+            <span>ENERGY | ROBOTICS | ENGINEERING | R&D</span>
+          </motion.div>
+
+          {/* Large Editorial Headline */}
+          <motion.h1
+            initial={{ opacity: 0, y: 24 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
+            className="text-5xl sm:text-7xl lg:text-8xl font-black font-heading tracking-tight leading-[1.04] text-white max-w-5xl mx-auto"
+          >
+            Engineering <br className="hidden sm:inline" />
+            <span className="bg-gradient-to-r from-[#A3FF35] via-[#6DEB38] to-[#47bfff] bg-clip-text text-transparent">
+              Real-World
+            </span> Solutions.
+          </motion.h1>
+
+          {/* Subtitle */}
+          <motion.p
+            initial={{ opacity: 0, y: 24 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+            className="text-[#A3ADA5] text-lg sm:text-2xl max-w-3xl mx-auto mt-6 font-normal leading-relaxed"
+          >
+            Portable power, off-grid systems, custom battery solutions and robotics R&D — from concept to real-world deployment.
+          </motion.p>
+
+          {/* Hero CTAs */}
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
+            className="flex flex-wrap items-center justify-center gap-4 mt-10"
+          >
+            <Link
+              to="/energy-solutions"
+              className="bg-[#A3FF35] hover:bg-[#8ee827] text-black font-extrabold text-sm px-8 py-3.5 rounded-full transition shadow-[0_0_25px_rgba(163,255,55,0.3)] flex items-center gap-2 group font-heading"
+            >
+              <span>Explore Solutions</span>
+              <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition" />
+            </Link>
+            <Link
+              to="/power-stations/adb-ps1"
+              className="bg-[#101C17] hover:bg-[#132019] text-white border border-white/15 font-semibold text-sm px-8 py-3.5 rounded-full transition flex items-center gap-2"
+            >
+              <span>PS1 Hardware Anatomy</span>
+            </Link>
+            <Link
+              to="/about"
+              className="text-[#A3ADA5] hover:text-white font-medium text-sm px-6 py-3.5 transition flex items-center gap-1.5"
+            >
+              <span>Our Capabilities</span>
+              <ArrowUpRight className="w-4 h-4 text-[#A3FF35]" />
+            </Link>
+          </motion.div>
+
+          {/* Cinematic Floating Hardware Render with Lime Display Glow */}
+          <motion.div
+            initial={{ opacity: 0, y: 40, scale: 0.95 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            transition={{ duration: 1.1, delay: 0.35, ease: [0.16, 1, 0.3, 1] }}
+            className="relative mt-14 max-w-4xl mx-auto flex flex-col items-center justify-center"
+          >
+            <div className="relative aspect-[16/9] w-full flex items-center justify-center animate-hardware-float">
+              <img
+                src="/images/ps1_titan_studio.jpg"
+                alt="ADB Labs PS1 Modular Power Station"
+                className="max-h-full max-w-full object-contain filter drop-shadow-[0_30px_60px_rgba(0,0,0,0.95)]"
+              />
+            </div>
+            {/* Scroll Indicator */}
+            <div className="flex flex-col items-center gap-2 mt-6 text-[#68776D] text-[10px] font-mono tracking-widest uppercase">
+              <span>Scroll to Explore</span>
+              <div className="w-4 h-7 rounded-full border border-white/20 flex items-start justify-center p-1">
+                <div className="w-1 h-2 rounded-full bg-[#A3FF35] animate-bounce"></div>
+              </div>
+            </div>
+          </motion.div>
+
+        </div>
+      </section>
 
       {/* SECTION 2: CAPABILITIES STRIP */}
       <section className="py-12 border-y border-white/10 bg-[#091310]">

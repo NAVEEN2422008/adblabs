@@ -17,6 +17,9 @@ import AboutPage from './pages/AboutPage';
 import MemberPortfolioPage from './pages/MemberPortfolioPage';
 import ContactPage from './pages/ContactPage';
 import GetAQuotePage from './pages/GetAQuotePage';
+import PrivacyPage from './pages/PrivacyPage';
+import TermsPage from './pages/TermsPage';
+import NotFoundPage from './pages/NotFoundPage';
 
 export default function App() {
   return (
@@ -39,9 +42,12 @@ export default function App() {
             <Route path="/about/:memberId" element={<MemberPortfolioPage />} />
             <Route path="/contact" element={<ContactPage />} />
             <Route path="/get-a-quote" element={<GetAQuotePage />} />
+            <Route path="/privacy" element={<PrivacyPage />} />
+            <Route path="/terms" element={<TermsPage />} />
+            <Route path="/404" element={<NotFoundPage />} />
             
-            {/* Catch-all redirect to Home */}
-            <Route path="*" element={<Navigate to="/" replace />} />
+            {/* Catch-all 404 handler */}
+            <Route path="*" element={<NotFoundPage />} />
           </Routes>
         </main>
 

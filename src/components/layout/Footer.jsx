@@ -168,10 +168,10 @@ export default function Footer() {
             <span className="text-[11px] font-mono text-[#A3ADA5]">
               CINEMATIC INDUSTRIAL V2.4
             </span>
-            <Link to="/contact" className="hover:text-white transition">
+            <Link to="/privacy" className="hover:text-white transition">
               Privacy Policy
             </Link>
-            <Link to="/contact" className="hover:text-white transition">
+            <Link to="/terms" className="hover:text-white transition">
               Terms of Engineering
             </Link>
           </div>
