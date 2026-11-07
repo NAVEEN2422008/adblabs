@@ -35,7 +35,7 @@ function GitHubIcon(props) {
   );
 }
 
-export default function MemberPortfolio({ employeeCode, onNavigateToTeam, onNavigateToMember }) {
+export default function MemberPortfolio({ employeeCode, member: propMember, onBack, onNavigateToTeam, onSelectMember, onNavigateToMember }) {
   const [copied, setCopied] = useState(false);
 
   // Find member by employee code (case-insensitive) or index
@@ -43,7 +43,9 @@ export default function MemberPortfolio({ employeeCode, onNavigateToTeam, onNavi
     (m) => m.id.toLowerCase() === (employeeCode || '').toLowerCase()
   );
 
-  const member = currentIndex !== -1 ? TEAM_MEMBERS[currentIndex] : null;
+  const member = propMember || (currentIndex !== -1 ? TEAM_MEMBERS[currentIndex] : null);
+  const handleBack = onBack || onNavigateToTeam;
+  const handleSelect = onSelectMember || onNavigateToMember;
 
   const prevMember = currentIndex > 0 
     ? TEAM_MEMBERS[currentIndex - 1] 
@@ -76,7 +78,7 @@ export default function MemberPortfolio({ employeeCode, onNavigateToTeam, onNavi
             No active portfolio found matching identifier <code className="text-green-400 bg-slate-900 px-2 py-0.5 rounded font-mono">{employeeCode}</code>.
           </p>
           <button
-            onClick={onNavigateToTeam}
+            onClick={handleBack}
             className="w-full inline-flex items-center justify-center gap-2 py-3 px-6 rounded-xl bg-green-500 hover:bg-green-400 text-black font-bold text-sm transition-all"
           >
             <ArrowLeft className="w-4 h-4" />
@@ -106,7 +108,7 @@ export default function MemberPortfolio({ employeeCode, onNavigateToTeam, onNavi
             </button>
             <span>/</span>
             <button 
-              onClick={onNavigateToTeam}
+              onClick={handleBack}
               className="hover:text-green-400 transition-colors"
             >
               Team Directory
@@ -135,7 +137,7 @@ export default function MemberPortfolio({ employeeCode, onNavigateToTeam, onNavi
             </button>
 
             <button
-              onClick={onNavigateToTeam}
+              onClick={handleBack}
               className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-green-500/10 border border-green-500/30 hover:bg-green-500/20 text-xs font-mono text-green-400 transition-all"
             >
               <ArrowLeft className="w-3.5 h-3.5" />
@@ -390,7 +392,7 @@ export default function MemberPortfolio({ employeeCode, onNavigateToTeam, onNavi
         {/* Teammate Switcher Footer (Prev / Next) */}
         <div className="pt-8 border-t border-[#182032] grid grid-cols-1 sm:grid-cols-2 gap-4">
           <button
-            onClick={() => onNavigateToMember(prevMember.id)}
+            onClick={() => handleSelect(prevMember.id)}
             className="flex items-center gap-3 p-4 rounded-2xl bg-[#090e1a] border border-[#182338] hover:border-green-500/40 text-left transition-all group"
           >
             <ChevronLeft className="w-5 h-5 text-slate-400 group-hover:text-green-400 group-hover:-translate-x-1 transition-transform" />
@@ -405,7 +407,7 @@ export default function MemberPortfolio({ employeeCode, onNavigateToTeam, onNavi
           </button>
 
           <button
-            onClick={() => onNavigateToMember(nextMember.id)}
+            onClick={() => handleSelect(nextMember.id)}
             className="flex items-center justify-end gap-3 p-4 rounded-2xl bg-[#090e1a] border border-[#182338] hover:border-green-500/40 text-right transition-all group"
           >
             <div>

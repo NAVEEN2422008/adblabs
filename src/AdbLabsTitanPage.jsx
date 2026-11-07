@@ -31,8 +31,9 @@ import {
   Play
 } from 'lucide-react';
 import './titan.css';
+import { TEAM_MEMBERS } from './data/teamData';
 
-export default function AdbLabsTitanPage() {
+export default function AdbLabsTitanPage({ onNavigateToMember }) {
   // Navigation & Sub-nav state
   const [activeNav, setActiveNav] = useState('overview');
   const [isSubNavSticky, setIsSubNavSticky] = useState(false);
@@ -67,7 +68,7 @@ export default function AdbLabsTitanPage() {
   const [activeStoryIdx, setActiveStoryIdx] = useState(0);
 
   // FAQ Accordion state
-  const [openFaq, setOpenFaq] = useState([0]); // first open by default
+  const [activeFaq, setActiveFaq] = useState(0); // first open by default
 
   // Robotics Terminal simulation state
   const [rosLogIdx, setRosLogIdx] = useState(0);
@@ -154,6 +155,7 @@ export default function AdbLabsTitanPage() {
         'besant',
         'robotics',
         'internship',
+        'team',
         'specs',
         'faq'
       ];
@@ -302,6 +304,9 @@ export default function AdbLabsTitanPage() {
             <button onClick={() => scrollToSection('internship')} className="hover:text-white transition">
               Internship
             </button>
+            <button onClick={() => scrollToSection('team')} className="hover:text-white transition">
+              Team
+            </button>
             <button onClick={() => scrollToSection('specs')} className="hover:text-white transition">
               Specs
             </button>
@@ -354,6 +359,9 @@ export default function AdbLabsTitanPage() {
             </button>
             <button onClick={() => { scrollToSection('internship'); setMobileMenuOpen(false); }} className="block w-full text-left text-neutral-300 hover:text-white py-1">
               6-Week Industrial Internship
+            </button>
+            <button onClick={() => { scrollToSection('team'); setMobileMenuOpen(false); }} className="block w-full text-left text-neutral-300 hover:text-white py-1">
+              Engineering Team & Dossiers
             </button>
             <button onClick={() => { scrollToSection('faq'); setMobileMenuOpen(false); }} className="block w-full text-left text-neutral-300 hover:text-white py-1">
               Technical FAQ
@@ -546,6 +554,12 @@ export default function AdbLabsTitanPage() {
               Internship
             </button>
             <button 
+              onClick={() => scrollToSection('team')}
+              className={`hover:text-white transition py-3.5 border-b-2 ${activeNav === 'team' ? 'text-white border-white' : 'border-transparent'}`}
+            >
+              Team
+            </button>
+            <button 
               onClick={() => scrollToSection('specs')}
               className={`hover:text-white transition py-3.5 border-b-2 ${activeNav === 'specs' ? 'text-white border-white' : 'border-transparent'}`}
             >
@@ -666,7 +680,7 @@ export default function AdbLabsTitanPage() {
 
             {/* Hotspot Deep-Dive Information Card */}
             <div className="lg:col-span-4 space-y-4">
-              <div className={`p-6 rounded-3xl border transition-all ${activeHotspot === 1 ? 'bg-white/[0.08] border-white/40' : 'bg-white/[0.02] border-white/[0.08]'}`}>
+              <div onClick={() => setActiveHotspot(1)} className={`p-6 rounded-3xl border transition-all cursor-pointer ${activeHotspot === 1 ? 'bg-white/[0.08] border-[#adceff]/60 ring-1 ring-[#adceff]/40 shadow-lg' : 'bg-white/[0.02] border-white/[0.08] hover:border-white/30'}`}>
                 <div className="flex items-center justify-between">
                   <span className="text-xs text-[#adceff] font-bold uppercase tracking-wider">Subsystem 01</span>
                   <span className="text-[10px] bg-white/10 text-neutral-300 px-2 py-0.5 rounded font-mono">3000W Target</span>
@@ -677,7 +691,7 @@ export default function AdbLabsTitanPage() {
                 </p>
               </div>
 
-              <div className={`p-6 rounded-3xl border transition-all ${activeHotspot === 2 ? 'bg-white/[0.08] border-white/40' : 'bg-white/[0.02] border-white/[0.08]'}`}>
+              <div onClick={() => setActiveHotspot(2)} className={`p-6 rounded-3xl border transition-all cursor-pointer ${activeHotspot === 2 ? 'bg-white/[0.08] border-[#adceff]/60 ring-1 ring-[#adceff]/40 shadow-lg' : 'bg-white/[0.02] border-white/[0.08] hover:border-white/30'}`}>
                 <div className="flex items-center justify-between">
                   <span className="text-xs text-[#adceff] font-bold uppercase tracking-wider">Subsystem 02</span>
                   <span className="text-[10px] bg-white/10 text-neutral-300 px-2 py-0.5 rounded font-mono">6.144 kWh Core</span>
@@ -688,7 +702,7 @@ export default function AdbLabsTitanPage() {
                 </p>
               </div>
 
-              <div className={`p-6 rounded-3xl border transition-all ${activeHotspot === 3 ? 'bg-white/[0.08] border-white/40' : 'bg-white/[0.02] border-white/[0.08]'}`}>
+              <div onClick={() => setActiveHotspot(3)} className={`p-6 rounded-3xl border transition-all cursor-pointer ${activeHotspot === 3 ? 'bg-white/[0.08] border-[#adceff]/60 ring-1 ring-[#adceff]/40 shadow-lg' : 'bg-white/[0.02] border-white/[0.08] hover:border-white/30'}`}>
                 <div className="flex items-center justify-between">
                   <span className="text-xs text-[#adceff] font-bold uppercase tracking-wider">Subsystem 03</span>
                   <span className="text-[10px] bg-white/10 text-neutral-300 px-2 py-0.5 rounded font-mono">420W - 2880W</span>
@@ -699,7 +713,7 @@ export default function AdbLabsTitanPage() {
                 </p>
               </div>
 
-              <div className={`p-6 rounded-3xl border transition-all ${activeHotspot === 4 ? 'bg-white/[0.08] border-white/40' : 'bg-white/[0.02] border-white/[0.08]'}`}>
+              <div onClick={() => setActiveHotspot(4)} className={`p-6 rounded-3xl border transition-all cursor-pointer ${activeHotspot === 4 ? 'bg-white/[0.08] border-[#adceff]/60 ring-1 ring-[#adceff]/40 shadow-lg' : 'bg-white/[0.02] border-white/[0.08] hover:border-white/30'}`}>
                 <div className="flex items-center justify-between">
                   <span className="text-xs text-[#adceff] font-bold uppercase tracking-wider">Subsystem 04</span>
                   <span className="text-[10px] bg-white/10 text-neutral-300 px-2 py-0.5 rounded font-mono">Quick-Connect</span>
@@ -1603,6 +1617,68 @@ export default function AdbLabsTitanPage() {
         </div>
       </section>
 
+      
+      {/* SECTION: LEADERSHIP & ENGINEERING TEAM (Dossiers) */}
+      <section id="team" className="py-28 px-6 border-b border-white/[0.08] bg-gradient-to-b from-black via-[#08090f] to-black relative">
+        <div className="max-w-[1440px] mx-auto">
+          
+          <div className="text-center max-w-3xl mx-auto mb-16">
+            <span className="text-xs font-semibold uppercase tracking-widest text-[#adceff]">
+              The Builders
+            </span>
+            <h2 className="text-4xl sm:text-6xl font-black text-white mt-3 tracking-tight">
+              Leadership & Engineering Team.
+            </h2>
+            <p className="text-[#adafb3] text-base sm:text-lg mt-4 leading-relaxed">
+              Meet the founders, researchers, and engineers pioneering clean energy architecture and autonomous robotics at ADB Labs.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
+            {TEAM_MEMBERS.map((member) => (
+              <div 
+                key={member.id}
+                onClick={() => onNavigateToMember && onNavigateToMember(member.id)}
+                className="group p-6 rounded-3xl bg-white/[0.02] border border-white/[0.08] hover:border-white/30 hover:bg-white/[0.04] transition-all backdrop-blur-xl flex flex-col justify-between cursor-pointer relative overflow-hidden"
+              >
+                <div className="absolute top-0 right-0 w-24 h-24 bg-[#adceff]/5 rounded-full blur-xl group-hover:bg-[#adceff]/15 transition"></div>
+
+                <div>
+                  <div className="flex items-center justify-between mb-4">
+                    <span className="text-[10px] font-mono uppercase tracking-wider text-[#adceff] bg-[#adceff]/10 px-2.5 py-1 rounded-full border border-[#adceff]/20 font-bold">
+                      {member.id}
+                    </span>
+                    <span className="text-[10px] text-[#83868a]">
+                      {member.location}
+                    </span>
+                  </div>
+
+                  <h3 className="text-lg font-bold text-white group-hover:text-[#adceff] transition">
+                    {member.name}
+                  </h3>
+                  <div className="text-xs font-medium text-neutral-400 mt-0.5">
+                    {member.role}
+                  </div>
+                  <div className="text-[11px] text-[#83868a] mt-1">
+                    {member.department}
+                  </div>
+
+                  <p className="text-xs text-[#adafb3] mt-3 line-clamp-3 leading-relaxed">
+                    {member.bio}
+                  </p>
+                </div>
+
+                <div className="mt-6 pt-4 border-t border-white/[0.06] flex items-center justify-between text-xs font-semibold text-white group-hover:text-[#adceff] transition">
+                  <span>View Dossier</span>
+                  <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition" />
+                </div>
+              </div>
+            ))}
+          </div>
+
+        </div>
+      </section>
+
       {/* SECTION 11: 5-STAGE ENGINEERING PROCESS */}
       <section className="py-28 px-6 border-b border-white/[0.08] bg-white/[0.01]">
         <div className="max-w-[1440px] mx-auto">
@@ -1794,20 +1870,14 @@ export default function AdbLabsTitanPage() {
                 a: "You can reach out through our 'Get a Quote' or 'Book Assessment' forms, or email us directly at mdzainoct@gmail.com / call +91 8310704488. We actively partner with small businesses, academic institutions, and robotics researchers across India."
               }
             ].map((faq, idx) => {
-              const isOpen = openFaq.includes(idx);
+              const isOpen = activeFaq === idx;
               return (
                 <div 
                   key={idx}
                   className="rounded-3xl border border-white/[0.08] bg-white/[0.02] backdrop-blur-xl overflow-hidden transition"
                 >
                   <button
-                    onClick={() => {
-                      if (isOpen) {
-                        setOpenFaq(openFaq.filter(i => i !== idx));
-                      } else {
-                        setOpenFaq([...openFaq, idx]);
-                      }
-                    }}
+                    onClick={() => setActiveFaq(isOpen ? null : idx)}
                     className="w-full text-left p-6 sm:p-7 font-bold text-base sm:text-lg text-white flex items-center justify-between gap-4 hover:text-[#adceff] transition"
                   >
                     <span>{faq.q}</span>
