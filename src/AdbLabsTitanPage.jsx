@@ -553,7 +553,7 @@ export default function AdbLabsTitanPage({ onNavigateToMember }) {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             
             {/* Bento Card 1: Full-width Power & Capacity */}
-            <div className="md:col-span-2 p-8 sm:p-12 rounded-[32px] bg-gradient-to-br from-white/[0.05] via-white/[0.02] to-black border border-white/[0.08] backdrop-blur-2xl relative overflow-hidden text-left shadow-2xl">
+            <div className="md:col-span-2 p-8 sm:p-12 rounded-[32px] glass-panel glass-panel-hover relative overflow-hidden text-left shadow-2xl">
               <div className="absolute top-0 right-0 w-96 h-96 bg-[#adceff]/10 rounded-full blur-3xl pointer-events-none"></div>
 
               <div className="max-w-xl">
@@ -570,32 +570,32 @@ export default function AdbLabsTitanPage({ onNavigateToMember }) {
               <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 mt-10 pt-8 border-t border-white/[0.08]">
                 <div>
                   <div className="text-xs text-[#83868a] font-medium">Output</div>
-                  <div className="text-2xl sm:text-3xl font-black bg-gradient-to-b from-[#adceff] to-white bg-clip-text text-transparent mt-1">3.0 kW</div>
+                  <div className="text-3xl sm:text-4xl stat-cyan mt-1">3.0 kW</div>
                   <div className="text-xs text-neutral-400 mt-1">6 kW Peak Surge</div>
                 </div>
 
                 <div>
                   <div className="text-xs text-[#83868a] font-medium">Capacity</div>
-                  <div className="text-2xl sm:text-3xl font-black bg-gradient-to-b from-[#adceff] to-white bg-clip-text text-transparent mt-1">6.1 ~ 12.3 kWh</div>
+                  <div className="text-3xl sm:text-4xl stat-cyan mt-1">6.1 ~ 12.3 kWh</div>
                   <div className="text-xs text-neutral-400 mt-1">Dual Stack Modular Bus</div>
                 </div>
 
                 <div>
                   <div className="text-xs text-[#83868a] font-medium">Monthly Savings</div>
-                  <div className="text-2xl sm:text-3xl font-black text-white mt-1">₹14,000</div>
+                  <div className="text-3xl sm:text-4xl stat-metallic mt-1">₹14,000</div>
                   <div className="text-xs text-neutral-400 mt-1">~14 Month Payback</div>
                 </div>
 
                 <div>
                   <div className="text-xs text-[#83868a] font-medium">Day Solar Array</div>
-                  <div className="text-2xl sm:text-3xl font-black text-white mt-1">2.88 kWp</div>
+                  <div className="text-3xl sm:text-4xl stat-metallic mt-1">2.88 kWp</div>
                   <div className="text-xs text-neutral-400 mt-1">Dual MPPT Tracking</div>
                 </div>
               </div>
             </div>
 
             {/* Bento Card 2: Spend Less From Day One */}
-            <div className="p-8 sm:p-10 rounded-[32px] bg-white/[0.02] border border-white/[0.08] backdrop-blur-xl text-left flex flex-col justify-between hover:border-white/20 transition">
+            <div className="p-8 sm:p-10 rounded-[32px] glass-panel glass-panel-hover text-left flex flex-col justify-between">
               <div>
                 <span className="text-xs uppercase tracking-wider text-[#adceff] font-bold">Economic Payback</span>
                 <h3 className="text-2xl font-bold text-white mt-2">Spend ₹0 on Fuel From Day One</h3>
@@ -606,12 +606,12 @@ export default function AdbLabsTitanPage({ onNavigateToMember }) {
                 <div className="grid grid-cols-2 gap-4 mt-8 pt-6 border-t border-white/[0.08]">
                   <div>
                     <div className="text-xs text-neutral-400">Fuel Expense</div>
-                    <div className="text-3xl font-black text-[#adceff] mt-1">100%</div>
+                    <div className="text-4xl stat-cyan mt-1">100%</div>
                     <div className="text-xs text-neutral-500 mt-0.5">Eliminated vs Diesel</div>
                   </div>
                   <div>
                     <div className="text-xs text-neutral-400">Cell Longevity</div>
-                    <div className="text-3xl font-black text-white mt-1">3,500+</div>
+                    <div className="text-4xl stat-metallic mt-1">3,500+</div>
                     <div className="text-xs text-neutral-500 mt-0.5">Cycles to 80% DoD</div>
                   </div>
                 </div>
@@ -624,7 +624,7 @@ export default function AdbLabsTitanPage({ onNavigateToMember }) {
             </div>
 
             {/* Bento Card 3: Autonomous Robotics & AI */}
-            <div className="p-8 sm:p-10 rounded-[32px] bg-white/[0.02] border border-white/[0.08] backdrop-blur-xl text-left flex flex-col justify-between hover:border-white/20 transition">
+            <div className="p-8 sm:p-10 rounded-[32px] glass-panel glass-panel-hover text-left flex flex-col justify-between">
               <div>
                 <span className="text-xs uppercase tracking-wider text-[#adceff] font-bold">Autonomous Robotics & AI</span>
                 <h3 className="text-2xl font-bold text-white mt-2">Field Robotics & ROS 2 Intelligence</h3>
@@ -890,10 +890,10 @@ export default function AdbLabsTitanPage({ onNavigateToMember }) {
                 <button 
                   onClick={() => setActiveHotspot(1)}
                   className={`absolute top-[28%] left-[25%] w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold transition shadow-lg ${
-                    activeHotspot === 1 ? 'bg-white text-black scale-125 ring-4 ring-white/30' : 'bg-neutral-800 text-white hover:bg-neutral-700'
+                    activeHotspot === 1 ? 'bg-white text-black scale-125 ring-4 ring-[#38bdf8]/40' : 'bg-neutral-800/90 text-white hover:bg-neutral-700'
                   }`}
                 >
-                  {activeHotspot === 1 && <span className="absolute inset-0 rounded-full bg-white/40 animate-ping"></span>}
+                  {activeHotspot === 1 && <span className="absolute -inset-1.5 rounded-full border border-[#38bdf8] hotspot-pulse pointer-events-none"></span>}
                   1
                 </button>
 
@@ -901,10 +901,10 @@ export default function AdbLabsTitanPage({ onNavigateToMember }) {
                 <button 
                   onClick={() => setActiveHotspot(2)}
                   className={`absolute top-[52%] left-[48%] w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold transition shadow-lg ${
-                    activeHotspot === 2 ? 'bg-white text-black scale-125 ring-4 ring-white/30' : 'bg-neutral-800 text-white hover:bg-neutral-700'
+                    activeHotspot === 2 ? 'bg-white text-black scale-125 ring-4 ring-[#38bdf8]/40' : 'bg-neutral-800/90 text-white hover:bg-neutral-700'
                   }`}
                 >
-                  {activeHotspot === 2 && <span className="absolute inset-0 rounded-full bg-white/40 animate-ping"></span>}
+                  {activeHotspot === 2 && <span className="absolute -inset-1.5 rounded-full border border-[#38bdf8] hotspot-pulse pointer-events-none"></span>}
                   2
                 </button>
 
@@ -912,10 +912,10 @@ export default function AdbLabsTitanPage({ onNavigateToMember }) {
                 <button 
                   onClick={() => setActiveHotspot(3)}
                   className={`absolute top-[32%] right-[24%] w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold transition shadow-lg ${
-                    activeHotspot === 3 ? 'bg-white text-black scale-125 ring-4 ring-white/30' : 'bg-neutral-800 text-white hover:bg-neutral-700'
+                    activeHotspot === 3 ? 'bg-white text-black scale-125 ring-4 ring-[#38bdf8]/40' : 'bg-neutral-800/90 text-white hover:bg-neutral-700'
                   }`}
                 >
-                  {activeHotspot === 3 && <span className="absolute inset-0 rounded-full bg-white/40 animate-ping"></span>}
+                  {activeHotspot === 3 && <span className="absolute -inset-1.5 rounded-full border border-[#38bdf8] hotspot-pulse pointer-events-none"></span>}
                   3
                 </button>
 
@@ -923,10 +923,10 @@ export default function AdbLabsTitanPage({ onNavigateToMember }) {
                 <button 
                   onClick={() => setActiveHotspot(4)}
                   className={`absolute bottom-[18%] right-[32%] w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold transition shadow-lg ${
-                    activeHotspot === 4 ? 'bg-white text-black scale-125 ring-4 ring-white/30' : 'bg-neutral-800 text-white hover:bg-neutral-700'
+                    activeHotspot === 4 ? 'bg-white text-black scale-125 ring-4 ring-[#38bdf8]/40' : 'bg-neutral-800/90 text-white hover:bg-neutral-700'
                   }`}
                 >
-                  {activeHotspot === 4 && <span className="absolute inset-0 rounded-full bg-white/40 animate-ping"></span>}
+                  {activeHotspot === 4 && <span className="absolute -inset-1.5 rounded-full border border-[#38bdf8] hotspot-pulse pointer-events-none"></span>}
                   4
                 </button>
               </div>
@@ -1311,7 +1311,7 @@ export default function AdbLabsTitanPage({ onNavigateToMember }) {
                 <div className="text-xs font-semibold text-neutral-400 mt-1">Continuous Active Load: {activeWatts}W</div>
                 
                 <div className="mt-6 p-5 rounded-2xl bg-white/[0.03] border border-white/[0.08]">
-                  <div className="text-4xl font-black bg-gradient-to-b from-[#adceff] to-white bg-clip-text text-transparent">{singleHours} Hours</div>
+                  <div className="text-4xl sm:text-5xl stat-cyan">{singleHours} Hours</div>
                   <div className="text-xs text-neutral-400 mt-1">Standalone Battery Autonomy</div>
                 </div>
 
@@ -1329,7 +1329,7 @@ export default function AdbLabsTitanPage({ onNavigateToMember }) {
                 <div className="text-xs font-semibold text-neutral-400 mt-1">Continuous Active Load: {activeWatts}W</div>
 
                 <div className="mt-6 p-5 rounded-2xl bg-white/[0.06] border border-white/20">
-                  <div className="text-4xl font-black text-white">{dualHours} Hours</div>
+                  <div className="text-4xl sm:text-5xl stat-metallic">{dualHours} Hours</div>
                   <div className="text-xs text-[#adceff] mt-1">Over 2 Full Days of Night Stall Running</div>
                 </div>
 
@@ -1799,7 +1799,7 @@ export default function AdbLabsTitanPage({ onNavigateToMember }) {
               <div 
                 key={member.id}
                 onClick={() => onNavigateToMember && onNavigateToMember(member.id)}
-                className="group p-6 rounded-3xl bg-white/[0.02] border border-white/[0.08] hover:border-white/30 hover:bg-white/[0.04] transition-all backdrop-blur-xl flex flex-col justify-between cursor-pointer relative overflow-hidden text-left"
+                className="group p-6 rounded-3xl glass-panel glass-panel-hover flex flex-col justify-between cursor-pointer relative overflow-hidden text-left"
               >
                 <div className="absolute top-0 right-0 w-24 h-24 bg-[#adceff]/5 rounded-full blur-xl group-hover:bg-[#adceff]/15 transition"></div>
 
