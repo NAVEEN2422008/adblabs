@@ -241,8 +241,27 @@
 /* ======================================================== */
 /* Editorial Magazine Poster Fonts & Studio Aesthetics      */
 /* ======================================================== */
+.font-anton {
+  font-family: 'Anton', 'Bebas Neue', sans-serif;
+  letter-spacing: 0.02em;
+}
+
+.font-oswald {
+  font-family: 'Oswald', sans-serif;
+  letter-spacing: 0.02em;
+}
+
+.font-bebas {
+  font-family: 'Bebas Neue', 'Oswald', sans-serif;
+  letter-spacing: 0.03em;
+}
+
+.font-body-portfolio {
+  font-family: 'Poppins', 'Inter', system-ui, -apple-system, sans-serif;
+}
+
 .font-display-condensed {
-  font-family: 'Bebas Neue', 'Oswald', 'Space Grotesk', sans-serif;
+  font-family: 'Anton', 'Bebas Neue', 'Oswald', 'Space Grotesk', sans-serif;
   letter-spacing: 0.02em;
 }
 

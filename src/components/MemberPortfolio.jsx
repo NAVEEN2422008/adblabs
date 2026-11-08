@@ -59,6 +59,46 @@ function GitHubIcon(props) {
   );
 }
 
+// Helper to generate perfectly balanced 2-line title watermark for Greyish & Greenish themes
+function getWatermarkLines(member, isRed) {
+  if (isRed) {
+    return { line1: "PORTFOLIO", line2: "" };
+  }
+
+  const idMap = {
+    'ADB-446-001': { line1: 'CHIEF EXECUTIVE', line2: 'OFFICER' },
+    'ADB-446-002': { line1: 'CHIEF TECHNOLOGY', line2: 'OFFICER' },
+    'ADB-446-003': { line1: 'MANAGING', line2: 'DIRECTOR' },
+    'ADB-446-004': { line1: 'MECHANICAL SYSTEMS', line2: '& CAD LEAD' },
+    'ADB-446-005': { line1: 'CHIEF OPERATING', line2: 'OFFICER' },
+    'ADB-446-006': { line1: 'POWER ELECTRONICS', line2: '& EMBEDDED' },
+    'ADB-446-007': { line1: 'LEAD FIRMWARE', line2: '& ROBOTICS' },
+    'ADB-446-008': { line1: 'BATTERY SYSTEMS', line2: '& HARDWARE QA' },
+    'ADB-446-009': { line1: 'FINANCE & OPS', line2: 'MANAGEMENT' },
+    'ADB-446-010': { line1: 'SOFTWARE, AI', line2: '& IOT CLOUD' },
+    'ADB-446-011': { line1: 'SUPPLY CHAIN', line2: '& PRODUCTION' },
+    'ADB-446-012': { line1: 'INDUSTRIAL DESIGN', line2: '& ERGONOMICS' },
+    'ADB-446-013': { line1: 'AUTONOMOUS SLAM', line2: '& NAVIGATION' }
+  };
+
+  if (member?.id && idMap[member.id]) {
+    return idMap[member.id];
+  }
+
+  const clean = (member?.role || 'ENGINEER')
+    .replace(/\(.*?\)/g, '')
+    .trim()
+    .toUpperCase();
+  const words = clean.split(/\s+/).filter(Boolean);
+  if (words.length <= 1) return { line1: words[0] || 'ENGINEER', line2: '' };
+  if (words.length === 2) return { line1: words[0], line2: words[1] };
+  const mid = Math.ceil(words.length / 2);
+  return {
+    line1: words.slice(0, mid).join(' '),
+    line2: words.slice(mid).join(' ')
+  };
+}
+
 // Capability Icon Helper
 function getCapabilityIcon(iconName, themeMode = 'slate') {
   let colorClass = "text-white/90";
@@ -292,15 +332,11 @@ export default function MemberPortfolio({ employeeCode, member: propMember, onBa
     );
   }
 
-  // Giant condensed background watermark text
-  // Red theme uses "PORTFOLIO" (Rayhan Aditya poster)
-  // Slate/Greenish theme uses headline or member's primary domain (AV poster)
-  const displayWatermark = isRed 
-    ? "PORTFOLIO" 
-    : (member.headline ? member.headline.toUpperCase() : member.role.toUpperCase());
+  // Generate balanced 2-line title watermark
+  const watermarkLines = getWatermarkLines(member, isRed);
 
   return (
-    <div className={`min-h-screen pt-4 pb-24 relative overflow-x-hidden transition-colors duration-500 ${
+    <div className={`min-h-screen pt-4 pb-24 relative overflow-x-hidden transition-colors duration-500 font-body-portfolio ${
       isRed 
         ? 'bg-[#08080A] text-[#E5E7EB] selection:bg-[#E50914] selection:text-white' 
         : isGreen
@@ -458,17 +494,22 @@ export default function MemberPortfolio({ employeeCode, member: propMember, onBa
             </>
           )}
 
-          {/* GIANT CONDENSED WATERMARK TEXT (Layer behind the person) */}
-          <div className="absolute top-6 sm:top-8 left-0 w-full select-none pointer-events-none z-0 overflow-hidden">
-            <h2 className={`font-display-condensed font-black uppercase tracking-tight leading-none whitespace-nowrap ${
-              isRed 
-                ? 'text-[22vw] lg:text-[15.5rem] text-[#E50914]/[0.9] drop-shadow-[0_0_40px_rgba(229,9,20,0.3)]' 
-                : isGreen
-                  ? 'text-[18vw] lg:text-[12.5rem] text-emerald-400/[0.18] drop-shadow-[0_0_40px_rgba(16,185,129,0.2)]'
-                  : 'text-[18vw] lg:text-[12.5rem] text-white/[0.14]'
-            }`}>
-              {displayWatermark}
-            </h2>
+          {/* GIANT WATERMARK TEXT (Layer behind the person) - Two Stacked Lines in Slate & Green */}
+          <div className="absolute top-2 sm:top-4 lg:top-0 left-0 w-full select-none pointer-events-none z-0 overflow-visible">
+            {isRed ? (
+              <h2 className="font-anton uppercase tracking-tight leading-none text-[20vw] lg:text-[14.5rem] text-[#E50914]/[0.9] drop-shadow-[0_0_40px_rgba(229,9,20,0.3)]">
+                PORTFOLIO
+              </h2>
+            ) : (
+              <h2 className={`font-anton uppercase tracking-tight leading-[0.82] ${
+                isGreen 
+                  ? 'text-[11vw] sm:text-[9vw] lg:text-[6.5rem] xl:text-[7.5rem] text-emerald-400/[0.18] drop-shadow-[0_0_40px_rgba(16,185,129,0.2)]' 
+                  : 'text-[11vw] sm:text-[9vw] lg:text-[6.5rem] xl:text-[7.5rem] text-white/[0.14]'
+              }`}>
+                <span className="block">{watermarkLines.line1}</span>
+                {watermarkLines.line2 && <span className="block">{watermarkLines.line2}</span>}
+              </h2>
+            )}
           </div>
 
           {/* MAIN HERO GRID: Left Statement + Right Free-Standing Cutout */}
@@ -484,20 +525,26 @@ export default function MemberPortfolio({ employeeCode, member: propMember, onBa
                 Hello, I'm
               </span>
 
-              {/* Bold Condensed Name */}
-              <h1 className="font-display-condensed text-5xl sm:text-7xl lg:text-8xl xl:text-[7rem] font-black uppercase text-white tracking-wide leading-[0.88] mb-3 select-none">
+              {/* Bold Condensed Name (Anton) */}
+              <h1 className="font-anton text-5xl sm:text-7xl lg:text-8xl xl:text-[6.8rem] uppercase text-white tracking-wide leading-[0.9] mb-3 select-none">
                 {member.name}
               </h1>
 
-              {/* Role / Headline */}
-              <div className={`text-xs sm:text-sm font-mono tracking-widest uppercase mb-6 font-semibold ${
-                isRed ? 'text-[#E50914]' : isGreen ? 'text-emerald-400' : 'text-zinc-400'
+              {/* Role / Headline (Oswald Bold) */}
+              <div className={`font-oswald font-bold text-xs sm:text-sm tracking-wider uppercase mb-6 flex flex-wrap items-center gap-x-2 gap-y-1 ${
+                isRed ? 'text-[#E50914]' : isGreen ? 'text-emerald-400' : 'text-zinc-300'
               }`}>
-                {member.role} {member.department && `// ${member.department}`}
+                <span>{member.role}</span>
+                {member.department && (
+                  <>
+                    <span className="text-zinc-600">//</span>
+                    <span className="text-zinc-400 font-normal">{member.department}</span>
+                  </>
+                )}
               </div>
 
-              {/* Bio Summary Paragraph */}
-              <p className="text-sm sm:text-base text-zinc-400 font-normal leading-relaxed mb-6 max-w-xl">
+              {/* Bio Summary Paragraph (Inter / Poppins) */}
+              <p className="font-body-portfolio text-sm sm:text-base text-zinc-400 font-normal leading-relaxed mb-6 max-w-xl">
                 {member.bio}
               </p>
 
@@ -643,13 +690,13 @@ export default function MemberPortfolio({ employeeCode, member: propMember, onBa
               >
                 <div className="inline-flex items-center justify-center gap-2 mb-2">
                   <span className={`text-sm ${isRed ? 'text-[#E50914]' : isGreen ? 'text-[#00FF88]' : 'text-white'}`}>✦</span>
-                  <div className={`font-display-condensed text-4xl sm:text-5xl font-black tracking-tight ${
+                  <div className={`font-bebas text-5xl sm:text-6xl tracking-wide leading-none ${
                     isRed ? 'text-[#E50914]' : isGreen ? 'text-[#00FF88]' : 'text-white'
                   }`}>
                     {st.value}
                   </div>
                 </div>
-                <div className="text-[10px] sm:text-[11px] font-mono uppercase tracking-widest text-zinc-400 font-medium">
+                <div className="font-oswald font-bold text-[11px] sm:text-xs uppercase tracking-widest text-zinc-400">
                   {st.label}
                 </div>
               </div>
@@ -662,12 +709,12 @@ export default function MemberPortfolio({ employeeCode, member: propMember, onBa
         {/* ======================================================== */}
         <section id="featured-work" className="mb-24 scroll-mt-24">
           <div className="flex items-center justify-between gap-4 mb-8 pb-4 border-b border-white/[0.08]">
-            <h2 className="text-xs font-mono uppercase tracking-[0.2em] text-zinc-400 font-semibold">
+            <h2 className="font-oswald font-bold text-sm uppercase tracking-[0.2em] text-zinc-400">
               {isRed ? 'SELECTED PROJECTS' : 'FEATURED WORK'}
             </h2>
             <a 
               href="#contact-section"
-              className={`text-xs font-mono uppercase tracking-wider inline-flex items-center gap-1.5 transition-colors ${
+              className={`font-oswald font-bold text-xs uppercase tracking-wider inline-flex items-center gap-1.5 transition-colors ${
                 isRed ? 'text-[#E50914] hover:text-white' : 'text-zinc-400 hover:text-white'
               }`}
             >
@@ -700,17 +747,17 @@ export default function MemberPortfolio({ employeeCode, member: propMember, onBa
 
                   {/* Card Content */}
                   <div className="p-6">
-                    <div className={`text-[11px] font-mono uppercase tracking-wider mb-2 font-semibold ${
+                    <div className={`text-xs font-mono uppercase tracking-wider mb-2 font-semibold ${
                       isRed ? 'text-[#E50914]' : isGreen ? 'text-[#00FF88]' : 'text-zinc-400'
                     }`}>
-                      0{pIdx + 1} // {proj.tag}
+                      <span className="font-bebas text-base">0{pIdx + 1}</span> // {proj.tag}
                     </div>
 
-                    <h3 className="text-xl font-bold text-white mb-2 group-hover:text-zinc-200 transition-colors">
+                    <h3 className="font-oswald font-bold text-xl text-white mb-2 group-hover:text-zinc-200 transition-colors">
                       {proj.title}
                     </h3>
 
-                    <p className="text-xs sm:text-sm text-zinc-400 leading-relaxed line-clamp-3">
+                    <p className="font-body-portfolio text-xs sm:text-sm text-zinc-400 leading-relaxed line-clamp-3">
                       {proj.desc}
                     </p>
                   </div>
@@ -746,7 +793,7 @@ export default function MemberPortfolio({ employeeCode, member: propMember, onBa
             <div className="lg:col-span-4 space-y-8">
               <div>
                 <div className="mb-6 pb-3 border-b border-white/[0.08]">
-                  <h3 className="text-xs font-mono uppercase tracking-[0.2em] text-[#E50914] font-semibold">
+                  <h3 className="font-oswald font-bold text-xs uppercase tracking-[0.2em] text-[#E50914]">
                     EDUCATION & CREDENTIALS
                   </h3>
                 </div>
@@ -759,7 +806,7 @@ export default function MemberPortfolio({ employeeCode, member: propMember, onBa
                       <span className="text-[10px] font-mono text-[#E50914] block mb-1 font-bold">
                         {edu.period}
                       </span>
-                      <h4 className="text-sm font-bold text-white mb-1">
+                      <h4 className="font-oswald font-bold text-sm text-white mb-1">
                         {edu.degree}
                       </h4>
                       <p className="text-xs text-zinc-400 font-mono">
@@ -772,7 +819,7 @@ export default function MemberPortfolio({ employeeCode, member: propMember, onBa
 
               <div>
                 <div className="mb-4 pb-2 border-b border-white/[0.08]">
-                  <h3 className="text-xs font-mono uppercase tracking-[0.2em] text-[#E50914] font-semibold">
+                  <h3 className="font-oswald font-bold text-xs uppercase tracking-[0.2em] text-[#E50914]">
                     SKILLS & TOOLCHAIN
                   </h3>
                 </div>
@@ -784,7 +831,7 @@ export default function MemberPortfolio({ employeeCode, member: propMember, onBa
                   ).map((skill, sIdx) => (
                     <span 
                       key={sIdx}
-                      className="px-3 py-1 rounded-lg bg-[#0E0608] border border-red-950/80 hover:border-[#E50914]/50 text-xs text-zinc-300 transition-colors"
+                      className="px-3 py-1 rounded-lg bg-[#0E0608] border border-red-950/80 hover:border-[#E50914]/50 text-xs text-zinc-300 transition-colors font-mono"
                     >
                       {skill}
                     </span>
@@ -796,7 +843,7 @@ export default function MemberPortfolio({ employeeCode, member: propMember, onBa
             {/* Column 2: WORK PROCESS (Vertical Connected Line) (4 cols) */}
             <div className="lg:col-span-4">
               <div className="mb-6 pb-3 border-b border-white/[0.08]">
-                <h3 className="text-xs font-mono uppercase tracking-[0.2em] text-[#E50914] font-semibold">
+                <h3 className="font-oswald font-bold text-xs uppercase tracking-[0.2em] text-[#E50914]">
                   WORK PROCESS
                 </h3>
               </div>
@@ -814,14 +861,14 @@ export default function MemberPortfolio({ employeeCode, member: propMember, onBa
                   const StepIcon = step.icon;
                   return (
                     <div key={idx} className="flex items-start gap-4 relative z-10 group">
-                      <div className="w-8 h-8 rounded-full bg-[#180A0C] border border-[#E50914]/40 group-hover:border-[#E50914] group-hover:bg-[#E50914] flex items-center justify-center text-xs font-mono font-bold text-[#E50914] group-hover:text-white transition-all shrink-0">
+                      <div className="w-8 h-8 rounded-full bg-[#180A0C] border border-[#E50914]/40 group-hover:border-[#E50914] group-hover:bg-[#E50914] flex items-center justify-center font-bebas text-sm font-bold text-[#E50914] group-hover:text-white transition-all shrink-0">
                         {step.num}
                       </div>
                       <div>
-                        <h5 className="text-xs font-bold uppercase tracking-wider text-white group-hover:text-[#E50914] transition-colors">
+                        <h5 className="font-oswald font-bold text-xs uppercase tracking-wider text-white group-hover:text-[#E50914] transition-colors">
                           {step.title}
                         </h5>
-                        <p className="text-[11px] text-zinc-400 mt-0.5 leading-relaxed">
+                        <p className="font-body-portfolio text-[11px] text-zinc-400 mt-0.5 leading-relaxed">
                           {step.desc}
                         </p>
                       </div>
@@ -837,7 +884,7 @@ export default function MemberPortfolio({ employeeCode, member: propMember, onBa
                 <span className="font-serif text-6xl text-[#E50914] leading-none block select-none">
                   “
                 </span>
-                <p className="text-base font-medium text-white leading-relaxed mt-2 mb-6">
+                <p className="font-body-portfolio text-base font-medium text-white leading-relaxed mt-2 mb-6">
                   {member.quote || "Good design is not just how it looks, but how it works under real operational stress."}
                 </p>
                 <div className="font-script text-3xl text-white mb-1 select-none">
@@ -849,10 +896,10 @@ export default function MemberPortfolio({ employeeCode, member: propMember, onBa
               </div>
 
               <div className="pt-6 border-t border-red-800/50 mt-6">
-                <span className="text-[10px] font-mono uppercase tracking-widest text-red-300 block mb-1">
+                <span className="font-oswald font-bold text-[10px] uppercase tracking-widest text-red-300 block mb-1">
                   VISION
                 </span>
-                <span className="text-xs font-bold text-white uppercase tracking-wider">
+                <span className="font-oswald font-bold text-xs text-white uppercase tracking-wider">
                   LET'S CREATE SOMETHING GREAT TOGETHER
                 </span>
               </div>
@@ -866,7 +913,7 @@ export default function MemberPortfolio({ employeeCode, member: propMember, onBa
             {/* Left: CORE CAPABILITIES */}
             <div className="lg:col-span-7">
               <div className="mb-8 pb-3 border-b border-white/[0.08]">
-                <h2 className={`text-xs font-mono uppercase tracking-[0.2em] font-semibold ${
+                <h2 className={`font-oswald font-bold text-sm uppercase tracking-[0.2em] ${
                   isGreen ? 'text-[#00FF88]' : 'text-zinc-400'
                 }`}>
                   CORE CAPABILITIES
@@ -889,10 +936,10 @@ export default function MemberPortfolio({ employeeCode, member: propMember, onBa
                     }`}>
                       {getCapabilityIcon(cap.icon, themeMode)}
                     </div>
-                    <h3 className="text-sm font-bold uppercase tracking-wider text-white">
+                    <h3 className="font-oswald font-bold text-sm uppercase tracking-wider text-white">
                       {cap.title}
                     </h3>
-                    <p className="text-xs text-zinc-400 leading-relaxed">
+                    <p className="font-body-portfolio text-xs text-zinc-400 leading-relaxed">
                       {cap.desc}
                     </p>
                   </div>
@@ -904,7 +951,7 @@ export default function MemberPortfolio({ employeeCode, member: propMember, onBa
             <div className="lg:col-span-5 flex flex-col justify-between gap-8">
               <div>
                 <div className="mb-6 pb-3 border-b border-white/[0.08]">
-                  <h3 className={`text-xs font-mono uppercase tracking-[0.2em] font-semibold ${
+                  <h3 className={`font-oswald font-bold text-sm uppercase tracking-[0.2em] ${
                     isGreen ? 'text-[#00FF88]' : 'text-zinc-400'
                   }`}>
                     TOOLS & TECHNOLOGIES
@@ -923,7 +970,7 @@ export default function MemberPortfolio({ employeeCode, member: propMember, onBa
                     ).slice(0, 8).map((tool, tIdx) => (
                       <div key={tIdx} className="flex items-center gap-2.5 py-1 text-xs text-zinc-300">
                         <div className={`w-2 h-2 rounded-full ${isGreen ? 'bg-[#00FF88]' : 'bg-white/40'}`} />
-                        <span className="font-medium text-white">{tool}</span>
+                        <span className="font-medium text-white font-mono">{tool}</span>
                       </div>
                     ))}
                   </div>
@@ -932,7 +979,7 @@ export default function MemberPortfolio({ employeeCode, member: propMember, onBa
 
               <div>
                 <div className="mb-6 pb-3 border-b border-white/[0.08]">
-                  <h3 className={`text-xs font-mono uppercase tracking-[0.2em] font-semibold ${
+                  <h3 className={`font-oswald font-bold text-sm uppercase tracking-[0.2em] ${
                     isGreen ? 'text-[#00FF88]' : 'text-zinc-400'
                   }`}>
                     CERTIFICATIONS & EDUCATION
@@ -956,7 +1003,7 @@ export default function MemberPortfolio({ employeeCode, member: propMember, onBa
                         <Award className="w-4 h-4" />
                       </div>
                       <div>
-                        <h4 className="text-xs sm:text-sm font-bold text-white leading-snug">
+                        <h4 className="font-oswald font-bold text-sm text-white leading-snug">
                           {edu.degree}
                         </h4>
                         <p className="text-[11px] text-zinc-400 mt-0.5 font-mono">
@@ -982,7 +1029,7 @@ export default function MemberPortfolio({ employeeCode, member: propMember, onBa
               : 'bg-[#11151F] border border-white/[0.08]'
           }`}>
             <div className="mb-6 pb-4 border-b border-white/[0.08]">
-              <h2 className={`text-xs font-mono uppercase tracking-[0.2em] font-semibold ${
+              <h2 className={`font-oswald font-bold text-sm uppercase tracking-[0.2em] ${
                 isGreen ? 'text-[#00FF88]' : 'text-zinc-400'
               }`}>
                 MY DESIGN PROCESS
@@ -999,10 +1046,10 @@ export default function MemberPortfolio({ employeeCode, member: propMember, onBa
                 const StepIcon = step.icon;
                 return (
                   <div key={sIdx} className="space-y-2">
-                    <div className={`text-xs font-mono uppercase tracking-widest font-bold ${
+                    <div className={`font-oswald font-bold text-xs uppercase tracking-widest ${
                       isGreen ? 'text-[#00FF88]' : 'text-zinc-400'
                     }`}>
-                      {step.num} // {step.title}
+                      <span className="font-bebas text-sm">{step.num}</span> // {step.title}
                     </div>
                     <div className={`w-8 h-8 rounded-lg flex items-center justify-center my-2 ${
                       isGreen 
@@ -1011,7 +1058,7 @@ export default function MemberPortfolio({ employeeCode, member: propMember, onBa
                     }`}>
                       <StepIcon className="w-4 h-4" />
                     </div>
-                    <p className="text-xs text-zinc-400 leading-relaxed">
+                    <p className="font-body-portfolio text-xs text-zinc-400 leading-relaxed">
                       {step.desc}
                     </p>
                   </div>
@@ -1036,9 +1083,9 @@ export default function MemberPortfolio({ employeeCode, member: propMember, onBa
           
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
             
-            {/* Left: Headline */}
+            {/* Left: Headline (Anton) */}
             <div className="lg:col-span-5">
-              <h2 className="font-display-condensed text-4xl sm:text-5xl font-black uppercase tracking-normal text-white leading-[0.95]">
+              <h2 className="font-anton text-4xl sm:text-5xl uppercase tracking-normal text-white leading-[0.95]">
                 {isRed ? "LET'S WORK TOGETHER" : "LET'S CREATE SOMETHING EXTRAORDINARY"}
                 <span className={`ml-2 ${isRed ? 'text-[#E50914]' : isGreen ? 'text-[#00FF88]' : 'text-white/60'}`}>✦</span>
               </h2>
@@ -1046,7 +1093,7 @@ export default function MemberPortfolio({ employeeCode, member: propMember, onBa
 
             {/* Middle: Blurb + Pill Button */}
             <div className="lg:col-span-3 flex flex-col items-start lg:items-center">
-              <p className="text-xs text-zinc-400 mb-3 text-left lg:text-center">
+              <p className="font-body-portfolio text-xs text-zinc-400 mb-3 text-left lg:text-center">
                 I'm currently available for freelance projects and collaborations.
               </p>
               {member.socials?.email && (
@@ -1172,7 +1219,7 @@ export default function MemberPortfolio({ employeeCode, member: propMember, onBa
                 <QrCode className="w-6 h-6" />
               </div>
 
-              <h3 className="text-xl font-bold text-white mb-1">
+              <h3 className="font-oswald font-bold text-xl text-white mb-1">
                 Official ADB Labs ID
               </h3>
               <p className="text-xs text-zinc-400 mb-6 font-mono">
