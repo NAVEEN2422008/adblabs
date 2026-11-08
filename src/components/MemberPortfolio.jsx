@@ -604,17 +604,18 @@ export default function MemberPortfolio({ employeeCode, member: propMember, onBa
           </div>
 
           {/* ======================================================== */}
-          {/* PERSON'S NAME & ACTIONS - DIRECTLY BELOW PERSON'S IMAGE  */}
+          {/* PERSON'S NAME & ACTIONS - OVERLAYING BOTTOM OF CUTOUT    */}
+          {/* Half overlayed on bottom of torso, half extending below  */}
           {/* ======================================================== */}
-          <div className="mt-8 sm:mt-12 pt-6 sm:pt-8 border-t border-white/[0.08] text-center relative z-20">
+          <div className="-mt-14 sm:-mt-20 lg:-mt-28 text-center relative z-30 px-2 pointer-events-auto">
             
-            {/* Person's Name in Anton */}
-            <h1 className="font-anton text-4xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-[6.8rem] uppercase text-white tracking-wide leading-none mb-3 select-none drop-shadow-xl">
+            {/* Person's Name in Anton with dramatic contrast drop-shadow */}
+            <h1 className="font-anton text-4xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-[6.8rem] uppercase text-white tracking-wide leading-none mb-3 select-none drop-shadow-[0_12px_35px_rgba(0,0,0,0.95)]">
               {member.name}
             </h1>
 
             {/* Role / Headline (Oswald Bold) */}
-            <div className={`font-oswald font-bold text-xs sm:text-sm md:text-base tracking-[0.2em] uppercase mb-6 flex items-center justify-center gap-2 flex-wrap ${
+            <div className={`font-oswald font-bold text-xs sm:text-sm md:text-base tracking-[0.2em] uppercase mb-6 flex items-center justify-center gap-2 flex-wrap drop-shadow-md ${
               isRed ? 'text-[#E50914]' : isGreen ? 'text-[#00FF88]' : 'text-slate-300'
             }`}>
               <span>{member.role}</span>
