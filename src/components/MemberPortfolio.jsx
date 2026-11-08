@@ -513,21 +513,21 @@ export default function MemberPortfolio({ employeeCode, member: propMember, onBa
             </div>
 
             {/* Center Column: FREE-STANDING CUTOUT IMAGE (NO BOUNDING BOX!) */}
-            <div className="lg:col-span-6 relative flex flex-col items-center justify-end order-1 lg:order-2 min-h-[380px] sm:min-h-[500px] lg:min-h-[560px]">
+            <div className="lg:col-span-6 relative flex flex-col items-center justify-end order-1 lg:order-2 min-h-[440px] sm:min-h-[540px] lg:min-h-[620px]">
               
               {/* Centered Glowing Halo Disc Behind Cutout (Matching Reference Poster) */}
               {isRed ? (
-                <div className="absolute bottom-8 left-1/2 -translate-x-1/2 w-[300px] sm:w-[420px] lg:w-[460px] h-[300px] sm:h-[420px] lg:h-[460px] rounded-full bg-gradient-to-tr from-[#7A0C0C] via-[#B81D24] to-[#450A0A] shadow-[0_0_120px_rgba(229,9,20,0.45)] pointer-events-none z-0" />
+                <div className="absolute bottom-8 left-1/2 -translate-x-1/2 w-[320px] sm:w-[440px] lg:w-[480px] h-[320px] sm:h-[440px] lg:h-[480px] rounded-full bg-gradient-to-tr from-[#7A0C0C] via-[#B81D24] to-[#450A0A] shadow-[0_0_120px_rgba(229,9,20,0.45)] pointer-events-none z-0" />
               ) : isGreen ? (
                 <>
-                  <div className="absolute bottom-8 left-1/2 -translate-x-1/2 w-[300px] sm:w-[420px] lg:w-[460px] h-[300px] sm:h-[420px] lg:h-[460px] rounded-full bg-gradient-to-tr from-[#062419] via-[#0B3D2B] to-[#041710] border border-emerald-500/20 shadow-[0_0_120px_rgba(16,185,129,0.3)] pointer-events-none z-0" />
-                  <div className="absolute bottom-4 left-1/2 -translate-x-1/2 w-[340px] sm:w-[480px] lg:w-[520px] h-[340px] sm:h-[480px] lg:h-[520px] rounded-full border border-emerald-500/20 pointer-events-none z-0" />
+                  <div className="absolute bottom-8 left-1/2 -translate-x-1/2 w-[320px] sm:w-[440px] lg:w-[480px] h-[320px] sm:h-[440px] lg:h-[480px] rounded-full bg-gradient-to-tr from-[#062419] via-[#0B3D2B] to-[#041710] border border-emerald-500/20 shadow-[0_0_120px_rgba(16,185,129,0.3)] pointer-events-none z-0" />
+                  <div className="absolute bottom-4 left-1/2 -translate-x-1/2 w-[360px] sm:w-[500px] lg:w-[540px] h-[360px] sm:h-[500px] lg:h-[540px] rounded-full border border-emerald-500/20 pointer-events-none z-0" />
                 </>
               ) : (
                 /* Dark Charcoal (Blue-Black) Halo Disc */
                 <>
-                  <div className="absolute bottom-8 left-1/2 -translate-x-1/2 w-[300px] sm:w-[420px] lg:w-[460px] h-[300px] sm:h-[420px] lg:h-[460px] rounded-full bg-gradient-to-tr from-[#0B101D] via-[#151E33] to-[#0A0E18] border border-slate-700/30 shadow-[0_0_120px_rgba(30,41,59,0.5)] pointer-events-none z-0" />
-                  <div className="absolute bottom-4 left-1/2 -translate-x-1/2 w-[340px] sm:w-[480px] lg:w-[520px] h-[340px] sm:h-[480px] lg:h-[520px] rounded-full border border-slate-700/30 pointer-events-none z-0" />
+                  <div className="absolute bottom-8 left-1/2 -translate-x-1/2 w-[320px] sm:w-[440px] lg:w-[480px] h-[320px] sm:h-[440px] lg:h-[480px] rounded-full bg-gradient-to-tr from-[#0B101D] via-[#151E33] to-[#0A0E18] border border-slate-700/30 shadow-[0_0_120px_rgba(30,41,59,0.5)] pointer-events-none z-0" />
+                  <div className="absolute bottom-4 left-1/2 -translate-x-1/2 w-[360px] sm:w-[500px] lg:w-[540px] h-[360px] sm:h-[500px] lg:h-[540px] rounded-full border border-slate-700/30 pointer-events-none z-0" />
                 </>
               )}
 
@@ -538,7 +538,7 @@ export default function MemberPortfolio({ employeeCode, member: propMember, onBa
                     <img
                       src={member.image}
                       alt={member.name}
-                      className="max-h-[440px] sm:max-h-[520px] lg:max-h-[600px] w-auto object-contain filter drop-shadow-[0_25px_50px_rgba(0,0,0,0.95)] select-none pointer-events-none transition-transform duration-500 hover:scale-[1.02]"
+                      className="h-[460px] sm:h-[540px] lg:h-[620px] w-auto max-w-full object-contain filter drop-shadow-[0_25px_50px_rgba(0,0,0,0.95)] select-none pointer-events-none transition-transform duration-500 hover:scale-[1.02]"
                       onError={(e) => {
                         e.target.style.display = 'none';
                       }}
