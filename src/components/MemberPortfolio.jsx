@@ -59,28 +59,26 @@ function GitHubIcon(props) {
   );
 }
 
-// Helper to generate the authoritative Job Title watermark running behind the subject (like PORTFOLIO in the reference poster)
-function getHeroJobTitle(member, isRed) {
-  if (isRed) return 'PORTFOLIO';
-
+// Helper to generate the authoritative Job Title watermark running behind the subject (matching official Canva ID cards & user instructions)
+function getHeroJobTitle(member) {
   const map = {
-    'ADB-446-001': 'CHIEF EXECUTIVE OFFICER',
-    'ADB-446-002': 'CHIEF TECHNOLOGY OFFICER',
-    'ADB-446-003': 'MANAGING DIRECTOR',
-    'ADB-446-004': 'MECHANICAL SYSTEMS & CAD',
-    'ADB-446-005': 'CHIEF OPERATING OFFICER',
-    'ADB-446-006': 'POWER ELECTRONICS & EMBEDDED',
-    'ADB-446-007': 'LEAD FIRMWARE & ROBOTICS',
-    'ADB-446-008': 'BATTERY SYSTEMS & QA',
-    'ADB-446-009': 'FINANCE & OPERATIONS',
-    'ADB-446-010': 'SOFTWARE, AI & IOT CLOUD',
-    'ADB-446-011': 'SUPPLY CHAIN & PRODUCTION',
-    'ADB-446-012': 'INDUSTRIAL DESIGN & ERGONOMICS',
-    'ADB-446-013': 'AUTONOMOUS NAVIGATION & SLAM'
+    'ADB-446-001': 'CHIEF EXECUTIVE OFFICER', // Canva ID: CEO
+    'ADB-446-002': 'CHIEF MARKETING OFFICER', // Canva ID: CMO
+    'ADB-446-003': 'MANAGING DIRECTOR', // Canva ID: MD
+    'ADB-446-004': 'IOT ENGINEER', // Canva ID: IoT Engineer
+    'ADB-446-005': 'HARDWARE ENGINEER', // Canva ID: Hardware Engineer
+    'ADB-446-006': 'COMMUNITY MANAGER', // Canva ID: Community Manager
+    'ADB-446-007': 'INTERNS', // Canva ID & User: INTERNS
+    'ADB-446-008': 'INTERNS', // Canva ID: INTERN
+    'ADB-446-009': 'INTERNS', // Canva ID & User: INTERNS
+    'ADB-446-010': 'INTERNS', // Canva ID & User: INTERNS
+    'ADB-446-011': 'INTERNS', // Canva ID & User: INTERNS
+    'ADB-446-012': 'INTERNS', // Canva ID & User: INTERNS
+    'ADB-446-013': 'CAD DESIGNER' // Canva ID: CAD Designer
   };
 
   if (member?.id && map[member.id]) return map[member.id];
-  return (member?.role || 'ENGINEERING LEAD').replace(/\(.*?\)/g, '').trim().toUpperCase();
+  return (member?.role || 'INTERNS').replace(/\(.*?\)/g, '').trim().toUpperCase();
 }
 
 // Capability Icon Helper
@@ -317,7 +315,7 @@ export default function MemberPortfolio({ employeeCode, member: propMember, onBa
   }
 
   // Compute authoritative Job Title for the watermark behind subject
-  const heroJobTitle = getHeroJobTitle(member, isRed);
+  const heroJobTitle = getHeroJobTitle(member);
 
   return (
     <div className={`min-h-screen pt-4 pb-24 relative overflow-x-hidden transition-colors duration-500 font-body-portfolio ${
@@ -463,14 +461,22 @@ export default function MemberPortfolio({ employeeCode, member: propMember, onBa
           <div className="absolute top-2 sm:top-4 lg:top-8 left-0 right-0 w-full flex justify-center select-none pointer-events-none z-0 overflow-hidden px-2 sm:px-4">
             <h2 className={`font-anton uppercase tracking-tight text-center leading-none whitespace-nowrap drop-shadow-2xl ${
               isRed 
-                ? 'text-[17vw] lg:text-[13.5rem] text-[#E50914]/[0.9] drop-shadow-[0_0_50px_rgba(229,9,20,0.35)]' 
+                ? (heroJobTitle.length <= 10 
+                    ? 'text-[17vw] sm:text-[14vw] lg:text-[13rem] text-[#E50914]/[0.9] drop-shadow-[0_0_50px_rgba(229,9,20,0.35)]' 
+                    : heroJobTitle.length <= 18
+                      ? 'text-[11vw] sm:text-[9.5vw] lg:text-[8rem] xl:text-[9.5rem] text-[#E50914]/[0.85] drop-shadow-[0_0_40px_rgba(229,9,20,0.35)]'
+                      : 'text-[7.5vw] sm:text-[6.5vw] lg:text-[5.5rem] xl:text-[6.8rem] text-[#E50914]/[0.85] drop-shadow-[0_0_40px_rgba(229,9,20,0.35)]')
                 : isGreen
-                  ? (heroJobTitle.length > 20 
-                      ? 'text-[7.5vw] sm:text-[6.5vw] lg:text-[5.5rem] xl:text-[6.8rem] text-emerald-400/[0.22] drop-shadow-[0_0_40px_rgba(16,185,129,0.25)]' 
-                      : 'text-[11vw] sm:text-[9.5vw] lg:text-[8rem] xl:text-[9.5rem] text-emerald-400/[0.22] drop-shadow-[0_0_40px_rgba(16,185,129,0.25)]')
-                  : (heroJobTitle.length > 20
-                      ? 'text-[7.5vw] sm:text-[6.5vw] lg:text-[5.5rem] xl:text-[6.8rem] text-slate-400/[0.18] drop-shadow-[0_0_40px_rgba(255,255,255,0.06)]'
-                      : 'text-[11vw] sm:text-[9.5vw] lg:text-[8rem] xl:text-[9.5rem] text-slate-300/[0.20] drop-shadow-[0_0_40px_rgba(255,255,255,0.08)]')
+                  ? (heroJobTitle.length <= 10
+                      ? 'text-[16vw] sm:text-[13vw] lg:text-[12rem] text-emerald-400/[0.22] drop-shadow-[0_0_40px_rgba(16,185,129,0.25)]'
+                      : heroJobTitle.length <= 18
+                        ? 'text-[11vw] sm:text-[9.5vw] lg:text-[8rem] xl:text-[9.5rem] text-emerald-400/[0.22] drop-shadow-[0_0_40px_rgba(16,185,129,0.25)]'
+                        : 'text-[7.5vw] sm:text-[6.5vw] lg:text-[5.5rem] xl:text-[6.8rem] text-emerald-400/[0.22] drop-shadow-[0_0_40px_rgba(16,185,129,0.25)]')
+                  : (heroJobTitle.length <= 10
+                      ? 'text-[16vw] sm:text-[13vw] lg:text-[12rem] text-slate-300/[0.22] drop-shadow-[0_0_40px_rgba(255,255,255,0.08)]'
+                      : heroJobTitle.length <= 18
+                        ? 'text-[11vw] sm:text-[9.5vw] lg:text-[8rem] xl:text-[9.5rem] text-slate-300/[0.20] drop-shadow-[0_0_40px_rgba(255,255,255,0.08)]'
+                        : 'text-[7.5vw] sm:text-[6.5vw] lg:text-[5.5rem] xl:text-[6.8rem] text-slate-400/[0.18] drop-shadow-[0_0_40px_rgba(255,255,255,0.06)]')
             }`}>
               {heroJobTitle}
             </h2>
