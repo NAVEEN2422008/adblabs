@@ -59,44 +59,28 @@ function GitHubIcon(props) {
   );
 }
 
-// Helper to generate perfectly balanced 2-line title watermark for Greyish & Greenish themes
-function getWatermarkLines(member, isRed) {
-  if (isRed) {
-    return { line1: "PORTFOLIO", line2: "" };
-  }
+// Helper to generate the authoritative Job Title watermark running behind the subject (like PORTFOLIO in the reference poster)
+function getHeroJobTitle(member, isRed) {
+  if (isRed) return 'PORTFOLIO';
 
-  const idMap = {
-    'ADB-446-001': { line1: 'CHIEF EXECUTIVE', line2: 'OFFICER' },
-    'ADB-446-002': { line1: 'CHIEF TECHNOLOGY', line2: 'OFFICER' },
-    'ADB-446-003': { line1: 'MANAGING', line2: 'DIRECTOR' },
-    'ADB-446-004': { line1: 'MECHANICAL SYSTEMS', line2: '& CAD LEAD' },
-    'ADB-446-005': { line1: 'CHIEF OPERATING', line2: 'OFFICER' },
-    'ADB-446-006': { line1: 'POWER ELECTRONICS', line2: '& EMBEDDED' },
-    'ADB-446-007': { line1: 'LEAD FIRMWARE', line2: '& ROBOTICS' },
-    'ADB-446-008': { line1: 'BATTERY SYSTEMS', line2: '& HARDWARE QA' },
-    'ADB-446-009': { line1: 'FINANCE & OPS', line2: 'MANAGEMENT' },
-    'ADB-446-010': { line1: 'SOFTWARE, AI', line2: '& IOT CLOUD' },
-    'ADB-446-011': { line1: 'SUPPLY CHAIN', line2: '& PRODUCTION' },
-    'ADB-446-012': { line1: 'INDUSTRIAL DESIGN', line2: '& ERGONOMICS' },
-    'ADB-446-013': { line1: 'AUTONOMOUS SLAM', line2: '& NAVIGATION' }
+  const map = {
+    'ADB-446-001': 'CHIEF EXECUTIVE OFFICER',
+    'ADB-446-002': 'CHIEF TECHNOLOGY OFFICER',
+    'ADB-446-003': 'MANAGING DIRECTOR',
+    'ADB-446-004': 'MECHANICAL SYSTEMS & CAD',
+    'ADB-446-005': 'CHIEF OPERATING OFFICER',
+    'ADB-446-006': 'POWER ELECTRONICS & EMBEDDED',
+    'ADB-446-007': 'LEAD FIRMWARE & ROBOTICS',
+    'ADB-446-008': 'BATTERY SYSTEMS & QA',
+    'ADB-446-009': 'FINANCE & OPERATIONS',
+    'ADB-446-010': 'SOFTWARE, AI & IOT CLOUD',
+    'ADB-446-011': 'SUPPLY CHAIN & PRODUCTION',
+    'ADB-446-012': 'INDUSTRIAL DESIGN & ERGONOMICS',
+    'ADB-446-013': 'AUTONOMOUS NAVIGATION & SLAM'
   };
 
-  if (member?.id && idMap[member.id]) {
-    return idMap[member.id];
-  }
-
-  const clean = (member?.role || 'ENGINEER')
-    .replace(/\(.*?\)/g, '')
-    .trim()
-    .toUpperCase();
-  const words = clean.split(/\s+/).filter(Boolean);
-  if (words.length <= 1) return { line1: words[0] || 'ENGINEER', line2: '' };
-  if (words.length === 2) return { line1: words[0], line2: words[1] };
-  const mid = Math.ceil(words.length / 2);
-  return {
-    line1: words.slice(0, mid).join(' '),
-    line2: words.slice(mid).join(' ')
-  };
+  if (member?.id && map[member.id]) return map[member.id];
+  return (member?.role || 'ENGINEERING LEAD').replace(/\(.*?\)/g, '').trim().toUpperCase();
 }
 
 // Capability Icon Helper
@@ -332,8 +316,8 @@ export default function MemberPortfolio({ employeeCode, member: propMember, onBa
     );
   }
 
-  // Generate balanced 2-line title watermark
-  const watermarkLines = getWatermarkLines(member, isRed);
+  // Compute authoritative Job Title for the watermark behind subject
+  const heroJobTitle = getHeroJobTitle(member, isRed);
 
   return (
     <div className={`min-h-screen pt-4 pb-24 relative overflow-x-hidden transition-colors duration-500 font-body-portfolio ${
@@ -341,7 +325,7 @@ export default function MemberPortfolio({ employeeCode, member: propMember, onBa
         ? 'bg-[#08080A] text-[#E5E7EB] selection:bg-[#E50914] selection:text-white' 
         : isGreen
           ? 'bg-[#060D0A] text-[#D8E6E0] selection:bg-[#00FF88] selection:text-black'
-          : 'bg-[#090B0E] text-[#D8DCE3] selection:bg-white selection:text-black'
+          : 'bg-[#0B0E14] text-[#E2E8F0] selection:bg-slate-300 selection:text-black'
     }`}>
       
       {/* Background Ambient Atmosphere */}
@@ -357,9 +341,11 @@ export default function MemberPortfolio({ employeeCode, member: propMember, onBa
           <div className="absolute bottom-[15%] right-[-50px] w-[600px] h-[600px] bg-emerald-950/25 rounded-full blur-[200px] pointer-events-none" />
         </>
       ) : (
+        /* Dark Charcoal (Blue-Black) Ambient Illumination */
         <>
-          <div className="absolute top-0 right-1/4 w-[700px] h-[700px] bg-white/[0.04] rounded-full blur-[180px] pointer-events-none" />
-          <div className="absolute top-[40%] left-[-100px] w-[500px] h-[500px] bg-white/[0.02] rounded-full blur-[200px] pointer-events-none" />
+          <div className="absolute top-0 right-1/4 w-[700px] h-[700px] bg-blue-950/[0.12] rounded-full blur-[200px] pointer-events-none" />
+          <div className="absolute top-[35%] left-[-100px] w-[550px] h-[550px] bg-slate-800/[0.1] rounded-full blur-[220px] pointer-events-none" />
+          <div className="absolute bottom-[15%] right-[-50px] w-[600px] h-[600px] bg-[#0E1524]/40 rounded-full blur-[200px] pointer-events-none" />
         </>
       )}
 
@@ -380,7 +366,7 @@ export default function MemberPortfolio({ employeeCode, member: propMember, onBa
             </button>
             <span className="text-zinc-600">/</span>
             <span className={`text-xs font-mono uppercase tracking-widest font-semibold ${
-              isRed ? 'text-[#E50914]' : isGreen ? 'text-[#00FF88]' : 'text-zinc-300'
+              isRed ? 'text-[#E50914]' : isGreen ? 'text-[#00FF88]' : 'text-slate-300'
             }`}>
               {member.id}
             </span>
@@ -390,18 +376,18 @@ export default function MemberPortfolio({ employeeCode, member: propMember, onBa
             </span>
           </div>
 
-          {/* Quick Theme Mode Toggle (Greyish vs Reddish vs Greenish) */}
+          {/* Quick Theme Mode Toggle (Dark Charcoal vs Reddish vs Greenish) */}
           <div className="flex items-center gap-1.5 p-1 rounded-full bg-white/[0.04] border border-white/10 text-xs font-mono">
             <button
               onClick={() => setThemeMode('slate')}
               className={`px-3 py-1 rounded-full text-[11px] transition-all flex items-center gap-1.5 ${
                 isSlate 
-                  ? 'bg-white text-black font-bold shadow-md' 
+                  ? 'bg-slate-200 text-slate-950 font-bold shadow-md' 
                   : 'text-zinc-400 hover:text-white'
               }`}
             >
-              <span className="w-2 h-2 rounded-full bg-slate-300" />
-              <span>Greyish (AV)</span>
+              <span className="w-2 h-2 rounded-full bg-slate-400" />
+              <span>Dark Charcoal</span>
             </button>
             <button
               onClick={() => setThemeMode('crimson')}
@@ -412,7 +398,7 @@ export default function MemberPortfolio({ employeeCode, member: propMember, onBa
               }`}
             >
               <span className="w-2 h-2 rounded-full bg-[#E50914]" />
-              <span>Reddish (Rayhan)</span>
+              <span>Reddish</span>
             </button>
             <button
               onClick={() => setThemeMode('emerald')}
@@ -423,7 +409,7 @@ export default function MemberPortfolio({ employeeCode, member: propMember, onBa
               }`}
             >
               <span className="w-2 h-2 rounded-full bg-[#00FF88]" />
-              <span>Greenish (ADB)</span>
+              <span>Greenish</span>
             </button>
           </div>
 
@@ -454,7 +440,7 @@ export default function MemberPortfolio({ employeeCode, member: propMember, onBa
                   ? 'bg-[#E50914] hover:bg-[#C8102E] text-white shadow-[0_0_20px_rgba(229,9,20,0.4)]' 
                   : isGreen
                     ? 'bg-[#00FF88] hover:bg-[#10B981] text-black shadow-[0_0_20px_rgba(0,255,136,0.35)]'
-                    : 'bg-white hover:bg-zinc-200 text-black'
+                    : 'bg-white hover:bg-slate-200 text-black'
               }`}
             >
               <span>LET'S TALK</span>
@@ -466,171 +452,117 @@ export default function MemberPortfolio({ employeeCode, member: propMember, onBa
 
         {/* ======================================================== */}
         {/* HERO SECTION - OUTSIDE ANY BOUNDING BOX!                 */}
-        {/* Person sits freely on the page canvas, overlapping text  */}
-        {/* Red Theme: Rayhan style with red circle halo & PORTFOLIO */}
-        {/* Green Theme: Dark emerald/slate halo + emerald star      */}
-        {/* Slate Theme: AV style with soft spotlight & DESIGNER     */}
+        {/* 1. Job Title runs horizontally behind the person's image */}
+        {/* 2. Free-standing cutout centered in the middle           */}
+        {/* 3. Flanked by editorial bio/signature (left) & quote (rt)*/}
+        {/* 4. Person's Name is placed DIRECTLY BELOW subject image  */}
         {/* ======================================================== */}
-        <section className="relative pt-6 pb-16 sm:pb-24 overflow-visible">
+        <section className="relative pt-4 pb-16 sm:pb-20 overflow-visible">
           
-          {/* BACKGROUND GRAPHIC BEHIND SUBJECT */}
-          {isRed ? (
-            /* Red Glowing Circular Disc (Exact Rayhan Aditya Reference) */
-            <div className="absolute top-[18%] right-[8%] sm:right-[14%] w-[320px] sm:w-[440px] lg:w-[500px] h-[320px] sm:h-[440px] lg:h-[500px] rounded-full bg-gradient-to-tr from-[#7A0C0C] via-[#B81D24] to-[#450A0A] shadow-[0_0_120px_rgba(229,9,20,0.45)] pointer-events-none z-0" />
-          ) : isGreen ? (
-            /* Subtle Dark Emerald & Slate Halo Disc with Glowing Orbital Ring */
-            <>
-              <div className="absolute top-[16%] right-[8%] sm:right-[14%] w-[320px] sm:w-[440px] lg:w-[500px] h-[320px] sm:h-[440px] lg:h-[500px] rounded-full bg-gradient-to-tr from-[#062419] via-[#0B3D2B] to-[#041710] shadow-[0_0_120px_rgba(16,185,129,0.3)] pointer-events-none z-0" />
-              <div className="absolute top-1/2 right-[10%] -translate-y-1/2 w-[340px] sm:w-[480px] lg:w-[580px] h-[340px] sm:h-[480px] lg:h-[580px] rounded-full border border-emerald-500/20 pointer-events-none z-0" />
-              <div className="absolute top-[25%] right-[8%] text-[#00FF88] text-xs font-mono pointer-events-none z-0">✦</div>
-              <div className="absolute top-[30%] right-[15%] w-[380px] h-[380px] rounded-full bg-emerald-500/[0.12] blur-[120px] pointer-events-none z-0" />
-            </>
-          ) : (
-            /* Soft Ambient Spotlight & Orbital Ring (Exact AV Reference) */
-            <>
-              <div className="absolute top-1/2 right-[10%] -translate-y-1/2 w-[340px] sm:w-[480px] lg:w-[580px] h-[340px] sm:h-[480px] lg:h-[580px] rounded-full border border-white/[0.06] pointer-events-none z-0" />
-              <div className="absolute top-[25%] right-[8%] text-white/30 text-xs font-mono pointer-events-none z-0">✦</div>
-              <div className="absolute top-[30%] right-[15%] w-[380px] h-[380px] rounded-full bg-white/[0.06] blur-[120px] pointer-events-none z-0" />
-            </>
-          )}
-
-          {/* GIANT WATERMARK TEXT (Layer behind the person) - Two Stacked Lines in Slate & Green */}
-          <div className="absolute top-2 sm:top-4 lg:top-0 left-0 w-full select-none pointer-events-none z-0 overflow-visible">
-            {isRed ? (
-              <h2 className="font-anton uppercase tracking-tight leading-none text-[20vw] lg:text-[14.5rem] text-[#E50914]/[0.9] drop-shadow-[0_0_40px_rgba(229,9,20,0.3)]">
-                PORTFOLIO
-              </h2>
-            ) : (
-              <h2 className={`font-anton uppercase tracking-tight leading-[0.82] ${
-                isGreen 
-                  ? 'text-[11vw] sm:text-[9vw] lg:text-[6.5rem] xl:text-[7.5rem] text-emerald-400/[0.18] drop-shadow-[0_0_40px_rgba(16,185,129,0.2)]' 
-                  : 'text-[11vw] sm:text-[9vw] lg:text-[6.5rem] xl:text-[7.5rem] text-white/[0.14]'
-              }`}>
-                <span className="block">{watermarkLines.line1}</span>
-                {watermarkLines.line2 && <span className="block">{watermarkLines.line2}</span>}
-              </h2>
-            )}
+          {/* GIANT HORIZONTAL JOB TITLE BEHIND SUBJECT (Centered across background) */}
+          <div className="absolute top-2 sm:top-4 lg:top-8 left-0 right-0 w-full flex justify-center select-none pointer-events-none z-0 overflow-hidden px-2 sm:px-4">
+            <h2 className={`font-anton uppercase tracking-tight text-center leading-none whitespace-nowrap drop-shadow-2xl ${
+              isRed 
+                ? 'text-[17vw] lg:text-[13.5rem] text-[#E50914]/[0.9] drop-shadow-[0_0_50px_rgba(229,9,20,0.35)]' 
+                : isGreen
+                  ? (heroJobTitle.length > 20 
+                      ? 'text-[7.5vw] sm:text-[6.5vw] lg:text-[5.5rem] xl:text-[6.8rem] text-emerald-400/[0.22] drop-shadow-[0_0_40px_rgba(16,185,129,0.25)]' 
+                      : 'text-[11vw] sm:text-[9.5vw] lg:text-[8rem] xl:text-[9.5rem] text-emerald-400/[0.22] drop-shadow-[0_0_40px_rgba(16,185,129,0.25)]')
+                  : (heroJobTitle.length > 20
+                      ? 'text-[7.5vw] sm:text-[6.5vw] lg:text-[5.5rem] xl:text-[6.8rem] text-slate-400/[0.18] drop-shadow-[0_0_40px_rgba(255,255,255,0.06)]'
+                      : 'text-[11vw] sm:text-[9.5vw] lg:text-[8rem] xl:text-[9.5rem] text-slate-300/[0.20] drop-shadow-[0_0_40px_rgba(255,255,255,0.08)]')
+            }`}>
+              {heroJobTitle}
+            </h2>
           </div>
 
-          {/* MAIN HERO GRID: Left Statement + Right Free-Standing Cutout */}
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center relative z-10">
+          {/* MAIN HERO STAGE: Left Bio/Signature + Center Cutout + Right Philosophy */}
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-end relative z-10 pt-12 sm:pt-16">
             
-            {/* Left Column: Script Accent, Bold Name, Subtitle, Bio, Action Buttons */}
-            <div className="lg:col-span-7 flex flex-col justify-center order-2 lg:order-1 pt-6 sm:pt-10">
+            {/* Left Column: Script greeting, Role Tag, Bio, and Signature */}
+            <div className="lg:col-span-3 flex flex-col justify-end order-2 lg:order-1 pb-4 sm:pb-8">
               
-              {/* Handwritten Script Accent ("Hello, I'm" from Rayhan poster) */}
-              <span className={`font-script text-3xl sm:text-4xl -rotate-6 mb-1 block select-none ${
-                isRed ? 'text-[#E50914]' : isGreen ? 'text-[#00FF88]' : 'text-zinc-300'
+              <div className={`font-oswald font-bold text-[11px] sm:text-xs uppercase tracking-[0.2em] mb-2 ${
+                isRed ? 'text-[#E50914]' : isGreen ? 'text-[#00FF88]' : 'text-slate-400'
+              }`}>
+                {isRed ? 'EXECUTIVE PORTFOLIO' : isGreen ? 'CLEAN ENERGY & ROBOTICS' : 'HARDWARE & SYSTEMS'}
+              </div>
+
+              {/* Handwritten Script Accent ("Hello, I'm" from reference poster) */}
+              <span className={`font-script text-3xl sm:text-4xl -rotate-6 mb-2 block select-none ${
+                isRed ? 'text-[#E50914]' : isGreen ? 'text-[#00FF88]' : 'text-slate-300'
               }`}>
                 Hello, I'm
               </span>
 
-              {/* Bold Condensed Name (Anton) */}
-              <h1 className="font-anton text-5xl sm:text-7xl lg:text-8xl xl:text-[6.8rem] uppercase text-white tracking-wide leading-[0.9] mb-3 select-none">
-                {member.name}
-              </h1>
-
-              {/* Role / Headline (Oswald Bold) */}
-              <div className={`font-oswald font-bold text-xs sm:text-sm tracking-wider uppercase mb-6 flex flex-wrap items-center gap-x-2 gap-y-1 ${
-                isRed ? 'text-[#E50914]' : isGreen ? 'text-emerald-400' : 'text-zinc-300'
-              }`}>
-                <span>{member.role}</span>
-                {member.department && (
-                  <>
-                    <span className="text-zinc-600">//</span>
-                    <span className="text-zinc-400 font-normal">{member.department}</span>
-                  </>
-                )}
-              </div>
-
-              {/* Bio Summary Paragraph (Inter / Poppins) */}
-              <p className="font-body-portfolio text-sm sm:text-base text-zinc-400 font-normal leading-relaxed mb-6 max-w-xl">
+              {/* Bio Summary Paragraph */}
+              <p className="font-body-portfolio text-xs sm:text-sm text-zinc-400 font-normal leading-relaxed mb-6">
                 {member.bio}
               </p>
 
-              {/* Quote pill */}
-              {member.quote && (
-                <div className={`border-l-2 pl-3.5 py-1 mb-8 rounded-r-lg max-w-md ${
-                  isRed 
-                    ? 'border-[#E50914] bg-red-950/20 text-zinc-300 font-mono text-xs' 
-                    : isGreen
-                      ? 'border-emerald-500 bg-emerald-950/25 text-emerald-100 text-xs'
-                      : 'border-white/30 bg-white/[0.02] text-zinc-400 text-xs'
-                }`}>
-                  "{member.quote}"
+              {/* Signature Accent (Exact match to reference poster) */}
+              <div className="pt-2 border-t border-white/[0.08]">
+                <div className="font-script text-2xl sm:text-3xl text-zinc-200 mb-0.5 select-none">
+                  {member.name}
                 </div>
-              )}
-
-              {/* Action Buttons */}
-              <div className="flex flex-wrap items-center gap-4">
-                <a
-                  href="#featured-work"
-                  className={`inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-full font-bold text-xs uppercase tracking-wider transition-all cursor-pointer ${
-                    isRed 
-                      ? 'bg-[#E50914] hover:bg-[#C8102E] text-white shadow-[0_0_25px_rgba(229,9,20,0.45)]' 
-                      : isGreen
-                        ? 'bg-[#00FF88] hover:bg-[#10B981] text-black font-extrabold shadow-[0_0_30px_rgba(0,255,136,0.35)]'
-                        : 'bg-white hover:bg-zinc-200 text-black shadow-[0_0_30px_rgba(255,255,255,0.2)]'
-                  }`}
-                >
-                  <span>VIEW MY WORK</span>
-                  <ArrowUpRight className="w-4 h-4 stroke-[2.5]" />
-                </a>
-
-                {member.resumeUrl && (
-                  <a
-                    href={member.resumeUrl}
-                    download={`${member.name.replace(/\s+/g, '_')}_Resume.pdf`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className={`inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-full font-bold text-xs uppercase tracking-wider transition-all cursor-pointer shadow-md ${
-                      isGreen
-                        ? 'bg-[#091511] hover:bg-[#0E201A] text-emerald-300 hover:text-white border border-emerald-500/25 hover:border-emerald-400/50'
-                        : 'bg-[#11141D] hover:bg-[#181D2A] text-zinc-300 hover:text-white border border-white/10 hover:border-white/25'
-                    }`}
-                  >
-                    <Download className={`w-4 h-4 ${isRed ? 'text-[#E50914]' : isGreen ? 'text-[#00FF88]' : 'text-zinc-400'}`} />
-                    <span>DOWNLOAD RESUME</span>
-                  </a>
-                )}
+                <div className="text-[10px] font-mono uppercase tracking-widest text-zinc-500">
+                  {member.division || 'ADB LABS CREW'}
+                </div>
               </div>
 
             </div>
 
-            {/* Right Column: FREE-STANDING CUTOUT IMAGE (NO BOUNDING BOX!) */}
-            <div className="lg:col-span-5 relative flex flex-col items-center justify-end order-1 lg:order-2 min-h-[380px] sm:min-h-[500px] lg:min-h-[600px]">
+            {/* Center Column: FREE-STANDING CUTOUT IMAGE (NO BOUNDING BOX!) */}
+            <div className="lg:col-span-6 relative flex flex-col items-center justify-end order-1 lg:order-2 min-h-[380px] sm:min-h-[500px] lg:min-h-[560px]">
               
-              <div className="relative w-full flex items-end justify-center lg:justify-end">
+              {/* Centered Glowing Halo Disc Behind Cutout (Matching Reference Poster) */}
+              {isRed ? (
+                <div className="absolute bottom-8 left-1/2 -translate-x-1/2 w-[300px] sm:w-[420px] lg:w-[460px] h-[300px] sm:h-[420px] lg:h-[460px] rounded-full bg-gradient-to-tr from-[#7A0C0C] via-[#B81D24] to-[#450A0A] shadow-[0_0_120px_rgba(229,9,20,0.45)] pointer-events-none z-0" />
+              ) : isGreen ? (
+                <>
+                  <div className="absolute bottom-8 left-1/2 -translate-x-1/2 w-[300px] sm:w-[420px] lg:w-[460px] h-[300px] sm:h-[420px] lg:h-[460px] rounded-full bg-gradient-to-tr from-[#062419] via-[#0B3D2B] to-[#041710] border border-emerald-500/20 shadow-[0_0_120px_rgba(16,185,129,0.3)] pointer-events-none z-0" />
+                  <div className="absolute bottom-4 left-1/2 -translate-x-1/2 w-[340px] sm:w-[480px] lg:w-[520px] h-[340px] sm:h-[480px] lg:h-[520px] rounded-full border border-emerald-500/20 pointer-events-none z-0" />
+                </>
+              ) : (
+                /* Dark Charcoal (Blue-Black) Halo Disc */
+                <>
+                  <div className="absolute bottom-8 left-1/2 -translate-x-1/2 w-[300px] sm:w-[420px] lg:w-[460px] h-[300px] sm:h-[420px] lg:h-[460px] rounded-full bg-gradient-to-tr from-[#0B101D] via-[#151E33] to-[#0A0E18] border border-slate-700/30 shadow-[0_0_120px_rgba(30,41,59,0.5)] pointer-events-none z-0" />
+                  <div className="absolute bottom-4 left-1/2 -translate-x-1/2 w-[340px] sm:w-[480px] lg:w-[520px] h-[340px] sm:h-[480px] lg:h-[520px] rounded-full border border-slate-700/30 pointer-events-none z-0" />
+                </>
+              )}
+
+              {/* The Cutout Image (Outside any box) */}
+              <div className="relative z-20 flex flex-col items-center">
                 {member.image ? (
-                  <div className="relative z-20">
+                  <div className="relative">
                     <img
                       src={member.image}
                       alt={member.name}
-                      className="max-h-[440px] sm:max-h-[540px] lg:max-h-[660px] w-auto object-contain filter drop-shadow-[0_25px_50px_rgba(0,0,0,0.95)] select-none pointer-events-none transition-transform duration-500 hover:scale-[1.02]"
+                      className="max-h-[440px] sm:max-h-[520px] lg:max-h-[600px] w-auto object-contain filter drop-shadow-[0_25px_50px_rgba(0,0,0,0.95)] select-none pointer-events-none transition-transform duration-500 hover:scale-[1.02]"
                       onError={(e) => {
                         e.target.style.display = 'none';
                       }}
                     />
 
                     {/* Gradient fade at bottom so subject blends seamlessly into page canvas */}
-                    <div className={`absolute inset-x-0 bottom-0 h-20 pointer-events-none z-30 ${
+                    <div className={`absolute inset-x-0 bottom-0 h-16 pointer-events-none z-30 ${
                       isRed 
-                        ? 'bg-gradient-to-t from-[#08080A] via-[#08080A]/70 to-transparent' 
+                        ? 'bg-gradient-to-t from-[#08080A] via-[#08080A]/60 to-transparent' 
                         : isGreen
-                          ? 'bg-gradient-to-t from-[#060D0A] via-[#060D0A]/70 to-transparent'
-                          : 'bg-gradient-to-t from-[#090B0E] via-[#090B0E]/70 to-transparent'
+                          ? 'bg-gradient-to-t from-[#060D0A] via-[#060D0A]/60 to-transparent'
+                          : 'bg-gradient-to-t from-[#0B0E14] via-[#0B0E14]/60 to-transparent'
                     }`} />
                   </div>
                 ) : (
-                  <div className={`w-72 h-96 rounded-3xl border flex flex-col items-center justify-center text-center p-6 z-20 ${
-                    isGreen ? 'bg-[#091511] border-emerald-500/20' : 'bg-[#11141D] border-white/10'
+                  <div className={`w-64 sm:w-72 h-80 sm:h-96 rounded-3xl border flex flex-col items-center justify-center text-center p-6 z-20 ${
+                    isGreen ? 'bg-[#091511] border-emerald-500/20' : isRed ? 'bg-[#14080A] border-red-900/40' : 'bg-[#101522] border-slate-800'
                   }`}>
                     <div className={`w-24 h-24 rounded-full flex items-center justify-center text-3xl font-extrabold text-white mb-4 ${
                       isRed 
                         ? 'bg-[#E50914]/20 border border-[#E50914]' 
                         : isGreen 
                           ? 'bg-emerald-500/20 border border-[#00FF88] text-[#00FF88]' 
-                          : 'bg-white/10 border border-white/20'
+                          : 'bg-slate-800 border border-slate-700'
                     }`}>
                       {member.name.split(' ').map(n => n[0]).join('')}
                     </div>
@@ -638,27 +570,96 @@ export default function MemberPortfolio({ employeeCode, member: propMember, onBa
                     <span className="text-xs text-zinc-400 font-mono mt-1">{member.role}</span>
                   </div>
                 )}
-
-                {/* Floating Availability Badge (AV / Rayhan Reference) */}
-                <div className={`absolute bottom-10 right-0 sm:-right-4 z-40 backdrop-blur-md px-3.5 py-2 rounded-xl text-right hidden sm:block ${
-                  isRed 
-                    ? 'bg-[#14080A]/90 border border-red-900/40 text-red-200' 
-                    : isGreen
-                      ? 'bg-[#091511]/90 border border-emerald-500/30 text-emerald-300'
-                      : 'bg-[#11141D]/90 border border-white/10 text-zinc-300'
-                }`}>
-                  <div className="text-[10px] font-mono uppercase tracking-widest text-zinc-400">
-                    AVAILABLE FOR
-                  </div>
-                  <div className={`text-xs font-bold tracking-wider uppercase ${
-                    isRed ? 'text-[#E50914]' : isGreen ? 'text-[#00FF88]' : 'text-white'
-                  }`}>
-                    FREELANCE / R&D ↗
-                  </div>
-                </div>
-
               </div>
 
+            </div>
+
+            {/* Right Column: Engineering Philosophy, Location & Availability */}
+            <div className="lg:col-span-3 flex flex-col justify-end text-left lg:text-right order-3 pb-4 sm:pb-8">
+              
+              <div className="font-oswald font-bold text-xs uppercase tracking-widest text-zinc-300 mb-2">
+                DESIGN THAT INSPIRES. CODE THAT PERFORMS.
+              </div>
+
+              {/* Philosophy Quote */}
+              <p className="font-body-portfolio text-xs text-zinc-400 italic leading-relaxed mb-6">
+                "{member.quote || "Building bold, uncompromising hardware engineered for the toughest real-world challenges."}"
+              </p>
+
+              {/* Location & Availability Badge */}
+              <div className="space-y-2 pt-2 border-t border-white/[0.08]">
+                <div className="text-[11px] font-mono text-zinc-400 flex items-center lg:justify-end gap-1.5">
+                  <MapPin className="w-3.5 h-3.5 text-zinc-500 shrink-0" />
+                  <span>{member.location || 'Chennai, India'}</span>
+                </div>
+                <div className={`text-xs font-bold tracking-wider uppercase font-mono ${
+                  isRed ? 'text-[#E50914]' : isGreen ? 'text-[#00FF88]' : 'text-slate-300'
+                }`}>
+                  AVAILABLE FOR R&D ↗
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+
+          {/* ======================================================== */}
+          {/* PERSON'S NAME & ACTIONS - DIRECTLY BELOW PERSON'S IMAGE  */}
+          {/* ======================================================== */}
+          <div className="mt-8 sm:mt-12 pt-6 sm:pt-8 border-t border-white/[0.08] text-center relative z-20">
+            
+            {/* Person's Name in Anton */}
+            <h1 className="font-anton text-4xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-[6.8rem] uppercase text-white tracking-wide leading-none mb-3 select-none drop-shadow-xl">
+              {member.name}
+            </h1>
+
+            {/* Role / Headline (Oswald Bold) */}
+            <div className={`font-oswald font-bold text-xs sm:text-sm md:text-base tracking-[0.2em] uppercase mb-6 flex items-center justify-center gap-2 flex-wrap ${
+              isRed ? 'text-[#E50914]' : isGreen ? 'text-[#00FF88]' : 'text-slate-300'
+            }`}>
+              <span>{member.role}</span>
+              {member.department && (
+                <>
+                  <span className="text-zinc-600">//</span>
+                  <span className="text-zinc-400 font-normal">{member.department}</span>
+                </>
+              )}
+            </div>
+
+            {/* Centered Action Buttons */}
+            <div className="flex flex-wrap items-center justify-center gap-4">
+              <a
+                href="#featured-work"
+                className={`inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-full font-bold text-xs uppercase tracking-wider transition-all cursor-pointer ${
+                  isRed 
+                    ? 'bg-[#E50914] hover:bg-[#C8102E] text-white shadow-[0_0_25px_rgba(229,9,20,0.45)]' 
+                    : isGreen
+                      ? 'bg-[#00FF88] hover:bg-[#10B981] text-black font-extrabold shadow-[0_0_30px_rgba(0,255,136,0.35)]'
+                      : 'bg-white hover:bg-slate-200 text-black shadow-[0_0_30px_rgba(255,255,255,0.2)]'
+                }`}
+              >
+                <span>VIEW MY WORK</span>
+                <ArrowUpRight className="w-4 h-4 stroke-[2.5]" />
+              </a>
+
+              {member.resumeUrl && (
+                <a
+                  href={member.resumeUrl}
+                  download={`${member.name.replace(/\s+/g, '_')}_Resume.pdf`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={`inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-full font-bold text-xs uppercase tracking-wider transition-all cursor-pointer shadow-md ${
+                    isGreen
+                      ? 'bg-[#091511] hover:bg-[#0E201A] text-emerald-300 hover:text-white border border-emerald-500/25 hover:border-emerald-400/50'
+                      : isRed
+                        ? 'bg-[#180A0C] hover:bg-[#250F13] text-zinc-300 hover:text-white border border-red-900/40 hover:border-red-600/50'
+                        : 'bg-[#101522] hover:bg-[#161D2E] text-slate-300 hover:text-white border border-slate-700/60 hover:border-slate-500/80'
+                  }`}
+                >
+                  <Download className={`w-4 h-4 ${isRed ? 'text-[#E50914]' : isGreen ? 'text-[#00FF88]' : 'text-slate-400'}`} />
+                  <span>DOWNLOAD RESUME</span>
+                </a>
+              )}
             </div>
 
           </div>
@@ -673,10 +674,10 @@ export default function MemberPortfolio({ employeeCode, member: propMember, onBa
             ? 'bg-[#0E0608]/90 border border-red-950/80 shadow-[0_0_30px_rgba(229,9,20,0.1)]' 
             : isGreen
               ? 'bg-[#091511]/90 border border-emerald-500/20 shadow-[0_0_35px_rgba(16,185,129,0.1)]'
-              : 'bg-[#11151F]/90 border border-white/[0.08]'
+              : 'bg-[#101522]/90 border border-slate-800/80 shadow-[0_4px_30px_rgba(0,0,0,0.5)]'
         }`}>
           <div className={`grid grid-cols-2 md:grid-cols-4 divide-y md:divide-y-0 md:divide-x ${
-            isRed ? 'divide-red-950/60' : isGreen ? 'divide-emerald-950/60' : 'divide-white/[0.08]'
+            isRed ? 'divide-red-950/60' : isGreen ? 'divide-emerald-950/60' : 'divide-slate-800/80'
           }`}>
             {(member.stats || [
               { label: 'YEARS EXPERIENCE', value: '6+' },
@@ -689,7 +690,7 @@ export default function MemberPortfolio({ employeeCode, member: propMember, onBa
                 className={`p-4 sm:p-6 text-center ${idx > 0 && idx % 2 === 0 ? 'border-t sm:border-t-0' : ''}`}
               >
                 <div className="inline-flex items-center justify-center gap-2 mb-2">
-                  <span className={`text-sm ${isRed ? 'text-[#E50914]' : isGreen ? 'text-[#00FF88]' : 'text-white'}`}>✦</span>
+                  <span className={`text-sm ${isRed ? 'text-[#E50914]' : isGreen ? 'text-[#00FF88]' : 'text-slate-300'}`}>✦</span>
                   <div className={`font-bebas text-5xl sm:text-6xl tracking-wide leading-none ${
                     isRed ? 'text-[#E50914]' : isGreen ? 'text-[#00FF88]' : 'text-white'
                   }`}>
@@ -736,7 +737,7 @@ export default function MemberPortfolio({ employeeCode, member: propMember, onBa
                     ? 'bg-[#0E0608] border border-red-950/80 hover:border-red-600/50' 
                     : isGreen
                       ? 'bg-[#091511] border border-emerald-500/20 hover:border-emerald-400/50 hover:shadow-[0_0_25px_rgba(16,185,129,0.12)]'
-                      : 'bg-[#11151F] border border-white/[0.08] hover:border-white/20'
+                      : 'bg-[#101522] border border-slate-800/80 hover:border-slate-600/60 hover:shadow-[0_4px_25px_rgba(0,0,0,0.4)]'
                 }`}
               >
                 <div>
@@ -770,7 +771,7 @@ export default function MemberPortfolio({ employeeCode, member: propMember, onBa
                       ? 'bg-red-950/40 border-red-900/60 group-hover:border-[#E50914] group-hover:bg-[#E50914] text-zinc-300 group-hover:text-white' 
                       : isGreen
                         ? 'bg-emerald-950/50 border-emerald-800/60 group-hover:border-[#00FF88] group-hover:bg-[#00FF88] text-emerald-200 group-hover:text-black'
-                        : 'bg-[#161B26] border border-white/10 group-hover:border-white group-hover:bg-white text-zinc-300 group-hover:text-black'
+                        : 'bg-[#141B2A] border border-slate-700/60 group-hover:border-white group-hover:bg-white text-zinc-300 group-hover:text-black'
                   }`}>
                     <ArrowUpRight className="w-4 h-4" />
                   </div>
@@ -960,7 +961,7 @@ export default function MemberPortfolio({ employeeCode, member: propMember, onBa
                 <div className={`p-6 rounded-2xl ${
                   isGreen 
                     ? 'bg-[#091511] border border-emerald-500/20 shadow-lg' 
-                    : 'bg-[#11151F] border border-white/[0.08]'
+                    : 'bg-[#101522] border border-slate-800/80 shadow-md'
                 }`}>
                   <div className="grid grid-cols-2 gap-4">
                     {(
@@ -969,7 +970,7 @@ export default function MemberPortfolio({ employeeCode, member: propMember, onBa
                       ['Figma', 'Adobe Photoshop', 'Adobe Illustrator', 'Webflow', 'Framer', 'Spline', 'Adobe After Effects', 'Notion']
                     ).slice(0, 8).map((tool, tIdx) => (
                       <div key={tIdx} className="flex items-center gap-2.5 py-1 text-xs text-zinc-300">
-                        <div className={`w-2 h-2 rounded-full ${isGreen ? 'bg-[#00FF88]' : 'bg-white/40'}`} />
+                        <div className={`w-2 h-2 rounded-full ${isGreen ? 'bg-[#00FF88]' : 'bg-slate-400'}`} />
                         <span className="font-medium text-white font-mono">{tool}</span>
                       </div>
                     ))}
@@ -988,7 +989,7 @@ export default function MemberPortfolio({ employeeCode, member: propMember, onBa
                 <div className={`p-6 rounded-2xl space-y-4 ${
                   isGreen 
                     ? 'bg-[#091511] border border-emerald-500/20 shadow-lg' 
-                    : 'bg-[#11151F] border border-white/[0.08]'
+                    : 'bg-[#101522] border border-slate-800/80 shadow-md'
                 }`}>
                   {(member.education || [
                     { degree: 'Google UX Design Professional Certificate', institution: 'Coursera', period: '2022' },
@@ -998,7 +999,7 @@ export default function MemberPortfolio({ employeeCode, member: propMember, onBa
                       <div className={`w-8 h-8 rounded-lg flex items-center justify-center shrink-0 mt-0.5 ${
                         isGreen 
                           ? 'bg-emerald-500/[0.1] border border-emerald-500/25 text-[#00FF88]' 
-                          : 'bg-white/[0.05] border border-white/10 text-white'
+                          : 'bg-slate-800/60 border border-slate-700/60 text-slate-300'
                       }`}>
                         <Award className="w-4 h-4" />
                       </div>
@@ -1026,7 +1027,7 @@ export default function MemberPortfolio({ employeeCode, member: propMember, onBa
           <section className={`mb-24 rounded-2xl sm:rounded-3xl p-6 sm:p-8 ${
             isGreen 
               ? 'bg-[#091511] border border-emerald-500/20 shadow-lg' 
-              : 'bg-[#11151F] border border-white/[0.08]'
+              : 'bg-[#101522] border border-slate-800/80 shadow-md'
           }`}>
             <div className="mb-6 pb-4 border-b border-white/[0.08]">
               <h2 className={`font-oswald font-bold text-sm uppercase tracking-[0.2em] ${
@@ -1054,7 +1055,7 @@ export default function MemberPortfolio({ employeeCode, member: propMember, onBa
                     <div className={`w-8 h-8 rounded-lg flex items-center justify-center my-2 ${
                       isGreen 
                         ? 'bg-emerald-500/[0.1] border border-emerald-500/25 text-[#00FF88]' 
-                        : 'bg-white/[0.04] border border-white/10 text-white'
+                        : 'bg-slate-800/60 border border-slate-700/60 text-slate-300'
                     }`}>
                       <StepIcon className="w-4 h-4" />
                     </div>
@@ -1078,7 +1079,7 @@ export default function MemberPortfolio({ employeeCode, member: propMember, onBa
             ? 'bg-gradient-to-r from-[#120608] via-[#1F0A0E] to-[#120608] border-red-900/40 shadow-[0_0_40px_rgba(229,9,20,0.15)]' 
             : isGreen
               ? 'bg-gradient-to-r from-[#071410] via-[#0C241C] to-[#071410] border-emerald-500/30 shadow-[0_0_40px_rgba(16,185,129,0.15)]'
-              : 'bg-gradient-to-r from-[#11151F] via-[#161B26] to-[#11151F] border-white/[0.08]'
+              : 'bg-gradient-to-r from-[#0E131E] via-[#121828] to-[#0E131E] border-slate-800/80 shadow-[0_4px_30px_rgba(0,0,0,0.5)]'
         }`}>
           
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
@@ -1104,7 +1105,7 @@ export default function MemberPortfolio({ employeeCode, member: propMember, onBa
                       ? 'bg-[#E50914] hover:bg-[#C8102E] text-white shadow-[0_0_20px_rgba(229,9,20,0.4)]' 
                       : isGreen
                         ? 'bg-[#00FF88] hover:bg-[#10B981] text-black font-extrabold shadow-[0_0_20px_rgba(0,255,136,0.35)]'
-                        : 'bg-white hover:bg-zinc-200 text-black shadow-[0_0_20px_rgba(255,255,255,0.2)]'
+                        : 'bg-white hover:bg-slate-200 text-black shadow-[0_0_20px_rgba(255,255,255,0.2)]'
                   }`}
                 >
                   <span>LET'S WORK TOGETHER</span>
@@ -1115,30 +1116,30 @@ export default function MemberPortfolio({ employeeCode, member: propMember, onBa
 
             {/* Right: Contact details */}
             <div className={`lg:col-span-4 space-y-2.5 pt-4 lg:pt-0 border-t lg:border-t-0 lg:border-l lg:pl-8 text-xs font-mono ${
-              isRed ? 'border-red-950/80' : isGreen ? 'border-emerald-950/80' : 'border-white/[0.08]'
+              isRed ? 'border-red-950/80' : isGreen ? 'border-emerald-950/80' : 'border-slate-800/80'
             }`}>
               {member.socials?.email && (
                 <a 
                   href={`mailto:${member.socials.email}`}
                   className="flex items-center gap-2.5 text-zinc-300 hover:text-white transition-colors"
                 >
-                  <Mail className={`w-3.5 h-3.5 shrink-0 ${isRed ? 'text-[#E50914]' : isGreen ? 'text-[#00FF88]' : 'text-zinc-400'}`} />
+                  <Mail className={`w-3.5 h-3.5 shrink-0 ${isRed ? 'text-[#E50914]' : isGreen ? 'text-[#00FF88]' : 'text-slate-400'}`} />
                   <span className="truncate">{member.socials.email}</span>
                 </a>
               )}
 
               <div className="flex items-center gap-2.5 text-zinc-400">
-                <Phone className={`w-3.5 h-3.5 shrink-0 ${isRed ? 'text-[#E50914]' : isGreen ? 'text-[#00FF88]' : 'text-zinc-400'}`} />
+                <Phone className={`w-3.5 h-3.5 shrink-0 ${isRed ? 'text-[#E50914]' : isGreen ? 'text-[#00FF88]' : 'text-slate-400'}`} />
                 <span>+91 83107 04488</span>
               </div>
 
               <div className="flex items-center gap-2.5 text-zinc-400">
-                <MapPin className={`w-3.5 h-3.5 shrink-0 ${isRed ? 'text-[#E50914]' : isGreen ? 'text-[#00FF88]' : 'text-zinc-400'}`} />
+                <MapPin className={`w-3.5 h-3.5 shrink-0 ${isRed ? 'text-[#E50914]' : isGreen ? 'text-[#00FF88]' : 'text-slate-400'}`} />
                 <span>{member.location || 'Coimbatore, India'}</span>
               </div>
 
               <div className="flex items-center gap-2.5 text-zinc-400">
-                <Globe className={`w-3.5 h-3.5 shrink-0 ${isRed ? 'text-[#E50914]' : isGreen ? 'text-[#00FF88]' : 'text-zinc-400'}`} />
+                <Globe className={`w-3.5 h-3.5 shrink-0 ${isRed ? 'text-[#E50914]' : isGreen ? 'text-[#00FF88]' : 'text-slate-400'}`} />
                 <span>www.adblabs.in</span>
               </div>
             </div>
@@ -1147,7 +1148,7 @@ export default function MemberPortfolio({ employeeCode, member: propMember, onBa
 
           {/* Bottom Copyright & Social Icons Row */}
           <div className={`mt-8 pt-6 border-t flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-mono text-zinc-500 ${
-            isRed ? 'border-red-950/60' : isGreen ? 'border-emerald-950/60' : 'border-white/[0.08]'
+            isRed ? 'border-red-950/60' : isGreen ? 'border-emerald-950/60' : 'border-slate-800/80'
           }`}>
             <div>
               © 2026 {member.name}. All Rights Reserved.
