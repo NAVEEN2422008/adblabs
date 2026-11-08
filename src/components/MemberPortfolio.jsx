@@ -28,13 +28,16 @@ import {
   FileText,
   Sparkles,
   Search,
-  Lightbulb,
-  Compass,
+  Target,
+  PenTool,
   Code2,
   Rocket,
-  Palette,
-  Activity,
-  Maximize2,
+  Monitor,
+  MousePointer2,
+  Box,
+  Globe,
+  Users,
+  Trophy,
   X
 } from 'lucide-react';
 import { TEAM_MEMBERS } from '../data/teamData';
@@ -58,111 +61,111 @@ function GitHubIcon(props) {
 // Capability Icon Helper
 function getCapabilityIcon(iconName) {
   switch (iconName) {
-    case 'Cpu': return <Cpu className="w-5 h-5 text-[#00FF66]" />;
-    case 'Bot': return <Bot className="w-5 h-5 text-[#00FF66]" />;
-    case 'Zap': return <Zap className="w-5 h-5 text-[#00FF66]" />;
-    case 'Layers': return <Layers className="w-5 h-5 text-[#00FF66]" />;
-    case 'Wrench': return <Wrench className="w-5 h-5 text-[#00FF66]" />;
-    case 'BarChart3': return <BarChart3 className="w-5 h-5 text-[#00FF66]" />;
-    case 'ShieldCheck': return <ShieldCheck className="w-5 h-5 text-[#00FF66]" />;
-    case 'Terminal': return <Terminal className="w-5 h-5 text-[#00FF66]" />;
-    case 'Award': return <Award className="w-5 h-5 text-[#00FF66]" />;
-    default: return <Cpu className="w-5 h-5 text-[#00FF66]" />;
+    case 'PenTool':
+    case 'Cpu': return <PenTool className="w-5 h-5 text-white/90" />;
+    case 'Monitor':
+    case 'Bot': return <Monitor className="w-5 h-5 text-white/90" />;
+    case 'Sparkles':
+    case 'Zap': return <Sparkles className="w-5 h-5 text-white/90" />;
+    case 'MousePointer2':
+    case 'Layers': return <MousePointer2 className="w-5 h-5 text-white/90" />;
+    case 'Box':
+    case 'Wrench': return <Box className="w-5 h-5 text-white/90" />;
+    case 'BarChart3': return <BarChart3 className="w-5 h-5 text-white/90" />;
+    case 'ShieldCheck': return <ShieldCheck className="w-5 h-5 text-white/90" />;
+    case 'Terminal': return <Terminal className="w-5 h-5 text-white/90" />;
+    case 'Award': return <Award className="w-5 h-5 text-white/90" />;
+    default: return <Cpu className="w-5 h-5 text-white/90" />;
   }
 }
 
-// Visual Mockup Preview for Selected Projects
-function ProjectMockupPreview({ index, tag, title }) {
-  // Variations based on index for ultra-clean tech visuals
+// Visual Mockups for the 3 Featured Work Cards (Exact replica of AV poster cards)
+function FeaturedWorkMockup({ index }) {
   if (index === 0) {
+    // Finance Dashboard mockup
     return (
-      <div className="w-full h-full bg-gradient-to-br from-[#0F141C] via-[#0A0D12] to-[#06080B] p-4 flex flex-col justify-between relative overflow-hidden border border-white/5 rounded-t-2xl">
-        <div className="flex items-center justify-between border-b border-white/5 pb-2">
+      <div className="w-full h-full bg-[#080A0E] p-4 flex flex-col justify-between relative overflow-hidden border-b border-white/[0.06]">
+        <div className="flex items-center justify-between border-b border-white/[0.06] pb-2">
           <div className="flex items-center gap-1.5">
-            <span className="w-2 h-2 rounded-full bg-red-500/80" />
-            <span className="w-2 h-2 rounded-full bg-amber-500/80" />
-            <span className="w-2 h-2 rounded-full bg-[#00FF66]/80" />
+            <div className="w-2 h-2 rounded-full bg-white/20" />
+            <div className="w-2 h-2 rounded-full bg-white/20" />
+            <div className="w-2 h-2 rounded-full bg-white/20" />
           </div>
-          <span className="text-[10px] font-mono text-[#00FF66] tracking-wider">LIVE TELEMETRY</span>
+          <span className="text-[10px] font-mono text-zinc-400">FINANCE OS</span>
         </div>
         
-        {/* Mockup Chart Graphic */}
-        <div className="my-2 relative flex items-center justify-center">
-          <svg className="w-full h-20 text-[#00FF66]/80" viewBox="0 0 200 60" fill="none">
-            <path 
-              d="M 0 45 Q 30 10, 60 30 T 120 20 T 160 38 T 200 15" 
-              stroke="currentColor" 
-              strokeWidth="2.5" 
-              strokeLinecap="round" 
-            />
-            <path 
-              d="M 0 45 Q 30 10, 60 30 T 120 20 T 160 38 T 200 15 L 200 60 L 0 60 Z" 
-              fill="url(#chartGrad)" 
-              opacity="0.25" 
-            />
-            <defs>
-              <linearGradient id="chartGrad" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0%" stopColor="#00FF66" stopOpacity="0.8" />
-                <stop offset="100%" stopColor="#00FF66" stopOpacity="0" />
-              </linearGradient>
-            </defs>
-          </svg>
-          <div className="absolute top-2 right-4 bg-[#111622]/90 border border-white/10 px-2 py-1 rounded text-[11px] font-mono text-white">
-            6.144 kWh
+        <div className="my-2 space-y-2">
+          <div className="text-xl font-bold font-mono text-white tracking-tight">
+            $24,860.50
+          </div>
+          {/* Wave bar chart */}
+          <div className="h-12 flex items-end gap-1.5 pt-2">
+            {[40, 65, 30, 85, 55, 95, 70, 45, 90, 60, 100, 75].map((h, i) => (
+              <div 
+                key={i} 
+                className="flex-1 bg-white/20 hover:bg-white/40 transition-colors rounded-t-sm"
+                style={{ height: `${h}%` }}
+              />
+            ))}
           </div>
         </div>
 
-        <div className="flex items-center justify-between text-[10px] font-mono text-zinc-400">
-          <span>BMS STATUS: NOMINAL</span>
-          <span className="text-[#00FF66]">99.8% EFF</span>
+        <div className="flex items-center justify-between text-[10px] font-mono text-zinc-500">
+          <span>ANALYTICS ENGINE</span>
+          <span className="text-zinc-300">LIVE FEED</span>
         </div>
       </div>
     );
   }
 
   if (index === 1) {
+    // Elevate Your Brand 3D sculpture mockup
     return (
-      <div className="w-full h-full bg-gradient-to-br from-[#12161F] via-[#0C0F16] to-[#080A0E] p-4 flex flex-col justify-between relative overflow-hidden border border-white/5 rounded-t-2xl">
-        <div className="flex items-center justify-between border-b border-white/5 pb-2">
-          <span className="text-[10px] font-mono text-zinc-400 uppercase tracking-wider">KINEMATICS ENGINE</span>
-          <span className="w-2 h-2 rounded-full bg-[#00FF66] animate-pulse" />
-        </div>
-
-        {/* 3D Wireframe / Node Diagram representation */}
-        <div className="my-3 flex items-center justify-center relative">
-          <div className="w-24 h-24 rounded-full border border-dashed border-white/20 flex items-center justify-center animate-[spin_20s_linear_infinite]">
-            <div className="w-16 h-16 rounded-full border border-[#00FF66]/40 flex items-center justify-center">
-              <Bot className="w-7 h-7 text-[#00FF66]" />
-            </div>
+      <div className="w-full h-full bg-[#090C12] p-4 flex flex-col justify-between relative overflow-hidden border-b border-white/[0.06]">
+        <div className="flex items-center justify-between border-b border-white/[0.06] pb-2">
+          <span className="text-[10px] font-mono text-zinc-400 uppercase tracking-widest">NEXORA</span>
+          <div className="flex items-center gap-2 text-[9px] font-mono text-zinc-500">
+            <span>HOME</span>
+            <span>ABOUT</span>
+            <span>SERVICES</span>
           </div>
-          <div className="absolute inset-0 bg-radial from-[#00FF66]/10 to-transparent pointer-events-none" />
         </div>
 
-        <div className="flex items-center justify-between text-[10px] font-mono text-zinc-400">
-          <span>12-DOF ACTUATION</span>
-          <span className="text-zinc-300">ROS2 HUMBLE</span>
+        {/* 3D abstract metallic torus */}
+        <div className="my-2 flex items-center justify-center relative">
+          <div className="w-20 h-20 rounded-full bg-gradient-to-tr from-zinc-700 via-zinc-400 to-zinc-900 shadow-[inset_0_0_20px_rgba(255,255,255,0.4)] flex items-center justify-center">
+            <div className="w-10 h-10 rounded-full bg-[#090C12]" />
+          </div>
+          <div className="absolute inset-0 bg-radial from-white/10 to-transparent pointer-events-none" />
+        </div>
+
+        <div className="flex items-center justify-between text-[10px] font-mono text-zinc-500">
+          <span>BRAND SYSTEM</span>
+          <span className="text-zinc-300">INTERACTION</span>
         </div>
       </div>
     );
   }
 
+  // Wellness Companion mobile phone mockup
   return (
-    <div className="w-full h-full bg-gradient-to-br from-[#131822] via-[#0E121A] to-[#07090D] p-4 flex flex-col justify-between relative overflow-hidden border border-white/5 rounded-t-2xl">
-      <div className="flex items-center justify-between border-b border-white/5 pb-2">
-        <span className="text-[10px] font-mono text-zinc-400 uppercase tracking-wider">ARCHITECTURE STACK</span>
-        <span className="text-[10px] font-mono text-[#00FF66] bg-[#00FF66]/10 px-1.5 py-0.5 rounded">V2.4</span>
+    <div className="w-full h-full bg-[#080B10] p-4 flex flex-col justify-between relative overflow-hidden border-b border-white/[0.06]">
+      <div className="flex items-center justify-between border-b border-white/[0.06] pb-2">
+        <span className="text-[10px] font-mono text-zinc-400 uppercase tracking-wider">COMPANION APP</span>
+        <span className="w-2 h-2 rounded-full bg-white/40" />
       </div>
 
-      {/* Code / Block schematic preview */}
-      <div className="my-2 space-y-1.5 font-mono text-[10px] text-zinc-400 bg-[#07090E] p-2.5 rounded-lg border border-white/5">
-        <div className="text-zinc-500">// Solar Inverter MPPT Protocol</div>
-        <div className="text-[#00FF66]">const powerBus = initCANbus(500k);</div>
-        <div className="text-zinc-300">voltage: 51.2V | current: 120A</div>
+      {/* Phone container */}
+      <div className="my-1 mx-auto w-24 h-24 rounded-2xl bg-[#0F1420] border border-white/20 p-2 flex flex-col items-center justify-center relative shadow-lg">
+        <div className="w-14 h-14 rounded-full border-2 border-white/30 border-t-white flex items-center justify-center">
+          <span className="text-xs font-mono font-bold text-white">72%</span>
+        </div>
+        <span className="text-[8px] font-mono text-zinc-400 mt-1">BATTERY CHARGE</span>
       </div>
 
-      <div className="flex items-center justify-between text-[10px] font-mono text-zinc-400">
-        <span>CLEAN POWER STACK</span>
-        <span className="text-white">FIELD-READY</span>
+      <div className="flex items-center justify-between text-[10px] font-mono text-zinc-500">
+        <span>MOBILE INTERFACE</span>
+        <span className="text-zinc-300">HEALTH & IOT</span>
       </div>
     </div>
   );
@@ -171,7 +174,6 @@ function ProjectMockupPreview({ index, tag, title }) {
 export default function MemberPortfolio({ employeeCode, member: propMember, onBack, onSelectMember }) {
   const [copied, setCopied] = useState(false);
   const [showBarcodeModal, setShowBarcodeModal] = useState(false);
-  const [activeTheme, setActiveTheme] = useState('emerald'); // 'emerald' | 'charcoal' | 'crimson'
 
   // Find member index
   const currentIndex = TEAM_MEMBERS.findIndex(
@@ -197,21 +199,21 @@ export default function MemberPortfolio({ employeeCode, member: propMember, onBa
 
   if (!member) {
     return (
-      <div className="min-h-[80vh] flex items-center justify-center px-4 py-24 bg-[#080A0E]">
-        <div className="max-w-md w-full bg-[#0D1016] border border-red-500/30 rounded-3xl p-8 text-center relative overflow-hidden shadow-2xl">
-          <div className="w-16 h-16 mx-auto mb-4 rounded-2xl bg-red-500/10 border border-red-500/30 flex items-center justify-center text-red-400">
+      <div className="min-h-screen flex items-center justify-center px-4 py-24 bg-[#090B0E] text-white">
+        <div className="max-w-md w-full bg-[#11141D] border border-white/10 rounded-3xl p-8 text-center shadow-2xl">
+          <div className="w-16 h-16 mx-auto mb-4 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-zinc-300">
             <ShieldCheck className="w-8 h-8" />
           </div>
-          <span className="text-xs font-mono text-red-400 uppercase tracking-widest block mb-1">
+          <span className="text-xs font-mono text-zinc-400 uppercase tracking-widest block mb-1">
             404 // Identity Record Not Found
           </span>
           <h2 className="text-2xl font-bold text-white mb-2">Employee ID Invalid</h2>
           <p className="text-sm text-zinc-400 mb-6">
-            No active portfolio found matching identifier <code className="text-[#00FF66] bg-[#050B0A] px-2 py-0.5 rounded font-mono">{employeeCode}</code>.
+            No active portfolio found matching identifier <code className="text-white bg-[#080A0E] px-2 py-0.5 rounded font-mono">{employeeCode}</code>.
           </p>
           <button
             onClick={onBack}
-            className="w-full inline-flex items-center justify-center gap-2 py-3 px-6 rounded-xl bg-[#00FF66] hover:bg-[#00E55C] text-black font-bold text-sm transition-all shadow-[0_0_20px_rgba(0,255,102,0.3)]"
+            className="w-full inline-flex items-center justify-center gap-2 py-3 px-6 rounded-full bg-white hover:bg-zinc-200 text-black font-bold text-xs uppercase tracking-wider transition-all"
           >
             <ArrowLeft className="w-4 h-4" />
             <span>Browse All Team Portfolios</span>
@@ -221,225 +223,122 @@ export default function MemberPortfolio({ employeeCode, member: propMember, onBa
     );
   }
 
-  // Derive display watermark word for the gigantic background depth typography
-  // In the reference posters: "PORTFOLIO" or "DIGITAL DESIGNER"
-  const displayWatermark = "PORTFOLIO";
+  // Derive display headline for the giant background text (e.g. DIGITAL DESIGNER / ROBOTICS ENGINEER / HARDWARE ARCHITECT)
+  const displayHeadline = member.headline ? member.headline.toUpperCase() : `${member.role.toUpperCase()}`;
 
   return (
-    <div className="min-h-screen bg-[#07090C] text-[#E4E7EB] pt-20 pb-28 relative overflow-hidden selection:bg-[#00FF66] selection:text-black">
+    <div className="min-h-screen bg-[#090B0E] text-[#D8DCE3] pt-6 pb-24 relative overflow-x-hidden selection:bg-white selection:text-black">
       
-      {/* ======================================================== */}
-      {/* ATMOSPHERIC BACKGROUND LIGHTING & VIGNETTE               */}
-      {/* ======================================================== */}
-      <div className="absolute inset-0 bg-gradient-to-b from-[#090C11] via-[#07090C] to-[#050709] pointer-events-none" />
-
-      {/* Dynamic Halo Disc Behind Hero Area */}
-      <div 
-        className={`absolute top-[160px] left-1/2 -translate-x-1/2 w-[340px] sm:w-[500px] lg:w-[680px] h-[340px] sm:h-[500px] lg:h-[680px] rounded-full blur-[130px] sm:blur-[160px] pointer-events-none transition-colors duration-700 ${
-          activeTheme === 'crimson' 
-            ? 'bg-rose-600/20' 
-            : activeTheme === 'charcoal' 
-            ? 'bg-white/10' 
-            : 'bg-[#00FF66]/15'
-        }`}
-      />
-
-      {/* Secondary ambient fill */}
-      <div className="absolute top-[40%] right-[-10%] w-[500px] h-[500px] bg-emerald-700/8 rounded-full blur-[200px] pointer-events-none" />
-      <div className="absolute bottom-[20%] left-[-10%] w-[500px] h-[500px] bg-teal-600/8 rounded-full blur-[200px] pointer-events-none" />
+      {/* Subtle Studio Vignette Glow (Matching the AV reference image) */}
+      <div className="absolute top-0 right-1/4 w-[700px] h-[700px] bg-white/[0.04] rounded-full blur-[180px] pointer-events-none" />
+      <div className="absolute top-[40%] left-[-100px] w-[500px] h-[500px] bg-white/[0.02] rounded-full blur-[200px] pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
         {/* ======================================================== */}
-        {/* TOP EDITORIAL CONTROL BAR                                */}
+        {/* TOP BAR / NAVIGATION (Exact layout of AV Reference)      */}
         {/* ======================================================== */}
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8 pb-5 border-b border-white/[0.08]">
-          <div className="flex items-center gap-2.5 text-xs font-mono text-zinc-400">
+        <header className="flex items-center justify-between py-6 border-b border-white/[0.08] mb-8">
+          
+          {/* Logo */}
+          <div className="flex items-center gap-3">
             <button 
               onClick={() => window.location.href = '/'}
-              className="hover:text-white transition-colors"
+              className="text-2xl font-black tracking-tighter text-white font-heading hover:opacity-80 transition-opacity"
             >
-              ADB Labs
+              ADB
             </button>
             <span className="text-zinc-600">/</span>
-            <button 
-              onClick={onBack}
-              className="hover:text-[#00FF66] transition-colors"
-            >
-              Team Directory
-            </button>
-            <span className="text-zinc-600">/</span>
-            <span className="text-[#00FF66] font-semibold bg-[#0D1017] px-2.5 py-1 rounded-md border border-white/10">
+            <span className="text-xs font-mono text-zinc-400 uppercase tracking-widest">
               {member.id}
             </span>
           </div>
 
-          <div className="flex items-center gap-2 sm:gap-3">
-            {/* Color Atmosphere Switcher */}
-            <div className="hidden sm:flex items-center gap-1 bg-[#0D1017] p-1 rounded-lg border border-white/10 mr-2 text-xs font-mono">
-              <button
-                onClick={() => setActiveTheme('emerald')}
-                className={`px-2 py-0.5 rounded text-[11px] transition-all ${
-                  activeTheme === 'emerald' ? 'bg-[#00FF66] text-black font-bold' : 'text-zinc-400 hover:text-white'
-                }`}
-                title="ADB Cyber Emerald Atmosphere"
-              >
-                Emerald
-              </button>
-              <button
-                onClick={() => setActiveTheme('crimson')}
-                className={`px-2 py-0.5 rounded text-[11px] transition-all ${
-                  activeTheme === 'crimson' ? 'bg-rose-600 text-white font-bold' : 'text-zinc-400 hover:text-white'
-                }`}
-                title="Studio Crimson Atmosphere (Reference Style)"
-              >
-                Crimson
-              </button>
-              <button
-                onClick={() => setActiveTheme('charcoal')}
-                className={`px-2 py-0.5 rounded text-[11px] transition-all ${
-                  activeTheme === 'charcoal' ? 'bg-zinc-200 text-black font-bold' : 'text-zinc-400 hover:text-white'
-                }`}
-                title="Studio Monochrome Slate"
-              >
-                Charcoal
-              </button>
-            </div>
+          {/* Nav links */}
+          <nav className="hidden md:flex items-center gap-8 text-xs font-mono uppercase tracking-widest text-zinc-400">
+            <a href="#featured-work" className="hover:text-white transition-colors">WORK</a>
+            <a href="#core-capabilities" className="hover:text-white transition-colors">CAPABILITIES</a>
+            <button onClick={onBack} className="hover:text-white transition-colors">ABOUT</button>
+            <a href="#contact-section" className="hover:text-white transition-colors">CONTACT</a>
+          </nav>
 
+          {/* Right Action Switcher & Pill Button */}
+          <div className="flex items-center gap-2 sm:gap-3">
             <button
               onClick={() => onSelectMember && onSelectMember(prevMember.id)}
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#0D1017] hover:bg-[#151A24] text-zinc-300 hover:text-white border border-white/10 text-xs font-medium transition-all"
+              className="inline-flex items-center gap-1 px-3 py-1.5 rounded-full bg-[#11141D] hover:bg-[#181D2A] text-zinc-400 hover:text-white border border-white/10 text-xs font-mono transition-all"
               title={`Previous: ${prevMember.name}`}
             >
-              <ChevronLeft className="w-3.5 h-3.5 text-[#00FF66]" />
-              <span className="hidden md:inline">{prevMember.name.split(' ')[0]}</span>
+              <ChevronLeft className="w-3.5 h-3.5" />
+              <span className="hidden lg:inline">{prevMember.name.split(' ')[0]}</span>
             </button>
 
             <button
               onClick={() => onSelectMember && onSelectMember(nextMember.id)}
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#0D1017] hover:bg-[#151A24] text-zinc-300 hover:text-white border border-white/10 text-xs font-medium transition-all"
+              className="inline-flex items-center gap-1 px-3 py-1.5 rounded-full bg-[#11141D] hover:bg-[#181D2A] text-zinc-400 hover:text-white border border-white/10 text-xs font-mono transition-all"
               title={`Next: ${nextMember.name}`}
             >
-              <span className="hidden md:inline">{nextMember.name.split(' ')[0]}</span>
-              <ChevronRight className="w-3.5 h-3.5 text-[#00FF66]" />
+              <span className="hidden lg:inline">{nextMember.name.split(' ')[0]}</span>
+              <ChevronRight className="w-3.5 h-3.5" />
             </button>
 
-            <button
-              onClick={() => setShowBarcodeModal(true)}
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#0D1017] hover:bg-[#151A24] text-[#00FF66] border border-white/10 text-xs font-medium transition-all"
-              title="View Scannable ID Badge"
+            <a
+              href="#contact-section"
+              className="inline-flex items-center gap-1.5 px-5 py-2 rounded-full bg-white hover:bg-zinc-200 text-black font-bold text-xs uppercase tracking-wider transition-all shadow-md ml-1"
             >
-              <QrCode className="w-3.5 h-3.5" />
-              <span>ID Badge</span>
-            </button>
-
-            <button
-              onClick={handleCopyLink}
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#0D1017] hover:bg-[#151A24] text-zinc-300 hover:text-white border border-white/10 text-xs font-medium transition-all"
-            >
-              {copied ? <Check className="w-3.5 h-3.5 text-[#00FF66]" /> : <Copy className="w-3.5 h-3.5" />}
-              <span>{copied ? 'Copied' : 'Share'}</span>
-            </button>
+              <span>LET'S TALK</span>
+              <ArrowUpRight className="w-3.5 h-3.5 stroke-[2.5]" />
+            </a>
           </div>
-        </div>
+
+        </header>
 
         {/* ======================================================== */}
-        {/* MONUMENTAL HERO: EDITORIAL MAGAZINE POSTER WITH DEPTH    */}
-        {/* Cutout is embedded IN FRONT OF giant background text     */}
+        {/* HERO SECTION - RECREATED EXACTLY LIKE THE AV POSTER      */}
+        {/* NO BOUNDING BOX! The image and text are completely free  */}
+        {/* standing on the page canvas, overlapping seamlessly      */}
         {/* ======================================================== */}
-        <div className="relative pt-6 pb-12 sm:pb-20 overflow-hidden rounded-3xl bg-gradient-to-b from-[#0C0E14] via-[#090C11] to-[#07090C] border border-white/[0.07] shadow-2xl">
+        <section className="relative pt-6 pb-16 sm:pb-24 overflow-visible">
           
-          {/* Subtle Orbital Ring & Star Accent (Matching AV Poster Reference) */}
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[340px] sm:w-[540px] lg:w-[680px] h-[340px] sm:h-[540px] lg:h-[680px] rounded-full border border-white/[0.05] pointer-events-none z-0" />
-          <div className="absolute top-[28%] right-[22%] text-white/20 text-xs font-mono pointer-events-none z-0">
-            ✦
-          </div>
-          <div className="absolute top-[68%] left-[18%] text-[#00FF66]/20 text-xs font-mono pointer-events-none z-0">
+          {/* Subtle Directional Spotlight & Fine Orbital Circle behind subject */}
+          <div className="absolute top-1/2 right-[10%] -translate-y-1/2 w-[340px] sm:w-[480px] lg:w-[580px] h-[340px] sm:h-[480px] lg:h-[580px] rounded-full border border-white/[0.06] pointer-events-none z-0" />
+          <div className="absolute top-[25%] right-[8%] text-white/30 text-xs font-mono pointer-events-none z-0">
             ✦
           </div>
 
-          {/* Graphic Glowing Circle Behind Subject Head (Rayhan Aditya / Arjun Reference) */}
-          <div 
-            className={`absolute top-[18%] left-1/2 -translate-x-1/2 w-[280px] sm:w-[420px] lg:w-[500px] h-[280px] sm:h-[420px] lg:h-[500px] rounded-full pointer-events-none transition-all duration-700 z-[1] ${
-              activeTheme === 'crimson'
-                ? 'bg-gradient-to-tr from-[#8E1616] via-[#A81B1B]/70 to-[#500A0A]/40 shadow-[0_0_90px_rgba(229,9,20,0.35)]'
-                : activeTheme === 'charcoal'
-                ? 'bg-gradient-to-tr from-zinc-700/40 via-zinc-600/30 to-zinc-900/60 shadow-[0_0_80px_rgba(255,255,255,0.08)]'
-                : 'bg-gradient-to-tr from-[#00FF66]/25 via-emerald-600/20 to-teal-900/30 shadow-[0_0_90px_rgba(0,255,102,0.2)]'
-            }`}
-          />
+          {/* Soft directional radial glow behind person's head */}
+          <div className="absolute top-[30%] right-[15%] w-[380px] h-[380px] rounded-full bg-white/[0.06] blur-[120px] pointer-events-none z-0" />
 
-          {/* LAYER 1: Giant Condensed Typography in the Background */}
-          {/* Sits BEHIND the cutout */}
-          <div className="absolute top-10 sm:top-14 lg:top-16 left-1/2 -translate-x-1/2 w-full text-center select-none pointer-events-none z-10 overflow-hidden">
-            <h1 
-              className={`font-display-condensed text-[22vw] sm:text-[20vw] lg:text-[15.5rem] font-black uppercase tracking-normal leading-none whitespace-nowrap transition-colors duration-500 ${
-                activeTheme === 'crimson'
-                  ? 'text-rose-600/[0.22]'
-                  : activeTheme === 'charcoal'
-                  ? 'text-white/[0.16]'
-                  : 'text-[#00FF66]/[0.18]'
-              }`}
-            >
-              {displayWatermark}
-            </h1>
-          </div>
-
-          {/* Top Eyebrow Tag */}
-          <div className="relative z-20 text-center mb-4 sm:mb-6 px-4">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#11151F]/80 border border-white/10 text-xs font-mono uppercase tracking-widest backdrop-blur-md">
-              <span className="w-2 h-2 rounded-full bg-[#00FF66] animate-pulse" />
-              <span className="text-zinc-300">ADB LABS R&D</span>
-              <span className="text-zinc-500">•</span>
-              <span className="text-[#00FF66] font-semibold">{member.department}</span>
-            </div>
-          </div>
-
-          {/* MAIN HERO GRID: LEFT INFO + CENTER CUTOUT (IN FRONT) + RIGHT META */}
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-end px-6 sm:px-10 lg:px-14 relative z-20">
+          {/* Hero Content Grid: Left Text Block + Right Free-Standing Cutout */}
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center relative z-10">
             
-            {/* Left Column: Script Accent, Bold Name, Role, Statement, Dual Action Buttons */}
-            <div className="lg:col-span-5 flex flex-col justify-end pb-4 sm:pb-8 text-center lg:text-left order-2 lg:order-1">
+            {/* Left Column: Eyebrow + Huge Title + Statement + Dual Action Buttons */}
+            <div className="lg:col-span-7 flex flex-col justify-center order-2 lg:order-1 pt-4 sm:pt-8">
               
-              {/* Handwritten Script Accent (Exactly like Rayhan Aditya Reference) */}
-              <span className="font-script text-3xl sm:text-4xl text-[#00FF66] -rotate-6 mb-1 block select-none">
-                Hello, I'm
-              </span>
-
-              {/* Huge Monumental Condensed Name */}
-              <h2 className="font-display-condensed text-5xl sm:text-7xl lg:text-8xl font-black uppercase text-white tracking-wide leading-[0.9] mb-3">
-                {member.name}
-              </h2>
-
-              {/* Subtitle / Role Badge */}
-              <div className="inline-block text-xs sm:text-sm font-mono tracking-widest text-zinc-300 uppercase mb-5 font-semibold">
-                <span className="text-[#00FF66]">{member.role}</span>
-                {member.headline && member.headline.includes('&') && (
-                  <span className="block text-zinc-400 font-normal mt-0.5 text-xs">
-                    {member.headline}
-                  </span>
-                )}
+              {/* Eyebrow in tracked small caps */}
+              <div className="text-[11px] sm:text-xs font-mono tracking-[0.25em] text-zinc-400 uppercase mb-4 sm:mb-6">
+                DIGITAL EXPERIENCES THAT INSPIRE
               </div>
 
-              {/* Bio summary paragraph */}
-              <p className="text-sm sm:text-base text-zinc-400 font-normal leading-relaxed mb-6 max-w-lg mx-auto lg:mx-0">
-                {member.bio}
+              {/* Giant Monumental Title (Matching "DIGITAL DESIGNER" in Reference Image) */}
+              <h1 className="font-display-condensed text-5xl sm:text-7xl lg:text-8xl xl:text-[7.5rem] font-black uppercase text-white tracking-normal leading-[0.88] mb-6 select-none">
+                {displayHeadline.split('&').map((part, idx) => (
+                  <span key={idx} className="block text-white">
+                    {part.trim()}
+                  </span>
+                ))}
+              </h1>
+
+              {/* Professional Statement Paragraph */}
+              <p className="text-sm sm:text-base text-zinc-400 font-normal leading-relaxed mb-8 max-w-xl">
+                {member.bio || "I design elegant, high-performing digital experiences that merge strategy, aesthetics, and technology."}
               </p>
 
-              {/* Quote pill */}
-              {member.quote && (
-                <div className="border-l-2 border-[#00FF66] pl-3.5 py-1 mb-8 bg-white/[0.02] rounded-r-lg max-w-md mx-auto lg:mx-0 text-left">
-                  <p className="text-xs sm:text-sm italic text-zinc-300 font-mono">
-                    "{member.quote}"
-                  </p>
-                </div>
-              )}
-
-              {/* Action Buttons: Solid High-Contrast Pill + Glass Pill (Matching Reference) */}
-              <div className="flex flex-wrap items-center justify-center lg:justify-start gap-3 sm:gap-4">
+              {/* Action Buttons: Solid Silver/White Pill + Dark Glass Pill */}
+              <div className="flex flex-wrap items-center gap-4">
                 <a
                   href="#featured-work"
-                  className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-full bg-white hover:bg-zinc-200 text-black font-bold text-xs uppercase tracking-wider transition-all shadow-[0_0_30px_rgba(255,255,255,0.2)] hover:shadow-[0_0_40px_rgba(255,255,255,0.35)] cursor-pointer"
+                  className="inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-full bg-white hover:bg-zinc-200 text-black font-bold text-xs uppercase tracking-wider transition-all shadow-[0_0_30px_rgba(255,255,255,0.2)] hover:shadow-[0_0_40px_rgba(255,255,255,0.35)] cursor-pointer"
                 >
                   <span>VIEW MY WORK</span>
                   <ArrowUpRight className="w-4 h-4 stroke-[2.5]" />
@@ -451,9 +350,9 @@ export default function MemberPortfolio({ employeeCode, member: propMember, onBa
                     download={`${member.name.replace(/\s+/g, '_')}_Resume.pdf`}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-full bg-[#121622] hover:bg-[#1A2030] text-zinc-300 hover:text-white border border-white/10 hover:border-white/30 font-bold text-xs uppercase tracking-wider transition-all cursor-pointer shadow-md"
+                    className="inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-full bg-[#11141D] hover:bg-[#181D2A] text-zinc-300 hover:text-white border border-white/10 hover:border-white/25 font-bold text-xs uppercase tracking-wider transition-all cursor-pointer shadow-md"
                   >
-                    <Download className="w-4 h-4 text-[#00FF66]" />
+                    <Download className="w-4 h-4 text-zinc-400" />
                     <span>DOWNLOAD RESUME</span>
                   </a>
                 )}
@@ -461,156 +360,128 @@ export default function MemberPortfolio({ employeeCode, member: propMember, onBa
 
             </div>
 
-            {/* Center/Foreground: THE CUTOUT IMAGE EMBEDDED IN FRONT OF TEXT */}
-            {/* z-30 layering ensures the subject's head and body clearly occlude the background watermark */}
-            <div className="lg:col-span-4 relative flex justify-center items-end order-1 lg:order-2 min-h-[400px] sm:min-h-[500px] lg:min-h-[620px]">
+            {/* Right Column: FREE-STANDING CUTOUT IMAGE (NO BOUNDING BOX!) */}
+            {/* Sits directly on the page canvas, exactly as shown in the reference image */}
+            <div className="lg:col-span-5 relative flex flex-col items-center justify-end order-1 lg:order-2 min-h-[380px] sm:min-h-[500px] lg:min-h-[580px]">
               
-              <div className="relative w-full max-w-[460px] flex items-end justify-center">
+              {/* The Subject Image (Free-standing cutout outside any card/box) */}
+              <div className="relative w-full flex items-end justify-center lg:justify-end">
                 {member.image ? (
-                  <div className="relative z-30 flex items-end justify-center w-full">
+                  <div className="relative z-20">
                     <img
                       src={member.image}
                       alt={member.name}
-                      className="max-h-[460px] sm:max-h-[580px] lg:max-h-[680px] w-auto object-contain filter drop-shadow-[0_25px_50px_rgba(0,0,0,0.95)] select-none pointer-events-none transform transition-transform duration-500 hover:scale-[1.03] -mt-10 sm:-mt-16 lg:-mt-24"
+                      className="max-h-[440px] sm:max-h-[540px] lg:max-h-[640px] w-auto object-contain filter drop-shadow-[0_20px_50px_rgba(0,0,0,0.9)] select-none pointer-events-none transition-transform duration-500 hover:scale-[1.02]"
                       onError={(e) => {
+                        // Fallback to placeholder monogram if image fails
                         e.target.style.display = 'none';
                       }}
                     />
-                    
-                    {/* Seamless bottom fade so cutout flows naturally into card floor */}
-                    <div className="absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-[#090C11] via-[#090C11]/80 to-transparent pointer-events-none z-35" />
+
+                    {/* Gentle gradient fade at the bottom of the subject so feet/torso blend into canvas */}
+                    <div className="absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-[#090B0E] via-[#090B0E]/70 to-transparent pointer-events-none z-30" />
                   </div>
                 ) : (
-                  <div className="w-64 h-80 rounded-2xl bg-gradient-to-br from-[#121622] to-[#0A0D14] border border-white/10 flex flex-col items-center justify-center text-center p-6 z-30">
-                    <div className="w-20 h-20 rounded-full bg-[#00FF66]/10 border border-[#00FF66]/30 flex items-center justify-center text-3xl font-extrabold text-[#00FF66] mb-3">
+                  <div className="w-72 h-96 rounded-3xl bg-[#11141D] border border-white/10 flex flex-col items-center justify-center text-center p-6 z-20">
+                    <div className="w-24 h-24 rounded-full bg-white/10 border border-white/20 flex items-center justify-center text-3xl font-extrabold text-white mb-4">
                       {member.name.split(' ').map(n => n[0]).join('')}
                     </div>
-                    <span className="text-base font-bold text-white">{member.name}</span>
-                    <span className="text-xs text-[#00FF66] font-mono mt-1">{member.role}</span>
+                    <span className="text-lg font-bold text-white">{member.name}</span>
+                    <span className="text-xs text-zinc-400 font-mono mt-1">{member.role}</span>
                   </div>
                 )}
-              </div>
 
-            </div>
+                {/* Floating Availability Label on the Right (AV Reference layout) */}
+                <div className="absolute bottom-12 right-0 sm:-right-4 z-40 bg-[#11141D]/90 border border-white/10 backdrop-blur-md px-3.5 py-2 rounded-xl text-right hidden sm:block">
+                  <div className="text-[10px] font-mono uppercase tracking-widest text-zinc-400">
+                    AVAILABLE FOR
+                  </div>
+                  <div className="text-xs font-bold text-white tracking-wider uppercase">
+                    FREELANCE / R&D ↗
+                  </div>
+                </div>
 
-            {/* Right Column: Availability Badge & Quick Specs (Matching AV & Rayhan Posters) */}
-            <div className="lg:col-span-3 flex flex-col justify-end pb-4 sm:pb-8 text-center lg:text-right order-3">
-              
-              {/* Engagement Status Pill */}
-              <div className="p-4 rounded-2xl bg-[#11151F]/90 border border-white/10 backdrop-blur-md mb-6 text-left">
-                <div className="flex items-center justify-between gap-2 mb-2">
-                  <span className="text-[10px] font-mono uppercase tracking-widest text-zinc-400">
-                    ENGAGEMENT STATUS
-                  </span>
-                  <div className="w-2 h-2 rounded-full bg-[#00FF66] animate-ping" />
-                </div>
-                <div className="text-xs font-semibold text-white">
-                  {member.availability || 'Available for Hardware R&D Projects'}
-                </div>
-                <span className="text-[11px] font-mono text-[#00FF66] mt-2 inline-flex items-center gap-1">
-                  <span>ACTIVE R&D</span>
-                  <ArrowUpRight className="w-3 h-3" />
-                </span>
-              </div>
-
-              {/* Quick Contact & Verified ID */}
-              <div className="space-y-2 text-xs font-mono text-zinc-400 text-left sm:text-right">
-                <div className="flex items-center lg:justify-end gap-2">
-                  <MapPin className="w-3.5 h-3.5 text-[#00FF66]" />
-                  <span>{member.location}</span>
-                </div>
-                <div className="flex items-center lg:justify-end gap-2">
-                  <ShieldCheck className="w-3.5 h-3.5 text-[#00FF66]" />
-                  <span>VERIFIED ID: {member.id}</span>
-                </div>
               </div>
 
             </div>
 
           </div>
 
-        </div>
+        </section>
 
         {/* ======================================================== */}
-        {/* STATS BANNER: 4 COLUMNS PILL CONTAINER (AV Poster Style) */}
+        {/* STATS ROW (The FIRST card container on the page)         */}
+        {/* Exact replicate of the AV Poster horizontal pill card    */}
         {/* ======================================================== */}
-        <div className="my-16 rounded-2xl sm:rounded-3xl bg-[#0D1017]/90 border border-white/10 backdrop-blur-xl p-6 sm:p-8 shadow-xl">
+        <section className="mb-24 rounded-2xl sm:rounded-3xl bg-[#11151F]/90 border border-white/[0.08] backdrop-blur-xl p-6 sm:p-8 shadow-xl">
           <div className="grid grid-cols-2 md:grid-cols-4 divide-y md:divide-y-0 md:divide-x divide-white/[0.08]">
             {(member.stats || [
-              { label: 'PROJECTS COMPLETED', value: '18+' },
-              { label: 'YEARS IN HARDWARE', value: '3+' },
-              { label: 'ACTIVE PROTOTYPES', value: '4' },
-              { label: 'SYSTEM RELIABILITY', value: '99.9%' }
+              { label: 'YEARS EXPERIENCE', value: '6+' },
+              { label: 'PROJECTS COMPLETED', value: '40+' },
+              { label: 'HAPPY CLIENTS', value: '18+' },
+              { label: 'COUNTRIES WORKED WITH', value: '12' }
             ]).map((st, idx) => (
               <div 
                 key={idx}
                 className={`p-4 sm:p-6 text-center ${idx > 0 && idx % 2 === 0 ? 'border-t sm:border-t-0' : ''}`}
               >
                 <div className="inline-flex items-center justify-center gap-2 mb-2">
-                  <span className="text-[#00FF66] text-sm">✦</span>
+                  <span className="text-white text-sm">✦</span>
                   <div className="font-display-condensed text-4xl sm:text-5xl font-black text-white tracking-tight">
                     {st.value}
                   </div>
                 </div>
-                <div className="text-[11px] font-mono uppercase tracking-widest text-zinc-400 font-medium">
+                <div className="text-[10px] sm:text-[11px] font-mono uppercase tracking-widest text-zinc-400 font-medium">
                   {st.label}
                 </div>
               </div>
             ))}
           </div>
-        </div>
+        </section>
 
         {/* ======================================================== */}
-        {/* SELECTED PROJECTS: 3 HORIZONTAL CARDS WITH MOCKUP FRAMES */}
-        {/* Matches AV Digital Designer & Rayhan Selected Projects    */}
+        {/* FEATURED WORK (3 Horizontal Cards Grid)                  */}
+        {/* Matches AV: Finance Dashboard, Elevate, Wellness Companion*/}
         {/* ======================================================== */}
-        <div id="featured-work" className="mb-24 scroll-mt-24">
-          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-8 pb-4 border-b border-white/10">
-            <div>
-              <div className="inline-flex items-center gap-2 text-xs font-mono text-[#00FF66] uppercase tracking-widest mb-1">
-                <Cpu className="w-3.5 h-3.5" />
-                <span>PORTFOLIO SHOWCASE</span>
-              </div>
-              <h2 className="font-display-condensed text-3xl sm:text-4xl lg:text-5xl font-bold uppercase tracking-wide text-white">
-                SELECTED PROJECTS
-              </h2>
-            </div>
+        <section id="featured-work" className="mb-24 scroll-mt-24">
+          <div className="flex items-center justify-between gap-4 mb-8 pb-4 border-b border-white/[0.08]">
+            <h2 className="text-xs font-mono uppercase tracking-[0.2em] text-zinc-400 font-semibold">
+              FEATURED WORK
+            </h2>
             <a 
               href="#contact-section"
-              className="text-xs font-mono text-zinc-400 hover:text-[#00FF66] inline-flex items-center gap-1.5 transition-colors"
+              className="text-xs font-mono uppercase tracking-wider text-zinc-400 hover:text-white inline-flex items-center gap-1.5 transition-colors"
             >
-              <span>EXPLORE ALL INITIATIVES</span>
+              <span>EXPLORE ALL PROJECTS</span>
               <ArrowUpRight className="w-3.5 h-3.5" />
             </a>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {(member.featuredProjects || []).map((proj, pIdx) => (
+            {(member.featuredProjects || [
+              { title: 'Finance Dashboard', tag: 'UI/UX DESIGN • WEB APPLICATION', desc: 'Crafting intuitive, scalable dashboard interfaces for financial monitoring and high-volume data visualization.' },
+              { title: 'Elevate Your Brand', tag: 'WEBSITE DESIGN • BRANDING', desc: 'Designing responsive, modern digital experiences that convey premium brand value and bold identity.' },
+              { title: 'Wellness Companion', tag: 'MOBILE APP DESIGN • HEALTH & LIFESTYLE', desc: 'Mobile-first biometric and hardware telemetry interface engineered for clarity and user engagement.' }
+            ]).map((proj, pIdx) => (
               <div 
                 key={pIdx}
-                className="rounded-2xl bg-[#0D1017] border border-white/10 hover:border-[#00FF66]/50 transition-all duration-300 group flex flex-col justify-between overflow-hidden shadow-lg hover:-translate-y-1.5"
+                className="rounded-2xl bg-[#11151F] border border-white/[0.08] hover:border-white/20 transition-all duration-300 group flex flex-col justify-between overflow-hidden shadow-lg hover:-translate-y-1.5"
               >
                 <div>
-                  {/* Visual Mockup Header Container */}
-                  <div className="h-44 w-full relative overflow-hidden bg-[#090C11]">
-                    <ProjectMockupPreview 
-                      index={pIdx} 
-                      tag={proj.tag} 
-                      title={proj.title} 
-                    />
+                  {/* Mockup Preview Header */}
+                  <div className="h-48 w-full relative overflow-hidden bg-[#080A0E]">
+                    <FeaturedWorkMockup index={pIdx} />
                   </div>
 
-                  {/* Card Body */}
+                  {/* Card Content */}
                   <div className="p-6">
-                    <div className="flex items-center justify-between gap-2 mb-3">
-                      <span className="text-[11px] font-mono uppercase tracking-wider text-[#00FF66] bg-[#00FF66]/10 px-2.5 py-1 rounded-md border border-[#00FF66]/20 font-semibold">
-                        0{pIdx + 1} // {proj.tag}
-                      </span>
-                    </div>
-
-                    <h3 className="text-xl font-bold text-white mb-2 group-hover:text-[#00FF66] transition-colors leading-snug">
+                    <h3 className="text-xl font-bold text-white mb-1.5 group-hover:text-zinc-200 transition-colors">
                       {proj.title}
                     </h3>
+                    
+                    <div className="text-[11px] font-mono uppercase tracking-wider text-zinc-400 mb-3">
+                      {proj.tag}
+                    </div>
 
                     <p className="text-xs sm:text-sm text-zinc-400 leading-relaxed line-clamp-3">
                       {proj.desc}
@@ -618,57 +489,49 @@ export default function MemberPortfolio({ employeeCode, member: propMember, onBa
                   </div>
                 </div>
 
-                {/* Card Footer: Tech tags + Circular Arrow Button */}
-                <div className="p-6 pt-0 border-t border-white/[0.06] mt-4 flex items-center justify-between gap-2">
-                  <div className="flex flex-wrap gap-1.5">
-                    {(proj.tech || []).slice(0, 3).map((t, tIdx) => (
-                      <span 
-                        key={tIdx}
-                        className="text-[10px] font-mono text-zinc-400 bg-[#121622] px-2 py-0.5 rounded border border-white/5"
-                      >
-                        {t}
-                      </span>
-                    ))}
-                  </div>
-
-                  <div className="w-9 h-9 rounded-full bg-[#121622] border border-white/10 group-hover:border-[#00FF66] group-hover:bg-[#00FF66] flex items-center justify-center text-zinc-300 group-hover:text-black transition-all shrink-0">
+                {/* Circular Arrow Button */}
+                <div className="p-6 pt-0 flex justify-end">
+                  <div className="w-9 h-9 rounded-full bg-[#161B26] border border-white/10 group-hover:border-white group-hover:bg-white flex items-center justify-center text-zinc-300 group-hover:text-black transition-all">
                     <ArrowUpRight className="w-4 h-4" />
                   </div>
                 </div>
               </div>
             ))}
           </div>
-        </div>
+        </section>
 
         {/* ======================================================== */}
-        {/* TWO-COLUMN GRID: CORE CAPABILITIES (LEFT) vs             */}
-        {/* TOOLS & TECHNOLOGIES + CERTIFICATIONS (RIGHT)            */}
-        {/* Exact Layout Structure from the AV Digital Designer poster*/}
+        {/* TWO-COLUMN SECTION (AV Layout Structure):                */}
+        {/* Left: CORE CAPABILITIES (6 items in 2x3 grid)            */}
+        {/* Right: TOOLS & TECH (8 items) + CERTIFICATIONS & EDUCATION */}
         {/* ======================================================== */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 mb-24">
+        <section id="core-capabilities" className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 mb-24 scroll-mt-24">
           
-          {/* Left Column: CORE CAPABILITIES (6 Grid Items) */}
+          {/* Left Column: CORE CAPABILITIES */}
           <div className="lg:col-span-7">
-            <div className="mb-8 pb-3 border-b border-white/10">
-              <div className="inline-flex items-center gap-2 text-xs font-mono text-[#00FF66] uppercase tracking-widest mb-1">
-                <Layers className="w-3.5 h-3.5" />
-                <span>EXPERTISE & SPECIALIZATION</span>
-              </div>
-              <h2 className="font-display-condensed text-3xl sm:text-4xl font-bold uppercase tracking-wide text-white">
+            <div className="mb-8 pb-3 border-b border-white/[0.08]">
+              <h2 className="text-xs font-mono uppercase tracking-[0.2em] text-zinc-400 font-semibold">
                 CORE CAPABILITIES
               </h2>
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-              {(member.capabilities || []).map((cap, cIdx) => (
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+              {(member.capabilities || [
+                { title: 'UI/UX DESIGN', desc: 'Crafting intuitive, user-centered interfaces that drive engagement and delight.', icon: 'PenTool' },
+                { title: 'WEB DESIGN', desc: 'Designing responsive, modern websites that communicate brand and purpose.', icon: 'Monitor' },
+                { title: 'BRANDING', desc: 'Building visual identities that connect, inspire, and leave a lasting impression.', icon: 'Sparkles' },
+                { title: 'INTERACTION DESIGN', desc: 'Creating smooth, meaningful interactions that enhance the user experience.', icon: 'MousePointer2' },
+                { title: 'DESIGN SYSTEMS', desc: 'Building scalable design systems that ensure consistency and efficiency.', icon: 'Layers' },
+                { title: 'PROTOTYPING', desc: 'Turning ideas into interactive prototypes to validate and accelerate solutions.', icon: 'Box' }
+              ]).map((cap, cIdx) => (
                 <div 
                   key={cIdx}
-                  className="p-5 rounded-2xl bg-[#0D1017] border border-white/10 hover:border-[#00FF66]/40 transition-all group"
+                  className="space-y-2 p-2"
                 >
-                  <div className="w-10 h-10 rounded-xl bg-[#121622] border border-white/10 group-hover:border-[#00FF66]/50 flex items-center justify-center mb-3 transition-colors">
+                  <div className="w-9 h-9 rounded-xl bg-white/[0.04] border border-white/10 flex items-center justify-center mb-3">
                     {getCapabilityIcon(cap.icon)}
                   </div>
-                  <h3 className="text-base font-bold text-white mb-1.5 group-hover:text-[#00FF66] transition-colors">
+                  <h3 className="text-sm font-bold uppercase tracking-wider text-white">
                     {cap.title}
                   </h3>
                   <p className="text-xs text-zinc-400 leading-relaxed">
@@ -680,291 +543,207 @@ export default function MemberPortfolio({ employeeCode, member: propMember, onBa
           </div>
 
           {/* Right Column: TOOLS & TECH + CERTIFICATIONS */}
-          <div className="lg:col-span-5 flex flex-col justify-between">
+          <div className="lg:col-span-5 flex flex-col justify-between gap-8">
             
             {/* 1. Tools & Technologies Grid */}
-            <div className="mb-8">
-              <div className="mb-6 pb-3 border-b border-white/10">
-                <div className="inline-flex items-center gap-2 text-xs font-mono text-[#00FF66] uppercase tracking-widest mb-1">
-                  <Terminal className="w-3.5 h-3.5" />
-                  <span>TOOLCHAIN</span>
-                </div>
-                <h3 className="font-display-condensed text-2xl sm:text-3xl font-bold uppercase tracking-wide text-white">
+            <div>
+              <div className="mb-6 pb-3 border-b border-white/[0.08]">
+                <h3 className="text-xs font-mono uppercase tracking-[0.2em] text-zinc-400 font-semibold">
                   TOOLS & TECHNOLOGIES
                 </h3>
               </div>
 
-              <div className="p-6 rounded-2xl bg-[#0D1017] border border-white/10">
-                <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
+              <div className="p-6 rounded-2xl bg-[#11151F] border border-white/[0.08]">
+                <div className="grid grid-cols-2 gap-4">
                   {(
                     (member.techStack && Object.values(member.techStack).flat()) ||
                     member.skills ||
-                    ['SolidWorks', 'ROS2', 'Altium', 'Python', 'C++', 'Docker', 'Linux', 'Git']
-                  ).slice(0, 9).map((tool, tIdx) => (
+                    ['Figma', 'Adobe Photoshop', 'Adobe Illustrator', 'Webflow', 'Framer', 'Spline', 'Adobe After Effects', 'Notion']
+                  ).slice(0, 8).map((tool, tIdx) => (
                     <div 
                       key={tIdx}
-                      className="p-3 rounded-xl bg-[#121622] border border-white/[0.07] hover:border-[#00FF66]/40 flex items-center gap-2.5 transition-colors group"
+                      className="flex items-center gap-2.5 py-1 text-xs text-zinc-300"
                     >
-                      <div className="w-2 h-2 rounded-full bg-[#00FF66]/60 group-hover:bg-[#00FF66]" />
-                      <span className="text-xs font-semibold text-zinc-200 group-hover:text-white truncate">
-                        {tool}
-                      </span>
+                      <div className="w-2 h-2 rounded-full bg-white/40" />
+                      <span className="font-medium text-white">{tool}</span>
                     </div>
                   ))}
                 </div>
               </div>
             </div>
 
-            {/* 2. Certifications & Education (Right Below Tools) */}
+            {/* 2. Certifications & Education (Right below Tools) */}
             <div>
-              <div className="mb-6 pb-3 border-b border-white/10">
-                <div className="inline-flex items-center gap-2 text-xs font-mono text-[#00FF66] uppercase tracking-widest mb-1">
-                  <Award className="w-3.5 h-3.5" />
-                  <span>CREDENTIALS</span>
-                </div>
-                <h3 className="font-display-condensed text-2xl sm:text-3xl font-bold uppercase tracking-wide text-white">
+              <div className="mb-6 pb-3 border-b border-white/[0.08]">
+                <h3 className="text-xs font-mono uppercase tracking-[0.2em] text-zinc-400 font-semibold">
                   CERTIFICATIONS & EDUCATION
                 </h3>
               </div>
 
-              <div className="space-y-3.5">
-                {(member.education || []).map((edu, eduIdx) => (
-                  <div 
-                    key={eduIdx}
-                    className="p-4 rounded-xl bg-[#0D1017] border border-white/10 flex items-start gap-3.5"
-                  >
-                    <div className="w-9 h-9 rounded-lg bg-[#121622] border border-white/10 flex items-center justify-center text-[#00FF66] shrink-0 mt-0.5">
+              <div className="p-6 rounded-2xl bg-[#11151F] border border-white/[0.08] space-y-4">
+                {(member.education || [
+                  { degree: 'Google UX Design Professional Certificate', institution: 'Coursera', period: '2022' },
+                  { degree: 'Bachelor of Design (B.Des.)', institution: 'University of California, Los Angeles', period: '2018' }
+                ]).map((edu, eduIdx) => (
+                  <div key={eduIdx} className="flex items-start gap-3.5 pb-3 border-b border-white/[0.05] last:border-b-0 last:pb-0">
+                    <div className="w-8 h-8 rounded-lg bg-white/[0.05] border border-white/10 flex items-center justify-center text-white shrink-0 mt-0.5">
                       <Award className="w-4 h-4" />
                     </div>
                     <div>
-                      <h4 className="text-sm font-bold text-white leading-snug">
+                      <h4 className="text-xs sm:text-sm font-bold text-white leading-snug">
                         {edu.degree}
                       </h4>
-                      <p className="text-xs text-zinc-400 mt-0.5">
+                      <p className="text-[11px] text-zinc-400 mt-0.5 font-mono">
                         {edu.institution} <span className="text-zinc-600">•</span> {edu.period}
                       </p>
-                      {edu.score && (
-                        <span className="inline-block text-[10px] font-mono text-[#00FF66] bg-[#00FF66]/10 px-2 py-0.5 rounded border border-[#00FF66]/20 mt-1.5">
-                          {edu.score}
-                        </span>
-                      )}
                     </div>
                   </div>
                 ))}
               </div>
-
             </div>
 
           </div>
 
-        </div>
+        </section>
 
         {/* ======================================================== */}
-        {/* WORK PROCESS & PHILOSOPHY: VERTICAL CONNECTED TIMELINE   */}
-        {/* Exact Layout from Rayhan Aditya Reference Poster         */}
+        {/* MY DESIGN PROCESS (Exact horizontal card from AV poster) */}
+        {/* 5 steps in a horizontal sequence                          */}
         {/* ======================================================== */}
-        <div className="mb-24">
-          <div className="mb-8 pb-4 border-b border-white/10">
-            <div className="inline-flex items-center gap-2 text-xs font-mono text-[#00FF66] uppercase tracking-widest mb-1">
-              <Wrench className="w-3.5 h-3.5" />
-              <span>SYSTEMATIC EXECUTION</span>
-            </div>
-            <h2 className="font-display-condensed text-3xl sm:text-4xl lg:text-5xl font-bold uppercase tracking-wide text-white">
-              MY ENGINEERING PROCESS
+        <section className="mb-24 rounded-2xl sm:rounded-3xl bg-[#11151F] border border-white/[0.08] p-6 sm:p-8">
+          <div className="mb-6 pb-4 border-b border-white/[0.08]">
+            <h2 className="text-xs font-mono uppercase tracking-[0.2em] text-zinc-400 font-semibold">
+              MY DESIGN PROCESS
             </h2>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
-            
-            {/* Left: 5 Numbered Connected Step Nodes (01 DISCOVER -> 05 DELIVER) */}
-            <div className="lg:col-span-8 p-6 sm:p-8 rounded-3xl bg-[#0D1017] border border-white/10 relative">
-              <div className="space-y-6 sm:space-y-8 relative">
-                
-                {/* Connecting glowing vertical spine line */}
-                <div className="absolute top-4 bottom-4 left-5 w-[2px] bg-gradient-to-b from-[#00FF66] via-emerald-600/40 to-transparent pointer-events-none hidden sm:block" />
-
-                {[
-                  { 
-                    num: '01', 
-                    title: 'DISCOVER & REQUIREMENT ANALYSIS', 
-                    desc: 'Deep-dive into electrical bounds, thermal dissipation thresholds, payload limits, and operational stress environments.',
-                    icon: Search
-                  },
-                  { 
-                    num: '02', 
-                    title: 'DEFINE & SCHEMATIC TOPOLOGY', 
-                    desc: 'Synthesizing kinematic models, component selection, CAN-bus network hierarchy, and Bill of Materials.',
-                    icon: Lightbulb
-                  },
-                  { 
-                    num: '03', 
-                    title: 'DESIGN & 3D SIMULATION', 
-                    desc: 'Parametric CAD modeling, structural FEA load analysis, multi-layer PCB layout routing, and airflow modeling.',
-                    icon: Compass
-                  },
-                  { 
-                    num: '04', 
-                    title: 'DEVELOP & RAPID PROTOTYPING', 
-                    desc: 'Bare-metal C/C++ firmware architecture, hardware-in-the-loop validation, and precision bench testing.',
-                    icon: Code2
-                  },
-                  { 
-                    num: '05', 
-                    title: 'DELIVER & STRESS VALIDATION', 
-                    desc: 'Full-load electrical run-to-empty tests, vibration profiling, safety certification checks, and field deployment.',
-                    icon: Rocket
-                  }
-                ].map((step, idx) => {
-                  const StepIcon = step.icon;
-                  return (
-                    <div key={idx} className="flex items-start gap-4 sm:gap-6 relative z-10 group">
-                      {/* Step Circle Node */}
-                      <div className="w-10 h-10 rounded-full bg-[#121622] border border-white/20 group-hover:border-[#00FF66] group-hover:bg-[#00FF66] flex items-center justify-center text-zinc-300 group-hover:text-black transition-all shrink-0">
-                        <span className="font-mono text-xs font-bold">{step.num}</span>
-                      </div>
-
-                      {/* Content */}
-                      <div className="flex-1 pt-1">
-                        <div className="flex items-center gap-2 mb-1">
-                          <StepIcon className="w-4 h-4 text-[#00FF66]" />
-                          <h4 className="text-sm sm:text-base font-bold uppercase tracking-wider text-white group-hover:text-[#00FF66] transition-colors">
-                            {step.title}
-                          </h4>
-                        </div>
-                        <p className="text-xs sm:text-sm text-zinc-400 leading-relaxed">
-                          {step.desc}
-                        </p>
-                      </div>
-                    </div>
-                  );
-                })}
-
-              </div>
-            </div>
-
-            {/* Right: Editorial Quote & Philosophy Card (Rayhan Aditya Style) */}
-            <div 
-              className={`lg:col-span-4 p-8 rounded-3xl border flex flex-col justify-between transition-colors duration-700 ${
-                activeTheme === 'crimson'
-                  ? 'bg-gradient-to-b from-[#8E1616]/40 to-[#0D1017] border-rose-600/30'
-                  : activeTheme === 'charcoal'
-                  ? 'bg-gradient-to-b from-zinc-800/40 to-[#0D1017] border-white/10'
-                  : 'bg-gradient-to-b from-emerald-950/40 to-[#0D1017] border-[#00FF66]/30'
-              }`}
-            >
-              <div>
-                <span className="font-serif text-6xl text-[#00FF66] leading-none block select-none">
-                  “
-                </span>
-                <p className="text-base sm:text-lg font-medium text-white leading-relaxed mt-2 mb-6">
-                  Great engineering is not merely how a system is assembled; it is how reliably it performs under unpredictable real-world extremes.
-                </p>
-                <div className="font-script text-2xl text-[#00FF66] mb-2 select-none">
-                  {member.name.split(' ')[0]}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">
+            {[
+              { num: '01', title: 'DISCOVER', desc: 'Understanding goals, user needs, and the problem in depth.', icon: Search },
+              { num: '02', title: 'DEFINE', desc: 'Research, analysis, and synthesising insights into clear direction.', icon: Target },
+              { num: '03', title: 'DESIGN', desc: 'Designing intuitive interfaces with clarity and purpose.', icon: PenTool },
+              { num: '04', title: 'DEVELOP', desc: 'Collaborating with developers to bring ideas to life.', icon: Code2 },
+              { num: '05', title: 'DELIVER', desc: 'Testing, refining, and launching seamless digital experiences.', icon: Rocket }
+            ].map((step, sIdx) => {
+              const StepIcon = step.icon;
+              return (
+                <div key={sIdx} className="space-y-2">
+                  <div className="text-xs font-mono uppercase tracking-widest text-zinc-400 font-bold">
+                    {step.num} // {step.title}
+                  </div>
+                  <div className="w-8 h-8 rounded-lg bg-white/[0.04] border border-white/10 flex items-center justify-center text-white my-2">
+                    <StepIcon className="w-4 h-4" />
+                  </div>
+                  <p className="text-xs text-zinc-400 leading-relaxed">
+                    {step.desc}
+                  </p>
                 </div>
-                <div className="text-xs font-mono text-zinc-400 uppercase tracking-widest">
-                  {member.division || 'ADB LABS ENGINEERING'}
-                </div>
-              </div>
-
-              <div className="pt-6 border-t border-white/10 mt-6">
-                <span className="text-[11px] font-mono uppercase tracking-widest text-zinc-400 block mb-1">
-                  CORE CREED
-                </span>
-                <span className="text-xs font-bold text-white uppercase">
-                  UNCOMPROMISING RELIABILITY & PRECISION
-                </span>
-              </div>
-            </div>
-
+              );
+            })}
           </div>
-        </div>
+        </section>
 
         {/* ======================================================== */}
-        {/* CALL TO ACTION BANNER: "LET'S CREATE SOMETHING EXTRAORDINARY" */}
-        {/* Matches AV Digital Designer Reference Footer Card        */}
+        {/* FOOTER BANNER: "LET'S CREATE SOMETHING EXTRAORDINARY"    */}
+        {/* Exact Layout & Metallic Gradient Sheen from the AV poster*/}
         {/* ======================================================== */}
-        <div id="contact-section" className="rounded-3xl bg-gradient-to-r from-[#0E121A] via-[#141A26] to-[#0E121A] border border-white/10 p-8 sm:p-12 relative overflow-hidden shadow-2xl">
+        <footer id="contact-section" className="rounded-3xl bg-gradient-to-r from-[#11151F] via-[#161B26] to-[#11151F] border border-white/[0.08] p-8 sm:p-12 relative overflow-hidden shadow-2xl">
           
-          <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-[#00FF66]/10 rounded-full blur-[140px] pointer-events-none" />
-
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center relative z-10">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
             
-            {/* Left: Giant Bold Typography */}
+            {/* Left: Giant bold headline */}
             <div className="lg:col-span-5">
-              <span className="text-xs font-mono text-[#00FF66] uppercase tracking-widest block mb-2 font-semibold">
-                INITIATE COLLABORATION
-              </span>
-              <h2 className="font-display-condensed text-4xl sm:text-5xl lg:text-6xl font-black uppercase tracking-tight text-white leading-[0.95] mb-3">
+              <h2 className="font-display-condensed text-4xl sm:text-5xl font-black uppercase tracking-normal text-white leading-[0.95]">
                 LET'S CREATE SOMETHING EXTRAORDINARY
-                <span className="text-[#00FF66] ml-2">✦</span>
+                <span className="text-white/60 ml-2">✦</span>
               </h2>
-              <p className="text-xs sm:text-sm text-zinc-400">
-                Open for clean-energy storage, field robotics hardware R&D, and deep-tech partnerships.
-              </p>
             </div>
 
-            {/* Middle: Action Button */}
+            {/* Middle: Availability statement + Pill Button */}
             <div className="lg:col-span-3 flex flex-col items-start lg:items-center">
-              <span className="text-xs text-zinc-400 mb-3 text-left lg:text-center">
-                Ready to engineer the next generation of hardware?
-              </span>
+              <p className="text-xs text-zinc-400 mb-3 text-left lg:text-center">
+                I'm currently available for freelance projects and collaborations.
+              </p>
               {member.socials?.email && (
                 <a
                   href={`mailto:${member.socials.email}`}
-                  className="inline-flex items-center gap-2 px-6 py-3.5 rounded-full bg-white hover:bg-zinc-200 text-black font-bold text-xs uppercase tracking-wider transition-all shadow-[0_0_25px_rgba(255,255,255,0.25)] hover:shadow-[0_0_35px_rgba(255,255,255,0.4)]"
+                  className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-white hover:bg-zinc-200 text-black font-bold text-xs uppercase tracking-wider transition-all shadow-[0_0_20px_rgba(255,255,255,0.2)]"
                 >
                   <span>LET'S WORK TOGETHER</span>
-                  <ArrowUpRight className="w-4 h-4 stroke-[2.5]" />
+                  <ArrowUpRight className="w-3.5 h-3.5 stroke-[2.5]" />
                 </a>
               )}
             </div>
 
-            {/* Right: Clean Contact Links Rows */}
-            <div className="lg:col-span-4 space-y-3 pt-4 lg:pt-0 border-t lg:border-t-0 lg:border-l border-white/10 lg:pl-8 text-xs font-mono">
+            {/* Right: Clean contact list with minimal icons */}
+            <div className="lg:col-span-4 space-y-2.5 pt-4 lg:pt-0 border-t lg:border-t-0 lg:border-l border-white/[0.08] lg:pl-8 text-xs font-mono">
               {member.socials?.email && (
                 <a 
                   href={`mailto:${member.socials.email}`}
                   className="flex items-center gap-2.5 text-zinc-300 hover:text-white transition-colors"
                 >
-                  <Mail className="w-4 h-4 text-[#00FF66] shrink-0" />
+                  <Mail className="w-3.5 h-3.5 text-zinc-400 shrink-0" />
                   <span className="truncate">{member.socials.email}</span>
                 </a>
               )}
 
-              {member.socials?.linkedin && (
-                <a 
-                  href={member.socials.linkedin}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-2.5 text-zinc-300 hover:text-[#00FF66] transition-colors"
-                >
-                  <LinkedInIcon className="w-4 h-4 text-[#00FF66] shrink-0" />
-                  <span>LinkedIn Profile</span>
-                </a>
-              )}
-
-              {member.socials?.github && (
-                <a 
-                  href={member.socials.github}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-2.5 text-zinc-300 hover:text-[#00FF66] transition-colors"
-                >
-                  <GitHubIcon className="w-4 h-4 text-[#00FF66] shrink-0" />
-                  <span>GitHub Repository</span>
-                </a>
-              )}
+              <div className="flex items-center gap-2.5 text-zinc-400">
+                <Phone className="w-3.5 h-3.5 text-zinc-400 shrink-0" />
+                <span>+91 83107 04488</span>
+              </div>
 
               <div className="flex items-center gap-2.5 text-zinc-400">
-                <MapPin className="w-4 h-4 text-[#00FF66] shrink-0" />
-                <span>{member.location}</span>
+                <MapPin className="w-3.5 h-3.5 text-zinc-400 shrink-0" />
+                <span>{member.location || 'Coimbatore, India'}</span>
+              </div>
+
+              <div className="flex items-center gap-2.5 text-zinc-400">
+                <Globe className="w-3.5 h-3.5 text-zinc-400 shrink-0" />
+                <span>www.adblabs.in</span>
               </div>
             </div>
 
           </div>
 
-        </div>
+          {/* Bottom Copyright & Social Icons Row */}
+          <div className="mt-8 pt-6 border-t border-white/[0.08] flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-mono text-zinc-500">
+            <div>
+              © 2026 {member.name}. All Rights Reserved.
+            </div>
+
+            <div className="flex items-center gap-4">
+              <span>LET'S CONNECT</span>
+              {member.socials?.linkedin && (
+                <a 
+                  href={member.socials.linkedin} 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="hover:text-white transition-colors"
+                >
+                  <LinkedInIcon className="w-4 h-4" />
+                </a>
+              )}
+              {member.socials?.github && (
+                <a 
+                  href={member.socials.github} 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="hover:text-white transition-colors"
+                >
+                  <GitHubIcon className="w-4 h-4" />
+                </a>
+              )}
+              <button 
+                onClick={() => setShowBarcodeModal(true)} 
+                className="hover:text-white transition-colors"
+                title="View ID Badge"
+              >
+                <QrCode className="w-4 h-4" />
+              </button>
+            </div>
+          </div>
+
+        </footer>
 
       </div>
 
@@ -985,7 +764,7 @@ export default function MemberPortfolio({ employeeCode, member: propMember, onBa
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.95, opacity: 0 }}
               onClick={(e) => e.stopPropagation()}
-              className="bg-[#0C0F17] border border-white/20 rounded-3xl p-6 sm:p-8 max-w-sm w-full text-center relative shadow-2xl"
+              className="bg-[#0F1420] border border-white/20 rounded-3xl p-6 sm:p-8 max-w-sm w-full text-center relative shadow-2xl"
             >
               <button
                 onClick={() => setShowBarcodeModal(false)}
@@ -994,7 +773,7 @@ export default function MemberPortfolio({ employeeCode, member: propMember, onBa
                 <X className="w-5 h-5" />
               </button>
 
-              <div className="w-12 h-12 mx-auto mb-4 rounded-xl bg-[#00FF66]/10 border border-[#00FF66]/30 flex items-center justify-center text-[#00FF66]">
+              <div className="w-12 h-12 mx-auto mb-4 rounded-xl bg-white/10 border border-white/20 flex items-center justify-center text-white">
                 <QrCode className="w-6 h-6" />
               </div>
 
@@ -1009,7 +788,7 @@ export default function MemberPortfolio({ employeeCode, member: propMember, onBa
               <div className="bg-[#07090E] border border-white/10 rounded-2xl p-4 mb-6 text-left">
                 <div className="flex items-center justify-between border-b border-white/10 pb-2 mb-3">
                   <span className="font-bold text-white tracking-widest text-xs">ADB LABS</span>
-                  <span className="text-[10px] font-mono text-[#00FF66]">SECURITY VERIFIED</span>
+                  <span className="text-[10px] font-mono text-zinc-400">SECURITY VERIFIED</span>
                 </div>
                 <div className="flex items-center gap-3 mb-3">
                   {member.image && (
@@ -1021,8 +800,8 @@ export default function MemberPortfolio({ employeeCode, member: propMember, onBa
                   )}
                   <div>
                     <div className="text-sm font-bold text-white">{member.name}</div>
-                    <div className="text-xs text-[#00FF66] font-mono">{member.role}</div>
-                    <div className="text-[10px] text-zinc-400 font-mono mt-0.5">{member.id}</div>
+                    <div className="text-xs text-zinc-300 font-mono">{member.role}</div>
+                    <div className="text-[10px] text-zinc-500 font-mono mt-0.5">{member.id}</div>
                   </div>
                 </div>
 
@@ -1045,7 +824,7 @@ export default function MemberPortfolio({ employeeCode, member: propMember, onBa
 
               <button
                 onClick={() => setShowBarcodeModal(false)}
-                className="w-full py-2.5 rounded-xl bg-white hover:bg-zinc-200 text-black font-bold text-xs uppercase tracking-wider transition-colors"
+                className="w-full py-2.5 rounded-full bg-white hover:bg-zinc-200 text-black font-bold text-xs uppercase tracking-wider transition-colors"
               >
                 Close ID Badge
               </button>

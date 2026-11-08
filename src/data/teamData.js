@@ -13,7 +13,7 @@ export const TEAM_MEMBERS = [
     "location": "Chennai, Tamil Nadu, India",
     "status": "Active / Executive Co-Founder",
     "availability": "Available for Deep-Tech & Hardware Partnerships",
-    "image": "/images/sol_robot.png",
+    "image": "/images/zain_cutout.png",
     "bio": "Third-year Computer Science Engineering student specializing in AI & Robotics at Sathyabama Institute of Science and Technology. Hands-on hardware builder moving from advanced research to validated working prototypes and real-world execution. Currently directing ADB Labs clean-energy battery systems, robotics R&D, and startup product operations.",
     "quote": "Building bold, uncompromising hardware engineered for the toughest real-world challenges.",
     "stats": [
@@ -182,7 +182,7 @@ export const TEAM_MEMBERS = [
     "location": "Dubai, UAE / Bangalore, India",
     "status": "Active / Executive Co-Founder",
     "availability": "Available for Brand Advisory & GTM Campaigns",
-    "image": "/images/haran_page3_bottom.png",
+    "image": "/images/haran_cutout.png",
     "bio": "Brand and marketing strategist with deep multi-sector experience across 10+ consumer and technology brands. Specializes in brand architecture, campaign platforms, audience insights, and performance-led communication systems. Adept at translating complex deep-tech and hardware engineering into high-impact narratives that drive measurable enterprise conversion.",
     "quote": "Telling authentic stories of ground-level engineering that transforms communities and industries.",
     "stats": [
@@ -565,7 +565,7 @@ export const TEAM_MEMBERS = [
     "location": "Chennai, India",
     "status": "Active / Core Engineer",
     "availability": "Available for High-Power Hardware Integration",
-    "image": "/images/sol_ps1.png",
+    "image": "/images/dushyanth_cutout.png",
     "bio": "Directing hardware-software co-design, electrical system integration, and rigorous physical stress-testing for ADB Labs power stations and robotic units. Ensures high-voltage battery enclosures, thermal airflow channels, and multi-rail power distribution operate safely under continuous full-load demand.",
     "quote": "Reliability isn't an accident\u2014it's engineered into every weld, trace, and thermal channel.",
     "stats": [
@@ -883,7 +883,7 @@ export const TEAM_MEMBERS = [
     "location": "Chennai, Tamil Nadu, India",
     "status": "Active / Operations Executive",
     "availability": "Directing Supply Chain Logistics & Operations",
-    "image": "/images/proportional_corporate_cutout.png",
+    "image": "/images/nangai_cutout.png",
     "bio": "Directing operational scalability, supply chain resilience, and fiscal governance for ADB Labs clean-energy product manufacturing. Coordinates global component procurement, quality audits, and capital allocation across tier-1 cell suppliers and local fabrication partners.",
     "quote": "Operational excellence turns cutting-edge lab prototypes into reliable mass-manufactured hardware.",
     "stats": [
@@ -2044,7 +2044,7 @@ export const TEAM_MEMBERS = [
     "location": "Chennai, Tamil Nadu, India",
     "status": "Active / Core Engineer",
     "availability": "Available for Defence Robotics & Embedded Systems R&D",
-    "image": "/images/person_013_extended_shoulders.png",
+    "image": "/images/srihari_cutout.png",
     "bio": "Final-year Computer Science student specialising in embedded systems and robotics, with hands-on defence industry experience at KAL-M Robotics developing unmanned ground vehicles (UGVs) for the Indian Army. Sole CAD and PCB designer for the company; lead author of scientific research on AI-driven lunar water-ice detection. Combines a hardware-first engineering mindset with deep firmware and prototyping fundamentals.",
     "quote": "In defence and robotics engineering, hardware reliability in extreme environments is the only metric that matters.",
     "stats": [
