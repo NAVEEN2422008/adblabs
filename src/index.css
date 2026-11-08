@@ -236,3 +236,33 @@
 .scroll-progress-bar {
   transform-origin: 0%;
 }
+
+
+/* ======================================================== */
+/* Editorial Magazine Poster Fonts & Studio Aesthetics      */
+/* ======================================================== */
+.font-display-condensed {
+  font-family: 'Bebas Neue', 'Oswald', 'Space Grotesk', sans-serif;
+  letter-spacing: 0.02em;
+}
+
+.font-script {
+  font-family: 'Caveat', cursive;
+}
+
+.font-syne {
+  font-family: 'Syne', sans-serif;
+}
+
+/* Studio Radial Light & Atmosphere */
+.studio-halo-green {
+  background: radial-gradient(circle, rgba(0, 255, 102, 0.28) 0%, rgba(13, 92, 58, 0.15) 45%, transparent 72%);
+}
+
+.studio-halo-red {
+  background: radial-gradient(circle, rgba(229, 9, 20, 0.3) 0%, rgba(139, 0, 0, 0.16) 50%, transparent 75%);
+}
+
+.studio-halo-ambient {
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.09) 0%, rgba(255, 255, 255, 0.02) 50%, transparent 72%);
+}
