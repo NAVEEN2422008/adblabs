@@ -3,9 +3,10 @@ import { motion } from 'framer-motion';
 import { 
   ArrowLeft, 
   ArrowRight, 
-  Check, 
-  Copy, 
+  ArrowUpRight,
+  Download,
   Mail, 
+  Phone,
   MapPin, 
   ShieldCheck, 
   Briefcase, 
@@ -15,7 +16,17 @@ import {
   ChevronLeft,
   ChevronRight,
   Zap,
-  BadgeCheck
+  BadgeCheck,
+  Layers,
+  Terminal,
+  Wrench,
+  BarChart3,
+  Bot,
+  Copy,
+  Check,
+  QrCode,
+  FileText,
+  Sparkles
 } from 'lucide-react';
 import { TEAM_MEMBERS } from '../data/teamData';
 
@@ -35,17 +46,32 @@ function GitHubIcon(props) {
   );
 }
 
-export default function MemberPortfolio({ employeeCode, member: propMember, onBack, onNavigateToTeam, onSelectMember, onNavigateToMember }) {
-  const [copied, setCopied] = useState(false);
+// Capability Icon Helper
+function getCapabilityIcon(iconName) {
+  switch (iconName) {
+    case 'Cpu': return <Cpu className="w-5 h-5 text-[#00FF66]" />;
+    case 'Bot': return <Bot className="w-5 h-5 text-[#00FF66]" />;
+    case 'Zap': return <Zap className="w-5 h-5 text-[#00FF66]" />;
+    case 'Layers': return <Layers className="w-5 h-5 text-[#00FF66]" />;
+    case 'Wrench': return <Wrench className="w-5 h-5 text-[#00FF66]" />;
+    case 'BarChart3': return <BarChart3 className="w-5 h-5 text-[#00FF66]" />;
+    case 'ShieldCheck': return <ShieldCheck className="w-5 h-5 text-[#00FF66]" />;
+    case 'Terminal': return <Terminal className="w-5 h-5 text-[#00FF66]" />;
+    case 'Award': return <Award className="w-5 h-5 text-[#00FF66]" />;
+    default: return <Cpu className="w-5 h-5 text-[#00FF66]" />;
+  }
+}
 
-  // Find member by employee code (case-insensitive) or index
+export default function MemberPortfolio({ employeeCode, member: propMember, onBack, onSelectMember }) {
+  const [copied, setCopied] = useState(false);
+  const [showBarcodeModal, setShowBarcodeModal] = useState(false);
+
+  // Find member index
   const currentIndex = TEAM_MEMBERS.findIndex(
     (m) => m.id.toLowerCase() === (employeeCode || '').toLowerCase()
   );
 
   const member = propMember || (currentIndex !== -1 ? TEAM_MEMBERS[currentIndex] : null);
-  const handleBack = onBack || onNavigateToTeam;
-  const handleSelect = onSelectMember || onNavigateToMember;
 
   const prevMember = currentIndex > 0 
     ? TEAM_MEMBERS[currentIndex - 1] 
@@ -62,11 +88,10 @@ export default function MemberPortfolio({ employeeCode, member: propMember, onBa
     setTimeout(() => setCopied(false), 2000);
   };
 
-  // If member not found
   if (!member) {
     return (
-      <div className="min-h-[70vh] flex items-center justify-center px-4 py-20">
-        <div className="max-w-md w-full bg-[#0c121e] border border-red-500/30 rounded-3xl p-8 text-center relative overflow-hidden">
+      <div className="min-h-[75vh] flex items-center justify-center px-4 py-20 bg-[#050B0A]">
+        <div className="max-w-md w-full bg-[#0B1513] border border-red-500/30 rounded-3xl p-8 text-center relative overflow-hidden shadow-2xl">
           <div className="w-16 h-16 mx-auto mb-4 rounded-2xl bg-red-500/10 border border-red-500/30 flex items-center justify-center text-red-400">
             <ShieldCheck className="w-8 h-8" />
           </div>
@@ -75,14 +100,14 @@ export default function MemberPortfolio({ employeeCode, member: propMember, onBa
           </span>
           <h2 className="text-2xl font-bold text-white mb-2">Employee ID Invalid</h2>
           <p className="text-sm text-slate-400 mb-6">
-            No active portfolio found matching identifier <code className="text-green-400 bg-slate-900 px-2 py-0.5 rounded font-mono">{employeeCode}</code>.
+            No active portfolio found matching identifier <code className="text-[#00FF66] bg-[#050B0A] px-2 py-0.5 rounded font-mono">{employeeCode}</code>.
           </p>
           <button
-            onClick={handleBack}
-            className="w-full inline-flex items-center justify-center gap-2 py-3 px-6 rounded-xl bg-green-500 hover:bg-green-400 text-black font-bold text-sm transition-all"
+            onClick={onBack}
+            className="w-full inline-flex items-center justify-center gap-2 py-3 px-6 rounded-xl bg-[#00FF66] hover:bg-[#00E55C] text-black font-bold text-sm transition-all shadow-[0_0_20px_rgba(0,255,102,0.3)]"
           >
             <ArrowLeft className="w-4 h-4" />
-            <span>Browse All 17 Team Portfolios</span>
+            <span>Browse All Team Portfolios</span>
           </button>
         </div>
       </div>
@@ -90,339 +115,719 @@ export default function MemberPortfolio({ employeeCode, member: propMember, onBa
   }
 
   return (
-    <div className="min-h-screen bg-[#06080f] text-slate-100 pt-24 pb-20 relative overflow-hidden">
-      {/* Background ambient lighting */}
-      <div className="absolute top-20 right-1/4 w-[500px] h-[500px] bg-green-500/10 rounded-full blur-[180px] pointer-events-none" />
-      <div className="absolute top-1/2 left-10 w-[400px] h-[400px] bg-blue-500/10 rounded-full blur-[160px] pointer-events-none" />
+    <div className="min-h-screen bg-[#050B0A] text-[#F5F7F2] pt-24 pb-24 relative overflow-hidden selection:bg-[#00FF66] selection:text-black">
+      {/* Background ambient lighting - ADB Labs cyber green glow */}
+      <div className="absolute top-10 right-1/4 w-[600px] h-[600px] bg-[#00FF66]/10 rounded-full blur-[200px] pointer-events-none" />
+      <div className="absolute top-1/3 left-[-100px] w-[500px] h-[500px] bg-emerald-600/10 rounded-full blur-[180px] pointer-events-none" />
+      <div className="absolute bottom-20 right-10 w-[500px] h-[500px] bg-[#00FF66]/8 rounded-full blur-[180px] pointer-events-none" />
 
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      {/* Cyber grid background overlay */}
+      <div 
+        className="absolute inset-0 opacity-[0.03] pointer-events-none"
+        style={{
+          backgroundImage: `linear-gradient(#00FF66 1px, transparent 1px), linear-gradient(90deg, #00FF66 1px, transparent 1px)`,
+          backgroundSize: '48px 48px'
+        }}
+      />
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
-        {/* Top Breadcrumb & Quick Actions Bar */}
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8 pb-6 border-b border-[#182032]">
-          <div className="flex items-center gap-2 text-xs font-mono text-slate-400">
+        {/* Top Control Bar: Breadcrumbs & Quick Switcher */}
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-10 pb-6 border-b border-[#162B25]/80">
+          <div className="flex items-center gap-2.5 text-xs font-mono text-slate-400">
             <button 
-              onClick={() => window.location.pathname = '/'}
+              onClick={() => window.location.href = '/'}
               className="hover:text-white transition-colors"
             >
               ADB Labs
             </button>
-            <span>/</span>
+            <span className="text-slate-600">/</span>
             <button 
-              onClick={handleBack}
-              className="hover:text-green-400 transition-colors"
+              onClick={onBack}
+              className="hover:text-[#00FF66] transition-colors"
             >
               Team Directory
             </button>
-            <span>/</span>
-            <span className="text-green-400 font-semibold">{member.id}</span>
+            <span className="text-slate-600">/</span>
+            <span className="text-[#00FF66] font-semibold bg-[#0B1513] px-2.5 py-1 rounded-md border border-[#162B25]">
+              {member.id}
+            </span>
           </div>
 
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2 sm:gap-3">
             <button
-              onClick={handleCopyLink}
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#0e1626] border border-[#1f2b45] hover:border-green-500/50 text-xs font-mono text-slate-300 hover:text-white transition-all"
-              title="Copy link to portfolio"
+              onClick={() => onSelectMember && onSelectMember(prevMember.id)}
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#0B1513] hover:bg-[#12231F] text-slate-300 hover:text-white border border-[#162B25] text-xs font-medium transition-all"
+              title={`Previous: ${prevMember.name}`}
             >
-              {copied ? (
-                <>
-                  <Check className="w-3.5 h-3.5 text-green-400" />
-                  <span className="text-green-400">Link Copied!</span>
-                </>
-              ) : (
-                <>
-                  <Copy className="w-3.5 h-3.5" />
-                  <span>Share Profile</span>
-                </>
-              )}
+              <ChevronLeft className="w-3.5 h-3.5 text-[#00FF66]" />
+              <span className="hidden md:inline">{prevMember.name.split(' ')[0]}</span>
             </button>
 
             <button
-              onClick={handleBack}
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-green-500/10 border border-green-500/30 hover:bg-green-500/20 text-xs font-mono text-green-400 transition-all"
+              onClick={() => onSelectMember && onSelectMember(nextMember.id)}
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#0B1513] hover:bg-[#12231F] text-slate-300 hover:text-white border border-[#162B25] text-xs font-medium transition-all"
+              title={`Next: ${nextMember.name}`}
             >
-              <ArrowLeft className="w-3.5 h-3.5" />
-              <span>All Members</span>
+              <span className="hidden md:inline">{nextMember.name.split(' ')[0]}</span>
+              <ChevronRight className="w-3.5 h-3.5 text-[#00FF66]" />
+            </button>
+
+            <button
+              onClick={() => setShowBarcodeModal(true)}
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#0B1513] hover:bg-[#12231F] text-[#00FF66] border border-[#162B25] text-xs font-medium transition-all"
+              title="View Scannable ID Badge"
+            >
+              <QrCode className="w-3.5 h-3.5" />
+              <span>ID Badge</span>
+            </button>
+
+            <button
+              onClick={handleCopyLink}
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#0B1513] hover:bg-[#12231F] text-slate-300 hover:text-white border border-[#162B25] text-xs font-medium transition-all"
+            >
+              {copied ? <Check className="w-3.5 h-3.5 text-[#00FF66]" /> : <Copy className="w-3.5 h-3.5" />}
+              <span>{copied ? 'Copied' : 'Share'}</span>
             </button>
           </div>
         </div>
 
-        {/* Master Digital ID Card */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          className="rounded-3xl bg-gradient-to-br from-[#0c1322] via-[#090e1a] to-[#060a12] border border-[#1e2a42] p-6 sm:p-10 mb-12 shadow-[0_20px_60px_rgba(0,0,0,0.8)] relative overflow-hidden"
-        >
-          {/* Futuristic grid watermarks */}
-          <div className="absolute top-0 right-0 w-80 h-80 bg-[radial-gradient(circle_at_top_right,#22c55e15,transparent_70%)] pointer-events-none" />
-          <div className="absolute -bottom-10 -right-10 text-[120px] font-black font-mono text-white/[0.02] select-none pointer-events-none leading-none">
-            {member.id.split('-').pop()}
+        {/* ======================================================== */}
+        {/* HERO SECTION - Inspired by Sample Reference Layout       */}
+        {/* ======================================================== */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center mb-16">
+          
+          {/* Left Column: Eyebrow, Huge Title, Statement, CTAs */}
+          <div className="lg:col-span-7 flex flex-col justify-center">
+            
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#0B1513] border border-[#162B25] text-[#00FF66] text-xs font-mono uppercase tracking-widest mb-6 w-fit">
+              <span className="w-2 h-2 rounded-full bg-[#00FF66] animate-pulse" />
+              <span>{member.department} // {member.division}</span>
+            </div>
+
+            {/* Massive Display Title (matching sample image's bold typography) */}
+            <h1 className="text-4xl sm:text-6xl lg:text-7xl font-extrabold uppercase tracking-tight leading-[0.95] mb-6 text-white">
+              {member.headline ? (
+                <>
+                  <span className="block text-white">{member.headline.split('&')[0]}</span>
+                  {member.headline.includes('&') && (
+                    <span className="block text-transparent bg-clip-text bg-gradient-to-r from-[#00FF66] via-emerald-400 to-teal-300">
+                      & {member.headline.split('&')[1]}
+                    </span>
+                  )}
+                </>
+              ) : (
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-white via-slate-100 to-[#00FF66]">
+                  {member.role}
+                </span>
+              )}
+            </h1>
+
+            {/* Professional Summary Paragraph */}
+            <p className="text-base sm:text-lg text-slate-300 font-normal leading-relaxed mb-8 max-w-2xl">
+              {member.bio}
+            </p>
+
+            {/* Quote Block */}
+            {member.quote && (
+              <div className="border-l-2 border-[#00FF66] pl-4 py-1 mb-8 bg-[#0B1513]/40 rounded-r-xl max-w-xl">
+                <p className="text-sm italic text-slate-400 font-mono">
+                  "{member.quote}"
+                </p>
+              </div>
+            )}
+
+            {/* Action Buttons */}
+            <div className="flex flex-wrap items-center gap-4">
+              <a
+                href="#featured-work"
+                className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-[#00FF66] hover:bg-[#00E55C] text-black font-bold text-sm tracking-wide transition-all shadow-[0_0_25px_rgba(0,255,102,0.35)] hover:shadow-[0_0_35px_rgba(0,255,102,0.5)] cursor-pointer"
+              >
+                <span>VIEW FEATURED WORK</span>
+                <ArrowUpRight className="w-4 h-4 stroke-[2.5]" />
+              </a>
+
+              {member.resumeUrl && (
+                <a
+                  href={member.resumeUrl}
+                  download={`${member.name.replace(/\s+/g, '_')}_Resume.pdf`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-[#0B1513] hover:bg-[#12231F] text-white hover:text-[#00FF66] border border-[#162B25] hover:border-[#00FF66]/50 font-bold text-sm tracking-wide transition-all cursor-pointer shadow-lg"
+                >
+                  <Download className="w-4 h-4 text-[#00FF66]" />
+                  <span>DOWNLOAD RESUME</span>
+                </a>
+              )}
+
+              <a
+                href="#contact-section"
+                className="inline-flex items-center justify-center gap-2 px-5 py-3.5 rounded-xl bg-transparent hover:bg-[#0B1513] text-slate-300 hover:text-white border border-transparent hover:border-[#162B25] font-semibold text-sm transition-all"
+              >
+                <Mail className="w-4 h-4 text-[#00FF66]" />
+                <span>LET'S CONNECT</span>
+              </a>
+            </div>
+
           </div>
+
+          {/* Right Column: Hero Portrait Cutout & Floating Badges */}
+          <div className="lg:col-span-5 relative flex flex-col items-center justify-center">
+            
+            {/* Ambient emerald backlight behind image */}
+            <div className="absolute inset-0 bg-gradient-to-t from-[#00FF66]/20 via-emerald-600/10 to-transparent rounded-3xl blur-2xl transform scale-95 pointer-events-none" />
+
+            <div className="relative w-full max-w-[420px] rounded-3xl bg-gradient-to-b from-[#0F1E1A] to-[#07100E] border border-[#162B25] overflow-hidden shadow-2xl p-4 sm:p-6 group">
+              
+              {/* Top corner status badges */}
+              <div className="flex items-center justify-between gap-2 mb-4 relative z-20">
+                <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#050B0A]/90 border border-[#00FF66]/30 text-[#00FF66] text-xs font-mono">
+                  <span className="w-2 h-2 rounded-full bg-[#00FF66] animate-ping" />
+                  <span>{member.status.split('/')[0]}</span>
+                </div>
+                <span className="text-xs font-mono text-slate-400 bg-[#050B0A]/80 px-2.5 py-1 rounded-md border border-[#162B25]">
+                  {member.id}
+                </span>
+              </div>
+
+              {/* Portrait Image Container */}
+              <div className="relative w-full aspect-[4/5] rounded-2xl overflow-hidden bg-gradient-to-t from-[#050B0A] via-transparent to-transparent flex items-end justify-center">
+                {member.image ? (
+                  <img
+                    src={member.image}
+                    alt={member.name}
+                    className="w-full h-full object-contain object-bottom filter drop-shadow-[0_15px_30px_rgba(0,0,0,0.8)] transition-transform duration-500 group-hover:scale-[1.02]"
+                    onError={(e) => {
+                      // Fallback to placeholder if image fails to load
+                      e.target.style.display = 'none';
+                    }}
+                  />
+                ) : (
+                  <div className="w-full h-full flex flex-col items-center justify-center text-center p-6 bg-gradient-to-br from-[#0B1513] to-[#050B0A]">
+                    <div className="w-24 h-24 rounded-full bg-[#00FF66]/10 border border-[#00FF66]/30 flex items-center justify-center text-3xl font-extrabold text-[#00FF66] mb-4">
+                      {member.name.split(' ').map(n => n[0]).join('')}
+                    </div>
+                    <span className="text-lg font-bold text-white">{member.name}</span>
+                    <span className="text-xs text-[#00FF66] font-mono mt-1">{member.role}</span>
+                  </div>
+                )}
+
+                {/* Subtle dark gradient overlay at bottom of cutout */}
+                <div className="absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-[#07100E] to-transparent pointer-events-none" />
+              </div>
+
+              {/* Floating Badge (like sample image "AVAILABLE FOR FREELANCE / HARDWARE") */}
+              <div className="mt-4 p-3.5 rounded-xl bg-[#050B0A]/90 border border-[#162B25] flex items-center justify-between gap-3">
+                <div className="flex items-center gap-2.5">
+                  <div className="w-8 h-8 rounded-lg bg-[#00FF66]/10 border border-[#00FF66]/30 flex items-center justify-center text-[#00FF66]">
+                    <Sparkles className="w-4 h-4" />
+                  </div>
+                  <div>
+                    <span className="text-[10px] uppercase font-mono tracking-wider text-slate-400 block">
+                      ENGAGEMENT STATUS
+                    </span>
+                    <span className="text-xs font-semibold text-white">
+                      {member.availability || 'Available for Hardware R&D Projects'}
+                    </span>
+                  </div>
+                </div>
+                <div className="w-2.5 h-2.5 rounded-full bg-[#00FF66] shadow-[0_0_8px_#00FF66]" />
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+        {/* ======================================================== */}
+        {/* STATS BANNER (4 Cards Grid - Exactly like sample layout) */}
+        {/* ======================================================== */}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 mb-20">
+          {(member.stats || [
+            { label: 'PROJECTS COMPLETED', value: '18+' },
+            { label: 'YEARS IN HARDWARE', value: '3+' },
+            { label: 'ACTIVE PROTOTYPES', value: '4' },
+            { label: 'SYSTEM RELIABILITY', value: '99.9%' }
+          ]).map((st, idx) => (
+            <div 
+              key={idx}
+              className="p-6 rounded-2xl bg-[#0B1513]/80 border border-[#162B25] hover:border-[#00FF66]/40 transition-all backdrop-blur-md group relative overflow-hidden"
+            >
+              <div className="absolute top-0 right-0 w-24 h-24 bg-[#00FF66]/5 rounded-bl-full pointer-events-none group-hover:scale-125 transition-transform" />
+              <div className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight mb-2 group-hover:text-[#00FF66] transition-colors">
+                {st.value}
+              </div>
+              <div className="text-xs font-mono uppercase tracking-wider text-slate-400">
+                {st.label}
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* ======================================================== */}
+        {/* FEATURED WORK (3 Column Cards Grid - Sample Reference)   */}
+        {/* ======================================================== */}
+        <div id="featured-work" className="mb-24 scroll-mt-24">
+          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-10 pb-4 border-b border-[#162B25]">
+            <div>
+              <div className="inline-flex items-center gap-2 text-xs font-mono text-[#00FF66] uppercase tracking-widest mb-2">
+                <Cpu className="w-3.5 h-3.5" />
+                <span>PORTFOLIO SHOWCASE</span>
+              </div>
+              <h2 className="text-3xl sm:text-4xl font-extrabold uppercase tracking-tight text-white">
+                FEATURED WORK & PROJECTS
+              </h2>
+            </div>
+            <span className="text-xs font-mono text-slate-400">
+              {member.featuredProjects?.length || 0} DOCUMENTED INITIATIVES
+            </span>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {(member.featuredProjects || []).map((proj, pIdx) => (
+              <div 
+                key={pIdx}
+                className="rounded-2xl bg-[#0B1513]/70 border border-[#162B25] hover:border-[#00FF66]/50 p-6 flex flex-col justify-between transition-all hover:-translate-y-1 duration-300 group shadow-lg"
+              >
+                <div>
+                  <div className="flex items-center justify-between gap-2 mb-4">
+                    <span className="text-[11px] font-mono uppercase tracking-wider text-[#00FF66] bg-[#00FF66]/10 px-2.5 py-1 rounded-md border border-[#00FF66]/20">
+                      {proj.tag}
+                    </span>
+                    <div className="w-8 h-8 rounded-full bg-[#050B0A] border border-[#162B25] group-hover:border-[#00FF66] flex items-center justify-center text-slate-400 group-hover:text-[#00FF66] transition-colors">
+                      <ArrowUpRight className="w-4 h-4" />
+                    </div>
+                  </div>
+
+                  <h3 className="text-xl font-bold text-white mb-3 group-hover:text-[#00FF66] transition-colors">
+                    {proj.title}
+                  </h3>
+
+                  <p className="text-sm text-slate-300 leading-relaxed mb-6">
+                    {proj.desc}
+                  </p>
+                </div>
+
+                {proj.tech && proj.tech.length > 0 && (
+                  <div className="pt-4 border-t border-[#162B25]/60 flex flex-wrap gap-1.5">
+                    {proj.tech.map((t, tIdx) => (
+                      <span 
+                        key={tIdx}
+                        className="text-[11px] font-mono text-slate-400 bg-[#050B0A] px-2 py-0.5 rounded border border-[#162B25]"
+                      >
+                        {t}
+                      </span>
+                    ))}
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* ======================================================== */}
+        {/* CORE CAPABILITIES (6 Cards Grid - Sample Reference)      */}
+        {/* ======================================================== */}
+        <div className="mb-24">
+          <div className="mb-10 pb-4 border-b border-[#162B25]">
+            <div className="inline-flex items-center gap-2 text-xs font-mono text-[#00FF66] uppercase tracking-widest mb-2">
+              <Layers className="w-3.5 h-3.5" />
+              <span>DOMAINS & COMPETENCIES</span>
+            </div>
+            <h2 className="text-3xl sm:text-4xl font-extrabold uppercase tracking-tight text-white">
+              CORE CAPABILITIES
+            </h2>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {(member.capabilities || []).map((cap, cIdx) => (
+              <div 
+                key={cIdx}
+                className="p-6 rounded-2xl bg-[#0B1513]/60 border border-[#162B25] hover:border-[#00FF66]/40 transition-all group"
+              >
+                <div className="w-12 h-12 rounded-xl bg-[#050B0A] border border-[#162B25] group-hover:border-[#00FF66]/50 flex items-center justify-center mb-4 transition-colors">
+                  {getCapabilityIcon(cap.icon)}
+                </div>
+                <h3 className="text-lg font-bold text-white mb-2 group-hover:text-[#00FF66] transition-colors">
+                  {cap.title}
+                </h3>
+                <p className="text-sm text-slate-400 leading-relaxed">
+                  {cap.desc}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* ======================================================== */}
+        {/* TOOLS & TECHNOLOGIES (Categorized Grid)                  */}
+        {/* ======================================================== */}
+        {member.techStack && (
+          <div className="mb-24">
+            <div className="mb-10 pb-4 border-b border-[#162B25]">
+              <div className="inline-flex items-center gap-2 text-xs font-mono text-[#00FF66] uppercase tracking-widest mb-2">
+                <Terminal className="w-3.5 h-3.5" />
+                <span>TOOLCHAIN & PLATFORMS</span>
+              </div>
+              <h2 className="text-3xl sm:text-4xl font-extrabold uppercase tracking-tight text-white">
+                TOOLS & TECHNOLOGIES
+              </h2>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+              {Object.entries(member.techStack).map(([catKey, items], idx) => (
+                <div 
+                  key={idx}
+                  className="p-6 rounded-2xl bg-[#0B1513]/60 border border-[#162B25]"
+                >
+                  <span className="text-xs font-mono uppercase tracking-wider text-[#00FF66] block mb-4 pb-2 border-b border-[#162B25]">
+                    {catKey === 'languages' ? 'Languages' :
+                     catKey === 'hardware' ? 'Hardware & Systems' :
+                     catKey === 'cadTools' ? 'CAD, EDA & Design' : 'Tools & Environments'}
+                  </span>
+                  <div className="flex flex-wrap gap-2">
+                    {items.map((item, iIdx) => (
+                      <span 
+                        key={iIdx}
+                        className="text-xs font-medium text-slate-200 bg-[#050B0A] px-3 py-1.5 rounded-lg border border-[#162B25] hover:border-[#00FF66]/50 transition-colors"
+                      >
+                        {item}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* ======================================================== */}
+        {/* EXPERIENCE & EDUCATION TIMELINE (Two Columns)            */}
+        {/* ======================================================== */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 mb-24">
+          
+          {/* Work Experience Column */}
+          <div className="lg:col-span-7">
+            <div className="mb-8 pb-3 border-b border-[#162B25]">
+              <div className="inline-flex items-center gap-2 text-xs font-mono text-[#00FF66] uppercase tracking-widest mb-1">
+                <Briefcase className="w-3.5 h-3.5" />
+                <span>CAREER RECORD</span>
+              </div>
+              <h2 className="text-2xl sm:text-3xl font-extrabold uppercase text-white">
+                WORK EXPERIENCE
+              </h2>
+            </div>
+
+            <div className="space-y-6">
+              {(member.experience || []).map((exp, eIdx) => (
+                <div 
+                  key={eIdx}
+                  className="p-6 rounded-2xl bg-[#0B1513]/60 border border-[#162B25] relative pl-6"
+                >
+                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1 mb-2">
+                    <h3 className="text-lg font-bold text-white">
+                      {exp.role}
+                    </h3>
+                    <span className="text-xs font-mono text-[#00FF66] bg-[#00FF66]/10 px-2.5 py-0.5 rounded border border-[#00FF66]/20 w-fit">
+                      {exp.period}
+                    </span>
+                  </div>
+
+                  <div className="text-sm font-medium text-slate-300 mb-4">
+                    {exp.company} <span className="text-slate-500">•</span> {exp.location}
+                  </div>
+
+                  {exp.highlights && exp.highlights.length > 0 && (
+                    <ul className="space-y-2 text-xs sm:text-sm text-slate-400">
+                      {exp.highlights.map((hl, hIdx) => (
+                        <li key={hIdx} className="flex items-start gap-2">
+                          <span className="text-[#00FF66] mt-1">▹</span>
+                          <span>{hl}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Education & Certifications Column */}
+          <div className="lg:col-span-5 flex flex-col justify-between">
+            <div>
+              <div className="mb-8 pb-3 border-b border-[#162B25]">
+                <div className="inline-flex items-center gap-2 text-xs font-mono text-[#00FF66] uppercase tracking-widest mb-1">
+                  <Award className="w-3.5 h-3.5" />
+                  <span>CREDENTIALS</span>
+                </div>
+                <h2 className="text-2xl sm:text-3xl font-extrabold uppercase text-white">
+                  EDUCATION & AWARDS
+                </h2>
+              </div>
+
+              <div className="space-y-6 mb-8">
+                {(member.education || []).map((edu, eduIdx) => (
+                  <div 
+                    key={eduIdx}
+                    className="p-5 rounded-2xl bg-[#0B1513]/60 border border-[#162B25]"
+                  >
+                    <span className="text-xs font-mono text-[#00FF66] block mb-1">
+                      {edu.period}
+                    </span>
+                    <h3 className="text-base font-bold text-white mb-1">
+                      {edu.degree}
+                    </h3>
+                    <div className="text-xs text-slate-400 mb-2">
+                      {edu.institution}
+                    </div>
+                    {edu.score && (
+                      <span className="text-xs font-mono text-emerald-300 bg-[#050B0A] px-2 py-0.5 rounded border border-[#162B25]">
+                        {edu.score}
+                      </span>
+                    )}
+                    {edu.details && (
+                      <p className="text-xs text-slate-400 mt-2">
+                        {edu.details}
+                      </p>
+                    )}
+                  </div>
+                ))}
+              </div>
+
+              {/* Certifications Block */}
+              {member.certifications && member.certifications.length > 0 && (
+                <div className="p-5 rounded-2xl bg-[#0B1513]/40 border border-[#162B25]">
+                  <span className="text-xs font-mono text-slate-400 uppercase tracking-wider block mb-3">
+                    HONORS & CERTIFICATIONS
+                  </span>
+                  <div className="space-y-2">
+                    {member.certifications.map((cert, cIdx) => (
+                      <div key={cIdx} className="flex items-center gap-2 text-xs text-slate-300">
+                        <BadgeCheck className="w-4 h-4 text-[#00FF66] shrink-0" />
+                        <span>{cert}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+            </div>
+          </div>
+
+        </div>
+
+        {/* ======================================================== */}
+        {/* ENGINEERING PROCESS (5 Steps - Sample Reference Layout)  */}
+        {/* ======================================================== */}
+        <div className="mb-24">
+          <div className="mb-10 pb-4 border-b border-[#162B25]">
+            <div className="inline-flex items-center gap-2 text-xs font-mono text-[#00FF66] uppercase tracking-widest mb-2">
+              <Wrench className="w-3.5 h-3.5" />
+              <span>METHODOLOGY & EXECUTION</span>
+            </div>
+            <h2 className="text-3xl sm:text-4xl font-extrabold uppercase tracking-tight text-white">
+              MY ENGINEERING PROCESS
+            </h2>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
+            {[
+              { num: '01', title: 'DISCOVER', desc: 'Understanding core physical constraints, electrical limits, and mission requirements.' },
+              { num: '02', title: 'DEFINE', desc: 'Translating research into schematic topologies, mathematical kinematic models, and BOM.' },
+              { num: '03', title: 'DESIGN', desc: 'Parametric 3D CAD modeling, PCB trace routing, and thermal channel simulations.' },
+              { num: '04', title: 'DEVELOP', desc: 'Writing deterministic embedded firmware, rapid prototyping, and bench validation.' },
+              { num: '05', title: 'DELIVER', desc: 'Stress testing under full electrical/mechanical load, calibration, and deployment.' }
+            ].map((st, sIdx) => (
+              <div 
+                key={sIdx}
+                className="p-5 rounded-2xl bg-[#0B1513]/50 border border-[#162B25] hover:border-[#00FF66]/50 transition-all"
+              >
+                <span className="text-2xl font-mono font-extrabold text-[#00FF66] block mb-2">
+                  {st.num}
+                </span>
+                <h3 className="text-sm font-bold uppercase tracking-wider text-white mb-2">
+                  {st.title}
+                </h3>
+                <p className="text-xs text-slate-400 leading-relaxed">
+                  {st.desc}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* ======================================================== */}
+        {/* CALL TO ACTION BANNER (Matching Sample Layout)           */}
+        {/* ======================================================== */}
+        <div id="contact-section" className="rounded-3xl bg-gradient-to-r from-[#0B1513] via-[#0F1E1A] to-[#0B1513] border border-[#00FF66]/30 p-8 sm:p-12 relative overflow-hidden shadow-2xl">
+          
+          <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-[#00FF66]/10 rounded-full blur-[140px] pointer-events-none" />
 
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center relative z-10">
             
-            {/* Avatar / Badge Column */}
-            <div className="lg:col-span-4 flex flex-col items-center sm:items-start lg:items-center text-center sm:text-left lg:text-center">
-              <div className="relative group mb-4">
-                <div className={`w-36 h-36 sm:w-44 sm:h-44 rounded-3xl bg-gradient-to-tr ${member.avatarGradient} p-1 shadow-[0_0_40px_rgba(34,197,94,0.25)] flex items-center justify-center relative overflow-hidden`}>
-                  <div className="w-full h-full rounded-[22px] bg-[#070b14] flex flex-col items-center justify-center p-4 relative">
-                    <span className="text-4xl sm:text-5xl font-black text-white font-mono tracking-wider">
-                      {member.name.split(' ').map(n => n[0]).join('')}
-                    </span>
-                    <span className="text-[10px] font-mono text-slate-400 mt-2 tracking-widest uppercase">
-                      ADB R&D LABS
-                    </span>
-                  </div>
-                </div>
-
-                {/* Status indicator badge */}
-                <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 px-3 py-0.5 rounded-full bg-[#080d1a] border border-green-500/50 flex items-center gap-1.5 shadow-lg whitespace-nowrap">
-                  <span className="w-2 h-2 rounded-full bg-green-400 animate-pulse" />
-                  <span className="text-[10px] font-mono font-bold text-green-400 tracking-wider uppercase">
-                    VERIFIED CREW
-                  </span>
-                </div>
-              </div>
-
-              {/* Monospace Code Tag */}
-              <div className="mt-3 px-3 py-1 rounded-lg bg-black/60 border border-[#202d44] font-mono text-xs text-green-400 font-bold tracking-widest shadow-inner">
-                {member.id}
-              </div>
-            </div>
-
-            {/* Info Column */}
-            <div className="lg:col-span-8 space-y-4">
-              <div className="flex flex-wrap items-center gap-2">
-                <span className="px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/30 text-blue-400 text-xs font-mono font-semibold">
-                  {member.department}
-                </span>
-                <span className="px-3 py-1 rounded-full bg-slate-800/80 border border-slate-700 text-slate-300 text-xs font-mono">
-                  {member.division}
-                </span>
-                <span className="flex items-center gap-1 text-xs text-slate-400 font-mono ml-auto">
-                  <MapPin className="w-3.5 h-3.5 text-green-400" />
-                  {member.location}
-                </span>
-              </div>
-
-              <div>
-                <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black text-white tracking-tight">
-                  {member.name}
-                </h1>
-                <p className="text-base sm:text-lg font-mono text-green-400 mt-1">
-                  {member.role}
-                </p>
-              </div>
-
-              {/* Engineering philosophy quote */}
-              <blockquote className="border-l-2 border-green-500 pl-4 py-1 italic text-slate-300 text-sm sm:text-base bg-white/[0.01] rounded-r-lg">
-                "{member.quote}"
-              </blockquote>
-
-              {/* Quick Stat Counter Badges */}
-              <div className="grid grid-cols-3 gap-3 pt-3">
-                <div className="p-3 rounded-2xl bg-[#090e1a]/80 border border-[#1b2538] text-center">
-                  <div className="text-xs font-mono text-slate-400">Experience</div>
-                  <div className="text-base sm:text-lg font-black text-white font-mono mt-0.5">{member.experience}</div>
-                </div>
-                <div className="p-3 rounded-2xl bg-[#090e1a]/80 border border-[#1b2538] text-center">
-                  <div className="text-xs font-mono text-slate-400">Projects Shipped</div>
-                  <div className="text-base sm:text-lg font-black text-green-400 font-mono mt-0.5">{member.projectsCompleted}+</div>
-                </div>
-                <div className="p-3 rounded-2xl bg-[#090e1a]/80 border border-[#1b2538] text-center">
-                  <div className="text-xs font-mono text-slate-400">Patents / IP</div>
-                  <div className="text-base sm:text-lg font-black text-blue-400 font-mono mt-0.5">{member.patentsFiled}</div>
-                </div>
-              </div>
-            </div>
-
-          </div>
-        </motion.div>
-
-        {/* Detailed Content Columns */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 mb-16">
-          
-          {/* Main Column: Bio & Featured Projects */}
-          <div className="lg:col-span-8 space-y-8">
-            
-            {/* Professional Background */}
-            <div className="rounded-3xl bg-[#090e1a] border border-[#182338] p-6 sm:p-8">
-              <div className="flex items-center gap-2 mb-4 text-green-400 text-xs font-mono font-bold uppercase tracking-wider">
-                <Briefcase className="w-4 h-4" />
-                <span>Mission & Engineering Background</span>
-              </div>
-              <p className="text-sm sm:text-base text-slate-300 leading-relaxed">
-                {member.bio}
+            <div className="lg:col-span-7">
+              <span className="text-xs font-mono text-[#00FF66] uppercase tracking-widest block mb-2">
+                INITIATE CONTACT
+              </span>
+              <h2 className="text-3xl sm:text-5xl font-black uppercase tracking-tight text-white leading-tight mb-4">
+                LET'S BUILD SOMETHING EXTRAORDINARY
+              </h2>
+              <p className="text-sm sm:text-base text-slate-300 max-w-xl mb-6">
+                Currently actively collaborating on clean-energy storage, autonomous robotics, and embedded systems engineering.
               </p>
-              
-              <div className="mt-6 pt-6 border-t border-[#162033] flex items-center gap-2 text-xs text-slate-400 font-mono">
-                <Award className="w-4 h-4 text-green-400" />
-                <span>Academic Foundation: <strong className="text-slate-200">{member.education}</strong></span>
+
+              <div className="flex flex-wrap items-center gap-4">
+                {member.socials?.email && (
+                  <a
+                    href={`mailto:${member.socials.email}`}
+                    className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-[#00FF66] hover:bg-[#00E55C] text-black font-bold text-sm tracking-wide transition-all shadow-[0_0_20px_rgba(0,255,102,0.3)]"
+                  >
+                    <Mail className="w-4 h-4" />
+                    <span>LET'S WORK TOGETHER</span>
+                    <ArrowUpRight className="w-4 h-4" />
+                  </a>
+                )}
+
+                {member.socials?.linkedin && (
+                  <a
+                    href={member.socials.linkedin}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-[#050B0A] hover:bg-[#12231F] text-white border border-[#162B25] hover:border-[#00FF66]/40 text-sm font-semibold transition-all"
+                  >
+                    <LinkedInIcon className="w-4 h-4 text-[#00FF66]" />
+                    <span>LinkedIn</span>
+                  </a>
+                )}
+
+                {member.socials?.github && (
+                  <a
+                    href={member.socials.github}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-[#050B0A] hover:bg-[#12231F] text-white border border-[#162B25] hover:border-[#00FF66]/40 text-sm font-semibold transition-all"
+                  >
+                    <GitHubIcon className="w-4 h-4 text-[#00FF66]" />
+                    <span>GitHub</span>
+                  </a>
+                )}
               </div>
             </div>
 
-            {/* Featured ADB Labs Projects */}
-            <div className="rounded-3xl bg-[#090e1a] border border-[#182338] p-6 sm:p-8">
-              <div className="flex items-center gap-2 mb-6 text-green-400 text-xs font-mono font-bold uppercase tracking-wider">
-                <Zap className="w-4 h-4" />
-                <span>Key Engineering Contributions</span>
-              </div>
+            {/* Direct Contact Cards */}
+            <div className="lg:col-span-5 bg-[#050B0A]/80 border border-[#162B25] rounded-2xl p-6 space-y-4">
+              <span className="text-xs font-mono text-slate-400 uppercase tracking-widest block border-b border-[#162B25] pb-2">
+                DIRECT CHANNELS // {member.id}
+              </span>
 
-              <div className="space-y-4">
-                {member.featuredProjects.map((project, idx) => (
-                  <div 
-                    key={idx}
-                    className="p-5 rounded-2xl bg-[#060a14] border border-[#19243a] hover:border-green-500/40 transition-colors group"
-                  >
-                    <div className="flex items-center justify-between mb-2">
-                      <h4 className="text-base font-bold text-white group-hover:text-green-400 transition-colors">
-                        {project.title}
-                      </h4>
-                      <span className="text-[10px] font-mono text-slate-500 bg-slate-900 px-2 py-0.5 rounded">
-                        DEPLOYED
-                      </span>
-                    </div>
-                    <p className="text-xs sm:text-sm text-slate-400 leading-relaxed">
-                      {project.desc}
-                    </p>
+              {member.socials?.email && (
+                <div className="flex items-center gap-3 text-xs sm:text-sm">
+                  <div className="w-8 h-8 rounded-lg bg-[#00FF66]/10 flex items-center justify-center text-[#00FF66] shrink-0">
+                    <Mail className="w-4 h-4" />
                   </div>
-                ))}
-              </div>
-            </div>
+                  <div>
+                    <span className="text-[10px] font-mono text-slate-400 block uppercase">EMAIL</span>
+                    <a href={`mailto:${member.socials.email}`} className="text-white hover:text-[#00FF66] transition-colors break-all">
+                      {member.socials.email}
+                    </a>
+                  </div>
+                </div>
+              )}
 
-          </div>
+              {member.socials?.phone && (
+                <div className="flex items-center gap-3 text-xs sm:text-sm">
+                  <div className="w-8 h-8 rounded-lg bg-[#00FF66]/10 flex items-center justify-center text-[#00FF66] shrink-0">
+                    <Phone className="w-4 h-4" />
+                  </div>
+                  <div>
+                    <span className="text-[10px] font-mono text-slate-400 block uppercase">PHONE / WHATSAPP</span>
+                    <a href={`tel:${member.socials.phone}`} className="text-white hover:text-[#00FF66] transition-colors">
+                      {member.socials.phone}
+                    </a>
+                  </div>
+                </div>
+              )}
 
-          {/* Side Column: Skills, Verified Credentials, Socials */}
-          <div className="lg:col-span-4 space-y-8">
-            
-            {/* Technical Skills Radar */}
-            <div className="rounded-3xl bg-[#090e1a] border border-[#182338] p-6">
-              <div className="flex items-center gap-2 mb-4 text-green-400 text-xs font-mono font-bold uppercase tracking-wider">
-                <Cpu className="w-4 h-4" />
-                <span>Core Competencies</span>
-              </div>
-              <div className="flex flex-wrap gap-2">
-                {member.skills.map((skill, idx) => (
-                  <span
-                    key={idx}
-                    className="px-3 py-1.5 rounded-xl bg-[#0c1424] border border-[#1e2d4a] text-xs font-mono text-slate-200 hover:text-green-400 hover:border-green-500/50 transition-colors"
-                  >
-                    {skill}
+              <div className="flex items-center gap-3 text-xs sm:text-sm">
+                <div className="w-8 h-8 rounded-lg bg-[#00FF66]/10 flex items-center justify-center text-[#00FF66] shrink-0">
+                  <MapPin className="w-4 h-4" />
+                </div>
+                <div>
+                  <span className="text-[10px] font-mono text-slate-400 block uppercase">LOCATION</span>
+                  <span className="text-white">
+                    {member.location}
                   </span>
-                ))}
-              </div>
-            </div>
-
-            {/* Crew Identity Card */}
-            <div className="rounded-3xl bg-gradient-to-b from-[#0c1424] to-[#070b14] border border-[#1e2d4a] p-6 text-left shadow-xl space-y-3">
-              <div className="flex items-center gap-2 text-xs font-mono text-green-400 font-bold uppercase tracking-wider">
-                <BadgeCheck className="w-4 h-4" />
-                <span>Verified Engineering Crew</span>
-              </div>
-              
-              <div className="space-y-2 pt-1 font-mono text-xs">
-                <div className="flex items-center justify-between py-1.5 border-b border-[#182338]">
-                  <span className="text-slate-500">Employee ID</span>
-                  <span className="text-green-400 font-bold">{member.id}</span>
                 </div>
-                <div className="flex items-center justify-between py-1.5 border-b border-[#182338]">
-                  <span className="text-slate-500">Department</span>
-                  <span className="text-slate-200">{member.department}</span>
-                </div>
-                <div className="flex items-center justify-between py-1.5 border-b border-[#182338]">
-                  <span className="text-slate-500">Roster Status</span>
-                  <span className="text-emerald-400 font-medium">● Active / Lab Staff</span>
-                </div>
-                <div className="flex items-center justify-between py-1.5">
-                  <span className="text-slate-500">Facility Base</span>
-                  <span className="text-slate-300">Chennai Lab</span>
-                </div>
-              </div>
-            </div>
-
-            {/* Connect & Social Contacts */}
-            <div className="rounded-3xl bg-[#090e1a] border border-[#182338] p-6">
-              <div className="text-xs font-mono text-slate-400 uppercase tracking-wider mb-4">
-                COMMUNICATION CHANNELS
-              </div>
-              <div className="space-y-2">
-                <a
-                  href={`mailto:${member.socials.email}`}
-                  className="flex items-center justify-between p-3 rounded-xl bg-[#060a14] border border-[#19243a] hover:border-green-500/50 hover:bg-[#0c1527] text-xs font-mono text-slate-300 hover:text-white transition-all"
-                >
-                  <div className="flex items-center gap-2.5">
-                    <Mail className="w-4 h-4 text-green-400" />
-                    <span>{member.socials.email}</span>
-                  </div>
-                  <ExternalLink className="w-3 h-3 text-slate-500" />
-                </a>
-
-                <a
-                  href={member.socials.linkedin}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center justify-between p-3 rounded-xl bg-[#060a14] border border-[#19243a] hover:border-blue-500/50 hover:bg-[#0c1527] text-xs font-mono text-slate-300 hover:text-white transition-all"
-                >
-                  <div className="flex items-center gap-2.5">
-                    <LinkedInIcon className="w-4 h-4 text-blue-400" />
-                    <span>LinkedIn Profile</span>
-                  </div>
-                  <ExternalLink className="w-3 h-3 text-slate-500" />
-                </a>
-
-                <a
-                  href={member.socials.github}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center justify-between p-3 rounded-xl bg-[#060a14] border border-[#19243a] hover:border-slate-500/50 hover:bg-[#0c1527] text-xs font-mono text-slate-300 hover:text-white transition-all"
-                >
-                  <div className="flex items-center gap-2.5">
-                    <GitHubIcon className="w-4 h-4 text-slate-300" />
-                    <span>GitHub Repositories</span>
-                  </div>
-                  <ExternalLink className="w-3 h-3 text-slate-500" />
-                </a>
               </div>
             </div>
 
           </div>
 
-        </div>
-
-        {/* Teammate Switcher Footer (Prev / Next) */}
-        <div className="pt-8 border-t border-[#182032] grid grid-cols-1 sm:grid-cols-2 gap-4">
-          <button
-            onClick={() => handleSelect(prevMember.id)}
-            className="flex items-center gap-3 p-4 rounded-2xl bg-[#090e1a] border border-[#182338] hover:border-green-500/40 text-left transition-all group"
-          >
-            <ChevronLeft className="w-5 h-5 text-slate-400 group-hover:text-green-400 group-hover:-translate-x-1 transition-transform" />
-            <div>
-              <span className="text-[10px] font-mono text-slate-500 block uppercase">
-                Previous Teammate ({prevMember.id})
-              </span>
-              <span className="text-sm font-bold text-white group-hover:text-green-400 transition-colors">
-                {prevMember.name}
-              </span>
-            </div>
-          </button>
-
-          <button
-            onClick={() => handleSelect(nextMember.id)}
-            className="flex items-center justify-end gap-3 p-4 rounded-2xl bg-[#090e1a] border border-[#182338] hover:border-green-500/40 text-right transition-all group"
-          >
-            <div>
-              <span className="text-[10px] font-mono text-slate-500 block uppercase">
-                Next Teammate ({nextMember.id})
-              </span>
-              <span className="text-sm font-bold text-white group-hover:text-green-400 transition-colors">
-                {nextMember.name}
-              </span>
-            </div>
-            <ChevronRight className="w-5 h-5 text-slate-400 group-hover:text-green-400 group-hover:translate-x-1 transition-transform" />
-          </button>
         </div>
 
       </div>
+
+      {/* ======================================================== */}
+      {/* SCANNABLE ID BADGE MODAL                                 */}
+      {/* ======================================================== */}
+      {showBarcodeModal && (
+        <div 
+          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md"
+          onClick={() => setShowBarcodeModal(false)}
+        >
+          <div 
+            className="max-w-md w-full bg-[#0B1513] border border-[#00FF66]/40 rounded-3xl p-6 sm:p-8 text-center relative shadow-[0_0_50px_rgba(0,255,102,0.2)]"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="flex items-center justify-between gap-2 mb-6 pb-3 border-b border-[#162B25]">
+              <div className="flex items-center gap-2">
+                <ShieldCheck className="w-5 h-5 text-[#00FF66]" />
+                <span className="text-xs font-mono uppercase tracking-wider text-white">
+                  ADB LABS // VERIFIED ID BADGE
+                </span>
+              </div>
+              <button
+                onClick={() => setShowBarcodeModal(false)}
+                className="text-slate-400 hover:text-white text-lg font-bold"
+              >
+                ✕
+              </button>
+            </div>
+
+            <h3 className="text-xl font-bold text-white mb-1">
+              {member.name}
+            </h3>
+            <span className="text-xs font-mono text-[#00FF66] block mb-6">
+              {member.id} • {member.role}
+            </span>
+
+            {/* Barcode Display */}
+            <div className="bg-white rounded-xl p-4 mb-4 flex items-center justify-center shadow-inner">
+              <img 
+                src={`/barcodes/badge_card/${member.id}_scannable_badge.png`}
+                alt={`${member.name} Barcode`}
+                className="max-h-24 object-contain"
+                onError={(e) => {
+                  // Fallback to standard barcode
+                  e.target.src = `/barcodes/${member.id}_barcode.png`;
+                }}
+              />
+            </div>
+
+            <p className="text-xs text-slate-400 mb-6 font-mono">
+              Scannable 1D & 2D verification badge linked to official employee credentials.
+            </p>
+
+            <button
+              onClick={() => setShowBarcodeModal(false)}
+              className="w-full py-2.5 rounded-xl bg-[#00FF66] hover:bg-[#00E55C] text-black font-bold text-xs uppercase tracking-wider transition-all"
+            >
+              Close Window
+            </button>
+          </div>
+        </div>
+      )}
+
     </div>
   );
 }
