@@ -60,8 +60,11 @@ function GitHubIcon(props) {
 }
 
 // Capability Icon Helper
-function getCapabilityIcon(iconName, isRed = false) {
-  const colorClass = isRed ? "text-[#E50914]" : "text-white/90";
+function getCapabilityIcon(iconName, themeMode = 'slate') {
+  let colorClass = "text-white/90";
+  if (themeMode === 'crimson') colorClass = "text-[#E50914]";
+  if (themeMode === 'emerald') colorClass = "text-emerald-400";
+
   switch (iconName) {
     case 'PenTool':
     case 'Cpu': return <PenTool className={`w-5 h-5 ${colorClass}`} />;
@@ -81,20 +84,31 @@ function getCapabilityIcon(iconName, isRed = false) {
   }
 }
 
-// Visual Mockup for Projects (Slate or Reddish)
-function ProjectMockup({ index, isRed = false }) {
+// Visual Mockup for Projects (Slate, Crimson, or Emerald)
+function ProjectMockup({ index, themeMode = 'slate' }) {
+  const isRed = themeMode === 'crimson';
+  const isGreen = themeMode === 'emerald';
+
   if (index === 0) {
     return (
       <div className={`w-full h-full p-4 flex flex-col justify-between relative overflow-hidden border-b ${
-        isRed ? 'bg-[#0E0607] border-red-950/60' : 'bg-[#080A0E] border-white/[0.06]'
+        isRed 
+          ? 'bg-[#0E0607] border-red-950/60' 
+          : isGreen 
+            ? 'bg-[#07130F] border-emerald-950/60' 
+            : 'bg-[#080A0E] border-white/[0.06]'
       }`}>
         <div className="flex items-center justify-between border-b border-white/[0.06] pb-2">
           <div className="flex items-center gap-1.5">
-            <div className={`w-2 h-2 rounded-full ${isRed ? 'bg-[#E50914]' : 'bg-white/20'}`} />
+            <div className={`w-2 h-2 rounded-full ${
+              isRed ? 'bg-[#E50914]' : isGreen ? 'bg-emerald-400' : 'bg-white/20'
+            }`} />
             <div className="w-2 h-2 rounded-full bg-white/20" />
             <div className="w-2 h-2 rounded-full bg-white/20" />
           </div>
-          <span className={`text-[10px] font-mono ${isRed ? 'text-[#E50914]' : 'text-zinc-400'}`}>
+          <span className={`text-[10px] font-mono ${
+            isRed ? 'text-[#E50914]' : isGreen ? 'text-emerald-400' : 'text-zinc-400'
+          }`}>
             01 // PLATFORM
           </span>
         </div>
@@ -109,7 +123,9 @@ function ProjectMockup({ index, isRed = false }) {
                 className={`flex-1 rounded-t-sm transition-colors ${
                   isRed 
                     ? (i % 2 === 0 ? 'bg-[#E50914]' : 'bg-red-950/80') 
-                    : 'bg-white/20 hover:bg-white/40'
+                    : isGreen 
+                      ? (i % 2 === 0 ? 'bg-emerald-400' : 'bg-emerald-950/80')
+                      : 'bg-white/20 hover:bg-white/40'
                 }`}
                 style={{ height: `${h}%` }}
               />
@@ -118,7 +134,9 @@ function ProjectMockup({ index, isRed = false }) {
         </div>
         <div className="flex items-center justify-between text-[10px] font-mono text-zinc-500">
           <span>ANALYTICS ENGINE</span>
-          <span className={isRed ? 'text-[#E50914]' : 'text-zinc-300'}>ACTIVE FEED</span>
+          <span className={isRed ? 'text-[#E50914]' : isGreen ? 'text-emerald-400' : 'text-zinc-300'}>
+            ACTIVE FEED
+          </span>
         </div>
       </div>
     );
@@ -127,7 +145,11 @@ function ProjectMockup({ index, isRed = false }) {
   if (index === 1) {
     return (
       <div className={`w-full h-full p-4 flex flex-col justify-between relative overflow-hidden border-b ${
-        isRed ? 'bg-[#0F0708] border-red-950/60' : 'bg-[#090C12] border-white/[0.06]'
+        isRed 
+          ? 'bg-[#0F0708] border-red-950/60' 
+          : isGreen 
+            ? 'bg-[#061410] border-emerald-950/60' 
+            : 'bg-[#090C12] border-white/[0.06]'
       }`}>
         <div className="flex items-center justify-between border-b border-white/[0.06] pb-2">
           <span className="text-[10px] font-mono text-zinc-400 uppercase tracking-widest">NEXORA</span>
@@ -141,14 +163,18 @@ function ProjectMockup({ index, isRed = false }) {
           <div className={`w-20 h-20 rounded-full flex items-center justify-center ${
             isRed 
               ? 'bg-gradient-to-tr from-[#E50914] via-[#8E1616] to-[#450A0A] shadow-[0_0_30px_rgba(229,9,20,0.5)]' 
-              : 'bg-gradient-to-tr from-zinc-700 via-zinc-400 to-zinc-900 shadow-[inset_0_0_20px_rgba(255,255,255,0.4)]'
+              : isGreen 
+                ? 'bg-gradient-to-tr from-emerald-500 via-teal-700 to-emerald-950 shadow-[0_0_30px_rgba(16,185,129,0.45)]' 
+                : 'bg-gradient-to-tr from-zinc-700 via-zinc-400 to-zinc-900 shadow-[inset_0_0_20px_rgba(255,255,255,0.4)]'
           }`}>
-            <div className={`w-10 h-10 rounded-full ${isRed ? 'bg-[#0F0708]' : 'bg-[#090C12]'}`} />
+            <div className={`w-10 h-10 rounded-full ${
+              isRed ? 'bg-[#0F0708]' : isGreen ? 'bg-[#061410]' : 'bg-[#090C12]'
+            }`} />
           </div>
         </div>
         <div className="flex items-center justify-between text-[10px] font-mono text-zinc-500">
           <span>BRAND SYSTEM</span>
-          <span className="text-zinc-300">INTERACTION</span>
+          <span className={isGreen ? 'text-emerald-400' : 'text-zinc-300'}>INTERACTION</span>
         </div>
       </div>
     );
@@ -156,25 +182,41 @@ function ProjectMockup({ index, isRed = false }) {
 
   return (
     <div className={`w-full h-full p-4 flex flex-col justify-between relative overflow-hidden border-b ${
-      isRed ? 'bg-[#0E0607] border-red-950/60' : 'bg-[#080B10] border-white/[0.06]'
+      isRed 
+        ? 'bg-[#0E0607] border-red-950/60' 
+        : isGreen 
+          ? 'bg-[#07130F] border-emerald-950/60' 
+          : 'bg-[#080B10] border-white/[0.06]'
     }`}>
       <div className="flex items-center justify-between border-b border-white/[0.06] pb-2">
         <span className="text-[10px] font-mono text-zinc-400 uppercase tracking-wider">COMPANION APP</span>
-        <span className={`w-2 h-2 rounded-full ${isRed ? 'bg-[#E50914]' : 'bg-white/40'}`} />
+        <span className={`w-2 h-2 rounded-full ${
+          isRed ? 'bg-[#E50914]' : isGreen ? 'bg-emerald-400' : 'bg-white/40'
+        }`} />
       </div>
       <div className={`my-1 mx-auto w-24 h-24 rounded-2xl p-2 flex flex-col items-center justify-center relative shadow-lg ${
-        isRed ? 'bg-[#180A0C] border border-red-900/40' : 'bg-[#0F1420] border border-white/20'
+        isRed 
+          ? 'bg-[#180A0C] border border-red-900/40' 
+          : isGreen 
+            ? 'bg-[#0A1A14] border border-emerald-500/30' 
+            : 'bg-[#0F1420] border border-white/20'
       }`}>
         <div className={`w-14 h-14 rounded-full border-2 flex items-center justify-center ${
-          isRed ? 'border-red-900 border-t-[#E50914]' : 'border-white/30 border-t-white'
+          isRed 
+            ? 'border-red-900 border-t-[#E50914]' 
+            : isGreen 
+              ? 'border-emerald-950 border-t-emerald-400' 
+              : 'border-white/30 border-t-white'
         }`}>
-          <span className="text-xs font-mono font-bold text-white">72%</span>
+          <span className={`text-xs font-mono font-bold ${isGreen ? 'text-emerald-400' : 'text-white'}`}>
+            72%
+          </span>
         </div>
         <span className="text-[8px] font-mono text-zinc-400 mt-1">TELEMETRY</span>
       </div>
       <div className="flex items-center justify-between text-[10px] font-mono text-zinc-500">
         <span>MOBILE INTERFACE</span>
-        <span className="text-zinc-300">IOT CORE</span>
+        <span className={isGreen ? 'text-emerald-400' : 'text-zinc-300'}>IOT CORE</span>
       </div>
     </div>
   );
@@ -202,7 +244,7 @@ export default function MemberPortfolio({ employeeCode, member: propMember, onBa
   // Specific user instruction:
   // 001 in Greyish (Slate) theme
   // 002, 009, 010 in Reddish (Crimson) theme
-  // Default to Red for 002, 009, 010; Default to Slate (Greyish) for 001 and others
+  // 3rd Theme: Greenish (Emerald/ADB Labs)
   const isRedMember = member && ['ADB-446-002', 'ADB-446-009', 'ADB-446-010'].includes(member.id);
   const [themeMode, setThemeMode] = useState(isRedMember ? 'crimson' : 'slate');
 
@@ -214,6 +256,8 @@ export default function MemberPortfolio({ employeeCode, member: propMember, onBa
   }, [member?.id]);
 
   const isRed = themeMode === 'crimson';
+  const isGreen = themeMode === 'emerald';
+  const isSlate = themeMode === 'slate';
 
   const handleCopyLink = () => {
     const url = window.location.href;
@@ -250,7 +294,7 @@ export default function MemberPortfolio({ employeeCode, member: propMember, onBa
 
   // Giant condensed background watermark text
   // Red theme uses "PORTFOLIO" (Rayhan Aditya poster)
-  // Slate theme uses "DIGITAL DESIGNER" or member's primary domain (AV poster)
+  // Slate/Greenish theme uses headline or member's primary domain (AV poster)
   const displayWatermark = isRed 
     ? "PORTFOLIO" 
     : (member.headline ? member.headline.toUpperCase() : member.role.toUpperCase());
@@ -259,7 +303,9 @@ export default function MemberPortfolio({ employeeCode, member: propMember, onBa
     <div className={`min-h-screen pt-4 pb-24 relative overflow-x-hidden transition-colors duration-500 ${
       isRed 
         ? 'bg-[#08080A] text-[#E5E7EB] selection:bg-[#E50914] selection:text-white' 
-        : 'bg-[#090B0E] text-[#D8DCE3] selection:bg-white selection:text-black'
+        : isGreen
+          ? 'bg-[#060D0A] text-[#D8E6E0] selection:bg-[#00FF88] selection:text-black'
+          : 'bg-[#090B0E] text-[#D8DCE3] selection:bg-white selection:text-black'
     }`}>
       
       {/* Background Ambient Atmosphere */}
@@ -267,6 +313,12 @@ export default function MemberPortfolio({ employeeCode, member: propMember, onBa
         <>
           <div className="absolute top-[180px] right-[10%] w-[500px] h-[500px] rounded-full bg-[#E50914]/12 blur-[170px] pointer-events-none" />
           <div className="absolute bottom-[20%] left-[-100px] w-[500px] h-[500px] bg-rose-950/20 rounded-full blur-[200px] pointer-events-none" />
+        </>
+      ) : isGreen ? (
+        <>
+          <div className="absolute top-0 right-1/4 w-[700px] h-[700px] bg-emerald-500/[0.08] rounded-full blur-[180px] pointer-events-none" />
+          <div className="absolute top-[35%] left-[-100px] w-[550px] h-[550px] bg-teal-500/[0.05] rounded-full blur-[220px] pointer-events-none" />
+          <div className="absolute bottom-[15%] right-[-50px] w-[600px] h-[600px] bg-emerald-950/25 rounded-full blur-[200px] pointer-events-none" />
         </>
       ) : (
         <>
@@ -291,7 +343,9 @@ export default function MemberPortfolio({ employeeCode, member: propMember, onBa
               ADB
             </button>
             <span className="text-zinc-600">/</span>
-            <span className={`text-xs font-mono uppercase tracking-widest font-semibold ${isRed ? 'text-[#E50914]' : 'text-zinc-300'}`}>
+            <span className={`text-xs font-mono uppercase tracking-widest font-semibold ${
+              isRed ? 'text-[#E50914]' : isGreen ? 'text-[#00FF88]' : 'text-zinc-300'
+            }`}>
               {member.id}
             </span>
             <span className="text-zinc-600">•</span>
@@ -300,12 +354,12 @@ export default function MemberPortfolio({ employeeCode, member: propMember, onBa
             </span>
           </div>
 
-          {/* Quick Theme Mode Toggle (Greyish vs Reddish) */}
+          {/* Quick Theme Mode Toggle (Greyish vs Reddish vs Greenish) */}
           <div className="flex items-center gap-1.5 p-1 rounded-full bg-white/[0.04] border border-white/10 text-xs font-mono">
             <button
               onClick={() => setThemeMode('slate')}
               className={`px-3 py-1 rounded-full text-[11px] transition-all flex items-center gap-1.5 ${
-                !isRed 
+                isSlate 
                   ? 'bg-white text-black font-bold shadow-md' 
                   : 'text-zinc-400 hover:text-white'
               }`}
@@ -323,6 +377,17 @@ export default function MemberPortfolio({ employeeCode, member: propMember, onBa
             >
               <span className="w-2 h-2 rounded-full bg-[#E50914]" />
               <span>Reddish (Rayhan)</span>
+            </button>
+            <button
+              onClick={() => setThemeMode('emerald')}
+              className={`px-3 py-1 rounded-full text-[11px] transition-all flex items-center gap-1.5 ${
+                isGreen 
+                  ? 'bg-[#00FF88] text-black font-extrabold shadow-[0_0_15px_rgba(0,255,136,0.5)]' 
+                  : 'text-zinc-400 hover:text-white'
+              }`}
+            >
+              <span className="w-2 h-2 rounded-full bg-[#00FF88]" />
+              <span>Greenish (ADB)</span>
             </button>
           </div>
 
@@ -351,7 +416,9 @@ export default function MemberPortfolio({ employeeCode, member: propMember, onBa
               className={`inline-flex items-center gap-1.5 px-5 py-2 rounded-full font-bold text-xs uppercase tracking-wider transition-all shadow-md ml-1 ${
                 isRed 
                   ? 'bg-[#E50914] hover:bg-[#C8102E] text-white shadow-[0_0_20px_rgba(229,9,20,0.4)]' 
-                  : 'bg-white hover:bg-zinc-200 text-black'
+                  : isGreen
+                    ? 'bg-[#00FF88] hover:bg-[#10B981] text-black shadow-[0_0_20px_rgba(0,255,136,0.35)]'
+                    : 'bg-white hover:bg-zinc-200 text-black'
               }`}
             >
               <span>LET'S TALK</span>
@@ -365,6 +432,7 @@ export default function MemberPortfolio({ employeeCode, member: propMember, onBa
         {/* HERO SECTION - OUTSIDE ANY BOUNDING BOX!                 */}
         {/* Person sits freely on the page canvas, overlapping text  */}
         {/* Red Theme: Rayhan style with red circle halo & PORTFOLIO */}
+        {/* Green Theme: Dark emerald/slate halo + emerald star      */}
         {/* Slate Theme: AV style with soft spotlight & DESIGNER     */}
         {/* ======================================================== */}
         <section className="relative pt-6 pb-16 sm:pb-24 overflow-visible">
@@ -373,6 +441,14 @@ export default function MemberPortfolio({ employeeCode, member: propMember, onBa
           {isRed ? (
             /* Red Glowing Circular Disc (Exact Rayhan Aditya Reference) */
             <div className="absolute top-[18%] right-[8%] sm:right-[14%] w-[320px] sm:w-[440px] lg:w-[500px] h-[320px] sm:h-[440px] lg:h-[500px] rounded-full bg-gradient-to-tr from-[#7A0C0C] via-[#B81D24] to-[#450A0A] shadow-[0_0_120px_rgba(229,9,20,0.45)] pointer-events-none z-0" />
+          ) : isGreen ? (
+            /* Subtle Dark Emerald & Slate Halo Disc with Glowing Orbital Ring */
+            <>
+              <div className="absolute top-[16%] right-[8%] sm:right-[14%] w-[320px] sm:w-[440px] lg:w-[500px] h-[320px] sm:h-[440px] lg:h-[500px] rounded-full bg-gradient-to-tr from-[#062419] via-[#0B3D2B] to-[#041710] shadow-[0_0_120px_rgba(16,185,129,0.3)] pointer-events-none z-0" />
+              <div className="absolute top-1/2 right-[10%] -translate-y-1/2 w-[340px] sm:w-[480px] lg:w-[580px] h-[340px] sm:h-[480px] lg:h-[580px] rounded-full border border-emerald-500/20 pointer-events-none z-0" />
+              <div className="absolute top-[25%] right-[8%] text-[#00FF88] text-xs font-mono pointer-events-none z-0">✦</div>
+              <div className="absolute top-[30%] right-[15%] w-[380px] h-[380px] rounded-full bg-emerald-500/[0.12] blur-[120px] pointer-events-none z-0" />
+            </>
           ) : (
             /* Soft Ambient Spotlight & Orbital Ring (Exact AV Reference) */
             <>
@@ -387,7 +463,9 @@ export default function MemberPortfolio({ employeeCode, member: propMember, onBa
             <h2 className={`font-display-condensed font-black uppercase tracking-tight leading-none whitespace-nowrap ${
               isRed 
                 ? 'text-[22vw] lg:text-[15.5rem] text-[#E50914]/[0.9] drop-shadow-[0_0_40px_rgba(229,9,20,0.3)]' 
-                : 'text-[18vw] lg:text-[12.5rem] text-white/[0.14]'
+                : isGreen
+                  ? 'text-[18vw] lg:text-[12.5rem] text-emerald-400/[0.18] drop-shadow-[0_0_40px_rgba(16,185,129,0.2)]'
+                  : 'text-[18vw] lg:text-[12.5rem] text-white/[0.14]'
             }`}>
               {displayWatermark}
             </h2>
@@ -401,7 +479,7 @@ export default function MemberPortfolio({ employeeCode, member: propMember, onBa
               
               {/* Handwritten Script Accent ("Hello, I'm" from Rayhan poster) */}
               <span className={`font-script text-3xl sm:text-4xl -rotate-6 mb-1 block select-none ${
-                isRed ? 'text-[#E50914]' : 'text-zinc-300'
+                isRed ? 'text-[#E50914]' : isGreen ? 'text-[#00FF88]' : 'text-zinc-300'
               }`}>
                 Hello, I'm
               </span>
@@ -413,7 +491,7 @@ export default function MemberPortfolio({ employeeCode, member: propMember, onBa
 
               {/* Role / Headline */}
               <div className={`text-xs sm:text-sm font-mono tracking-widest uppercase mb-6 font-semibold ${
-                isRed ? 'text-[#E50914]' : 'text-zinc-400'
+                isRed ? 'text-[#E50914]' : isGreen ? 'text-emerald-400' : 'text-zinc-400'
               }`}>
                 {member.role} {member.department && `// ${member.department}`}
               </div>
@@ -428,7 +506,9 @@ export default function MemberPortfolio({ employeeCode, member: propMember, onBa
                 <div className={`border-l-2 pl-3.5 py-1 mb-8 rounded-r-lg max-w-md ${
                   isRed 
                     ? 'border-[#E50914] bg-red-950/20 text-zinc-300 font-mono text-xs' 
-                    : 'border-white/30 bg-white/[0.02] text-zinc-400 text-xs'
+                    : isGreen
+                      ? 'border-emerald-500 bg-emerald-950/25 text-emerald-100 text-xs'
+                      : 'border-white/30 bg-white/[0.02] text-zinc-400 text-xs'
                 }`}>
                   "{member.quote}"
                 </div>
@@ -441,7 +521,9 @@ export default function MemberPortfolio({ employeeCode, member: propMember, onBa
                   className={`inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-full font-bold text-xs uppercase tracking-wider transition-all cursor-pointer ${
                     isRed 
                       ? 'bg-[#E50914] hover:bg-[#C8102E] text-white shadow-[0_0_25px_rgba(229,9,20,0.45)]' 
-                      : 'bg-white hover:bg-zinc-200 text-black shadow-[0_0_30px_rgba(255,255,255,0.2)]'
+                      : isGreen
+                        ? 'bg-[#00FF88] hover:bg-[#10B981] text-black font-extrabold shadow-[0_0_30px_rgba(0,255,136,0.35)]'
+                        : 'bg-white hover:bg-zinc-200 text-black shadow-[0_0_30px_rgba(255,255,255,0.2)]'
                   }`}
                 >
                   <span>VIEW MY WORK</span>
@@ -454,9 +536,13 @@ export default function MemberPortfolio({ employeeCode, member: propMember, onBa
                     download={`${member.name.replace(/\s+/g, '_')}_Resume.pdf`}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-full bg-[#11141D] hover:bg-[#181D2A] text-zinc-300 hover:text-white border border-white/10 hover:border-white/25 font-bold text-xs uppercase tracking-wider transition-all cursor-pointer shadow-md"
+                    className={`inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-full font-bold text-xs uppercase tracking-wider transition-all cursor-pointer shadow-md ${
+                      isGreen
+                        ? 'bg-[#091511] hover:bg-[#0E201A] text-emerald-300 hover:text-white border border-emerald-500/25 hover:border-emerald-400/50'
+                        : 'bg-[#11141D] hover:bg-[#181D2A] text-zinc-300 hover:text-white border border-white/10 hover:border-white/25'
+                    }`}
                   >
-                    <Download className={`w-4 h-4 ${isRed ? 'text-[#E50914]' : 'text-zinc-400'}`} />
+                    <Download className={`w-4 h-4 ${isRed ? 'text-[#E50914]' : isGreen ? 'text-[#00FF88]' : 'text-zinc-400'}`} />
                     <span>DOWNLOAD RESUME</span>
                   </a>
                 )}
@@ -483,13 +569,21 @@ export default function MemberPortfolio({ employeeCode, member: propMember, onBa
                     <div className={`absolute inset-x-0 bottom-0 h-20 pointer-events-none z-30 ${
                       isRed 
                         ? 'bg-gradient-to-t from-[#08080A] via-[#08080A]/70 to-transparent' 
-                        : 'bg-gradient-to-t from-[#090B0E] via-[#090B0E]/70 to-transparent'
+                        : isGreen
+                          ? 'bg-gradient-to-t from-[#060D0A] via-[#060D0A]/70 to-transparent'
+                          : 'bg-gradient-to-t from-[#090B0E] via-[#090B0E]/70 to-transparent'
                     }`} />
                   </div>
                 ) : (
-                  <div className="w-72 h-96 rounded-3xl bg-[#11141D] border border-white/10 flex flex-col items-center justify-center text-center p-6 z-20">
+                  <div className={`w-72 h-96 rounded-3xl border flex flex-col items-center justify-center text-center p-6 z-20 ${
+                    isGreen ? 'bg-[#091511] border-emerald-500/20' : 'bg-[#11141D] border-white/10'
+                  }`}>
                     <div className={`w-24 h-24 rounded-full flex items-center justify-center text-3xl font-extrabold text-white mb-4 ${
-                      isRed ? 'bg-[#E50914]/20 border border-[#E50914]' : 'bg-white/10 border border-white/20'
+                      isRed 
+                        ? 'bg-[#E50914]/20 border border-[#E50914]' 
+                        : isGreen 
+                          ? 'bg-emerald-500/20 border border-[#00FF88] text-[#00FF88]' 
+                          : 'bg-white/10 border border-white/20'
                     }`}>
                       {member.name.split(' ').map(n => n[0]).join('')}
                     </div>
@@ -502,12 +596,16 @@ export default function MemberPortfolio({ employeeCode, member: propMember, onBa
                 <div className={`absolute bottom-10 right-0 sm:-right-4 z-40 backdrop-blur-md px-3.5 py-2 rounded-xl text-right hidden sm:block ${
                   isRed 
                     ? 'bg-[#14080A]/90 border border-red-900/40 text-red-200' 
-                    : 'bg-[#11141D]/90 border border-white/10 text-zinc-300'
+                    : isGreen
+                      ? 'bg-[#091511]/90 border border-emerald-500/30 text-emerald-300'
+                      : 'bg-[#11141D]/90 border border-white/10 text-zinc-300'
                 }`}>
                   <div className="text-[10px] font-mono uppercase tracking-widest text-zinc-400">
                     AVAILABLE FOR
                   </div>
-                  <div className={`text-xs font-bold tracking-wider uppercase ${isRed ? 'text-[#E50914]' : 'text-white'}`}>
+                  <div className={`text-xs font-bold tracking-wider uppercase ${
+                    isRed ? 'text-[#E50914]' : isGreen ? 'text-[#00FF88]' : 'text-white'
+                  }`}>
                     FREELANCE / R&D ↗
                   </div>
                 </div>
@@ -526,10 +624,12 @@ export default function MemberPortfolio({ employeeCode, member: propMember, onBa
         <section className={`mb-24 rounded-2xl sm:rounded-3xl backdrop-blur-xl p-6 sm:p-8 shadow-xl ${
           isRed 
             ? 'bg-[#0E0608]/90 border border-red-950/80 shadow-[0_0_30px_rgba(229,9,20,0.1)]' 
-            : 'bg-[#11151F]/90 border border-white/[0.08]'
+            : isGreen
+              ? 'bg-[#091511]/90 border border-emerald-500/20 shadow-[0_0_35px_rgba(16,185,129,0.1)]'
+              : 'bg-[#11151F]/90 border border-white/[0.08]'
         }`}>
           <div className={`grid grid-cols-2 md:grid-cols-4 divide-y md:divide-y-0 md:divide-x ${
-            isRed ? 'divide-red-950/60' : 'divide-white/[0.08]'
+            isRed ? 'divide-red-950/60' : isGreen ? 'divide-emerald-950/60' : 'divide-white/[0.08]'
           }`}>
             {(member.stats || [
               { label: 'YEARS EXPERIENCE', value: '6+' },
@@ -538,13 +638,13 @@ export default function MemberPortfolio({ employeeCode, member: propMember, onBa
               { label: 'COUNTRIES WORKED WITH', value: '12' }
             ]).map((st, idx) => (
               <div 
-                key={idx}
+                key={idx} 
                 className={`p-4 sm:p-6 text-center ${idx > 0 && idx % 2 === 0 ? 'border-t sm:border-t-0' : ''}`}
               >
                 <div className="inline-flex items-center justify-center gap-2 mb-2">
-                  <span className={`text-sm ${isRed ? 'text-[#E50914]' : 'text-white'}`}>✦</span>
+                  <span className={`text-sm ${isRed ? 'text-[#E50914]' : isGreen ? 'text-[#00FF88]' : 'text-white'}`}>✦</span>
                   <div className={`font-display-condensed text-4xl sm:text-5xl font-black tracking-tight ${
-                    isRed ? 'text-[#E50914]' : 'text-white'
+                    isRed ? 'text-[#E50914]' : isGreen ? 'text-[#00FF88]' : 'text-white'
                   }`}>
                     {st.value}
                   </div>
@@ -587,19 +687,21 @@ export default function MemberPortfolio({ employeeCode, member: propMember, onBa
                 className={`rounded-2xl transition-all duration-300 group flex flex-col justify-between overflow-hidden shadow-lg hover:-translate-y-1.5 ${
                   isRed 
                     ? 'bg-[#0E0608] border border-red-950/80 hover:border-red-600/50' 
-                    : 'bg-[#11151F] border border-white/[0.08] hover:border-white/20'
+                    : isGreen
+                      ? 'bg-[#091511] border border-emerald-500/20 hover:border-emerald-400/50 hover:shadow-[0_0_25px_rgba(16,185,129,0.12)]'
+                      : 'bg-[#11151F] border border-white/[0.08] hover:border-white/20'
                 }`}
               >
                 <div>
                   {/* Mockup Preview Header */}
                   <div className="h-48 w-full relative overflow-hidden bg-[#080A0E]">
-                    <ProjectMockup index={pIdx} isRed={isRed} />
+                    <ProjectMockup index={pIdx} themeMode={themeMode} />
                   </div>
 
                   {/* Card Content */}
                   <div className="p-6">
                     <div className={`text-[11px] font-mono uppercase tracking-wider mb-2 font-semibold ${
-                      isRed ? 'text-[#E50914]' : 'text-zinc-400'
+                      isRed ? 'text-[#E50914]' : isGreen ? 'text-[#00FF88]' : 'text-zinc-400'
                     }`}>
                       0{pIdx + 1} // {proj.tag}
                     </div>
@@ -619,7 +721,9 @@ export default function MemberPortfolio({ employeeCode, member: propMember, onBa
                   <div className={`w-9 h-9 rounded-full border flex items-center justify-center transition-all ${
                     isRed 
                       ? 'bg-red-950/40 border-red-900/60 group-hover:border-[#E50914] group-hover:bg-[#E50914] text-zinc-300 group-hover:text-white' 
-                      : 'bg-[#161B26] border border-white/10 group-hover:border-white group-hover:bg-white text-zinc-300 group-hover:text-black'
+                      : isGreen
+                        ? 'bg-emerald-950/50 border-emerald-800/60 group-hover:border-[#00FF88] group-hover:bg-[#00FF88] text-emerald-200 group-hover:text-black'
+                        : 'bg-[#161B26] border border-white/10 group-hover:border-white group-hover:bg-white text-zinc-300 group-hover:text-black'
                   }`}>
                     <ArrowUpRight className="w-4 h-4" />
                   </div>
@@ -632,7 +736,7 @@ export default function MemberPortfolio({ employeeCode, member: propMember, onBa
         {/* ======================================================== */}
         {/* SPLIT SECTION:                                           */}
         {/* If Red: EDUCATION & SKILLS + WORK PROCESS + PHILOSOPHY   */}
-        {/* If Slate: CORE CAPABILITIES + TOOLS & CERTS              */}
+        {/* If Slate/Greenish: CORE CAPABILITIES + TOOLS & CERTS     */}
         {/* ======================================================== */}
         {isRed ? (
           /* Rayhan Aditya Red Theme 3-Column Grid */
@@ -756,13 +860,15 @@ export default function MemberPortfolio({ employeeCode, member: propMember, onBa
 
           </section>
         ) : (
-          /* AV Slate Greyish Theme Grid */
+          /* AV Slate / Greenish Theme Grid */
           <section id="core-capabilities" className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 mb-24 scroll-mt-24">
             
             {/* Left: CORE CAPABILITIES */}
             <div className="lg:col-span-7">
               <div className="mb-8 pb-3 border-b border-white/[0.08]">
-                <h2 className="text-xs font-mono uppercase tracking-[0.2em] text-zinc-400 font-semibold">
+                <h2 className={`text-xs font-mono uppercase tracking-[0.2em] font-semibold ${
+                  isGreen ? 'text-[#00FF88]' : 'text-zinc-400'
+                }`}>
                   CORE CAPABILITIES
                 </h2>
               </div>
@@ -776,8 +882,12 @@ export default function MemberPortfolio({ employeeCode, member: propMember, onBa
                   { title: 'PROTOTYPING', desc: 'Turning ideas into interactive prototypes to validate and accelerate solutions.', icon: 'Box' }
                 ]).map((cap, cIdx) => (
                   <div key={cIdx} className="space-y-2 p-2">
-                    <div className="w-9 h-9 rounded-xl bg-white/[0.04] border border-white/10 flex items-center justify-center mb-3">
-                      {getCapabilityIcon(cap.icon, false)}
+                    <div className={`w-9 h-9 rounded-xl flex items-center justify-center mb-3 ${
+                      isGreen 
+                        ? 'bg-emerald-500/[0.08] border border-emerald-500/20' 
+                        : 'bg-white/[0.04] border border-white/10'
+                    }`}>
+                      {getCapabilityIcon(cap.icon, themeMode)}
                     </div>
                     <h3 className="text-sm font-bold uppercase tracking-wider text-white">
                       {cap.title}
@@ -794,11 +904,17 @@ export default function MemberPortfolio({ employeeCode, member: propMember, onBa
             <div className="lg:col-span-5 flex flex-col justify-between gap-8">
               <div>
                 <div className="mb-6 pb-3 border-b border-white/[0.08]">
-                  <h3 className="text-xs font-mono uppercase tracking-[0.2em] text-zinc-400 font-semibold">
+                  <h3 className={`text-xs font-mono uppercase tracking-[0.2em] font-semibold ${
+                    isGreen ? 'text-[#00FF88]' : 'text-zinc-400'
+                  }`}>
                     TOOLS & TECHNOLOGIES
                   </h3>
                 </div>
-                <div className="p-6 rounded-2xl bg-[#11151F] border border-white/[0.08]">
+                <div className={`p-6 rounded-2xl ${
+                  isGreen 
+                    ? 'bg-[#091511] border border-emerald-500/20 shadow-lg' 
+                    : 'bg-[#11151F] border border-white/[0.08]'
+                }`}>
                   <div className="grid grid-cols-2 gap-4">
                     {(
                       (member.techStack && Object.values(member.techStack).flat()) ||
@@ -806,7 +922,7 @@ export default function MemberPortfolio({ employeeCode, member: propMember, onBa
                       ['Figma', 'Adobe Photoshop', 'Adobe Illustrator', 'Webflow', 'Framer', 'Spline', 'Adobe After Effects', 'Notion']
                     ).slice(0, 8).map((tool, tIdx) => (
                       <div key={tIdx} className="flex items-center gap-2.5 py-1 text-xs text-zinc-300">
-                        <div className="w-2 h-2 rounded-full bg-white/40" />
+                        <div className={`w-2 h-2 rounded-full ${isGreen ? 'bg-[#00FF88]' : 'bg-white/40'}`} />
                         <span className="font-medium text-white">{tool}</span>
                       </div>
                     ))}
@@ -816,17 +932,27 @@ export default function MemberPortfolio({ employeeCode, member: propMember, onBa
 
               <div>
                 <div className="mb-6 pb-3 border-b border-white/[0.08]">
-                  <h3 className="text-xs font-mono uppercase tracking-[0.2em] text-zinc-400 font-semibold">
+                  <h3 className={`text-xs font-mono uppercase tracking-[0.2em] font-semibold ${
+                    isGreen ? 'text-[#00FF88]' : 'text-zinc-400'
+                  }`}>
                     CERTIFICATIONS & EDUCATION
                   </h3>
                 </div>
-                <div className="p-6 rounded-2xl bg-[#11151F] border border-white/[0.08] space-y-4">
+                <div className={`p-6 rounded-2xl space-y-4 ${
+                  isGreen 
+                    ? 'bg-[#091511] border border-emerald-500/20 shadow-lg' 
+                    : 'bg-[#11151F] border border-white/[0.08]'
+                }`}>
                   {(member.education || [
                     { degree: 'Google UX Design Professional Certificate', institution: 'Coursera', period: '2022' },
                     { degree: 'Bachelor of Design (B.Des.)', institution: 'University of California, Los Angeles', period: '2018' }
                   ]).map((edu, eduIdx) => (
                     <div key={eduIdx} className="flex items-start gap-3.5 pb-3 border-b border-white/[0.05] last:border-b-0 last:pb-0">
-                      <div className="w-8 h-8 rounded-lg bg-white/[0.05] border border-white/10 flex items-center justify-center text-white shrink-0 mt-0.5">
+                      <div className={`w-8 h-8 rounded-lg flex items-center justify-center shrink-0 mt-0.5 ${
+                        isGreen 
+                          ? 'bg-emerald-500/[0.1] border border-emerald-500/25 text-[#00FF88]' 
+                          : 'bg-white/[0.05] border border-white/10 text-white'
+                      }`}>
                         <Award className="w-4 h-4" />
                       </div>
                       <div>
@@ -847,12 +973,18 @@ export default function MemberPortfolio({ employeeCode, member: propMember, onBa
         )}
 
         {/* ======================================================== */}
-        {/* MY DESIGN PROCESS (Horizontal sequence in Slate theme)   */}
+        {/* MY DESIGN PROCESS (Horizontal sequence in Slate & Green) */}
         {/* ======================================================== */}
         {!isRed && (
-          <section className="mb-24 rounded-2xl sm:rounded-3xl bg-[#11151F] border border-white/[0.08] p-6 sm:p-8">
+          <section className={`mb-24 rounded-2xl sm:rounded-3xl p-6 sm:p-8 ${
+            isGreen 
+              ? 'bg-[#091511] border border-emerald-500/20 shadow-lg' 
+              : 'bg-[#11151F] border border-white/[0.08]'
+          }`}>
             <div className="mb-6 pb-4 border-b border-white/[0.08]">
-              <h2 className="text-xs font-mono uppercase tracking-[0.2em] text-zinc-400 font-semibold">
+              <h2 className={`text-xs font-mono uppercase tracking-[0.2em] font-semibold ${
+                isGreen ? 'text-[#00FF88]' : 'text-zinc-400'
+              }`}>
                 MY DESIGN PROCESS
               </h2>
             </div>
@@ -867,10 +999,16 @@ export default function MemberPortfolio({ employeeCode, member: propMember, onBa
                 const StepIcon = step.icon;
                 return (
                   <div key={sIdx} className="space-y-2">
-                    <div className="text-xs font-mono uppercase tracking-widest text-zinc-400 font-bold">
+                    <div className={`text-xs font-mono uppercase tracking-widest font-bold ${
+                      isGreen ? 'text-[#00FF88]' : 'text-zinc-400'
+                    }`}>
                       {step.num} // {step.title}
                     </div>
-                    <div className="w-8 h-8 rounded-lg bg-white/[0.04] border border-white/10 flex items-center justify-center text-white my-2">
+                    <div className={`w-8 h-8 rounded-lg flex items-center justify-center my-2 ${
+                      isGreen 
+                        ? 'bg-emerald-500/[0.1] border border-emerald-500/25 text-[#00FF88]' 
+                        : 'bg-white/[0.04] border border-white/10 text-white'
+                    }`}>
                       <StepIcon className="w-4 h-4" />
                     </div>
                     <p className="text-xs text-zinc-400 leading-relaxed">
@@ -886,12 +1024,14 @@ export default function MemberPortfolio({ employeeCode, member: propMember, onBa
         {/* ======================================================== */}
         {/* FOOTER CTA BANNER                                        */}
         {/* Red Theme: "LET'S WORK TOGETHER" (Rayhan Aditya style)   */}
-        {/* Slate Theme: "LET'S CREATE SOMETHING EXTRAORDINARY" (AV) */}
+        {/* Slate & Green Theme: "LET'S CREATE SOMETHING EXTRAORDINARY"*/}
         {/* ======================================================== */}
         <footer id="contact-section" className={`rounded-3xl border p-8 sm:p-12 relative overflow-hidden shadow-2xl ${
           isRed 
             ? 'bg-gradient-to-r from-[#120608] via-[#1F0A0E] to-[#120608] border-red-900/40 shadow-[0_0_40px_rgba(229,9,20,0.15)]' 
-            : 'bg-gradient-to-r from-[#11151F] via-[#161B26] to-[#11151F] border-white/[0.08]'
+            : isGreen
+              ? 'bg-gradient-to-r from-[#071410] via-[#0C241C] to-[#071410] border-emerald-500/30 shadow-[0_0_40px_rgba(16,185,129,0.15)]'
+              : 'bg-gradient-to-r from-[#11151F] via-[#161B26] to-[#11151F] border-white/[0.08]'
         }`}>
           
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
@@ -900,7 +1040,7 @@ export default function MemberPortfolio({ employeeCode, member: propMember, onBa
             <div className="lg:col-span-5">
               <h2 className="font-display-condensed text-4xl sm:text-5xl font-black uppercase tracking-normal text-white leading-[0.95]">
                 {isRed ? "LET'S WORK TOGETHER" : "LET'S CREATE SOMETHING EXTRAORDINARY"}
-                <span className={`ml-2 ${isRed ? 'text-[#E50914]' : 'text-white/60'}`}>✦</span>
+                <span className={`ml-2 ${isRed ? 'text-[#E50914]' : isGreen ? 'text-[#00FF88]' : 'text-white/60'}`}>✦</span>
               </h2>
             </div>
 
@@ -915,7 +1055,9 @@ export default function MemberPortfolio({ employeeCode, member: propMember, onBa
                   className={`inline-flex items-center gap-2 px-6 py-3 rounded-full font-bold text-xs uppercase tracking-wider transition-all shadow-lg ${
                     isRed 
                       ? 'bg-[#E50914] hover:bg-[#C8102E] text-white shadow-[0_0_20px_rgba(229,9,20,0.4)]' 
-                      : 'bg-white hover:bg-zinc-200 text-black shadow-[0_0_20px_rgba(255,255,255,0.2)]'
+                      : isGreen
+                        ? 'bg-[#00FF88] hover:bg-[#10B981] text-black font-extrabold shadow-[0_0_20px_rgba(0,255,136,0.35)]'
+                        : 'bg-white hover:bg-zinc-200 text-black shadow-[0_0_20px_rgba(255,255,255,0.2)]'
                   }`}
                 >
                   <span>LET'S WORK TOGETHER</span>
@@ -926,30 +1068,30 @@ export default function MemberPortfolio({ employeeCode, member: propMember, onBa
 
             {/* Right: Contact details */}
             <div className={`lg:col-span-4 space-y-2.5 pt-4 lg:pt-0 border-t lg:border-t-0 lg:border-l lg:pl-8 text-xs font-mono ${
-              isRed ? 'border-red-950/80' : 'border-white/[0.08]'
+              isRed ? 'border-red-950/80' : isGreen ? 'border-emerald-950/80' : 'border-white/[0.08]'
             }`}>
               {member.socials?.email && (
                 <a 
                   href={`mailto:${member.socials.email}`}
                   className="flex items-center gap-2.5 text-zinc-300 hover:text-white transition-colors"
                 >
-                  <Mail className={`w-3.5 h-3.5 shrink-0 ${isRed ? 'text-[#E50914]' : 'text-zinc-400'}`} />
+                  <Mail className={`w-3.5 h-3.5 shrink-0 ${isRed ? 'text-[#E50914]' : isGreen ? 'text-[#00FF88]' : 'text-zinc-400'}`} />
                   <span className="truncate">{member.socials.email}</span>
                 </a>
               )}
 
               <div className="flex items-center gap-2.5 text-zinc-400">
-                <Phone className={`w-3.5 h-3.5 shrink-0 ${isRed ? 'text-[#E50914]' : 'text-zinc-400'}`} />
+                <Phone className={`w-3.5 h-3.5 shrink-0 ${isRed ? 'text-[#E50914]' : isGreen ? 'text-[#00FF88]' : 'text-zinc-400'}`} />
                 <span>+91 83107 04488</span>
               </div>
 
               <div className="flex items-center gap-2.5 text-zinc-400">
-                <MapPin className={`w-3.5 h-3.5 shrink-0 ${isRed ? 'text-[#E50914]' : 'text-zinc-400'}`} />
+                <MapPin className={`w-3.5 h-3.5 shrink-0 ${isRed ? 'text-[#E50914]' : isGreen ? 'text-[#00FF88]' : 'text-zinc-400'}`} />
                 <span>{member.location || 'Coimbatore, India'}</span>
               </div>
 
               <div className="flex items-center gap-2.5 text-zinc-400">
-                <Globe className={`w-3.5 h-3.5 shrink-0 ${isRed ? 'text-[#E50914]' : 'text-zinc-400'}`} />
+                <Globe className={`w-3.5 h-3.5 shrink-0 ${isRed ? 'text-[#E50914]' : isGreen ? 'text-[#00FF88]' : 'text-zinc-400'}`} />
                 <span>www.adblabs.in</span>
               </div>
             </div>
@@ -958,7 +1100,7 @@ export default function MemberPortfolio({ employeeCode, member: propMember, onBa
 
           {/* Bottom Copyright & Social Icons Row */}
           <div className={`mt-8 pt-6 border-t flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-mono text-zinc-500 ${
-            isRed ? 'border-red-950/60' : 'border-white/[0.08]'
+            isRed ? 'border-red-950/60' : isGreen ? 'border-emerald-950/60' : 'border-white/[0.08]'
           }`}>
             <div>
               © 2026 {member.name}. All Rights Reserved.
