@@ -41,12 +41,12 @@ export default function OurSolutionsBento({ onSelectSolution }) {
       id: 'robotics-rd',
       anchor: 'robotics',
       title: 'Robotics & AI R&D',
-      tagline: 'Autonomous Mobile & Quadruped Systems',
-      desc: 'Research, simulation and rapid prototyping in autonomous mobile robotics, 3D LiDAR SLAM, and embedded firmware.',
-      image: '/images/robot_dog_titan.jpg',
+      tagline: 'ORZO Quadruped Locomotion Platform',
+      desc: 'Research, simulation and prototyping in dynamic quadruped robotics, bio-inspired gait physics, and embedded CAN-bus firmware.',
+      image: '/images/orzo_robot_dog.jpg',
       badge: 'Autonomous Systems',
-      stats: 'ROS 2 & Nav2 Stack',
-      features: ['Gazebo & Isaac Sim physics modeling', '360° 3D LiDAR SLAM navigation', 'Low-latency STM32 CAN-bus controllers']
+      stats: 'ROS 2 & Dynamic Gait Physics',
+      features: ['Gazebo & Isaac Sim physics modeling', 'Dynamic 12-DoF trot & balance stabilization', 'Low-latency STM32 CAN-bus controllers']
     }
   ];
 

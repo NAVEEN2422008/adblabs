@@ -20,10 +20,10 @@ export default function RoboticsPage() {
   const focusAreas = [
     {
       title: 'Robotic Systems & Kinematics',
-      tagline: 'Autonomous Mobile Robots, Quadruped Walkers & 6-Axis Arms',
+      tagline: 'Autonomous Quadruped Locomotion & Dynamic Gait Stabilization',
       icon: Bot,
-      desc: 'Mechanical kinematics design, payload balancing, and dynamic gait stabilization. We build custom wheeled AMRs, 12-DoF quadruped robots, and articulating robotic arms engineered for high-duty cycles.',
-      bullets: ['Rigid aluminum and carbon-fiber unibody structural frames', 'Dynamic torque-vectoring brushless motor drives', 'Precision harmonic gearboxes with sub-millimeter backlash']
+      desc: 'Mechanical kinematics design, multi-terrain payload balancing, and dynamic trotting stabilization. We engineer custom 12-DoF quadruped robots built for agile locomotion and high-duty cycles.',
+      bullets: ['Rigid aluminum and carbon-fiber unibody structural frames', 'Dynamic torque-vectoring brushless motor drives', 'Precision high-torque planetary and cycloidal joint actuators']
     },
     {
       title: 'AI & Edge Vision Perception',
@@ -67,7 +67,7 @@ export default function RoboticsPage() {
           </h1>
 
           <p className="text-[#A3ADA5] text-lg sm:text-xl max-w-3xl mx-auto leading-relaxed">
-            Advancing practical autonomous mobile robots, computer vision perception, embedded STM32/CAN firmware, and kinematic physics simulation — from CAD blueprints to deployed field hardware.
+            Advancing bio-inspired quadruped robotics, computer vision perception, embedded STM32/CAN firmware, and kinematic physics simulation — from CAD blueprints to deployed field hardware.
           </p>
 
           <div className="pt-4 flex flex-wrap items-center justify-center gap-4">
@@ -99,7 +99,7 @@ export default function RoboticsPage() {
               Autonomous Hardware Fleet.
             </h2>
             <p className="text-[#A3ADA5] text-base mt-3">
-              Explore our core mobile robotics platforms spanning 3D LiDAR AMRs, dynamic quadruped locomotion, and 6-axis manipulation.
+              Explore ORZO, our bio-inspired quadruped robot platform engineered for dynamic multi-terrain balance, CAN-bus motor control, and autonomous navigation.
             </p>
           </div>
 

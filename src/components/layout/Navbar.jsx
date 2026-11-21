@@ -27,9 +27,9 @@ export default function Navbar() {
   }, [location.pathname]);
 
   const navLinks = [
+    { label: 'Home', path: '/' },
     { label: 'Energy Solutions', path: '/energy-solutions' },
     { label: 'Power Stations', path: '/power-stations' },
-    { label: 'PS1 Station', path: '/power-stations/adb-ps1', highlight: true },
     { label: 'Projects', path: '/projects' },
     { label: 'Robotics & R&D', path: '/robotics-rd' },
     { label: 'Internship', path: '/internship' },

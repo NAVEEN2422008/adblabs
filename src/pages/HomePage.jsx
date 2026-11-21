@@ -369,7 +369,7 @@ export default function HomePage() {
               </h2>
             </div>
             <p className="text-[#A3ADA5] text-base max-w-lg leading-relaxed">
-              Advancing practical autonomous mobile robots, computer vision perception, embedded STM32/CAN firmware, and kinematic simulation.
+              Advancing bio-inspired quadruped robotics, computer vision perception, embedded STM32/CAN firmware, and dynamic gait simulation.
             </p>
           </div>
 
