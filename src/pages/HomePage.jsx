@@ -333,11 +333,11 @@ export default function HomePage() {
                 <div className="text-xs font-mono text-[#A3ADA5] mt-1">
                   2.88 kWp Solar | 100% Diesel-Free
                 </div>
-                <div className="relative aspect-[16/11] my-4 rounded-2xl bg-[#050B0A] border border-white/10 flex items-center justify-center p-3">
+                <div className="relative aspect-[16/11] my-4 rounded-2xl bg-[#050B0A] border border-white/10 flex items-center justify-center overflow-hidden">
                   <img
-                    src="/images/besant_wide.png"
+                    src="/images/commercial_solar.jpg"
                     alt="Besant Nagar Commercial Solar Pilot"
-                    className="max-h-full max-w-full object-cover rounded-xl filter drop-shadow-[0_15px_25px_rgba(0,0,0,0.8)] group-hover:scale-105 transition duration-300"
+                    className="w-full h-full object-cover filter brightness-95 group-hover:scale-105 transition duration-500"
                   />
                 </div>
                 <p className="text-xs text-[#A3ADA5] leading-relaxed">

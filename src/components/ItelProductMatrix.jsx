@@ -73,7 +73,7 @@ export default function ItelProductMatrix() {
       badge: 'Turnkey Commercial Pilot',
       capacity: '2.88 kWp Bifacial Solar | 100% Diesel-Free',
       tagline: 'Field-deployed off-grid power replacement for commercial retail stalls, saving ₹14,000/month.',
-      image: '/images/besant_wide.png',
+      image: '/images/commercial_solar.jpg',
       specs: [
         { label: 'Solar Generation', value: '4x 720W Bifacial Panels (2.88 kWp)' },
         { label: 'Storage Cluster', value: '12.288 kWh LiFePO₄ Pack' },

@@ -1170,7 +1170,7 @@ export const TEAM_MEMBERS = [
       "github": "https://github.com/NAVEEN2422008",
       "linkedin": "https://linkedin.com/company/adblabs"
     },
-    "resumeUrl": null
+    "resumeUrl": "/resumes/ADB-446-007_Resume.pdf"
   },
   {
     "id": "ADB-446-008",

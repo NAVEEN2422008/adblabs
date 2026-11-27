@@ -10,11 +10,41 @@ export default function PS1ProductViewer() {
   const mountRef = useRef(null);
 
   const angles = [
-    { id: 'front', label: 'Front View', image: '/images/thumb_front.jpg', desc: 'Active display screen, 230V AC output sockets, DC switches, and quick-access breaker panel.' },
-    { id: 'left', label: 'Left Side', image: '/images/thumb_left.jpg', desc: 'Dual MPPT solar PV inputs (12V–150V) and filtered intake cooling louvers with marine salt seals.' },
-    { id: 'rear', label: 'Rear View', image: '/images/thumb_rear.jpg', desc: 'Heavy-duty high-amp DC expansion bus for secondary 6.144 kWh pack coupling.' },
-    { id: 'right', label: 'Right Side', image: '/images/thumb_right.jpg', desc: 'High-speed forced exhaust ventilation ports with thermal automatic variable-speed fans.' },
-    { id: 'top', label: 'Top View', image: '/images/thumb_top.jpg', desc: 'Flush-recessed reinforced aluminum carrying handles and modular stacking lock guides.' }
+    { 
+      id: 'front', 
+      label: 'Front View', 
+      image: '/images/ps1_titan_studio.jpg', 
+      thumb: '/images/thumb_front.jpg', 
+      desc: 'Active display screen, 230V AC output sockets, DC switches, and quick-access breaker panel.' 
+    },
+    { 
+      id: 'left', 
+      label: 'Left Side (Inputs)', 
+      image: '/images/ps1_hero.jpg', 
+      thumb: '/images/thumb_left.jpg', 
+      desc: 'Dual MPPT solar PV inputs (12V–150V) and filtered intake cooling louvers with marine salt seals.' 
+    },
+    { 
+      id: 'rear', 
+      label: 'Rear View (DC Bus)', 
+      image: '/images/ps1_dual_stack_titan.jpg', 
+      thumb: '/images/thumb_rear.jpg', 
+      desc: 'Heavy-duty high-amp DC expansion bus for secondary 6.144 kWh pack coupling.' 
+    },
+    { 
+      id: 'right', 
+      label: 'Right Side (Exhaust)', 
+      image: '/images/mockup_hero_ps1.png', 
+      thumb: '/images/thumb_right.jpg', 
+      desc: 'High-speed forced exhaust ventilation ports with thermal automatic variable-speed fans.' 
+    },
+    { 
+      id: 'top', 
+      label: 'Top Architecture', 
+      image: '/images/sol_ps1.png', 
+      thumb: '/images/thumb_top.jpg', 
+      desc: 'Flush-recessed reinforced aluminum carrying handles, LiFePO₄ pack topology, and modular stacking lock guides.' 
+    }
   ];
 
   // Auto rotation interval for angle mode
@@ -34,17 +64,18 @@ export default function PS1ProductViewer() {
     if (viewMode !== '3d' || !mountRef.current) return;
 
     const currentMount = mountRef.current;
-    const width = currentMount.clientWidth;
-    const height = currentMount.clientHeight;
+    const width = currentMount.clientWidth || 800;
+    const height = currentMount.clientHeight || 500;
 
     // Scene, Camera, Renderer
     const scene = new THREE.Scene();
     scene.background = new THREE.Color(0x050b0a);
 
     const camera = new THREE.PerspectiveCamera(45, width / height, 0.1, 1000);
-    camera.position.set(4, 2.5, 5);
+    camera.position.set(3.5, 2.2, 4.5);
+    camera.lookAt(0, 0, 0);
 
-    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true, powerPreference: 'high-performance' });
     renderer.setSize(width, height);
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
     renderer.shadowMap.enabled = true;
@@ -384,8 +415,8 @@ export default function PS1ProductViewer() {
                     : 'bg-[#050B0A]/60 border-white/10 text-[#A3ADA5] hover:border-white/25 hover:text-white'
                 }`}
               >
-                <div className="w-10 h-10 rounded-lg overflow-hidden bg-black/60 border border-white/10 flex-shrink-0 flex items-center justify-center p-1">
-                  <img src={ang.image} alt={ang.label} className="max-h-full max-w-full object-contain" />
+                <div className="w-10 h-10 rounded-lg overflow-hidden bg-[#050B0A] border border-white/10 flex-shrink-0 flex items-center justify-center">
+                  <img src={ang.image} alt={ang.label} className="w-full h-full object-cover" />
                 </div>
                 <div>
                   <div className="text-xs font-bold leading-tight">{ang.label}</div>

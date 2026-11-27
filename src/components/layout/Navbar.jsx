@@ -92,10 +92,11 @@ export default function Navbar() {
         <div className="flex items-center gap-3">
           <Link
             to="/get-a-quote"
-            className="bg-[#A3FF35] hover:bg-[#8ee827] text-black font-extrabold text-xs px-5 py-2.5 rounded-full transition shadow-[0_0_20px_rgba(163,255,55,0.25)] flex items-center gap-2 group font-heading"
+            className="bg-[#A3FF35] hover:bg-[#8ee827] text-black font-extrabold text-xs px-3.5 sm:px-5 py-2.5 rounded-full transition shadow-[0_0_20px_rgba(163,255,55,0.25)] flex items-center gap-1.5 sm:gap-2 group font-heading whitespace-nowrap shrink-0"
           >
-            <span>Start an Enquiry</span>
-            <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition" />
+            <span className="hidden sm:inline">Start an Enquiry</span>
+            <span className="sm:hidden">Enquire</span>
+            <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition shrink-0" />
           </Link>
 
           {/* Mobile Hamburger Button */}
