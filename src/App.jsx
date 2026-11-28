@@ -7,7 +7,6 @@ import ScrollToTop from './components/layout/ScrollToTop';
 import SmoothScrollProvider from './components/global/SmoothScrollProvider';
 import PagePreloader from './components/global/PagePreloader';
 import CustomCursor from './components/global/CustomCursor';
-import GlobalParticles from './components/global/GlobalParticles';
 import PageTransition from './components/global/PageTransition';
 
 import HomePage from './pages/HomePage';
@@ -63,13 +62,6 @@ function AnimatedRoutes() {
   );
 }
 
-function RouteAwareParticles() {
-  const location = useLocation();
-  const heavy = location.pathname === '/' || location.pathname === '/power-stations/adb-ps1';
-  if (heavy) return null;
-  return <GlobalParticles />;
-}
-
 export default function App() {
   return (
     <BrowserRouter>
@@ -78,7 +70,6 @@ export default function App() {
           <ScrollToTop />
           <PagePreloader />
           <CustomCursor />
-          <RouteAwareParticles />
           <Navbar />
           <main className="flex-grow">
             <AnimatedRoutes />

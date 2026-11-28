@@ -1,18 +1,14 @@
-import React, { Suspense, lazy } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight, Play } from 'lucide-react';
 import { motion } from 'framer-motion';
 import KineticHeadline from '../../home/KineticHeadline';
 
-const HeroWebGLCanvas = lazy(() => import('../../home/HeroWebGLCanvas'));
 const HERO_IMG = '/images/ps1_titan_studio.jpg';
 
 export default function HomeHero() {
   return (
     <section className="relative pt-24 sm:pt-28 pb-14 sm:pb-18 px-4 sm:px-6 lg:px-8 border-b border-white/10 text-center overflow-hidden">
-      <Suspense fallback={null}>
-        <HeroWebGLCanvas />
-      </Suspense>
       <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[900px] h-[550px] bg-gradient-to-b from-[#A3FF35]/15 via-[#101C17]/40 to-transparent rounded-full blur-[160px] pointer-events-none -z-10" />
 
       <div className="max-w-6xl mx-auto space-y-5 relative z-10">
