@@ -1,4 +1,6 @@
-# Logs
+.playwright-mcp/
+TODOS.md
+
 logs
 *.log
 npm-debug.log*

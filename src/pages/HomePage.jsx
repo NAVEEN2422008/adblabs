@@ -1,27 +1,42 @@
 import React, { Suspense, lazy } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
-import CinematicHero from '../components/sections/home/CinematicHero';
-import StatsBand from '../components/sections/home/StatsBand';
-import AnimatedStats from '../components/home/AnimatedStats';
-import InfiniteMarquee from '../components/home/InfiniteMarquee';
-import HorizontalScroll from '../components/home/HorizontalScroll';
-import PhilosophyStrip from '../components/sections/home/PhilosophyStrip';
-import TrustAndComparisonSection from '../components/TrustAndComparisonSection';
 
-import PS1CinematicScroll from '../components/three/PS1CinematicScroll';
-const OrzoShowcase = lazy(() => import('../components/sections/home/OrzoShowcase'));
+import HomeHero from '../components/sections/home/HomeHero';
+import ComparisonSection from '../components/sections/home/ComparisonSection';
+import LaunchOfferBanner from '../components/sections/home/LaunchOfferBanner';
+import PowerEssentialsSection from '../components/sections/home/PowerEssentialsSection';
+import CapacityComparisonSection from '../components/sections/home/CapacityComparisonSection';
+import SmartControlSection from '../components/sections/home/SmartControlSection';
+import PremiumPerformanceSection from '../components/sections/home/PremiumPerformanceSection';
+import SavingsSection from '../components/sections/home/SavingsSection';
+import StormBackupSection from '../components/sections/home/StormBackupSection';
+import InstallStepsSection from '../components/sections/home/InstallStepsSection';
+import FreeSupportSection from '../components/sections/home/FreeSupportSection';
+import TrustBadgesSection from '../components/sections/home/TrustBadgesSection';
+import FAQSection from '../components/sections/home/FAQSection';
+import FinalCTA from '../components/sections/home/FinalCTA';
+
+const TrustAndComparisonSection = lazy(() => import('../components/TrustAndComparisonSection'));
 
 export default function HomePage() {
   return (
     <div className="bg-[#050B0A] text-[#F5F7F2] min-h-screen selection:bg-[#A3FF35] selection:text-black">
-      <CinematicHero />
-      <StatsBand />
-      <AnimatedStats />
-      <InfiniteMarquee />
-      <HorizontalScroll />
+      <HomeHero />
+      <ComparisonSection />
+      <LaunchOfferBanner />
+      <PowerEssentialsSection />
+      <CapacityComparisonSection />
+      <SmartControlSection />
+      <PremiumPerformanceSection />
+      <SavingsSection />
+      <StormBackupSection />
+      <InstallStepsSection />
+      <FreeSupportSection />
+      <TrustBadgesSection />
+      <FAQSection />
 
-      {/* Product lineup (migrated, enhanced) */}
+      {/* Product lineup */}
       <section className="py-20 px-6 lg:px-8 border-b border-white/10">
         <div className="max-w-6xl mx-auto">
           <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-12">
@@ -45,7 +60,7 @@ export default function HomePage() {
                   <h3 className="text-xl sm:text-2xl font-black font-heading text-white mt-3 group-hover:text-[#A3FF35] transition">{p.title}</h3>
                   <div className="text-xs font-mono text-[#A3ADA5] mt-1">{p.spec}</div>
                   <div className="relative aspect-[16/11] my-4 rounded-2xl bg-[#050B0A] border border-white/10 flex items-center justify-center overflow-hidden">
-                    <img src={p.img} alt={p.title} className="max-h-full max-w-full object-contain filter drop-shadow-[0_15px_25px_rgba(0,0,0,0.8)] group-hover:scale-105 transition duration-300" />
+                    <img src={p.img} alt={p.title} className="max-h-full max-w-full object-contain filter drop-shadow-[0_15px_25px_rgba(0,0,0,0.8)] group-hover:scale-105 transition duration-300" loading="lazy" />
                   </div>
                   <p className="text-xs text-[#A3ADA5] leading-relaxed">{p.desc}</p>
                 </div>
@@ -61,38 +76,11 @@ export default function HomePage() {
         </div>
       </section>
 
-      <Suspense fallback={<div className="h-screen flex items-center justify-center text-[#68776D] font-mono text-sm">Loading cinematic scene…</div>}>
-        <PS1CinematicScroll />
-      </Suspense>
-      <PhilosophyStrip />
-      <Suspense fallback={<div className="py-20 text-center text-[#68776D] font-mono text-sm">Loading 3D viewer…</div>}>
-        <OrzoShowcase />
+      <Suspense fallback={<div className="py-20 text-center text-[#68776D] font-mono text-sm">Loading…</div>}>
+        <TrustAndComparisonSection />
       </Suspense>
 
-      <section className="py-20 px-6 lg:px-8 border-b border-white/10 bg-[#091310] relative">
-        <div className="max-w-6xl mx-auto">
-          <TrustAndComparisonSection />
-        </div>
-      </section>
-
-      <section className="py-20 px-6 lg:px-8 bg-gradient-to-b from-[#091310] to-[#050B0A] relative text-center">
-        <div className="max-w-3xl mx-auto space-y-5">
-          <span className="text-xs font-mono uppercase tracking-widest text-[#A3FF35] font-bold">LET'S DISCUSS YOUR SYSTEM REQUIREMENTS</span>
-          <h2 className="text-3xl sm:text-5xl font-black font-heading text-white tracking-tight">Ready to Replace Your Diesel Generator?</h2>
-          <p className="text-[#A3ADA5] text-sm sm:text-base max-w-xl mx-auto leading-relaxed">
-            Our engineering team will assess your electrical loads and design a tailored LiFePO4 battery storage or solar microgrid package.
-          </p>
-          <div className="flex flex-wrap items-center justify-center gap-4 pt-4">
-            <Link to="/get-a-quote" className="bg-[#A3FF35] hover:bg-[#8ee827] text-black font-extrabold text-xs sm:text-sm px-8 py-3.5 rounded-full transition shadow-[0_0_25px_rgba(163,255,55,0.3)] flex items-center gap-2 font-heading">
-              <span>Start an Enquiry</span>
-              <ArrowRight className="w-4 h-4" />
-            </Link>
-            <Link to="/contact" className="bg-[#101C17] hover:bg-[#132019] text-white border border-white/15 font-semibold text-xs sm:text-sm px-7 py-3.5 rounded-full transition">
-              <span>Contact ADB LABS</span>
-            </Link>
-          </div>
-        </div>
-      </section>
+      <FinalCTA />
     </div>
   );
 }
