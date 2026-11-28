@@ -114,7 +114,7 @@ export default function GetAQuotePage() {
         const stored = JSON.parse(localStorage.getItem('adblabs_enquiries') || '[]');
         stored.push({ id: generatedId, timestamp: new Date().toISOString(), data: formData });
         localStorage.setItem('adblabs_enquiries', JSON.stringify(stored));
-      } catch (err) {
+      } catch {
         console.warn('LocalStorage save skipped');
       }
     }, 1200);

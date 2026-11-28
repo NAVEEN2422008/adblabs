@@ -164,10 +164,14 @@ export default function ItelProductMatrix() {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.95 }}
               transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-              className="group rounded-3xl bg-[#101C17] border border-white/10 hover:border-[#A3FF35]/40 transition-all duration-300 p-6 sm:p-7 flex flex-col justify-between text-left relative overflow-hidden shadow-xl hover:shadow-[0_20px_40px_rgba(0,0,0,0.8)]"
+              className="group tilt-card rounded-3xl bg-[#101C17] border border-white/10 hover:border-[#A3FF35]/40 transition-all duration-300 p-6 sm:p-7 flex flex-col justify-between text-left relative overflow-hidden shadow-xl hover:shadow-[0_0_40px_rgba(163,255,55,0.25)] noise-card"
             >
               {/* Subtle top ambient glow */}
               <div className="absolute top-0 right-0 w-64 h-64 bg-[#A3FF35]/5 rounded-full blur-3xl group-hover:bg-[#A3FF35]/10 transition pointer-events-none"></div>
+              {/* Rotating conic border */}
+              <div className="absolute inset-0 rounded-3xl pointer-events-none opacity-0 group-hover:opacity-100 transition" style={{ padding: 1 }}>
+                <div className="absolute inset-0 rounded-3xl animate-spin-slow" style={{ background: 'conic-gradient(from 0deg, transparent, #A3FF35, transparent 30%)' }} />
+              </div>
 
               <div>
                 {/* Header Badge */}

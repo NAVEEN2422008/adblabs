@@ -79,7 +79,7 @@ export default function PS1ProductViewer() {
     renderer.setSize(width, height);
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
     renderer.shadowMap.enabled = true;
-    renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+    renderer.shadowMap.type = THREE.PCFShadowMap;
     currentMount.appendChild(renderer.domElement);
 
     // Group for the PS1 Chassis
@@ -261,6 +261,7 @@ export default function PS1ProductViewer() {
     let animationFrameId;
     const animate = () => {
       animationFrameId = requestAnimationFrame(animate);
+      if (document.hidden) return;
       if (!isDragging) {
         ps1Group.rotation.y += 0.004;
       }

@@ -18,7 +18,15 @@ import {
 export default function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [solutionsDropdownOpen, setSolutionsDropdownOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
   const location = useLocation();
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 200);
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
 
   // Close menus on route change
   useEffect(() => {
@@ -38,8 +46,8 @@ export default function Navbar() {
   ];
 
   return (
-    <header className="sticky top-0 z-50 bg-[#050B0A]/85 backdrop-blur-2xl border-b border-white/10 transition-all">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-18 flex items-center justify-between">
+    <header className={`sticky top-0 z-50 transition-all duration-300 ${scrolled ? 'px-4 pt-3' : ''}`}>
+      <div className={`max-w-7xl mx-auto flex items-center justify-between transition-all duration-300 ${scrolled ? 'h-14 px-5 rounded-full bg-[#050B0A]/90 backdrop-blur-2xl border border-white/10 shadow-[0_8px_32px_rgba(0,0,0,0.5)]' : 'h-18 px-4 sm:px-6 lg:px-8'}`}>
         
         {/* Brand Logo */}
         <Link to="/" className="flex items-center gap-3 group">
@@ -71,11 +79,13 @@ export default function Navbar() {
               <Link
                 key={link.path}
                 to={link.path}
-                className={`relative py-2 transition hover:text-white ${
+                className={`group relative py-2 transition hover:text-white ${
                   isActive ? 'text-white font-bold' : ''
                 } ${link.highlight ? 'text-[#A3FF35] font-semibold' : ''}`}
               >
                 <span>{link.label}</span>
+                {/* center-out hover underline */}
+                <span className="absolute -bottom-1 left-1/2 h-[2px] w-full -translate-x-1/2 scale-x-0 bg-[#A3FF35]/70 transition-transform duration-300 origin-center group-hover:scale-x-100" />
                 {isActive && (
                   <motion.div
                     layoutId="desktopNavUnderline"
