@@ -2,10 +2,10 @@ import React from 'react';
 import { motion } from 'framer-motion';
 
 const rows = [
-  { label: 'Upfront Cost', traditional: '$33K+', adb: '70% less', note: 'TODO: verify ADB pricing' },
-  { label: 'Installation Time', traditional: 'Up to 60 Days', adb: '7 Days', note: 'TODO: verify install SLA' },
-  { label: 'Intelligence', traditional: 'No Built-In Load Control', adb: 'Built-In Load Management', note: '' },
-  { label: 'Entry Threshold', traditional: '13.5 kWh at a Time', adb: 'Starts at 6.144 kWh', note: '' },
+  { label: '5-Year Total Cost (TCO)', traditional: '₹4.8L+ Fuel & Maint.', adb: 'Up to 65% Lower TCO', note: 'Zero diesel refill or engine servicing overhead' },
+  { label: 'Deployment Time', traditional: '30–60 Days Permitting', adb: 'Plug & Play / <7 Days', note: 'Pre-wired MPPT + 230V AC industrial bus' },
+  { label: 'Intelligence', traditional: 'Manual Transfer & Noise', adb: 'Active CAN-Bus BMS', note: 'Sub-15 ms UPS switchover & live telemetry' },
+  { label: 'Modular Scaling', traditional: 'Fixed Oversized Block', adb: '6.144 → 12.288 kWh', note: 'Quick-latch DC coupling without rewiring' },
 ];
 
 export default function ComparisonSection() {

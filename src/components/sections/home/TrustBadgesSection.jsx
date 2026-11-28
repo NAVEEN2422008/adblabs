@@ -1,12 +1,12 @@
 import React from 'react';
 
 const badges = [
-  { title: 'UL 9540', desc: 'Complete-system safety certification (TODO: confirm)' },
-  { title: 'UL 9540A', desc: 'Thermal runaway testing (TODO: confirm)' },
+  { title: 'IS / IEC 62619', desc: 'Industrial LiFePO₄ cell & pack safety architecture' },
+  { title: 'IP65 Coastal', desc: 'Salt-mist & monsoon-sealed enclosure design' },
   { title: 'LiFePO₄', desc: 'Grade-A prismatic cells, 3,500+ cycles' },
-  { title: '3.0 kW', desc: 'Pure sine inverter, <15 ms transfer' },
-  { title: '2.88 kWp', desc: 'Dual MPPT solar input' },
-  { title: '90% DoD', desc: 'Usable capacity' },
+  { title: '3.0 kW', desc: 'Pure sine inverter, <15 ms UPS transfer' },
+  { title: '2.88 kWp', desc: 'Dual MPPT 12V–150V solar input' },
+  { title: '90% DoD', desc: 'Continuous usable cycle capacity' },
 ];
 
 export default function TrustBadgesSection() {

@@ -60,8 +60,8 @@ export default function RoboticsTitanGallery() {
           {/* Left Column: ORZO Identity & Overview */}
           <div className="lg:col-span-7 space-y-6">
             <div className="flex flex-wrap items-center gap-3">
-              <span className="text-[11px] font-mono uppercase tracking-wider text-[#38bdf8] bg-[#38bdf8]/10 px-3.5 py-1.5 rounded-full font-bold border border-[#38bdf8]/30 inline-flex items-center gap-2">
-                <span className="w-2 h-2 rounded-full bg-[#38bdf8] animate-ping"></span>
+              <span className="text-[11px] font-mono uppercase tracking-wider text-[#A3FF35] bg-[#A3FF35]/10 px-3.5 py-1.5 rounded-full font-bold border border-[#A3FF35]/30 inline-flex items-center gap-2">
+                <span className="w-2 h-2 rounded-full bg-[#A3FF35] animate-ping"></span>
                 FLAGSHIP ROBOTICS PLATFORM
               </span>
               <span className="text-[11px] font-mono text-neutral-400">
@@ -71,7 +71,7 @@ export default function RoboticsTitanGallery() {
 
             <div>
               <h3 className="text-3xl sm:text-5xl font-black text-white tracking-tight font-heading">
-                ORZO <span className="text-[#38bdf8]">Quadruped</span> Robot.
+                ORZO <span className="text-[#A3FF35]">Quadruped</span> Robot.
               </h3>
               <p className="text-sm sm:text-base text-neutral-300 mt-3 leading-relaxed">
                 Bio-inspired dynamic quadruped locomotion platform engineered by ADB Labs. Designed for rugged terrain traversal, stair negotiation, and autonomous inspection with active compliance controllers, 12-axis torque vectoring, and real-time center-of-mass stabilization.
@@ -104,7 +104,7 @@ export default function RoboticsTitanGallery() {
                 'Integrated lithium pack with autonomous telemetry logging'
               ].map((cap, cIdx) => (
                 <div key={cIdx} className="flex items-start gap-2.5 text-xs text-neutral-300">
-                  <CheckCircle2 className="w-4 h-4 text-[#38bdf8] flex-shrink-0 mt-0.5" />
+                  <CheckCircle2 className="w-4 h-4 text-[#A3FF35] flex-shrink-0 mt-0.5" />
                   <span>{cap}</span>
                 </div>
               ))}
@@ -119,8 +119,8 @@ export default function RoboticsTitanGallery() {
                 alt="ORZO Quadruped Dynamic Locomotion Robot"
                 className="max-h-full max-w-full object-contain filter drop-shadow-[0_20px_35px_rgba(0,0,0,0.9)] group-hover:scale-105 transition-transform duration-500"
               />
-              <div className="absolute top-4 left-4 bg-black/80 backdrop-blur-md px-3 py-1.5 rounded-full text-[10px] font-mono text-[#38bdf8] border border-[#38bdf8]/30 flex items-center gap-1.5">
-                <span className="w-1.5 h-1.5 rounded-full bg-[#38bdf8] animate-pulse"></span>
+              <div className="absolute top-4 left-4 bg-black/80 backdrop-blur-md px-3 py-1.5 rounded-full text-[10px] font-mono text-[#A3FF35] border border-[#A3FF35]/30 flex items-center gap-1.5">
+                <span className="w-1.5 h-1.5 rounded-full bg-[#A3FF35] animate-pulse"></span>
                 ACTIVE TELEMETRY: NOMINAL
               </div>
               <div className="absolute bottom-4 right-4 bg-black/80 backdrop-blur-md px-3 py-1 rounded-full text-[10px] font-mono text-neutral-300 border border-white/10">
@@ -136,7 +136,7 @@ export default function RoboticsTitanGallery() {
       <div className="mt-10 p-8 sm:p-12 rounded-[32px] bg-[#090b10] border border-white/[0.08] shadow-2xl relative overflow-hidden backdrop-blur-2xl text-left">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-8 border-b border-white/[0.06]">
           <div>
-            <span className="text-xs font-mono uppercase tracking-widest text-[#38bdf8] font-bold block mb-1">
+            <span className="text-xs font-mono uppercase tracking-widest text-[#A3FF35] font-bold block mb-1">
               ARCHITECTURE DOSSIER // BIO-INSPIRED QUADRUPED ROBOTICS
             </span>
             <h4 className="text-2xl sm:text-3xl font-extrabold text-white">
@@ -145,14 +145,14 @@ export default function RoboticsTitanGallery() {
           </div>
 
           {/* Subsystem Navigation Pills */}
-          <div className="flex items-center gap-2 bg-white/[0.04] p-1.5 rounded-2xl border border-white/[0.06] self-start sm:self-auto">
+          <div className="flex flex-wrap sm:flex-nowrap items-center gap-1.5 sm:gap-2 bg-white/[0.04] p-1.5 rounded-2xl border border-white/[0.06] w-full sm:w-auto">
             {orzoSubsystems.map((sub) => (
               <button
                 key={sub.id}
                 onClick={() => setActiveTab(sub.id)}
-                className={`px-4 py-2 rounded-xl text-xs font-medium transition ${
+                className={`flex-1 sm:flex-initial px-3 sm:px-4 py-2 rounded-xl text-[11px] sm:text-xs font-medium transition whitespace-nowrap ${
                   activeTab === sub.id
-                    ? 'bg-[#38bdf8] text-black font-bold shadow-[0_0_15px_rgba(56,189,248,0.3)]'
+                    ? 'bg-[#A3FF35] text-black font-bold shadow-[0_0_15px_rgba(163,255,55,0.3)]'
                     : 'text-neutral-400 hover:text-white hover:bg-white/[0.04]'
                 }`}
               >
@@ -179,7 +179,7 @@ export default function RoboticsTitanGallery() {
                 >
                   <div className="lg:col-span-7 space-y-4">
                     <div className="flex items-center gap-3">
-                      <div className="w-10 h-10 rounded-xl bg-[#38bdf8]/10 border border-[#38bdf8]/30 flex items-center justify-center text-[#38bdf8]">
+                      <div className="w-10 h-10 rounded-xl bg-[#A3FF35]/10 border border-[#A3FF35]/30 flex items-center justify-center text-[#A3FF35]">
                         <Icon className="w-5 h-5" />
                       </div>
                       <h5 className="text-xl sm:text-2xl font-bold text-white">

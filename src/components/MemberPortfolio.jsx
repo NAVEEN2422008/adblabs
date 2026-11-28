@@ -136,7 +136,7 @@ function ProjectMockup({ index, themeMode = 'slate' }) {
         </div>
         <div className="my-2 space-y-2">
           <div className="text-xl font-bold font-mono text-white tracking-tight">
-            $24,860.50
+            54.4V // 16S LFP
           </div>
           <div className="h-12 flex items-end gap-1.5 pt-2">
             {[40, 65, 30, 85, 55, 95, 70, 45, 90, 60, 100, 75].map((h, i) => (
@@ -155,9 +155,9 @@ function ProjectMockup({ index, themeMode = 'slate' }) {
           </div>
         </div>
         <div className="flex items-center justify-between text-[10px] font-mono text-zinc-500">
-          <span>ANALYTICS ENGINE</span>
+          <span>ADB BMS TELEMETRY</span>
           <span className={isRed ? 'text-[#E50914]' : isGreen ? 'text-emerald-400' : 'text-zinc-300'}>
-            ACTIVE FEED
+            CAN-BUS ACTIVE
           </span>
         </div>
       </div>
@@ -174,11 +174,11 @@ function ProjectMockup({ index, themeMode = 'slate' }) {
             : 'bg-[#090C12] border-white/[0.06]'
       }`}>
         <div className="flex items-center justify-between border-b border-white/[0.06] pb-2">
-          <span className="text-[10px] font-mono text-zinc-400 uppercase tracking-widest">NEXORA</span>
+          <span className="text-[10px] font-mono text-zinc-400 uppercase tracking-widest">ADB-OS // ROS2</span>
           <div className="flex items-center gap-2 text-[9px] font-mono text-zinc-500">
-            <span>HOME</span>
-            <span>ABOUT</span>
-            <span>SERVICES</span>
+            <span>NODES</span>
+            <span>SLAM</span>
+            <span>MQTT</span>
           </div>
         </div>
         <div className="my-2 flex items-center justify-center relative">
@@ -195,8 +195,8 @@ function ProjectMockup({ index, themeMode = 'slate' }) {
           </div>
         </div>
         <div className="flex items-center justify-between text-[10px] font-mono text-zinc-500">
-          <span>BRAND SYSTEM</span>
-          <span className={isGreen ? 'text-emerald-400' : 'text-zinc-300'}>INTERACTION</span>
+          <span>EDGE TELEMETRY</span>
+          <span className={isGreen ? 'text-emerald-400' : 'text-zinc-300'}>REAL-TIME SYNC</span>
         </div>
       </div>
     );
@@ -495,7 +495,7 @@ export default function MemberPortfolio({ employeeCode, member: propMember, onBa
               </div>
 
               {/* Handwritten Script Accent ("Hello, I'm" from reference poster) */}
-              <span className={`font-script text-3xl sm:text-4xl -rotate-6 mb-2 block select-none ${
+              <span className={`font-script text-3xl sm:text-4xl -rotate-3 mb-4 sm:mb-5 leading-snug inline-block origin-left select-none ${
                 isRed ? 'text-[#E50914]' : isGreen ? 'text-[#00FF88]' : 'text-slate-300'
               }`}>
                 Hello, I'm
@@ -613,7 +613,7 @@ export default function MemberPortfolio({ employeeCode, member: propMember, onBa
           {/* PERSON'S NAME & ACTIONS - OVERLAYING BOTTOM OF CUTOUT    */}
           {/* Half overlayed on bottom of torso, half extending below  */}
           {/* ======================================================== */}
-          <div className="-mt-14 sm:-mt-20 lg:-mt-28 text-center relative z-30 px-2 pointer-events-auto">
+          <div className="mt-6 lg:-mt-28 text-center relative z-30 px-2 pointer-events-auto">
             
             {/* Person's Name in Anton with dramatic contrast drop-shadow */}
             <h1 className="font-anton text-4xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-[6.8rem] uppercase text-white tracking-wide leading-none mb-3 select-none drop-shadow-[0_12px_35px_rgba(0,0,0,0.95)]">
@@ -694,11 +694,11 @@ export default function MemberPortfolio({ employeeCode, member: propMember, onBa
             ]).map((st, idx) => (
               <div 
                 key={idx} 
-                className={`p-4 sm:p-6 text-center ${idx > 0 && idx % 2 === 0 ? 'border-t sm:border-t-0' : ''}`}
+                className={`p-3 sm:p-6 text-center min-w-0 ${idx > 0 && idx % 2 === 0 ? 'border-t md:border-t-0' : ''}`}
               >
-                <div className="inline-flex items-center justify-center gap-2 mb-2">
-                  <span className={`text-sm ${isRed ? 'text-[#E50914]' : isGreen ? 'text-[#00FF88]' : 'text-slate-300'}`}>✦</span>
-                  <div className={`font-bebas text-5xl sm:text-6xl tracking-wide leading-none ${
+                <div className="inline-flex items-center justify-center gap-1.5 sm:gap-2 mb-2 max-w-full">
+                  <span className={`text-xs sm:text-sm shrink-0 ${isRed ? 'text-[#E50914]' : isGreen ? 'text-[#00FF88]' : 'text-slate-300'}`}>✦</span>
+                  <div className={`font-bebas text-3xl sm:text-5xl lg:text-6xl tracking-wide leading-none break-words ${
                     isRed ? 'text-[#E50914]' : isGreen ? 'text-[#00FF88]' : 'text-white'
                   }`}>
                     {st.value}
@@ -1028,10 +1028,10 @@ export default function MemberPortfolio({ employeeCode, member: propMember, onBa
         )}
 
         {/* ======================================================== */}
-        {/* MY DESIGN PROCESS (Horizontal sequence in Slate & Green) */}
+        {/* ENGINEERING WORKFLOW (Horizontal sequence)               */}
         {/* ======================================================== */}
         {!isRed && (
-          <section className={`mb-24 rounded-2xl sm:rounded-3xl p-6 sm:p-8 ${
+          <section className={`mb-16 sm:mb-24 rounded-2xl sm:rounded-3xl p-6 sm:p-8 ${
             isGreen 
               ? 'bg-[#091511] border border-emerald-500/20 shadow-lg' 
               : 'bg-[#101522] border border-slate-800/80 shadow-md'
@@ -1040,16 +1040,16 @@ export default function MemberPortfolio({ employeeCode, member: propMember, onBa
               <h2 className={`font-oswald font-bold text-sm uppercase tracking-[0.2em] ${
                 isGreen ? 'text-[#00FF88]' : 'text-zinc-400'
               }`}>
-                MY DESIGN PROCESS
+                ENGINEERING WORKFLOW
               </h2>
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">
               {[
-                { num: '01', title: 'DISCOVER', desc: 'Understanding goals, user needs, and the problem in depth.', icon: Search },
-                { num: '02', title: 'DEFINE', desc: 'Research, analysis, and synthesising insights into clear direction.', icon: Target },
-                { num: '03', title: 'DESIGN', desc: 'Designing intuitive interfaces with clarity and purpose.', icon: PenTool },
-                { num: '04', title: 'DEVELOP', desc: 'Collaborating with developers to bring ideas to life.', icon: Code2 },
-                { num: '05', title: 'DELIVER', desc: 'Testing, refining, and launching seamless digital experiences.', icon: Rocket }
+                { num: '01', title: 'ARCHITECTURE', desc: 'Defining power budgets, bus topologies, and system constraints.', icon: Search },
+                { num: '02', title: 'SCHEMATICS & CAD', desc: 'Designing multi-layer PCBs, thermal enclosures, and harnesses.', icon: Target },
+                { num: '03', title: 'FIRMWARE / ROS2', desc: 'Implementing deterministic RTOS, CAN-FD, and perception stacks.', icon: Code2 },
+                { num: '04', title: 'BENCH VALIDATION', desc: 'Oscilloscope load testing, thermal profiling, and fault injection.', icon: PenTool },
+                { num: '05', title: 'FIELD DEPLOYMENT', desc: 'Commissioning ruggedized hardware for real-world operation.', icon: Rocket }
               ].map((step, sIdx) => {
                 const StepIcon = step.icon;
                 return (
@@ -1081,7 +1081,7 @@ export default function MemberPortfolio({ employeeCode, member: propMember, onBa
         {/* Red Theme: "LET'S WORK TOGETHER" (Rayhan Aditya style)   */}
         {/* Slate & Green Theme: "LET'S CREATE SOMETHING EXTRAORDINARY"*/}
         {/* ======================================================== */}
-        <footer id="contact-section" className={`rounded-3xl border p-8 sm:p-12 relative overflow-hidden shadow-2xl ${
+        <section id="contact-section" className={`rounded-3xl border p-8 sm:p-12 relative overflow-hidden shadow-2xl ${
           isRed 
             ? 'bg-gradient-to-r from-[#120608] via-[#1F0A0E] to-[#120608] border-red-900/40 shadow-[0_0_40px_rgba(229,9,20,0.15)]' 
             : isGreen
@@ -1094,7 +1094,7 @@ export default function MemberPortfolio({ employeeCode, member: propMember, onBa
             {/* Left: Headline (Anton) */}
             <div className="lg:col-span-5">
               <h2 className="font-anton text-4xl sm:text-5xl uppercase tracking-normal text-white leading-[0.95]">
-                {isRed ? "LET'S WORK TOGETHER" : "LET'S CREATE SOMETHING EXTRAORDINARY"}
+                {isRed ? "LET'S WORK TOGETHER" : "BUILD WITH ADB LABS"}
                 <span className={`ml-2 ${isRed ? 'text-[#E50914]' : isGreen ? 'text-[#00FF88]' : 'text-white/60'}`}>✦</span>
               </h2>
             </div>
@@ -1102,7 +1102,7 @@ export default function MemberPortfolio({ employeeCode, member: propMember, onBa
             {/* Middle: Blurb + Pill Button */}
             <div className="lg:col-span-3 flex flex-col items-start lg:items-center">
               <p className="font-body-portfolio text-xs text-zinc-400 mb-3 text-left lg:text-center">
-                I'm currently available for freelance projects and collaborations.
+                ADB Labs R&amp;D Division — Engineering off-grid power, firmware, and robotics.
               </p>
               {member.socials?.email && (
                 <a
@@ -1193,7 +1193,7 @@ export default function MemberPortfolio({ employeeCode, member: propMember, onBa
             </div>
           </div>
 
-        </footer>
+        </section>
 
       </div>
 

@@ -3,17 +3,12 @@ import { Link } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
 
 import HomeHero from '../components/sections/home/HomeHero';
+import InfiniteMarquee from '../components/home/InfiniteMarquee';
+import AnimatedStats from '../components/home/AnimatedStats';
 import ComparisonSection from '../components/sections/home/ComparisonSection';
-import LaunchOfferBanner from '../components/sections/home/LaunchOfferBanner';
 import PowerEssentialsSection from '../components/sections/home/PowerEssentialsSection';
-import CapacityComparisonSection from '../components/sections/home/CapacityComparisonSection';
-import SmartControlSection from '../components/sections/home/SmartControlSection';
-import PremiumPerformanceSection from '../components/sections/home/PremiumPerformanceSection';
 import SavingsSection from '../components/sections/home/SavingsSection';
-import StormBackupSection from '../components/sections/home/StormBackupSection';
-import InstallStepsSection from '../components/sections/home/InstallStepsSection';
-import FreeSupportSection from '../components/sections/home/FreeSupportSection';
-import TrustBadgesSection from '../components/sections/home/TrustBadgesSection';
+import HorizontalScroll from '../components/home/HorizontalScroll';
 import FAQSection from '../components/sections/home/FAQSection';
 import FinalCTA from '../components/sections/home/FinalCTA';
 
@@ -23,23 +18,13 @@ export default function HomePage() {
   return (
     <div className="bg-[#050B0A] text-[#F5F7F2] min-h-screen selection:bg-[#A3FF35] selection:text-black">
       <HomeHero />
-      <ComparisonSection />
-      <LaunchOfferBanner />
-      <PowerEssentialsSection />
-      <CapacityComparisonSection />
-      <SmartControlSection />
-      <PremiumPerformanceSection />
-      <SavingsSection />
-      <StormBackupSection />
-      <InstallStepsSection />
-      <FreeSupportSection />
-      <TrustBadgesSection />
-      <FAQSection />
+      <InfiniteMarquee />
+      <AnimatedStats />
 
       {/* Product lineup */}
-      <section className="py-20 px-6 lg:px-8 border-b border-white/10">
+      <section className="py-16 px-4 sm:px-6 lg:px-8 border-b border-white/10">
         <div className="max-w-6xl mx-auto">
-          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-12">
+          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-10">
             <div>
               <span className="text-xs font-mono uppercase tracking-widest text-[#A3FF35] font-bold block mb-1">PRODUCT LINEUP</span>
               <h2 className="text-3xl sm:text-5xl font-black font-heading text-white">Energy Systems Series</h2>
@@ -60,7 +45,7 @@ export default function HomePage() {
                   <h3 className="text-xl sm:text-2xl font-black font-heading text-white mt-3 group-hover:text-[#A3FF35] transition">{p.title}</h3>
                   <div className="text-xs font-mono text-[#A3ADA5] mt-1">{p.spec}</div>
                   <div className="relative aspect-[16/11] my-4 rounded-2xl bg-[#050B0A] border border-white/10 flex items-center justify-center overflow-hidden">
-                    <img src={p.img} alt={p.title} className="max-h-full max-w-full object-contain filter drop-shadow-[0_15px_25px_rgba(0,0,0,0.8)] group-hover:scale-105 transition duration-300" loading="lazy" />
+                    <img src={p.img} alt={p.title} className="w-full h-full object-cover filter drop-shadow-[0_15px_25px_rgba(0,0,0,0.8)] group-hover:scale-105 transition duration-300" />
                   </div>
                   <p className="text-xs text-[#A3ADA5] leading-relaxed">{p.desc}</p>
                 </div>
@@ -76,10 +61,16 @@ export default function HomePage() {
         </div>
       </section>
 
-      <Suspense fallback={<div className="py-20 text-center text-[#68776D] font-mono text-sm">Loading…</div>}>
+      <ComparisonSection />
+      <PowerEssentialsSection />
+      <SavingsSection />
+      <HorizontalScroll />
+
+      <Suspense fallback={<div className="py-20 text-center text-[#68776D] font-mono text-sm">Syncing Benchmarks…</div>}>
         <TrustAndComparisonSection />
       </Suspense>
 
+      <FAQSection />
       <FinalCTA />
     </div>
   );

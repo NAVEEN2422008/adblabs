@@ -19,7 +19,7 @@ export default function PowerEssentialsSection() {
           <span className="text-xs font-mono uppercase tracking-widest text-[#A3FF35] font-bold block mb-2">POWER ALL YOUR HOME ESSENTIALS</span>
           <h2 className="text-3xl sm:text-5xl font-black font-heading text-white tracking-tight">Whole-Home Power for Everyday Living</h2>
           <p className="text-[#A3ADA5] text-sm sm:text-base mt-3">
-            Run Your 3-Ton AC—and More. With 3.0 kW continuous (6.0 kW surge) output, the ADB PS1 supports these everyday essentials — size your load so simultaneous draw stays within rating. {/* TODO: verify combined load */}
+            With 3.0 kW continuous (6.0 kW surge) pure sine output, the ADB PS1 powers heavy commercial freezers, pumps, and essential equipment without harmonic distortion.
           </p>
         </div>
 
@@ -49,10 +49,14 @@ export default function PowerEssentialsSection() {
             </ul>
           </div>
 
-          <div className="rounded-3xl bg-[#101C17] border border-white/10 p-6 sm:p-8 min-h-[320px] flex flex-col items-center justify-center gap-4">
-            {/* TODO: replace with generated/real essentials image */}
-            <div className="text-center text-[#68776D] text-sm font-mono">[Essentials image placeholder]</div>
-            <div className="grid grid-cols-2 gap-3 w-full max-w-xs">
+          <div className="rounded-3xl bg-[#101C17] border border-white/10 p-5 sm:p-6 flex flex-col items-center justify-center gap-4 overflow-hidden">
+            <img
+              src="/images/home_backup.jpg"
+              alt="ADB Labs PS1 Commercial & Residential Essentials Power"
+              className="w-full h-56 sm:h-64 object-cover rounded-2xl border border-white/10"
+              loading="lazy"
+            />
+            <div className="grid grid-cols-2 gap-3 w-full">
               <div className="rounded-2xl bg-[#050B0A] border border-white/10 p-3 text-center">
                 <div className="text-lg font-black font-heading text-[#A3FF35]">3.0 kW</div>
                 <div className="text-[10px] text-[#68776D] mt-1">Continuous</div>

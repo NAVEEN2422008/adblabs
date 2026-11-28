@@ -14,7 +14,7 @@ export default function StormBackupSection() {
           <span className="text-xs font-mono uppercase tracking-widest text-[#A3FF35] font-bold block mb-2">STORM BACKUP THAT THINKS AHEAD</span>
           <h2 className="text-3xl sm:text-5xl font-black font-heading text-white tracking-tight">It Learns. It Plans. It Saves.</h2>
           <p className="text-[#A3ADA5] text-sm sm:text-base mt-3">
-            Prepare early. Switch instantly. Keep essentials powered longer. {/* TODO: storm mode spec */}
+            Prepare early, switch in under 15 ms, and keep critical refrigeration and communications online through coastal storms and grid blackouts.
           </p>
         </div>
 
@@ -45,9 +45,13 @@ export default function StormBackupSection() {
               ))}
             </ul>
           </div>
-          <div className="rounded-3xl bg-[#101C17] border border-white/10 p-6 sm:p-8 min-h-[260px] flex items-center justify-center">
-            {/* TODO: replace with generated/real storm-backup image */}
-            <div className="text-center text-[#68776D] text-sm font-mono">[Storm backup image placeholder]</div>
+          <div className="rounded-3xl bg-[#101C17] border border-white/10 p-4 sm:p-6 flex items-center justify-center overflow-hidden">
+            <img
+              src="/images/besant_detail_night.png"
+              alt="ADB Labs Night Operation Off-Grid Backup"
+              className="w-full h-64 sm:h-72 object-cover rounded-2xl border border-white/10"
+              loading="lazy"
+            />
           </div>
         </div>
       </div>

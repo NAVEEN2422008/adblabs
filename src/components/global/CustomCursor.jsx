@@ -8,7 +8,8 @@ export default function CustomCursor() {
   useEffect(() => {
     const coarse = window.matchMedia('(pointer: coarse)').matches;
     const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (coarse || reduced) return;
+    const isSmallViewport = window.innerWidth < 1024;
+    if (coarse || reduced || isSmallViewport) return;
     setEnabled(true);
     document.documentElement.classList.add('has-custom-cursor');
 

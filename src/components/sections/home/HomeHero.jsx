@@ -1,17 +1,21 @@
-import React from 'react';
+import React, { Suspense, lazy } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight, Play } from 'lucide-react';
 import { motion } from 'framer-motion';
+import KineticHeadline from '../../home/KineticHeadline';
 
-// TODO: replace placeholder image with generated/real hero photography
+const HeroWebGLCanvas = lazy(() => import('../../home/HeroWebGLCanvas'));
 const HERO_IMG = '/images/ps1_titan_studio.jpg';
 
 export default function HomeHero() {
   return (
-    <section className="relative pt-20 sm:pt-24 pb-16 sm:pb-20 px-4 sm:px-6 lg:px-8 border-b border-white/10 text-center overflow-hidden">
+    <section className="relative pt-24 sm:pt-28 pb-14 sm:pb-18 px-4 sm:px-6 lg:px-8 border-b border-white/10 text-center overflow-hidden">
+      <Suspense fallback={null}>
+        <HeroWebGLCanvas />
+      </Suspense>
       <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[900px] h-[550px] bg-gradient-to-b from-[#A3FF35]/15 via-[#101C17]/40 to-transparent rounded-full blur-[160px] pointer-events-none -z-10" />
 
-      <div className="max-w-6xl mx-auto space-y-6">
+      <div className="max-w-6xl mx-auto space-y-5 relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
@@ -22,14 +26,10 @@ export default function HomeHero() {
           <span>FLAGSHIP PORTABLE POWER STATION</span>
         </motion.div>
 
-        <motion.h1
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.1 }}
+        <KineticHeadline
+          text="ADB LABS PS1"
           className="text-5xl sm:text-7xl lg:text-8xl font-black font-heading text-white tracking-tight leading-[0.98]"
-        >
-          ADB LABS <span className="text-[#A3FF35]">PS1</span>
-        </motion.h1>
+        />
 
         <motion.p
           initial={{ opacity: 0, y: 20 }}
@@ -37,16 +37,16 @@ export default function HomeHero() {
           transition={{ duration: 0.7, delay: 0.2 }}
           className="text-xl sm:text-3xl font-heading text-[#A3ADA5] max-w-3xl mx-auto font-light"
         >
-          Whole-Home Power, <span className="text-white font-medium">Now Within Reach.</span>
+          Industrial Off-Grid Power, <span className="text-white font-medium">Engineered Without Compromise.</span>
         </motion.p>
 
         <motion.p
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.3 }}
-          className="text-[#68776D] text-sm sm:text-base max-w-2xl mx-auto leading-relaxed"
+          className="text-[#A3ADA5] text-sm sm:text-base max-w-2xl mx-auto leading-relaxed"
         >
-          Delivers pure, silent, modular LiFePO₄ energy that pays for itself — 3.0 kW pure sine inverter, 6.144 kWh automotive LiFePO₄ prismatic core, dual 12 V–150 V MPPT solar tracking, and modular expansion to 12.288 kWh. {/* TODO: verify copy */}
+          Pure, silent, modular LiFePO₄ energy — 3.0 kW pure sine inverter (6.0 kW surge), 6.144 kWh automotive prismatic core, dual 12 V–150 V MPPT solar tracking, and hot-latch expansion to 12.288 kWh.
         </motion.p>
 
         <motion.div

@@ -87,84 +87,120 @@ export default function PS1ProductViewer() {
     scene.add(ps1Group);
 
     // Main Chassis Body (Industrial Obsidian Graphite)
-    const bodyGeometry = new THREE.BoxGeometry(2.4, 1.8, 1.6);
+    const bodyGeometry = new THREE.BoxGeometry(2.4, 1.75, 1.55);
     const bodyMaterial = new THREE.MeshStandardMaterial({
-      color: 0x132019,
-      roughness: 0.35,
-      metalness: 0.85,
+      color: 0x111a16,
+      roughness: 0.32,
+      metalness: 0.88,
     });
     const body = new THREE.Mesh(bodyGeometry, bodyMaterial);
     body.castShadow = true;
     body.receiveShadow = true;
     ps1Group.add(body);
 
-    // Front Display Bezel & Screen
-    const screenGeo = new THREE.PlaneGeometry(1.2, 0.6);
-    const screenMat = new THREE.MeshBasicMaterial({ color: 0x07110c });
+    // Anodized Aluminum Front Faceplate Frame
+    const bezelGeo = new THREE.BoxGeometry(2.26, 1.62, 0.04);
+    const bezelMat = new THREE.MeshStandardMaterial({ color: 0x0a110e, roughness: 0.45, metalness: 0.7 });
+    const bezel = new THREE.Mesh(bezelGeo, bezelMat);
+    bezel.position.set(0, 0, 0.78);
+    ps1Group.add(bezel);
+
+    // Front Display Screen with Canvas Telemetry Texture
+    const canvas = document.createElement('canvas');
+    canvas.width = 512;
+    canvas.height = 256;
+    const ctx = canvas.getContext('2d');
+    ctx.fillStyle = '#040a07';
+    ctx.fillRect(0, 0, 512, 256);
+    ctx.strokeStyle = 'rgba(163, 255, 55, 0.35)';
+    ctx.lineWidth = 3;
+    ctx.strokeRect(8, 8, 496, 240);
+    ctx.fillStyle = '#A3FF35';
+    ctx.font = 'bold 28px monospace';
+    ctx.fillText('ADB LABS // PS1-CORE', 28, 52);
+    ctx.fillStyle = '#F5F7F2';
+    ctx.font = 'bold 64px sans-serif';
+    ctx.fillText('98%  6.14 kWh', 28, 138);
+    ctx.fillStyle = '#A3ADA5';
+    ctx.font = '22px monospace';
+    ctx.fillText('OUT: 230V 50Hz   PV: 1,420W   BMS: OK', 28, 206);
+    const screenTex = new THREE.CanvasTexture(canvas);
+
+    const screenGeo = new THREE.PlaneGeometry(1.35, 0.65);
+    const screenMat = new THREE.MeshBasicMaterial({ map: screenTex });
     const screenMesh = new THREE.Mesh(screenGeo, screenMat);
-    screenMesh.position.set(0, 0.3, 0.81);
+    screenMesh.position.set(0, 0.32, 0.805);
     ps1Group.add(screenMesh);
 
-    // Acid Lime Glowing LED Display Telemetry
-    const limeGlowGeo = new THREE.PlaneGeometry(1.1, 0.5);
-    const limeGlowMat = new THREE.MeshBasicMaterial({
-      color: 0xa3ff35,
-      wireframe: true,
-      transparent: true,
-      opacity: 0.4
-    });
-    const limeMesh = new THREE.Mesh(limeGlowGeo, limeGlowMat);
-    limeMesh.position.set(0, 0.3, 0.815);
-    ps1Group.add(limeMesh);
+    // Acid Lime Accent Strip under Display
+    const stripGeo = new THREE.BoxGeometry(1.35, 0.025, 0.02);
+    const stripMat = new THREE.MeshStandardMaterial({ color: 0xa3ff35, emissive: 0xa3ff35, emissiveIntensity: 1.5 });
+    const stripMesh = new THREE.Mesh(stripGeo, stripMat);
+    stripMesh.position.set(0, -0.05, 0.805);
+    ps1Group.add(stripMesh);
 
-    // Front Output Socket Bank
-    const socketBankGeo = new THREE.BoxGeometry(1.8, 0.5, 0.05);
-    const socketBankMat = new THREE.MeshStandardMaterial({ color: 0x101c17, metalness: 0.6, roughness: 0.4 });
+    // Front Output Socket Bank + Dual AC Sockets + Anderson Port
+    const socketBankGeo = new THREE.BoxGeometry(1.9, 0.48, 0.04);
+    const socketBankMat = new THREE.MeshStandardMaterial({ color: 0x0d1512, metalness: 0.65, roughness: 0.4 });
     const socketBank = new THREE.Mesh(socketBankGeo, socketBankMat);
-    socketBank.position.set(0, -0.4, 0.81);
+    socketBank.position.set(0, -0.42, 0.79);
     ps1Group.add(socketBank);
 
+    [-0.55, -0.15, 0.25, 0.65].forEach((sx, i) => {
+      const portGeo = new THREE.CylinderGeometry(0.11, 0.11, 0.05, 24);
+      const portMat = new THREE.MeshStandardMaterial({ color: i < 2 ? 0x1a2620 : 0x243028, metalness: 0.8, roughness: 0.3 });
+      const port = new THREE.Mesh(portGeo, portMat);
+      port.rotation.x = Math.PI / 2;
+      port.position.set(sx, -0.42, 0.81);
+      ps1Group.add(port);
+    });
+
+    // Side Cooling Louver Fins (Left & Right)
+    const finMat = new THREE.MeshStandardMaterial({ color: 0x1e2c25, metalness: 0.85, roughness: 0.25 });
+    for (let fy = -0.5; fy <= 0.5; fy += 0.16) {
+      const finGeo = new THREE.BoxGeometry(0.05, 0.06, 1.15);
+      const finL = new THREE.Mesh(finGeo, finMat);
+      finL.position.set(-1.21, fy, 0);
+      ps1Group.add(finL);
+      const finR = new THREE.Mesh(finGeo, finMat);
+      finR.position.set(1.21, fy, 0);
+      ps1Group.add(finR);
+    }
+
     // Corner Bumper Armor (Heavy-duty Marine Protection)
-    const bumperMat = new THREE.MeshStandardMaterial({ color: 0x091310, roughness: 0.8 });
+    const bumperMat = new THREE.MeshStandardMaterial({ color: 0x080e0c, roughness: 0.75, metalness: 0.3 });
     const cornerOffsets = [
-      [-1.22, 0, -0.82],
-      [1.22, 0, -0.82],
-      [-1.22, 0, 0.82],
-      [1.22, 0, 0.82],
+      [-1.2, 0, -0.78],
+      [1.2, 0, -0.78],
+      [-1.2, 0, 0.78],
+      [1.2, 0, 0.78],
     ];
     cornerOffsets.forEach(([x, y, z]) => {
-      const bumperGeo = new THREE.BoxGeometry(0.12, 1.85, 0.12);
+      const bumperGeo = new THREE.BoxGeometry(0.14, 1.82, 0.14);
       const bumper = new THREE.Mesh(bumperGeo, bumperMat);
       bumper.position.set(x, y, z);
       ps1Group.add(bumper);
     });
 
-    // 4 Heavy-duty Caster Wheels at base
-    const wheelGeo = new THREE.CylinderGeometry(0.2, 0.2, 0.15, 24);
-    const wheelMat = new THREE.MeshStandardMaterial({ color: 0x222625, roughness: 0.5, metalness: 0.6 });
-    const wheelPositions = [
-      [-0.9, -1.05, -0.6],
-      [0.9, -1.05, -0.6],
-      [-0.9, -1.05, 0.6],
-      [0.9, -1.05, 0.6],
-    ];
-    wheelPositions.forEach(([x, y, z]) => {
-      const wheel = new THREE.Mesh(wheelGeo, wheelMat);
-      wheel.rotation.z = Math.PI / 2;
-      wheel.position.set(x, y, z);
-      wheel.castShadow = true;
-      ps1Group.add(wheel);
+    // Integrated Rubberized Base Skid Rails (replaces stick legs)
+    const skidGeo = new THREE.BoxGeometry(2.3, 0.14, 0.24);
+    const skidMat = new THREE.MeshStandardMaterial({ color: 0x0a0f0d, roughness: 0.85, metalness: 0.2 });
+    [-0.58, 0.58].forEach((sz) => {
+      const skid = new THREE.Mesh(skidGeo, skidMat);
+      skid.position.set(0, -0.94, sz);
+      skid.castShadow = true;
+      ps1Group.add(skid);
     });
 
     // Recessed Top Aluminum Carry Handles
-    const handleGeo = new THREE.BoxGeometry(0.8, 0.08, 0.2);
-    const handleMat = new THREE.MeshStandardMaterial({ color: 0x8a9b90, metalness: 0.9, roughness: 0.2 });
+    const handleGeo = new THREE.BoxGeometry(0.85, 0.07, 0.18);
+    const handleMat = new THREE.MeshStandardMaterial({ color: 0x9aa89f, metalness: 0.92, roughness: 0.18 });
     const handleFront = new THREE.Mesh(handleGeo, handleMat);
-    handleFront.position.set(0, 0.93, 0.4);
+    handleFront.position.set(0, 0.91, 0.42);
     ps1Group.add(handleFront);
 
     const handleRear = new THREE.Mesh(handleGeo, handleMat);
-    handleRear.position.set(0, 0.93, -0.4);
+    handleRear.position.set(0, 0.91, -0.42);
     ps1Group.add(handleRear);
 
     // Floor Reflection Grid
@@ -401,7 +437,7 @@ export default function PS1ProductViewer() {
       {/* Angle Selector Tabs */}
       {viewMode === 'angle' && (
         <div className="grid grid-cols-2 sm:grid-cols-5 gap-3 mt-6">
-          {angles.map((ang) => {
+          {angles.map((ang, idx) => {
             const isSelected = activeAngle === ang.id;
             return (
               <button
@@ -411,6 +447,8 @@ export default function PS1ProductViewer() {
                   setIsRotating(false);
                 }}
                 className={`p-3 rounded-2xl border text-left transition flex items-center gap-3 ${
+                  idx === 4 ? 'col-span-2 sm:col-span-1' : ''
+                } ${
                   isSelected
                     ? 'bg-[#101C17] border-[#A3FF35] text-white shadow-[0_0_15px_rgba(163,255,55,0.15)]'
                     : 'bg-[#050B0A]/60 border-white/10 text-[#A3ADA5] hover:border-white/25 hover:text-white'
@@ -421,7 +459,9 @@ export default function PS1ProductViewer() {
                 </div>
                 <div>
                   <div className="text-xs font-bold leading-tight">{ang.label}</div>
-                  <div className="text-[9px] font-mono text-[#68776D] uppercase">Selected CAD</div>
+                  <div className={`text-[9px] font-mono uppercase mt-0.5 ${isSelected ? 'text-[#A3FF35] font-bold' : 'text-[#68776D]'}`}>
+                    {isSelected ? 'Selected CAD' : 'Inspect View'}
+                  </div>
                 </div>
               </button>
             );

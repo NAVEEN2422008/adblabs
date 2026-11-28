@@ -94,19 +94,16 @@ export default function RuntimeCalculator({ onOpenQuote }) {
   const inverterLoadPct = Math.min(100, Math.round((totalWatts / 3000) * 100));
 
   return (
-    <section id="calculator" className="py-24 bg-[#06080f] relative overflow-hidden border-t border-[#161c2c]">
+    <section id="calculator" className="py-12 sm:py-16 bg-[#050B0A] relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
         {/* Section Header */}
-        <div className="text-left max-w-3xl mb-12">
-          <div className="text-xs font-mono text-green-400 uppercase tracking-wider mb-2">
+        <div className="text-left max-w-3xl mb-10">
+          <div className="text-xs font-mono text-[#A3FF35] uppercase tracking-widest mb-2 font-bold">
             INTERACTIVE RUNTIME SIMULATOR
           </div>
-          <h2 className="text-3xl sm:text-5xl font-black text-white tracking-tight">
-            Calculate Your Stall's <span className="text-green-400">Autonomy</span>
-          </h2>
-          <p className="text-slate-400 text-sm sm:text-base mt-2">
-            EcoFlow-style real-time energy profiler. See exactly how many continuous hours the PS1 runs your commercial loads with optional solar PV direct-drive offset.
+          <p className="text-[#A3ADA5] text-sm sm:text-base">
+            Real-time ADB Labs energy profiler. See exactly how many continuous hours the PS1 runs your commercial or residential loads with optional solar PV direct-drive offset.
           </p>
         </div>
 

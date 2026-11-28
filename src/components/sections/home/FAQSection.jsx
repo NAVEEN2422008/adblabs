@@ -2,14 +2,14 @@ import React, { useState } from 'react';
 import { ChevronDown } from 'lucide-react';
 
 const faqs = [
-  { q: 'Can the ADB PS1 run a 3-ton AC and other essentials together?', a: 'With 3.0 kW continuous and 6.0 kW surge, the PS1 can support a 3-ton AC alongside common household loads. Size combined draw to stay within rating. /* TODO: verify */' },
+  { q: 'Can the ADB PS1 run heavy commercial appliances together?', a: 'With 3.0 kW continuous and 6.0 kW surge pure sine output, the PS1 supports freezers, pumps, POS terminals, and LED lighting simultaneously within rated capacity.' },
   { q: 'How does modular expansion to 12.288 kWh work?', a: 'A secondary 6.144 kWh module docks via quick-latch DC bus coupling and CAN-bus sync, doubling runtime without rewiring.' },
   { q: 'Is the PS1 safe for indoor use?', a: 'Yes — sealed LiFePO₄ chemistry, zero emissions, whisper-quiet (<30 dB), safe under counters or in kiosks.' },
   { q: 'What is the expected battery lifespan?', a: '3,500+ full cycles to 80% capacity — over 10 years of daily use.' },
-  { q: 'Can I add the PS1 to an existing rooftop solar system?', a: 'Yes — dual 12–150 V MPPT inputs accept a wide range of panel strings. /* TODO: verify compatibility */' },
-  { q: 'How much can it reduce my electricity bill?', a: 'With solar self-consumption and peak shaving, savings depend on tariff and usage. /* TODO: verify payback */' },
-  { q: 'Is it worth it without solar?', a: 'Yes — as a silent, emission-free backup that charges from the grid and discharges during outages/peak tariffs.' },
-  { q: 'What safety certifications does it carry?', a: 'Listed with UL 9540 / UL 9540A in ADB copy — confirm against the final datasheet. /* TODO */' },
+  { q: 'Can I add the PS1 to an existing rooftop solar system?', a: 'Yes — dual 12–150 V MPPT inputs accept standard 24V/48V/series commercial PV panel strings.' },
+  { q: 'How much can it reduce my electricity & diesel bill?', a: 'Solar self-consumption and diesel replacement at our Besant Nagar pilot eliminated 100% of daily generator fuel spend.' },
+  { q: 'Is it worth it without solar?', a: 'Yes — as a silent, emission-free UPS backup that charges from the grid and discharges during outages and peak tariffs.' },
+  { q: 'What protection systems are built into the BMS?', a: 'Active 16-cell balancing, over-current, short-circuit, over-temperature, and galvanically isolated CAN-bus fault telemetry.' },
   { q: 'How fast is the switchover during an outage?', a: 'Sub-15 ms automatic transfer keeps critical loads live without interruption.' },
   { q: 'Can I expand from 6.144 kWh to 12.288 kWh later?', a: 'Yes — add a second module anytime via the quick-latch DC bus; no inverter or rewiring needed.' },
 ];

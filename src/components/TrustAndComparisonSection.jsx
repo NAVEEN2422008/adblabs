@@ -67,11 +67,13 @@ export default function TrustAndComparisonSection() {
           </p>
         </div>
 
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4">
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 sm:gap-4">
           {certifications.map((cert, i) => (
             <div 
               key={i} 
-              className="p-5 rounded-2xl bg-[#101C17] border border-white/10 hover:border-[#A3FF35]/40 transition text-left flex flex-col justify-between"
+              className={`p-4 sm:p-5 rounded-2xl bg-[#101C17] border border-white/10 hover:border-[#A3FF35]/40 transition text-left flex flex-col justify-between ${
+                i === 4 ? 'col-span-2 sm:col-span-3 lg:col-span-1' : ''
+              }`}
             >
               <div>
                 <div className="flex items-center justify-between mb-3">
@@ -111,7 +113,36 @@ export default function TrustAndComparisonSection() {
           </Link>
         </div>
 
-        <div className="overflow-x-auto">
+        {/* Mobile Comparison Cards (<640px) */}
+        <div className="space-y-3 sm:hidden">
+          {comparisonRows.map((row, idx) => (
+            <div key={idx} className="p-4 rounded-2xl bg-[#050B0A] border border-white/10 space-y-2.5">
+              <div className="text-xs font-mono uppercase tracking-wider text-[#A3ADA5] font-bold">
+                {row.feature}
+              </div>
+              <div className="flex items-start gap-2 text-xs text-white font-semibold bg-[#A3FF35]/10 border border-[#A3FF35]/25 rounded-xl p-2.5">
+                <CheckCircle2 className="w-4 h-4 text-[#A3FF35] shrink-0 mt-0.5" />
+                <div>
+                  <span className="text-[10px] font-mono text-[#A3FF35] block uppercase">ADB Labs PS1</span>
+                  {row.adb}
+                </div>
+              </div>
+              <div className="grid grid-cols-2 gap-2 text-[11px]">
+                <div className="p-2 rounded-xl bg-white/[0.02] border border-white/5 text-[#A3ADA5]">
+                  <span className="text-[9px] font-mono text-rose-400 block uppercase">Diesel Gen</span>
+                  {row.diesel}
+                </div>
+                <div className="p-2 rounded-xl bg-white/[0.02] border border-white/5 text-[#68776D]">
+                  <span className="text-[9px] font-mono text-[#68776D] block uppercase">Generic Pack</span>
+                  {row.consumer}
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* Desktop & Tablet Table (>=640px) */}
+        <div className="hidden sm:block overflow-x-auto">
           <table className="w-full text-left text-xs sm:text-sm border-collapse min-w-[620px]">
             <thead>
               <tr className="border-b border-white/10 text-xs font-mono uppercase tracking-wider">

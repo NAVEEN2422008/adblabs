@@ -58,15 +58,15 @@ export default function Navbar() {
               </span>
             </div>
           </div>
-          <div className="flex flex-col">
-            <div className="flex items-center gap-2">
-              <span className="font-heading font-bold text-lg tracking-tight text-[#F5F7F2] group-hover:text-white transition">
+          <div className="flex flex-col min-w-0">
+            <div className="flex items-center gap-1.5 sm:gap-2">
+              <span className="font-heading font-bold text-base sm:text-lg tracking-tight text-[#F5F7F2] group-hover:text-white transition whitespace-nowrap">
                 ADB LABS
               </span>
-              <span className="w-1.5 h-1.5 rounded-full bg-[#A3FF35] animate-pulse"></span>
+              <span className="w-1.5 h-1.5 rounded-full bg-[#A3FF35] animate-pulse shrink-0"></span>
             </div>
-            <span className="text-[9px] font-mono tracking-widest text-[#68776D] uppercase -mt-1">
-              ENERGY · ROBOTICS · R&D
+            <span className="text-[8px] sm:text-[9px] font-mono tracking-wider sm:tracking-widest text-[#68776D] uppercase -mt-0.5 whitespace-nowrap">
+              ENERGY · ROBOTICS · R&amp;D
             </span>
           </div>
         </Link>

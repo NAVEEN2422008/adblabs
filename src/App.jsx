@@ -31,7 +31,14 @@ function AnimatedRoutes() {
   return (
     <AnimatePresence mode="wait">
       <PageTransition key={location.pathname}>
-      <Suspense fallback={<div className="min-h-[60vh] flex items-center justify-center text-[#68776D] font-mono text-xs">Loading…</div>}>
+      <Suspense fallback={
+        <div className="min-h-[65vh] flex flex-col items-center justify-center gap-3 bg-[#050B0A]">
+          <div className="w-10 h-10 rounded-xl border border-[#A3FF35]/40 bg-[#101C17] flex items-center justify-center">
+            <span className="w-2.5 h-2.5 rounded-full bg-[#A3FF35] animate-ping" />
+          </div>
+          <span className="text-[#A3ADA5] font-mono text-[11px] uppercase tracking-[0.2em]">Syncing Telemetry…</span>
+        </div>
+      }>
       <Routes location={location} key={location.pathname}>
         <Route path="/" element={<HomePage />} />
         <Route path="/energy-solutions" element={<EnergySolutionsPage />} />

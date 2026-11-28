@@ -9,7 +9,7 @@ export default function SavingsSection() {
           <span className="text-xs font-mono uppercase tracking-widest text-[#A3FF35] font-bold block mb-2">TOP-TIER SAVINGS</span>
           <h2 className="text-3xl sm:text-5xl font-black font-heading text-white tracking-tight">Save More. Pay Back Faster</h2>
           <p className="text-[#A3ADA5] text-sm sm:text-base mt-4 leading-relaxed">
-            X-Fusion-style self-consumption: your solar powers your home first, then charges the PS1 for after dark, so you buy less from the grid. {/* TODO: verify savings claims */}
+            Intelligent solar-first self-consumption: rooftop PV powers your active loads first, then charges the PS1 LiFePO₄ bank for after-dark operation—eliminating diesel fuel burn.
           </p>
           <ul className="mt-6 space-y-2 text-sm text-[#A3ADA5]">
             {['Work With The Grid — buy less at peak rates', 'Rooftop-grade Solar Input — up to 2.88 kWp', 'Full Power, Lower Bills — even while charging'].map((t) => (
@@ -30,9 +30,13 @@ export default function SavingsSection() {
             </div>
           </div>
         </div>
-        <div className="rounded-3xl bg-[#101C17] border border-white/10 p-6 sm:p-8 min-h-[260px] flex items-center justify-center">
-          {/* TODO: replace with generated/real savings-solar image */}
-          <div className="text-center text-[#68776D] text-sm font-mono">[Savings image placeholder]</div>
+        <div className="rounded-3xl bg-[#101C17] border border-white/10 p-4 sm:p-6 flex items-center justify-center overflow-hidden">
+          <img
+            src="/images/sol_solar.png"
+            alt="ADB Labs Dual MPPT Solar Hybrid Architecture"
+            className="w-full h-64 sm:h-72 object-cover rounded-2xl border border-white/10"
+            loading="lazy"
+          />
         </div>
       </div>
     </section>

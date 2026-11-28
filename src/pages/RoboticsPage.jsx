@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Suspense, lazy } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { 
@@ -15,6 +15,8 @@ import {
   Terminal 
 } from 'lucide-react';
 import RoboticsTitanGallery from '../components/RoboticsTitanGallery';
+
+const OrzoViewer = lazy(() => import('../components/three/OrzoViewer'));
 
 export default function RoboticsPage() {
   const focusAreas = [
@@ -52,38 +54,51 @@ export default function RoboticsPage() {
     <div className="bg-[#050B0A] text-[#F5F7F2] min-h-screen selection:bg-[#A3FF35] selection:text-black">
       
       {/* Hero */}
-      <section className="relative pt-24 pb-20 px-4 sm:px-6 lg:px-8 border-b border-white/10 text-center overflow-hidden">
+      {/* Hero Section with Live 3D ORZO Anchor */}
+      <section className="relative pt-24 pb-16 px-4 sm:px-6 lg:px-8 border-b border-white/10 overflow-hidden">
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[850px] h-[500px] bg-[#A3FF35]/10 rounded-full blur-[150px] pointer-events-none -z-10"></div>
 
-        <div className="max-w-5xl mx-auto space-y-6">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#101C17] border border-white/15 text-xs font-mono text-[#A3FF35] uppercase tracking-wider">
-            <Bot className="w-3.5 h-3.5 text-[#A3FF35]" />
-            <span>AUTONOMOUS SYSTEMS & INTELLIGENCE // ADB LABS</span>
+        <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+          <div className="lg:col-span-6 space-y-6 text-left">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#101C17] border border-white/15 text-[10px] sm:text-xs font-mono text-[#A3FF35] uppercase tracking-wider whitespace-nowrap">
+              <Bot className="w-3.5 h-3.5 text-[#A3FF35] shrink-0" />
+              <span>AUTONOMOUS SYSTEMS // ADB LABS</span>
+            </div>
+
+            <h1 className="text-4xl sm:text-6xl lg:text-7xl font-black font-heading text-white tracking-tight leading-[1.02]">
+              Building Intelligent <br />
+              <span className="text-[#A3FF35]">Machines.</span>
+            </h1>
+
+            <p className="text-[#A3ADA5] text-base sm:text-lg max-w-xl leading-relaxed">
+              Advancing bio-inspired quadruped robotics, computer vision perception, embedded STM32/CAN firmware, and kinematic physics simulation — from CAD blueprints to deployed field hardware.
+            </p>
+
+            <div className="pt-2 flex flex-wrap items-center gap-3 sm:gap-4">
+              <Link
+                to="/get-a-quote"
+                className="bg-[#A3FF35] hover:bg-[#8ee827] text-black font-extrabold text-sm px-7 py-3.5 rounded-full transition shadow-[0_0_25px_rgba(163,255,55,0.25)] flex items-center gap-2 font-heading"
+              >
+                <span>Discuss an R&amp;D Project</span>
+                <ArrowRight className="w-4 h-4" />
+              </Link>
+              <Link
+                to="/internship"
+                className="bg-[#101C17] hover:bg-[#132019] text-white border border-white/15 font-semibold text-sm px-7 py-3.5 rounded-full transition"
+              >
+                <span>Explore Robotics Internship</span>
+              </Link>
+            </div>
           </div>
 
-          <h1 className="text-5xl sm:text-7xl font-black font-heading text-white tracking-tight">
-            Building Intelligent <br />
-            <span className="text-[#A3FF35]">Machines.</span>
-          </h1>
-
-          <p className="text-[#A3ADA5] text-lg sm:text-xl max-w-3xl mx-auto leading-relaxed">
-            Advancing bio-inspired quadruped robotics, computer vision perception, embedded STM32/CAN firmware, and kinematic physics simulation — from CAD blueprints to deployed field hardware.
-          </p>
-
-          <div className="pt-4 flex flex-wrap items-center justify-center gap-4">
-            <Link
-              to="/get-a-quote"
-              className="bg-[#A3FF35] hover:bg-[#8ee827] text-black font-extrabold text-sm px-8 py-3.5 rounded-full transition shadow-[0_0_25px_rgba(163,255,55,0.25)] flex items-center gap-2 font-heading"
-            >
-              <span>Discuss an R&D Project</span>
-              <ArrowRight className="w-4 h-4" />
-            </Link>
-            <Link
-              to="/internship"
-              className="bg-[#101C17] hover:bg-[#132019] text-white border border-white/15 font-semibold text-sm px-8 py-3.5 rounded-full transition"
-            >
-              <span>Explore Robotics Internship</span>
-            </Link>
+          <div className="lg:col-span-6">
+            <div className="relative rounded-3xl bg-[#091310] border border-white/10 overflow-hidden h-[320px] sm:h-[420px] shadow-2xl">
+              <Suspense fallback={
+                <img src="/images/orzo_robot_dog.jpg" alt="ORZO Quadruped" className="w-full h-full object-cover opacity-80" />
+              }>
+                <OrzoViewer />
+              </Suspense>
+            </div>
           </div>
         </div>
       </section>

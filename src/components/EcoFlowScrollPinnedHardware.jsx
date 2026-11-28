@@ -123,8 +123,8 @@ export default function EcoFlowScrollPinnedHardware() {
           <div>
             <div className="flex items-center gap-2">
               <span className="w-2 h-2 rounded-full bg-[#38bdf8] animate-ping"></span>
-              <span className="text-[11px] font-mono tracking-widest text-[#38bdf8] uppercase font-bold">
-                Scroll-Driven Hardware Anatomy // Titan-C8
+              <span className="text-[11px] font-mono tracking-widest text-[#A3FF35] uppercase font-bold">
+                Scroll-Driven Hardware Anatomy // ADB-PS1
               </span>
             </div>
             <h3 className="text-2xl sm:text-4xl font-black text-white mt-1 tracking-tight">
